@@ -425,8 +425,11 @@
 				3D43CF161C1F43B400118998 /* ParseKeys.m in Sources */,
 				903177CE1C1F3A9E001C8DF9 /* AppDelegate.m in Sources */,
 				903177CB1C1F3A9E001C8DF9 /* main.m in Sources */,
-				90380EF51C1F49160085DD66 /* Tour.m in Sources */,
+<<<<<<< HEAD
 				3D7264051C1F6BCC00ABEEFD /* TourSelectionViewController.m in Sources */,
+=======
+				90380EF51C1F49160085DD66 /* Tour.m in Sources */,
+>>>>>>> master
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
