@@ -18,4 +18,13 @@
 @property (strong, nonatomic) PFGeoPoint *location;
 @property (strong, nonatomic) Tour *tour;
 
+
+-(id)initWithClassName:(NSString *)Location
+          locationName:(NSString *)locationName
+   locationDescription:(NSString *)locationDescription
+                 photo:(PFFile *)photo
+            categories:(NSArray *)categories
+              location:(PFGeoPoint *)location
+                  tour:(Tour *)tour;
+
 @end
