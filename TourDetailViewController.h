@@ -1,5 +1,5 @@
 //
-//  CreateTourDetailViewController.h
+//  TourDetailViewController.h
 //  WalkingTours
 //
 //  Created by Miles Ranisavljevic on 12/14/15.
@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 @import AVFoundation;
 
-@interface CreateTourDetailViewController : UIViewController
+@interface TourDetailViewController : UIViewController
 
 @property (strong, nonatomic) NSURL *videoURL;
 

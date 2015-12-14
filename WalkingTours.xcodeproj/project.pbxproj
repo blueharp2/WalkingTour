@@ -43,7 +43,7 @@
 		90380EF51C1F49160085DD66 /* Tour.m in Sources */ = {isa = PBXBuildFile; fileRef = 90380EF41C1F49160085DD66 /* Tour.m */; };
 		90380EF81C1F4C590085DD66 /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = 90380EF71C1F4C590085DD66 /* Location.m */; };
 		9050ECD91C1F78E80092CF86 /* VideoPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9050ECD81C1F78E80092CF86 /* VideoPlayerView.m */; };
-		9050ECDC1C1F7B920092CF86 /* CreateTourDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9050ECDB1C1F7B920092CF86 /* CreateTourDetailViewController.m */; };
+		9050ECDC1C1F7B920092CF86 /* TourDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9050ECDB1C1F7B920092CF86 /* TourDetailViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -115,8 +115,8 @@
 		90380EF71C1F4C590085DD66 /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Location.m; sourceTree = "<group>"; };
 		9050ECD71C1F78E80092CF86 /* VideoPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoPlayerView.h; sourceTree = "<group>"; };
 		9050ECD81C1F78E80092CF86 /* VideoPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoPlayerView.m; sourceTree = "<group>"; };
-		9050ECDA1C1F7B920092CF86 /* CreateTourDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateTourDetailViewController.h; sourceTree = "<group>"; };
-		9050ECDB1C1F7B920092CF86 /* CreateTourDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateTourDetailViewController.m; sourceTree = "<group>"; };
+		9050ECDA1C1F7B920092CF86 /* TourDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TourDetailViewController.h; sourceTree = "<group>"; };
+		9050ECDB1C1F7B920092CF86 /* TourDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TourDetailViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -206,8 +206,8 @@
 			children = (
 				9050ECD71C1F78E80092CF86 /* VideoPlayerView.h */,
 				9050ECD81C1F78E80092CF86 /* VideoPlayerView.m */,
-				9050ECDA1C1F7B920092CF86 /* CreateTourDetailViewController.h */,
-				9050ECDB1C1F7B920092CF86 /* CreateTourDetailViewController.m */,
+				9050ECDA1C1F7B920092CF86 /* TourDetailViewController.h */,
+				9050ECDB1C1F7B920092CF86 /* TourDetailViewController.m */,
 				3D43CF271C1F47D600118998 /* PARSE */,
 				903177C81C1F3A9E001C8DF9 /* WalkingTours */,
 				903177E21C1F3A9E001C8DF9 /* WalkingToursTests */,
@@ -426,7 +426,7 @@
 				9050ECD91C1F78E80092CF86 /* VideoPlayerView.m in Sources */,
 				3D43CF161C1F43B400118998 /* ParseKeys.m in Sources */,
 				903177CE1C1F3A9E001C8DF9 /* AppDelegate.m in Sources */,
-				9050ECDC1C1F7B920092CF86 /* CreateTourDetailViewController.m in Sources */,
+				9050ECDC1C1F7B920092CF86 /* TourDetailViewController.m in Sources */,
 				903177CB1C1F3A9E001C8DF9 /* main.m in Sources */,
 				90380EF51C1F49160085DD66 /* Tour.m in Sources */,
 			);

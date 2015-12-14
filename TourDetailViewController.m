@@ -1,17 +1,17 @@
 //
-//  CreateTourDetailViewController.m
+//  TourDetailViewController.m
 //  WalkingTours
 //
 //  Created by Miles Ranisavljevic on 12/14/15.
 //  Copyright © 2015 Lindsey Boggio. All rights reserved.
 //
 
-#import "CreateTourDetailViewController.h"
+#import "TourDetailViewController.h"
 #import "VideoPlayerView.h"
 
 static const NSString *ItemStatusContext;
 
-@interface CreateTourDetailViewController ()
+@interface TourDetailViewController ()
 
 @property (nonatomic) AVPlayer *player;
 @property (nonatomic) AVPlayerItem *playerItem;
@@ -21,7 +21,7 @@ static const NSString *ItemStatusContext;
 
 @end
 
-@implementation CreateTourDetailViewController
+@implementation TourDetailViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -37,9 +37,8 @@ static const NSString *ItemStatusContext;
     AVURLAsset *asset = [AVURLAsset URLAssetWithURL:url options:nil];
     NSString *tracksKey = @"tracks";
     
-    [asset loadValuesAsynchronouslyForKeys:@[tracksKey] completionHandler:
-     ^{
-         dispatch_async(dispatch_get_main_queue(), ^{
+    [asset loadValuesAsynchronouslyForKeys:@[tracksKey] completionHandler: ^ {
+         dispatch_async(dispatch_get_main_queue(), ^ {
             NSError *error;
             AVKeyValueStatus status = [asset statusOfValueForKey:tracksKey error:&error];
             
