@@ -50,7 +50,16 @@
     MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(coordinate, 2000.0, 2000.0);
     [self setRegionForCoordinate:region];
 }
+#pragma mark - MKMapViewDelegate
 
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
+    if ([annotation isKindOfClass:[MKUserLocation class]]) {
+        return nil; }
+    
+    // Add view.
+    MKPinAnnotationView *annotationView = (MKPinAnnotationView *) [_locationManager dequeReusableAnnotationViewWithIdentifier: ];
+    }
+}
 
 #pragma mark - CLLocationManager
 
@@ -78,6 +87,8 @@
     _locationManager.delegate = self;
     [_locationManager startMonitoringSignificantLocationChanges];
 }
+
+
 
 
 /*
