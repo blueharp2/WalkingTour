@@ -348,7 +348,7 @@
         <!--Create Tour ViewController-->
         <scene sceneID="PvD-xR-3JL">
             <objects>
-                <viewController title="Create Tour ViewController" id="vsA-st-EdL" sceneMemberID="viewController">
+                <viewController title="Create Tour ViewController" id="vsA-st-EdL" customClass="CreateTourTableViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="lnd-bp-pY4"/>
                         <viewControllerLayoutGuide type="bottom" id="aDh-or-b7o"/>
@@ -356,8 +356,44 @@
                     <view key="view" contentMode="scaleToFill" id="HCd-lq-wYg">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="gha-TO-9kk">
+                                <rect key="frame" x="0.0" y="166" width="320" height="402"/>
+                                <animations/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create Your Tour" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qal-q6-3hA">
+                                <rect key="frame" x="96" y="20" width="129" height="21"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name of Tour" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1L6-cQ-RUl">
+                                <rect key="frame" x="20" y="49" width="280" height="30"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Tour Description" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wq2-4m-Ca4">
+                                <rect key="frame" x="20" y="87" width="280" height="30"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="gha-TO-9kk" firstAttribute="leading" secondItem="HCd-lq-wYg" secondAttribute="leading" id="0L5-Bi-9l1"/>
+                            <constraint firstAttribute="trailing" secondItem="1L6-cQ-RUl" secondAttribute="trailing" constant="20" id="Ix8-SY-gig"/>
+                            <constraint firstItem="1L6-cQ-RUl" firstAttribute="top" secondItem="Qal-q6-3hA" secondAttribute="bottom" constant="8" id="KIq-yh-EgP"/>
+                            <constraint firstItem="Qal-q6-3hA" firstAttribute="top" secondItem="lnd-bp-pY4" secondAttribute="bottom" id="QUr-gO-G6h"/>
+                            <constraint firstItem="aDh-or-b7o" firstAttribute="top" secondItem="gha-TO-9kk" secondAttribute="bottom" id="Zjh-gh-60O"/>
+                            <constraint firstItem="1L6-cQ-RUl" firstAttribute="leading" secondItem="HCd-lq-wYg" secondAttribute="leading" constant="20" id="a6I-p0-hQ9"/>
+                            <constraint firstAttribute="trailing" secondItem="gha-TO-9kk" secondAttribute="trailing" id="dpK-mk-R8H"/>
+                            <constraint firstItem="Qal-q6-3hA" firstAttribute="centerX" secondItem="HCd-lq-wYg" secondAttribute="centerX" id="wZN-1C-74h"/>
+                        </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                 </viewController>
@@ -404,38 +440,33 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zCE-1G-ygN">
-                                <rect key="frame" x="0.0" y="28" width="320" height="200"/>
-                                <animations/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="200" id="b8r-3x-3gy"/>
-                                </constraints>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ab4-nZ-Lpj">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ab4-nZ-Lpj">
                                 <rect key="frame" x="24" y="273" width="272" height="21"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MeJ-Tg-42J">
+                                <rect key="frame" x="0.0" y="28" width="320" height="200"/>
+                                <animations/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="Gco-gN-sWY"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="ab4-nZ-Lpj" firstAttribute="top" secondItem="zCE-1G-ygN" secondAttribute="bottom" constant="45" id="M8D-aj-54g"/>
-                            <constraint firstItem="zCE-1G-ygN" firstAttribute="leading" secondItem="xyJ-0v-rmR" secondAttribute="leading" id="RuX-IX-UvP"/>
+                            <constraint firstItem="MeJ-Tg-42J" firstAttribute="top" secondItem="WgN-IX-MKI" secondAttribute="bottom" constant="8" id="9mu-Ue-X9R"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ab4-nZ-Lpj" secondAttribute="trailing" constant="8" id="SfJ-QL-Y4F"/>
                             <constraint firstItem="ab4-nZ-Lpj" firstAttribute="leading" secondItem="xyJ-0v-rmR" secondAttribute="leadingMargin" constant="8" id="VUI-6b-U1E"/>
-                            <constraint firstItem="zCE-1G-ygN" firstAttribute="top" secondItem="WgN-IX-MKI" secondAttribute="bottom" constant="8" id="X41-4W-uUz"/>
-                            <constraint firstAttribute="trailing" secondItem="zCE-1G-ygN" secondAttribute="trailing" id="gXc-dX-lPc"/>
+                            <constraint firstItem="MeJ-Tg-42J" firstAttribute="leading" secondItem="xyJ-0v-rmR" secondAttribute="leading" id="Wrq-P2-FU6"/>
+                            <constraint firstAttribute="trailing" secondItem="MeJ-Tg-42J" secondAttribute="trailing" id="YZa-ZW-xeX"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-                    <connections>
-                        <outlet property="descriptionText" destination="ab4-nZ-Lpj" id="04R-SX-gFs"/>
-                        <outlet property="imgView" destination="zCE-1G-ygN" id="MPN-e3-ezw"/>
-                        <outlet property="locationDescriptionLabel" destination="ab4-nZ-Lpj" id="aWX-I3-B6a"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jtp-dI-fuk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
