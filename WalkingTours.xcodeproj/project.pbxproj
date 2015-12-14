@@ -32,6 +32,7 @@
 		3D43CF2A1C1F47F400118998 /* ParseLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D43CF291C1F47F400118998 /* ParseLoginViewController.m */; };
 		3D43CF2D1C1F4E4D00118998 /* ParseSignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D43CF2C1C1F4E4D00118998 /* ParseSignUpViewController.m */; };
 		3D43CF301C1F4E5B00118998 /* ParseResetPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D43CF2F1C1F4E5B00118998 /* ParseResetPasswordViewController.m */; };
+		3D7264021C1F687D00ABEEFD /* WalkingTour.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D7264011C1F687D00ABEEFD /* WalkingTour.png */; };
 		903177CB1C1F3A9E001C8DF9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 903177CA1C1F3A9E001C8DF9 /* main.m */; };
 		903177CE1C1F3A9E001C8DF9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 903177CD1C1F3A9E001C8DF9 /* AppDelegate.m */; };
 		903177D11C1F3A9E001C8DF9 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 903177D01C1F3A9E001C8DF9 /* ViewController.m */; };
@@ -89,6 +90,7 @@
 		3D43CF2C1C1F4E4D00118998 /* ParseSignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParseSignUpViewController.m; sourceTree = "<group>"; };
 		3D43CF2E1C1F4E5B00118998 /* ParseResetPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParseResetPasswordViewController.h; sourceTree = "<group>"; };
 		3D43CF2F1C1F4E5B00118998 /* ParseResetPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParseResetPasswordViewController.m; sourceTree = "<group>"; };
+		3D7264011C1F687D00ABEEFD /* WalkingTour.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WalkingTour.png; sourceTree = "<group>"; };
 		903177C61C1F3A9E001C8DF9 /* WalkingTours.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WalkingTours.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		903177CA1C1F3A9E001C8DF9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		903177CC1C1F3A9E001C8DF9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -233,6 +235,7 @@
 		903177C91C1F3A9E001C8DF9 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				3D7264011C1F687D00ABEEFD /* WalkingTour.png */,
 				903177CA1C1F3A9E001C8DF9 /* main.m */,
 			);
 			name = "Supporting Files";
@@ -360,6 +363,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3D43CF261C1F478D00118998 /* WalkingTours120.png in Resources */,
+				3D7264021C1F687D00ABEEFD /* WalkingTour.png in Resources */,
 				3D43CF231C1F478D00118998 /* WalkingTours58.png in Resources */,
 				903177D91C1F3A9E001C8DF9 /* LaunchScreen.storyboard in Resources */,
 				903177D61C1F3A9E001C8DF9 /* Assets.xcassets in Resources */,
