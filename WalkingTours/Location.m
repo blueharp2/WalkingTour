@@ -32,6 +32,7 @@
             categories:(NSArray *)categories
               location:(PFGeoPoint *)location
                   tour:(Tour *)tour{
+    
     if ((self = [super init])){
         self.locationName = locationName;
         self.locationDescription = locationDescription;
