@@ -7,8 +7,14 @@
 //
 
 #import "TourMapViewController.h"
+@import MapKit;
+@import CoreLocation;
+@interface TourMapViewController () <MKMapViewDelegate, CLLocationManagerDelegate>
 
-@interface TourMapViewController ()
+@property (weak, nonatomic) IBOutlet MKMapView *mapView;
+
+@property (strong, nonatomic) CLLocationManager *locationManager;
+
 
 @end
 
@@ -16,6 +22,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self.mapView setDelegate:self];
+    [self.mapView setShowsUserLocation: YES];
+
     // Do any additional setup after loading the view.
 }
 
@@ -23,6 +33,52 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    
+    [_locationManager stopMonitoringSignificantLocationChanges];
+}
+
+- (void)setRegionForCoordinate:(MKCoordinateRegion)region {
+    [self.mapView setRegion:region animated:YES];
+}
+
+- (void)setMapForCoordinateWithLatitude: (double)lat  andLongitude:(double)longa {
+    
+    CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(lat, longa);
+    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(coordinate, 2000.0, 2000.0);
+    [self setRegionForCoordinate:region];
+}
+
+
+#pragma mark - CLLocationManager
+
+-(void) startStandardUpdates
+{
+    
+    if (nil == _locationManager)
+        _locationManager = [[CLLocationManager alloc] init];
+    
+    _locationManager.delegate = self;
+    _locationManager.desiredAccuracy = kCLLocationAccuracyKilometer;
+    
+    // Set a movement threshold for new events.
+    _locationManager.distanceFilter = 500; // meters
+    
+    [_locationManager startUpdatingLocation];
+}
+
+- (void)startSignificantChangeUpdates
+{
+    
+    if (nil == _locationManager)
+        _locationManager = [[CLLocationManager alloc] init];
+    
+    _locationManager.delegate = self;
+    [_locationManager startMonitoringSignificantLocationChanges];
+}
+
 
 /*
 #pragma mark - Navigation
