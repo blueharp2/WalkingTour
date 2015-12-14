@@ -395,7 +395,7 @@
         <!--Detail ViewController-->
         <scene sceneID="dRw-18-JAy">
             <objects>
-                <viewController title="Detail ViewController" id="16i-zP-Ize" sceneMemberID="viewController">
+                <viewController title="Detail ViewController" id="16i-zP-Ize" customClass="TourDetailViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="WgN-IX-MKI"/>
                         <viewControllerLayoutGuide type="bottom" id="STd-o3-vpi"/>
@@ -403,10 +403,39 @@
                     <view key="view" contentMode="scaleToFill" id="xyJ-0v-rmR">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zCE-1G-ygN">
+                                <rect key="frame" x="0.0" y="28" width="320" height="200"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="b8r-3x-3gy"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ab4-nZ-Lpj">
+                                <rect key="frame" x="24" y="273" width="272" height="21"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ab4-nZ-Lpj" firstAttribute="top" secondItem="zCE-1G-ygN" secondAttribute="bottom" constant="45" id="M8D-aj-54g"/>
+                            <constraint firstItem="zCE-1G-ygN" firstAttribute="leading" secondItem="xyJ-0v-rmR" secondAttribute="leading" id="RuX-IX-UvP"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ab4-nZ-Lpj" secondAttribute="trailing" constant="8" id="SfJ-QL-Y4F"/>
+                            <constraint firstItem="ab4-nZ-Lpj" firstAttribute="leading" secondItem="xyJ-0v-rmR" secondAttribute="leadingMargin" constant="8" id="VUI-6b-U1E"/>
+                            <constraint firstItem="zCE-1G-ygN" firstAttribute="top" secondItem="WgN-IX-MKI" secondAttribute="bottom" constant="8" id="X41-4W-uUz"/>
+                            <constraint firstAttribute="trailing" secondItem="zCE-1G-ygN" secondAttribute="trailing" id="gXc-dX-lPc"/>
+                        </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="descriptionText" destination="ab4-nZ-Lpj" id="04R-SX-gFs"/>
+                        <outlet property="imgView" destination="zCE-1G-ygN" id="MPN-e3-ezw"/>
+                        <outlet property="locationDescriptionLabel" destination="ab4-nZ-Lpj" id="aWX-I3-B6a"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jtp-dI-fuk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

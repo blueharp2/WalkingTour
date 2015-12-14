@@ -42,6 +42,7 @@
 		903177EF1C1F3A9E001C8DF9 /* WalkingToursUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 903177EE1C1F3A9E001C8DF9 /* WalkingToursUITests.m */; };
 		90380EF51C1F49160085DD66 /* Tour.m in Sources */ = {isa = PBXBuildFile; fileRef = 90380EF41C1F49160085DD66 /* Tour.m */; };
 		90380EF81C1F4C590085DD66 /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = 90380EF71C1F4C590085DD66 /* Location.m */; };
+		90380EFB1C1F6EA30085DD66 /* TourDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90380EFA1C1F6EA30085DD66 /* TourDetailViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -111,6 +112,8 @@
 		90380EF41C1F49160085DD66 /* Tour.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tour.m; sourceTree = "<group>"; };
 		90380EF61C1F4C590085DD66 /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Location.h; sourceTree = "<group>"; };
 		90380EF71C1F4C590085DD66 /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Location.m; sourceTree = "<group>"; };
+		90380EF91C1F6EA30085DD66 /* TourDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TourDetailViewController.h; sourceTree = "<group>"; };
+		90380EFA1C1F6EA30085DD66 /* TourDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TourDetailViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -225,6 +228,8 @@
 				903177CD1C1F3A9E001C8DF9 /* AppDelegate.m */,
 				903177CF1C1F3A9E001C8DF9 /* ViewController.h */,
 				903177D01C1F3A9E001C8DF9 /* ViewController.m */,
+				90380EF91C1F6EA30085DD66 /* TourDetailViewController.h */,
+				90380EFA1C1F6EA30085DD66 /* TourDetailViewController.m */,
 				903177D51C1F3A9E001C8DF9 /* Assets.xcassets */,
 				903177D71C1F3A9E001C8DF9 /* LaunchScreen.storyboard */,
 				903177DA1C1F3A9E001C8DF9 /* Info.plist */,
@@ -409,6 +414,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3D43CF2D1C1F4E4D00118998 /* ParseSignUpViewController.m in Sources */,
+				90380EFB1C1F6EA30085DD66 /* TourDetailViewController.m in Sources */,
 				903177D11C1F3A9E001C8DF9 /* ViewController.m in Sources */,
 				90380EF81C1F4C590085DD66 /* Location.m in Sources */,
 				3D43CF301C1F4E5B00118998 /* ParseResetPasswordViewController.m in Sources */,
