@@ -25,6 +25,6 @@
     return @"Location";
 }
 
--(id)initWithClassName:(NSString *)Location locationName:
+-(id)initWithClassName:(NSString *)Location locationName:git
 
 @end
