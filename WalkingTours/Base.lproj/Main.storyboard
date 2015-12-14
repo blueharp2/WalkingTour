@@ -25,7 +25,7 @@
                                 <nil key="highlightedColor"/>
                                 <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hrs-cf-THY">
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hrs-cf-THY">
                                 <rect key="frame" x="123" y="354" width="75" height="36"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
                                 <size key="titleShadowOffset" width="1" height="0.0"/>
@@ -37,7 +37,7 @@
                                     <segue destination="jae-n2-KAo" kind="show" identifier="signup" id="MHu-rp-kh2"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RC8-SS-wum">
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RC8-SS-wum">
                                 <rect key="frame" x="185" y="470" width="115" height="30"/>
                                 <state key="normal" title="Forgot Password">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -56,12 +56,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email Address" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rln-D9-BzM">
-                                <rect key="frame" x="20" y="227" width="280" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oNw-SI-dSs">
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oNw-SI-dSs">
                                 <rect key="frame" x="134" y="302" width="54" height="36"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
                                 <size key="titleShadowOffset" width="1" height="0.0"/>
@@ -77,29 +72,21 @@
                         <color key="backgroundColor" red="0.32203380520000002" green="0.7088735477" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="kes-x4-yde" firstAttribute="top" secondItem="ee5-Nu-KTa" secondAttribute="bottom" constant="8" symbolic="YES" id="0rB-ac-byt"/>
-                            <constraint firstItem="rln-D9-BzM" firstAttribute="top" secondItem="kes-x4-yde" secondAttribute="bottom" constant="8" symbolic="YES" id="2a2-7q-rbf"/>
                             <constraint firstItem="oNw-SI-dSs" firstAttribute="centerX" secondItem="hrs-cf-THY" secondAttribute="centerX" id="3uW-wu-9BW"/>
-                            <constraint firstItem="rln-D9-BzM" firstAttribute="centerX" secondItem="hrs-cf-THY" secondAttribute="centerX" id="A0F-u1-0m8"/>
                             <constraint firstItem="kes-x4-yde" firstAttribute="trailing" secondItem="ee5-Nu-KTa" secondAttribute="trailing" id="Abl-Va-IXG"/>
                             <constraint firstItem="ee5-Nu-KTa" firstAttribute="leading" secondItem="KUa-0d-h09" secondAttribute="leadingMargin" id="FkK-sB-526"/>
                             <constraint firstItem="oNw-SI-dSs" firstAttribute="centerX" secondItem="ag8-3E-KUc" secondAttribute="centerX" id="IR2-nv-gWg"/>
-                            <constraint firstItem="RC8-SS-wum" firstAttribute="trailing" secondItem="rln-D9-BzM" secondAttribute="trailing" id="KyQ-46-Liu"/>
                             <constraint firstItem="7dl-73-WFv" firstAttribute="top" secondItem="RC8-SS-wum" secondAttribute="bottom" constant="68" id="N19-Io-qK0"/>
                             <constraint firstItem="ee5-Nu-KTa" firstAttribute="top" secondItem="ag8-3E-KUc" secondAttribute="bottom" constant="26" id="SIE-nD-kfb"/>
                             <constraint firstItem="ag8-3E-KUc" firstAttribute="leading" secondItem="KUa-0d-h09" secondAttribute="leadingMargin" constant="19" id="VlT-nc-56K"/>
-                            <constraint firstItem="oNw-SI-dSs" firstAttribute="top" secondItem="rln-D9-BzM" secondAttribute="bottom" constant="45" id="a3g-ud-ca2"/>
                             <constraint firstItem="ag8-3E-KUc" firstAttribute="top" secondItem="t2T-eg-ugg" secondAttribute="bottom" constant="25" id="cxj-YA-3Ot"/>
                             <constraint firstItem="hrs-cf-THY" firstAttribute="top" secondItem="oNw-SI-dSs" secondAttribute="bottom" constant="16" id="dej-Bx-btg"/>
-                            <constraint firstItem="rln-D9-BzM" firstAttribute="centerX" secondItem="KUa-0d-h09" secondAttribute="centerX" id="eYl-ML-ERR"/>
                             <constraint firstItem="ee5-Nu-KTa" firstAttribute="leading" secondItem="kes-x4-yde" secondAttribute="leading" id="exV-6d-pSW"/>
-                            <constraint firstItem="rln-D9-BzM" firstAttribute="leading" secondItem="kes-x4-yde" secondAttribute="leading" id="jzL-bc-swL"/>
-                            <constraint firstItem="kes-x4-yde" firstAttribute="trailing" secondItem="rln-D9-BzM" secondAttribute="trailing" id="rcH-xM-dCO"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="O7p-cV-BRC"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
-                        <outlet property="emailField" destination="rln-D9-BzM" id="Sol-WQ-W93"/>
                         <outlet property="passwordField" destination="kes-x4-yde" id="JYo-uf-pKr"/>
                         <outlet property="userNameField" destination="ee5-Nu-KTa" id="UUo-9L-JVr"/>
                     </connections>

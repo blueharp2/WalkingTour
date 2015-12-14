@@ -7,6 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Parse/Parse.h>
+#import "ParseSignUpViewController.h"
+#import "ParseLoginViewController.h"
+#import "ParseResetPasswordViewController.h"
 
 @interface TourSelectionViewController : UIViewController
 

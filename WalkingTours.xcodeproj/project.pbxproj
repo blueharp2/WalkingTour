@@ -29,11 +29,11 @@
 		3D43CF241C1F478D00118998 /* WalkingTours60.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D43CF201C1F478D00118998 /* WalkingTours60.png */; };
 		3D43CF251C1F478D00118998 /* WalkingTours80.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D43CF211C1F478D00118998 /* WalkingTours80.png */; };
 		3D43CF261C1F478D00118998 /* WalkingTours120.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D43CF221C1F478D00118998 /* WalkingTours120.png */; };
-		3D43CF2A1C1F47F400118998 /* ParseLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D43CF291C1F47F400118998 /* ParseLoginViewController.m */; };
 		3D43CF2D1C1F4E4D00118998 /* ParseSignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D43CF2C1C1F4E4D00118998 /* ParseSignUpViewController.m */; };
 		3D43CF301C1F4E5B00118998 /* ParseResetPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D43CF2F1C1F4E5B00118998 /* ParseResetPasswordViewController.m */; };
 		3D7264021C1F687D00ABEEFD /* WalkingTour.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D7264011C1F687D00ABEEFD /* WalkingTour.png */; };
 		3D7264051C1F6BCC00ABEEFD /* TourSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D7264041C1F6BCC00ABEEFD /* TourSelectionViewController.m */; };
+		3D7264071C1F716E00ABEEFD /* ParseLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D7264061C1F716E00ABEEFD /* ParseLoginViewController.m */; };
 		903177CB1C1F3A9E001C8DF9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 903177CA1C1F3A9E001C8DF9 /* main.m */; };
 		903177CE1C1F3A9E001C8DF9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 903177CD1C1F3A9E001C8DF9 /* AppDelegate.m */; };
 		903177D11C1F3A9E001C8DF9 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 903177D01C1F3A9E001C8DF9 /* ViewController.m */; };
@@ -86,7 +86,6 @@
 		3D43CF211C1F478D00118998 /* WalkingTours80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WalkingTours80.png; sourceTree = SOURCE_ROOT; };
 		3D43CF221C1F478D00118998 /* WalkingTours120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WalkingTours120.png; sourceTree = SOURCE_ROOT; };
 		3D43CF281C1F47F400118998 /* ParseLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParseLoginViewController.h; sourceTree = "<group>"; };
-		3D43CF291C1F47F400118998 /* ParseLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParseLoginViewController.m; sourceTree = "<group>"; };
 		3D43CF2B1C1F4E4D00118998 /* ParseSignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParseSignUpViewController.h; sourceTree = "<group>"; };
 		3D43CF2C1C1F4E4D00118998 /* ParseSignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParseSignUpViewController.m; sourceTree = "<group>"; };
 		3D43CF2E1C1F4E5B00118998 /* ParseResetPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParseResetPasswordViewController.h; sourceTree = "<group>"; };
@@ -94,6 +93,7 @@
 		3D7264011C1F687D00ABEEFD /* WalkingTour.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WalkingTour.png; sourceTree = "<group>"; };
 		3D7264031C1F6BCC00ABEEFD /* TourSelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TourSelectionViewController.h; path = WalkingTours/TourSelectionViewController.h; sourceTree = "<group>"; };
 		3D7264041C1F6BCC00ABEEFD /* TourSelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TourSelectionViewController.m; path = WalkingTours/TourSelectionViewController.m; sourceTree = "<group>"; };
+		3D7264061C1F716E00ABEEFD /* ParseLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParseLoginViewController.m; sourceTree = "<group>"; };
 		903177C61C1F3A9E001C8DF9 /* WalkingTours.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WalkingTours.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		903177CA1C1F3A9E001C8DF9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		903177CC1C1F3A9E001C8DF9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -185,7 +185,7 @@
 				3D43CF141C1F43B400118998 /* ParseKeys.h */,
 				3D43CF151C1F43B400118998 /* ParseKeys.m */,
 				3D43CF281C1F47F400118998 /* ParseLoginViewController.h */,
-				3D43CF291C1F47F400118998 /* ParseLoginViewController.m */,
+				3D7264061C1F716E00ABEEFD /* ParseLoginViewController.m */,
 				3D43CF2B1C1F4E4D00118998 /* ParseSignUpViewController.h */,
 				3D43CF2C1C1F4E4D00118998 /* ParseSignUpViewController.m */,
 				3D43CF2E1C1F4E5B00118998 /* ParseResetPasswordViewController.h */,
@@ -399,10 +399,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3D7264071C1F716E00ABEEFD /* ParseLoginViewController.m in Sources */,
 				3D43CF2D1C1F4E4D00118998 /* ParseSignUpViewController.m in Sources */,
 				903177D11C1F3A9E001C8DF9 /* ViewController.m in Sources */,
 				3D43CF301C1F4E5B00118998 /* ParseResetPasswordViewController.m in Sources */,
-				3D43CF2A1C1F47F400118998 /* ParseLoginViewController.m in Sources */,
 				3D43CF161C1F43B400118998 /* ParseKeys.m in Sources */,
 				903177CE1C1F3A9E001C8DF9 /* AppDelegate.m in Sources */,
 				903177CB1C1F3A9E001C8DF9 /* main.m in Sources */,

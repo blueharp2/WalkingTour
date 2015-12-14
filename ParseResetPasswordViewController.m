@@ -7,8 +7,16 @@
 //
 
 #import "ParseResetPasswordViewController.h"
+#import "ParseSignUpViewController.h"
+#import "ParseLoginViewController.h"
 
-@interface ParseResetPasswordViewController ()
+#import "Parse/Parse.h"
+#import <ParseUI/ParseUI.h>
+
+
+
+@interface ParseResetPasswordViewController () <UITextFieldDelegate>
+
 @property (weak, nonatomic) IBOutlet UITextField *passwordReset;
 
 - (IBAction)sendResetPassword:(id)sender;
