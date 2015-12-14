@@ -17,14 +17,12 @@
 @property (readonly, strong, nonatomic, nullable) UIButton *signUpButton;
 
 
+
+
 @end
 
 @implementation ParseLoginViewController
 
-- (void)parseLogin {
-    PFUser *user = [PFUser user];
-    user.username =
-}
 
 
 - (void)viewDidLoad {

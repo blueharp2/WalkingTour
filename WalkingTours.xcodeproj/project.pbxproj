@@ -176,6 +176,7 @@
 		3D43CF271C1F47D600118998 /* PARSE */ = {
 			isa = PBXGroup;
 			children = (
+				903177D21C1F3A9E001C8DF9 /* Main.storyboard */,
 				3D43CF141C1F43B400118998 /* ParseKeys.h */,
 				3D43CF151C1F43B400118998 /* ParseKeys.m */,
 				3D43CF281C1F47F400118998 /* ParseLoginViewController.h */,
@@ -217,7 +218,6 @@
 				903177CD1C1F3A9E001C8DF9 /* AppDelegate.m */,
 				903177CF1C1F3A9E001C8DF9 /* ViewController.h */,
 				903177D01C1F3A9E001C8DF9 /* ViewController.m */,
-				903177D21C1F3A9E001C8DF9 /* Main.storyboard */,
 				903177D51C1F3A9E001C8DF9 /* Assets.xcassets */,
 				903177D71C1F3A9E001C8DF9 /* LaunchScreen.storyboard */,
 				903177DA1C1F3A9E001C8DF9 /* Info.plist */,
@@ -438,6 +438,7 @@
 				903177D31C1F3A9E001C8DF9 /* Base */,
 			);
 			name = Main.storyboard;
+			path = WalkingTours;
 			sourceTree = "<group>";
 		};
 		903177D71C1F3A9E001C8DF9 /* LaunchScreen.storyboard */ = {
