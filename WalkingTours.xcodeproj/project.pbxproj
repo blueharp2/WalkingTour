@@ -33,6 +33,7 @@
 		903177E41C1F3A9E001C8DF9 /* WalkingToursTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 903177E31C1F3A9E001C8DF9 /* WalkingToursTests.m */; };
 		903177EF1C1F3A9E001C8DF9 /* WalkingToursUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 903177EE1C1F3A9E001C8DF9 /* WalkingToursUITests.m */; };
 		90380EF51C1F49160085DD66 /* Tour.m in Sources */ = {isa = PBXBuildFile; fileRef = 90380EF41C1F49160085DD66 /* Tour.m */; };
+		90380EF81C1F4C590085DD66 /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = 90380EF71C1F4C590085DD66 /* Location.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,6 +89,8 @@
 		903177F01C1F3A9E001C8DF9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		90380EF31C1F49160085DD66 /* Tour.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tour.h; sourceTree = "<group>"; };
 		90380EF41C1F49160085DD66 /* Tour.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tour.m; sourceTree = "<group>"; };
+		90380EF61C1F4C590085DD66 /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Location.h; sourceTree = "<group>"; };
+		90380EF71C1F4C590085DD66 /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Location.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -225,6 +228,8 @@
 			children = (
 				90380EF31C1F49160085DD66 /* Tour.h */,
 				90380EF41C1F49160085DD66 /* Tour.m */,
+				90380EF61C1F4C590085DD66 /* Location.h */,
+				90380EF71C1F4C590085DD66 /* Location.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -360,6 +365,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				903177D11C1F3A9E001C8DF9 /* ViewController.m in Sources */,
+				90380EF81C1F4C590085DD66 /* Location.m in Sources */,
 				903177CE1C1F3A9E001C8DF9 /* AppDelegate.m in Sources */,
 				903177CB1C1F3A9E001C8DF9 /* main.m in Sources */,
 				90380EF51C1F49160085DD66 /* Tour.m in Sources */,
