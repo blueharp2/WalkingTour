@@ -13,7 +13,7 @@
 
 @property (copy, nonatomic) NSString *locationName;
 @property (copy, nonatomic) NSString *locationDescription;
-@property (strong, nonatomic) UIImage *photo;
+@property (strong, nonatomic) PFFile *photo;
 @property (strong, nonatomic) NSArray *categories;
 @property (strong, nonatomic) PFGeoPoint *location;
 @property (strong, nonatomic) Tour *tour;

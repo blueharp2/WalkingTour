@@ -13,7 +13,7 @@
 @property(copy, nonatomic) NSString *nameOfTour;
 @property(copy, nonatomic) NSString *descriptionText;
 @property(strong, nonatomic)PFGeoPoint *startLocation;
-@property(strong, nonatomic)NSString *user;
+@property(strong, nonatomic)PFUser *user;
 
 
 
