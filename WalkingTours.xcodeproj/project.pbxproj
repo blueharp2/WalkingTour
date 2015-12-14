@@ -24,6 +24,14 @@
 		3D43CF111C1F41AB00118998 /* ParseFacebookUtilsV4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D43CF0B1C1F41AB00118998 /* ParseFacebookUtilsV4.framework */; };
 		3D43CF121C1F41AB00118998 /* ParseTwitterUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D43CF0C1C1F41AB00118998 /* ParseTwitterUtils.framework */; };
 		3D43CF131C1F41AB00118998 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D43CF0D1C1F41AB00118998 /* ParseUI.framework */; };
+		3D43CF161C1F43B400118998 /* ParseKeys.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D43CF151C1F43B400118998 /* ParseKeys.m */; };
+		3D43CF231C1F478D00118998 /* WalkingTours58.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D43CF1F1C1F478D00118998 /* WalkingTours58.png */; };
+		3D43CF241C1F478D00118998 /* WalkingTours60.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D43CF201C1F478D00118998 /* WalkingTours60.png */; };
+		3D43CF251C1F478D00118998 /* WalkingTours80.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D43CF211C1F478D00118998 /* WalkingTours80.png */; };
+		3D43CF261C1F478D00118998 /* WalkingTours120.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D43CF221C1F478D00118998 /* WalkingTours120.png */; };
+		3D43CF2A1C1F47F400118998 /* ParseLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D43CF291C1F47F400118998 /* ParseLoginViewController.m */; };
+		3D43CF2D1C1F4E4D00118998 /* ParseSignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D43CF2C1C1F4E4D00118998 /* ParseSignUpViewController.m */; };
+		3D43CF301C1F4E5B00118998 /* ParseResetPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D43CF2F1C1F4E5B00118998 /* ParseResetPasswordViewController.m */; };
 		903177CB1C1F3A9E001C8DF9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 903177CA1C1F3A9E001C8DF9 /* main.m */; };
 		903177CE1C1F3A9E001C8DF9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 903177CD1C1F3A9E001C8DF9 /* AppDelegate.m */; };
 		903177D11C1F3A9E001C8DF9 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 903177D01C1F3A9E001C8DF9 /* ViewController.m */; };
@@ -69,6 +77,18 @@
 		3D43CF0B1C1F41AB00118998 /* ParseFacebookUtilsV4.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtilsV4.framework; sourceTree = "<group>"; };
 		3D43CF0C1C1F41AB00118998 /* ParseTwitterUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseTwitterUtils.framework; sourceTree = "<group>"; };
 		3D43CF0D1C1F41AB00118998 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
+		3D43CF141C1F43B400118998 /* ParseKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ParseKeys.h; path = WalkingTours/ParseKeys.h; sourceTree = "<group>"; };
+		3D43CF151C1F43B400118998 /* ParseKeys.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ParseKeys.m; path = WalkingTours/ParseKeys.m; sourceTree = "<group>"; };
+		3D43CF1F1C1F478D00118998 /* WalkingTours58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WalkingTours58.png; sourceTree = SOURCE_ROOT; };
+		3D43CF201C1F478D00118998 /* WalkingTours60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WalkingTours60.png; sourceTree = SOURCE_ROOT; };
+		3D43CF211C1F478D00118998 /* WalkingTours80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WalkingTours80.png; sourceTree = SOURCE_ROOT; };
+		3D43CF221C1F478D00118998 /* WalkingTours120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WalkingTours120.png; sourceTree = SOURCE_ROOT; };
+		3D43CF281C1F47F400118998 /* ParseLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParseLoginViewController.h; sourceTree = "<group>"; };
+		3D43CF291C1F47F400118998 /* ParseLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParseLoginViewController.m; sourceTree = "<group>"; };
+		3D43CF2B1C1F4E4D00118998 /* ParseSignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParseSignUpViewController.h; sourceTree = "<group>"; };
+		3D43CF2C1C1F4E4D00118998 /* ParseSignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParseSignUpViewController.m; sourceTree = "<group>"; };
+		3D43CF2E1C1F4E5B00118998 /* ParseResetPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParseResetPasswordViewController.h; sourceTree = "<group>"; };
+		3D43CF2F1C1F4E5B00118998 /* ParseResetPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParseResetPasswordViewController.m; sourceTree = "<group>"; };
 		903177C61C1F3A9E001C8DF9 /* WalkingTours.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WalkingTours.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		903177CA1C1F3A9E001C8DF9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		903177CC1C1F3A9E001C8DF9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -153,9 +173,25 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		3D43CF271C1F47D600118998 /* PARSE */ = {
+			isa = PBXGroup;
+			children = (
+				3D43CF141C1F43B400118998 /* ParseKeys.h */,
+				3D43CF151C1F43B400118998 /* ParseKeys.m */,
+				3D43CF281C1F47F400118998 /* ParseLoginViewController.h */,
+				3D43CF291C1F47F400118998 /* ParseLoginViewController.m */,
+				3D43CF2B1C1F4E4D00118998 /* ParseSignUpViewController.h */,
+				3D43CF2C1C1F4E4D00118998 /* ParseSignUpViewController.m */,
+				3D43CF2E1C1F4E5B00118998 /* ParseResetPasswordViewController.h */,
+				3D43CF2F1C1F4E5B00118998 /* ParseResetPasswordViewController.m */,
+			);
+			name = PARSE;
+			sourceTree = "<group>";
+		};
 		903177BD1C1F3A9E001C8DF9 = {
 			isa = PBXGroup;
 			children = (
+				3D43CF271C1F47D600118998 /* PARSE */,
 				903177C81C1F3A9E001C8DF9 /* WalkingTours */,
 				903177E21C1F3A9E001C8DF9 /* WalkingToursTests */,
 				903177ED1C1F3A9E001C8DF9 /* WalkingToursUITests */,
@@ -186,6 +222,10 @@
 				903177D71C1F3A9E001C8DF9 /* LaunchScreen.storyboard */,
 				903177DA1C1F3A9E001C8DF9 /* Info.plist */,
 				903177C91C1F3A9E001C8DF9 /* Supporting Files */,
+				3D43CF1F1C1F478D00118998 /* WalkingTours58.png */,
+				3D43CF201C1F478D00118998 /* WalkingTours60.png */,
+				3D43CF211C1F478D00118998 /* WalkingTours80.png */,
+				3D43CF221C1F478D00118998 /* WalkingTours120.png */,
 			);
 			path = WalkingTours;
 			sourceTree = "<group>";
@@ -319,9 +359,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3D43CF261C1F478D00118998 /* WalkingTours120.png in Resources */,
+				3D43CF231C1F478D00118998 /* WalkingTours58.png in Resources */,
 				903177D91C1F3A9E001C8DF9 /* LaunchScreen.storyboard in Resources */,
 				903177D61C1F3A9E001C8DF9 /* Assets.xcassets in Resources */,
+				3D43CF241C1F478D00118998 /* WalkingTours60.png in Resources */,
 				903177D41C1F3A9E001C8DF9 /* Main.storyboard in Resources */,
+				3D43CF251C1F478D00118998 /* WalkingTours80.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -346,7 +390,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3D43CF2D1C1F4E4D00118998 /* ParseSignUpViewController.m in Sources */,
 				903177D11C1F3A9E001C8DF9 /* ViewController.m in Sources */,
+				3D43CF301C1F4E5B00118998 /* ParseResetPasswordViewController.m in Sources */,
+				3D43CF2A1C1F47F400118998 /* ParseLoginViewController.m in Sources */,
+				3D43CF161C1F43B400118998 /* ParseKeys.m in Sources */,
 				903177CE1C1F3A9E001C8DF9 /* AppDelegate.m in Sources */,
 				903177CB1C1F3A9E001C8DF9 /* main.m in Sources */,
 			);
