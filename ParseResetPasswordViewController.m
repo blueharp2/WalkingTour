@@ -9,6 +9,9 @@
 #import "ParseResetPasswordViewController.h"
 
 @interface ParseResetPasswordViewController ()
+@property (weak, nonatomic) IBOutlet UITextField *passwordReset;
+
+- (IBAction)sendResetPassword:(id)sender;
 
 @end
 
@@ -23,4 +26,6 @@
 }
 
 
+- (IBAction)sendResetPassword:(id)sender {
+}
 @end

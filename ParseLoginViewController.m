@@ -11,13 +11,11 @@
 
 @interface ParseLoginViewController () <UITextFieldDelegate>
 
-@property (readonly, strong, nonatomic, nullable) UITextField *usernameField;
-@property (readonly, strong, nonatomic, nullable) UITextField *passwordField;
-@property (readonly, strong, nonatomic, nullable) UITextField *emailField;
-@property (readonly, strong, nonatomic, nullable) UIButton *signUpButton;
+@property (weak, nonatomic) IBOutlet UITextField *userNameField;
+@property (weak, nonatomic) IBOutlet UITextField *passwordField;
+@property (weak, nonatomic) IBOutlet UITextField *emailField;
 
-
-
+- (IBAction)loginButton:(id)sender;
 
 @end
 
@@ -45,6 +43,8 @@
 //
 //self.presentViewController(myAlert, animated: true, completion:nil)
 
+- (IBAction)loginButton:(id)sender {
+}
 @end
 
 
