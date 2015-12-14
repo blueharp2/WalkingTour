@@ -25,6 +25,20 @@
     return @"Tour";
 }
 
+-(id)initWithClassName:(NSString *)Tour
+            nameOfTour: (NSString *)nameOfTour
+       descriptionText:(NSString *)descriptionText
+         startLocation:(PFGeoPoint *)startLocation
+                  user:(PFUser *)user{
+    
+    if ((self = [super init])){
+        self.nameOfTour = nameOfTour;
+        self.descriptionText = descriptionText;
+        self.startLocation = startLocation;
+        self.user = user;
+    }
+    return self;
+}
 
 
 @end
