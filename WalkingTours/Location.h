@@ -18,7 +18,4 @@
 @property (strong, nonatomic) PFGeoPoint *location;
 @property (strong, nonatomic) Tour *tour;
 
-
-
-
 @end

@@ -25,4 +25,6 @@
     return @"Location";
 }
 
+-(id)initWithClassName:(NSString *)Location locationName:
+
 @end
