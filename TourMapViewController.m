@@ -7,6 +7,7 @@
 //
 
 #import "TourMapViewController.h"
+@import UIKit;
 @import MapKit;
 @import CoreLocation;
 @interface TourMapViewController () <MKMapViewDelegate, CLLocationManagerDelegate>
@@ -57,9 +58,30 @@
         return nil; }
     
     // Add view.
-    MKPinAnnotationView *annotationView = (MKPinAnnotationView *) [_locationManager dequeReusableAnnotationViewWithIdentifier: ];
+    MKPinAnnotationView *annotationView = (MKPinAnnotationView *) [_locationManager dequeueReusableAnnotationViewWithIdentifier: @"AnnotationView"];
+    annotationView.annotation = annotation;
+    
+    if (!annotationView) {
+        annotationView = [[MKPinAnnotationView alloc]initWithAnnotation:annotation reuseIdentifier:@"AnnotationView"];
     }
+    
+    annotationView.canShowCallout = true;
+    UIButton *rightCallout = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+    annotationView.rightCalloutAccessoryView = rightCallout;
+    
+    return annotationView;
 }
+
+//Uncomment this one if you want an overlay circle around the pin.
+
+//- (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id<MKOverlay>)overlay {
+//    MKCircleRenderer *circleRenderer = [[MKCircleRenderer alloc] initWithOverlay:overlay];
+//    circleRenderer.strokeColor = [UIColor blueColor];
+//    circleRenderer.fillColor = [UIColor redColor];
+//    circleRenderer.alpha = 0.5;
+//    return circleRenderer;
+//}
+
 
 #pragma mark - CLLocationManager
 
