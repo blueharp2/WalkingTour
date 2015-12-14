@@ -224,6 +224,7 @@
 		903177C81C1F3A9E001C8DF9 /* WalkingTours */ = {
 			isa = PBXGroup;
 			children = (
+				90380EF21C1F48730085DD66 /* Models */,
 				903177CC1C1F3A9E001C8DF9 /* AppDelegate.h */,
 				903177CD1C1F3A9E001C8DF9 /* AppDelegate.m */,
 				903177CF1C1F3A9E001C8DF9 /* ViewController.h */,
@@ -264,6 +265,17 @@
 				903177F01C1F3A9E001C8DF9 /* Info.plist */,
 			);
 			path = WalkingToursUITests;
+			sourceTree = "<group>";
+		};
+		90380EF21C1F48730085DD66 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				90380EF31C1F49160085DD66 /* Tour.h */,
+				90380EF41C1F49160085DD66 /* Tour.m */,
+				90380EF61C1F4C590085DD66 /* Location.h */,
+				90380EF71C1F4C590085DD66 /* Location.m */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -403,12 +415,14 @@
 				3D43CF2D1C1F4E4D00118998 /* ParseSignUpViewController.m in Sources */,
 				BFD441891C1F6574004F8CDE /* FindToursViewController.m in Sources */,
 				903177D11C1F3A9E001C8DF9 /* ViewController.m in Sources */,
+				90380EF81C1F4C590085DD66 /* Location.m in Sources */,
 				3D43CF301C1F4E5B00118998 /* ParseResetPasswordViewController.m in Sources */,
 				BFD4418C1C1F6C21004F8CDE /* TourMapViewController.m in Sources */,
 				3D43CF2A1C1F47F400118998 /* ParseLoginViewController.m in Sources */,
 				3D43CF161C1F43B400118998 /* ParseKeys.m in Sources */,
 				903177CE1C1F3A9E001C8DF9 /* AppDelegate.m in Sources */,
 				903177CB1C1F3A9E001C8DF9 /* main.m in Sources */,
+				90380EF51C1F49160085DD66 /* Tour.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
