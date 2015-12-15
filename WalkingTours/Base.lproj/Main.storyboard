@@ -300,19 +300,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eoR-vB-3h6">
-                                <rect key="frame" x="137" y="143" width="46" height="30"/>
-                                <fontDescription key="fontDescription" name="GurmukhiMN-Bold" family="Gurmukhi MN" pointSize="25"/>
-                                <size key="titleShadowOffset" width="2.2250738585072014e-308" height="0.0"/>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <action selector="selectTour:" destination="GeJ-TF-SYQ" eventType="touchUpInside" id="Mx5-X3-axU"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zo4-Kb-Hh8">
-                                <rect key="frame" x="137" y="249" width="46" height="30"/>
-                                <state key="normal" title="Button"/>
-                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="WalkingTour.png" translatesAutoresizingMaskIntoConstraints="NO" id="tZU-n3-oIP">
+                                <rect key="frame" x="33" y="53" width="310" height="461"/>
+                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P06-Ev-jeT">
                                 <rect key="frame" x="20" y="266" width="287" height="46"/>
                                 <fontDescription key="fontDescription" name="GurmukhiMN-Bold" family="Gurmukhi MN" pointSize="25"/>
@@ -324,11 +314,19 @@
                                     <action selector="createTour:" destination="GeJ-TF-SYQ" eventType="touchUpInside" id="cKM-Un-ZWu"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="WalkingTour.png" translatesAutoresizingMaskIntoConstraints="NO" id="tZU-n3-oIP">
-                                <rect key="frame" x="33" y="53" width="310" height="461"/>
-                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rLZ-jB-9eS">
+                                <rect key="frame" x="20" y="166" width="287" height="47"/>
+                                <fontDescription key="fontDescription" name="GurmukhiMN-Bold" family="Gurmukhi MN" pointSize="25"/>
+                                <state key="normal" title="Select Walking Tour">
+                                    <color key="titleColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="createTour:" destination="GeJ-TF-SYQ" eventType="touchUpInside" id="5pF-SB-bEt"/>
+                                </connections>
+                            </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.32203380520000002" green="0.7088735477" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                 </viewController>
