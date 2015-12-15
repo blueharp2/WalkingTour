@@ -106,11 +106,28 @@
 
 -(void)saveButtonSelected:(UIBarButtonItem *)sender{
 
+    if (self.nameOfTourTextField.text.length != 0) {
+        // [ParseService saveToParse:<#(Tour *)#> locations:<#(NSArray *)#>]
+    }else {
+        UIAlertController *noTextinFieldAlert = [UIAlertController alertControllerWithTitle:@"Please enter the name of your tour" message:@"Thank you" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){}];
+        [noTextinFieldAlert addAction:defaultAction];
+        [self presentViewController:noTextinFieldAlert animated:YES completion:nil];
+    }
+    
+    if (self.location.count !=0) {
+        
+        UIAlertController *noLocationAlert = [UIAlertController alertControllerWithTitle:@"Please add at least one location" message:@"Thank you" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){}];
+        [noLocationAlert addAction:defaultAction];
+        [self presentViewController:noLocationAlert animated:YES completion:nil];
+    }
+    
 //check if there is text and at least one location
     //if not present Alert and do not save
     
     
-   // ParseService saveToParse:<#(Tour *)#> locations:<#(NSArray *)#>
+   // [ParseService saveToParse:<#(Tour *)#> locations:<#(NSArray *)#>]
     
 }
 
