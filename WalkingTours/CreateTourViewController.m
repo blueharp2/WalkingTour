@@ -11,6 +11,7 @@
 #import <Parse/Parse.h>
 #import "POIDetailTableViewCell.h"
 #import "CreateTourDetailViewController.h"
+#import "ParseService.h"
 
 
 
@@ -24,7 +25,7 @@
 - (IBAction)addLocationsButton:(id)sender;
 
 @property (weak, nonatomic) IBOutlet UITableView *locationTableView;
-@property (strong, nonatomic) NSArray<Location *> *Location;
+
 
 
 @end
@@ -80,9 +81,14 @@
     return cell;
 }
 
+
 #pragma mark Save to Parse
 
 -(void)saveButtonSelected:(UIBarButtonItem *)sender{
+ 
+    
+    
+   // ParseService saveToParse:<#(Tour *)#> locations:<#(NSArray *)#>
     
 }
 
