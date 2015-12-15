@@ -19,8 +19,7 @@
 @property (strong, nonatomic) Tour *tour;
 
 
--(id)initWithClassName:(NSString *)Location
-          locationName:(NSString *)locationName
+-(id)initWithLocationName:(NSString *)locationName
    locationDescription:(NSString *)locationDescription
                  photo:(PFFile *)photo
             categories:(NSArray *)categories
