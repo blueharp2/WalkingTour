@@ -48,17 +48,25 @@ static const NSString *ItemStatusContext;
                 Location *location = (Location *)object;
                 if ([location.photo isKindOfClass:[PFFile class]]) {
                     PFFile *photoFile = (PFFile *)location.photo;
-                    NSURL *videoURL = [NSURL URLWithString:photoFile.url];
-                    [self loadVideoAsset:videoURL];
-//                    [photoFile getFilePathInBackgroundWithBlock:^(NSString * _Nullable filePath, NSError * _Nullable error) {
-//                        if (error) {
-//                            NSLog(@"Couldn't get the file path...");
-//                        }
-//                        if (filePath) {
-//                            NSLog(@"%@", filePath);
-//                            [self loadVideoAsset:[NSURL URLWithString:filePath]];
-//                        }
-//                    }];
+                    NSURL *mediaURL = [NSURL URLWithString:photoFile.url];
+                    if ([[NSString stringWithFormat:@"%@", mediaURL] containsString:@".mp4"]) {
+                        [self loadVideoAsset:mediaURL];
+                    } else {
+                        [photoFile getDataInBackgroundWithBlock:^(NSData * _Nullable data, NSError * _Nullable error) {
+                            if (error) {
+                                NSLog(@"Error unwrapping image");
+                            }
+                            if (data) {
+                                UIImage *image = [UIImage imageWithData:data];
+                                [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                                    UIImageView *imageView = [[UIImageView alloc] initWithFrame:self.playerView.frame];
+                                    imageView.contentMode = UIViewContentModeScaleAspectFill;
+                                    [self.playerView addSubview:imageView];
+                                    imageView.image = image;
+                                }];
+                            }
+                        }];
+                    }
                 }
             }
         }
@@ -68,27 +76,25 @@ static const NSString *ItemStatusContext;
 - (void)loadVideoAsset:(NSURL *)url {
     
     AVURLAsset *asset = [AVURLAsset URLAssetWithURL:url options:nil];
-    NSLog(@"%@", asset.metadata);
-    NSLog(@"%@", asset.description);
     NSString *tracksKey = @"tracks";
     
     [asset loadValuesAsynchronouslyForKeys:@[tracksKey] completionHandler: ^ {
          dispatch_async(dispatch_get_main_queue(), ^ {
             NSError *error;
             AVKeyValueStatus status = [asset statusOfValueForKey:tracksKey error:&error];
-             
-             NSLog(@"%li", status);
             
-            if (status == AVKeyValueStatusLoaded) {
-                self.playerItem = [AVPlayerItem playerItemWithAsset:asset];
-//                 ensure that this is done before the playerItem is associated with the player
-                [self.playerItem addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionInitial context:&ItemStatusContext];
-                [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerItemDidReachEnd:) name:AVPlayerItemDidPlayToEndTimeNotification object:self.playerItem];
-                self.player = [AVPlayer playerWithPlayerItem:self.playerItem];
-                [self.playerView setPlayer:self.player];
+             if (status == AVKeyValueStatusLoaded) {
+                 AVPlayerLayer *playerLayer = [AVPlayerLayer playerLayerWithPlayer:self.player];
+                 playerLayer.frame = self.playerView.bounds;
+                 [self.playerView.layer addSublayer:playerLayer];
+                 self.playerItem = [AVPlayerItem playerItemWithAsset:asset];
+                 [self.playerItem addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionInitial context:&ItemStatusContext];
+                 [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerItemDidReachEnd:) name:AVPlayerItemDidPlayToEndTimeNotification object:self.playerItem];
+                 self.player = [AVPlayer playerWithPlayerItem:self.playerItem];
+                 [playerLayer setVideoGravity:AVLayerVideoGravityResizeAspectFill];
+                 [self.playerView setPlayer:self.player];
             }
             else {
-//                 You should deal with the error appropriately.
                 NSLog(@"The asset's tracks were not loaded:\n%@", [error localizedDescription]);
             }
         });
