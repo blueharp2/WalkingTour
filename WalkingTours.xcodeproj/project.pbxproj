@@ -440,6 +440,7 @@
 				3D7264071C1F716E00ABEEFD /* ParseLoginViewController.m in Sources */,
 				3D43CF2D1C1F4E4D00118998 /* ParseSignUpViewController.m in Sources */,
 				90380EFB1C1F6EA30085DD66 /* TourDetailViewController.m in Sources */,
+				BFD441891C1F6574004F8CDE /* FindToursViewController.m in Sources */,
 				903177D11C1F3A9E001C8DF9 /* ViewController.m in Sources */,
 				90380EF81C1F4C590085DD66 /* Location.m in Sources */,
 				3D43CF301C1F4E5B00118998 /* ParseResetPasswordViewController.m in Sources */,
