@@ -116,7 +116,9 @@
     }
     
     if (self.location.count !=0) {
-        
+        // [ParseService saveToParse:<#(Tour *)#> locations:<#(NSArray *)#>]
+    }else{
+    
         UIAlertController *noLocationAlert = [UIAlertController alertControllerWithTitle:@"Please add at least one location" message:@"Thank you" preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){}];
         [noLocationAlert addAction:defaultAction];
