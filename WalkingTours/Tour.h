@@ -16,8 +16,7 @@
 @property(strong, nonatomic)PFUser *user;
 
 
--(id)initWithClassName:(NSString *)Tour
-            nameOfTour: (NSString *)nameOfTour
+-(id)initWithNameOfTour:(NSString *)nameOfTour
        descriptionText:(NSString *)descriptionText
          startLocation:(PFGeoPoint *)startLocation
                   user:(PFUser *)user;

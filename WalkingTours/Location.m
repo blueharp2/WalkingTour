@@ -25,13 +25,12 @@
     return @"Location";
 }
 
--(id)initWithClassName:(NSString *)Location
-          locationName:(NSString *)locationName
-   locationDescription:(NSString *)locationDescription
-                 photo:(PFFile *)photo
-            categories:(NSArray *)categories
-              location:(PFGeoPoint *)location
-                  tour:(Tour *)tour{
+-(id)initWithLocationName:(NSString *)locationName
+      locationDescription:(NSString *)locationDescription
+                    photo:(PFFile *)photo
+               categories:(NSArray *)categories
+                 location:(PFGeoPoint *)location
+                     tour:(Tour *)tour{
     
     if ((self = [super init])){
         self.locationName = locationName;
