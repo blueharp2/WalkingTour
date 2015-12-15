@@ -17,6 +17,8 @@
 
 - (IBAction)cameraButtonPressed:(UIButton *)sender;
 @property (strong, nonatomic) UIImagePickerController *imagePicker;
+@property (weak, nonatomic) IBOutlet UIView *greyOutView;
+@property (weak, nonatomic) IBOutlet UITableView *categoryTableView;
 
 @end
 
