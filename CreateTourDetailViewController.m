@@ -45,9 +45,7 @@
             self.imagePicker.allowsEditing = YES;
         }
     }
-    [self presentViewController:self.imagePicker animated:YES completion:^{
-        //
-    }];
+    [self presentViewController:self.imagePicker animated:YES completion:nil];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
