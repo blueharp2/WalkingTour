@@ -29,6 +29,9 @@
                     <constraint firstAttribute="bottomMargin" secondItem="czy-wV-bxD" secondAttribute="bottom" constant="3.5" id="FPX-46-jsR"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="categoryLabel" destination="czy-wV-bxD" id="OdS-fF-Ryp"/>
+            </connections>
         </tableViewCell>
     </objects>
 </document>

@@ -8,16 +8,24 @@
 
 #import "CategoryTableViewCell.h"
 
+@interface CategoryTableViewCell ()
+
+@property (weak, nonatomic) IBOutlet UILabel *categoryLabel;
+
+@end
+
 @implementation CategoryTableViewCell
 
 - (void)awakeFromNib {
-    // Initialization code
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
+}
 
-    // Configure the view for the selected state
+- (void)setCategory:(NSString *)category {
+    _category = category;
+    self.categoryLabel.text = self.category;
 }
 
 @end

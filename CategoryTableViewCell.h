@@ -12,5 +12,6 @@
 @interface CategoryTableViewCell : UITableViewCell
 
 @property (strong, nonatomic) NSString *category;
+- (void)setCategory:(NSString *)category;
 
 @end

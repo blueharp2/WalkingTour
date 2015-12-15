@@ -31,8 +31,26 @@ static const NSArray *categories;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+//    PFQuery *query = [PFQuery queryWithClassName:@"Location"];
+//    [query getFirstObjectInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+//        if (object) {
+//            Location *location = (Location *)object;
+//            PFQuery *tourQuery = [PFQuery queryWithClassName:@"Tour"];
+//            [tourQuery whereKey:@"objectId" equalTo:location.tour.objectId];
+//            [tourQuery getFirstObjectInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+//                if ([object isKindOfClass:[Tour class]]) {
+//                    location.tour = (Tour *)object;
+//                    NSLog(@"%@", location.tour.nameOfTour);
+//                    Tour *tour = (Tour *)object;
+//                    NSLog(@"%@", tour.nameOfTour);
+//                }
+//            }];
+//        }
+//    }];
+    
     UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveTour:)];
     self.navigationItem.rightBarButtonItem = saveButton;
+    [self setUpGreyOutView];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -41,30 +59,37 @@ static const NSArray *categories;
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self.greyOutView setFrame:CGRectMake(self.view.center.x, self.view.center.y, 0, 0)];
-    [self.categoryTableView setFrame:CGRectMake(self.greyOutView.center.x, self.greyOutView.center.y, 0, 0)];
-    [self.greyOutView setNeedsLayout];
-    [self.categoryTableView setNeedsLayout];
-    [self.view layoutIfNeeded];
 }
 
 - (void)setCategoryOptions {
     categories = @[@"Restaurant", @"Cafe", @"Art", @"Museum", @"History", @"Shopping", @"Nightlife"];
 }
 
+- (void)setUpGreyOutView {
+    self.greyOutView = [[UIView alloc] initWithFrame:CGRectMake(self.view.center.x, self.view.center.y, 0, 0)];
+    
+    self.greyOutView.backgroundColor = [UIColor colorWithWhite:0.737 alpha:0.500];
+    
+    [self.greyOutView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    
+    [self.view addSubview:self.greyOutView];
+    
+    [self setUpTableView];
+}
+
 - (void)setUpTableView {
     self.categoryTableView = [[UITableView alloc] initWithFrame:CGRectMake(self.view.center.x, self.view.center.y, 0, 0)];
+    
+    [self setCategoryOptions];
     self.categoryTableView.dataSource = self;
     self.categoryTableView.delegate = self;
+    
     UINib *categoryNib = [UINib nibWithNibName:@"CategoryTableViewCell" bundle:[NSBundle mainBundle]];
     [self.categoryTableView registerNib:categoryNib forCellReuseIdentifier:@"cell"];
     
     [self.categoryTableView setTranslatesAutoresizingMaskIntoConstraints:NO];
     
-    NSLayoutConstraint *bottom = [NSLayoutConstraint constraintWithItem:self.categoryTableView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeBottom multiplier:1.0 constant:30];
-    NSLayoutConstraint *height = [NSLayoutConstraint constraintWithItem:self.categoryTableView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeHeight multiplier:0.8 constant:0.0];
-    NSLayoutConstraint *width = [NSLayoutConstraint constraintWithItem:self.categoryTableView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeWidth multiplier:0.8 constant:0.0];
-    NSLayoutConstraint *centerX = [NSLayoutConstraint constraintWithItem:self.categoryTableView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0.0];
+    [self.view addSubview:self.categoryTableView];
 }
 
 - (void)loadImagePicker {
@@ -86,13 +111,43 @@ static const NSArray *categories;
 }
 
 - (void)saveTour:(UIBarButtonItem *)sender {
-    [UIView animateKeyframesWithDuration:0.8 delay:0 options:UIViewKeyframeAnimationOptionCalculationModeLinear animations:^{
+    [self.view layoutIfNeeded];
+    NSLayoutConstraint *top = [NSLayoutConstraint constraintWithItem:self.greyOutView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTop multiplier:1.0 constant:self.view.frame.size.height / 2];
+    NSLayoutConstraint *trailing = [NSLayoutConstraint constraintWithItem:self.greyOutView attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:self.view.frame.size.width / 2];
+    NSLayoutConstraint *bottom = [NSLayoutConstraint constraintWithItem:self.greyOutView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeBottom multiplier:1.0 constant:-(self.view.frame.size.height / 2)];
+    NSLayoutConstraint *leading = [NSLayoutConstraint constraintWithItem:self.greyOutView attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeLeading multiplier:1.0 constant:-(self.view.frame.size.width / 2)];
+    
+    top.active = YES;
+    trailing.active = YES;
+    bottom.active = YES;
+    leading.active = YES;
+    
+    NSLayoutConstraint *tableViewBottom = [NSLayoutConstraint constraintWithItem:self.categoryTableView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeBottom multiplier:1.0 constant:-(self.view.frame.size.height / 2)];
+    NSLayoutConstraint *tableViewHeight = [NSLayoutConstraint constraintWithItem:self.categoryTableView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeHeight multiplier:0.6 constant:-(self.view.frame.size.height * 0.6)];
+    NSLayoutConstraint *tableViewWidth = [NSLayoutConstraint constraintWithItem:self.categoryTableView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeWidth multiplier:0.8 constant:-(self.view.frame.size.width) * 0.8];
+    NSLayoutConstraint *tableViewCenterX = [NSLayoutConstraint constraintWithItem:self.categoryTableView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0.0];
+    
+    tableViewBottom.active = YES;
+    tableViewHeight.active = YES;
+    tableViewWidth.active = YES;
+    tableViewCenterX.active = YES;
+    
+    top.constant = 0;
+    trailing.constant = 0;
+    bottom.constant = 0;
+    leading.constant = 0;
+    
+    [UIView animateKeyframesWithDuration:0.8 delay:0 options:UIViewKeyframeAnimationOptionLayoutSubviews animations:^{
         [UIView addKeyframeWithRelativeStartTime:0.0 relativeDuration:0.5 animations:^{
-            //Animate greyout view to full screen size
-            self.greyOutView.frame = CGRectMake(self.view.center.x, self.view.center.y, self.view.frame.size.width, self.view.frame.size.height);
+            [self.view layoutIfNeeded];
+            
         }];
+        
+        tableViewBottom.constant = -30.0;
+        tableViewHeight.constant = 0;
+        tableViewWidth.constant = 0;
         [UIView addKeyframeWithRelativeStartTime:0.5 relativeDuration:0.5 animations:^{
-            //Animate table view to most of screen size
+            [self.view layoutIfNeeded];
         }];
     } completion:^(BOOL finished) {
         //
@@ -122,7 +177,8 @@ static const NSArray *categories;
 }
 
 - (IBAction)cameraButtonPressed:(UIButton *)sender {
-    [self loadImagePicker];
+//    [self loadImagePicker];
+    [self saveTour:nil];
 }
 
 - (void)addTestModelsToParse:(PFFile *)media {
@@ -148,7 +204,7 @@ static const NSArray *categories;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     CategoryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-    cell.category = categories[indexPath.row];
+    [cell setCategory:categories[indexPath.row]];
     return cell;
 }
 
