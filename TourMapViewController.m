@@ -7,6 +7,7 @@
 //
 
 #import "TourMapViewController.h"
+#import "TourDetailViewController.h"
 @import UIKit;
 @import MapKit;
 @import CoreLocation;
@@ -117,9 +118,11 @@
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"DetailViewController"]) {
+    if ([segue.identifier isEqualToString:@"TourDetailViewController"]) {
         if ([sender isKindOfClass:[MKAnnotationView class]]) {
             MKAnnotationView *annotationView = (MKAnnotationView *)sender;
+            TourDetailViewController *tourDetailViewController = (TourDetailViewController *)segue.destinationViewController;
+            
         }
     }    // Pass the selected object to the new view controller.
 }
