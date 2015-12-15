@@ -65,12 +65,21 @@
     if (!annotationView) {
         annotationView = [[MKPinAnnotationView alloc]initWithAnnotation:annotation reuseIdentifier:@"AnnotationView"];
     }
-    
+    //Add a detail disclosure button.
     annotationView.canShowCallout = true;
-    UIButton *rightCallout = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
-    annotationView.rightCalloutAccessoryView = rightCallout;
+    UIButton *rightCalloutButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+    annotationView.rightCalloutAccessoryView = rightCalloutButton;
+    
+    // Add a custom image to the callout.
+    
+//    UIImage *myCustomImage = [[UIImage alloc]initWithImage:[UIImage imageNamed:@"MyCustomImage.png"]];
     
     return annotationView;
+}
+
+- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
+    //Put the segue name here...
+    [self performSegueWithIdentifier:@"DetailViewController" sender:view];
 }
 
 //Uncomment this one if you want an overlay circle around the pin.
