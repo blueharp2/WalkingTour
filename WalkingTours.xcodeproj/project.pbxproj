@@ -47,9 +47,10 @@
 		9050ECD91C1F78E80092CF86 /* VideoPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9050ECD81C1F78E80092CF86 /* VideoPlayerView.m */; };
 		9050ECDC1C1F7B920092CF86 /* TourDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9050ECDB1C1F7B920092CF86 /* TourDetailViewController.m */; };
 		9050ECDF1C1F82F20092CF86 /* CreateTourDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9050ECDE1C1F82F20092CF86 /* CreateTourDetailViewController.m */; };
+		908AA8C11C20972B00A7DF57 /* ParseService.m in Sources */ = {isa = PBXBuildFile; fileRef = 908AA8C01C20972B00A7DF57 /* ParseService.m */; };
+		90F4E22B1C1FA7B3002A75B2 /* CreateTourViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90F4E22A1C1FA7B3002A75B2 /* CreateTourViewController.m */; };
 		BF7EAC391C207FC40076E432 /* POIDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF7EAC381C207FC40076E432 /* POIDetailCell.xib */; };
 		BF7EAC3C1C2080160076E432 /* POIDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BF7EAC3B1C2080160076E432 /* POIDetailTableViewCell.m */; };
-		90F4E22B1C1FA7B3002A75B2 /* CreateTourViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90F4E22A1C1FA7B3002A75B2 /* CreateTourViewController.m */; };
 		BFD441891C1F6574004F8CDE /* FindToursViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFD441881C1F6574004F8CDE /* FindToursViewController.m */; };
 		BFD4418C1C1F6C21004F8CDE /* TourMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFD4418B1C1F6C21004F8CDE /* TourMapViewController.m */; };
 /* End PBXBuildFile section */
@@ -130,11 +131,13 @@
 		9050ECDB1C1F7B920092CF86 /* TourDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TourDetailViewController.m; sourceTree = "<group>"; };
 		9050ECDD1C1F82F20092CF86 /* CreateTourDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateTourDetailViewController.h; sourceTree = "<group>"; };
 		9050ECDE1C1F82F20092CF86 /* CreateTourDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateTourDetailViewController.m; sourceTree = "<group>"; };
+		908AA8BF1C20972B00A7DF57 /* ParseService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParseService.h; sourceTree = "<group>"; };
+		908AA8C01C20972B00A7DF57 /* ParseService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParseService.m; sourceTree = "<group>"; };
+		90F4E2291C1FA7B3002A75B2 /* CreateTourViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CreateTourViewController.h; path = WalkingTours/CreateTourViewController.h; sourceTree = "<group>"; };
+		90F4E22A1C1FA7B3002A75B2 /* CreateTourViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CreateTourViewController.m; path = WalkingTours/CreateTourViewController.m; sourceTree = "<group>"; };
 		BF7EAC381C207FC40076E432 /* POIDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = POIDetailCell.xib; sourceTree = "<group>"; };
 		BF7EAC3A1C2080160076E432 /* POIDetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = POIDetailTableViewCell.h; sourceTree = "<group>"; };
 		BF7EAC3B1C2080160076E432 /* POIDetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = POIDetailTableViewCell.m; sourceTree = "<group>"; };
-		90F4E2291C1FA7B3002A75B2 /* CreateTourViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CreateTourViewController.h; path = WalkingTours/CreateTourViewController.h; sourceTree = "<group>"; };
-		90F4E22A1C1FA7B3002A75B2 /* CreateTourViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CreateTourViewController.m; path = WalkingTours/CreateTourViewController.m; sourceTree = "<group>"; };
 		BFD441871C1F6574004F8CDE /* FindToursViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindToursViewController.h; sourceTree = "<group>"; };
 		BFD441881C1F6574004F8CDE /* FindToursViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindToursViewController.m; sourceTree = "<group>"; };
 		BFD4418A1C1F6C21004F8CDE /* TourMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TourMapViewController.h; sourceTree = "<group>"; };
@@ -210,6 +213,8 @@
 		3D43CF271C1F47D600118998 /* PARSE */ = {
 			isa = PBXGroup;
 			children = (
+				908AA8BF1C20972B00A7DF57 /* ParseService.h */,
+				908AA8C01C20972B00A7DF57 /* ParseService.m */,
 				3D43CF141C1F43B400118998 /* ParseKeys.h */,
 				3D43CF151C1F43B400118998 /* ParseKeys.m */,
 				3D43CF281C1F47F400118998 /* ParseLoginViewController.h */,
@@ -329,8 +334,6 @@
 		BF7EAC3E1C2085DD0076E432 /* Tours */ = {
 			isa = PBXGroup;
 			children = (
-				9050ECDA1C1F7B920092CF86 /* TourDetailViewController.h */,
-				9050ECDB1C1F7B920092CF86 /* TourDetailViewController.m */,
 				BFD4418A1C1F6C21004F8CDE /* TourMapViewController.h */,
 				BFD4418B1C1F6C21004F8CDE /* TourMapViewController.m */,
 			);
@@ -340,8 +343,6 @@
 		BF7EAC3F1C2085E60076E432 /* Create */ = {
 			isa = PBXGroup;
 			children = (
-				9050ECDD1C1F82F20092CF86 /* CreateTourDetailViewController.h */,
-				9050ECDE1C1F82F20092CF86 /* CreateTourDetailViewController.m */,
 			);
 			name = Create;
 			sourceTree = "<group>";
@@ -513,6 +514,7 @@
 				9050ECD91C1F78E80092CF86 /* VideoPlayerView.m in Sources */,
 				3D43CF161C1F43B400118998 /* ParseKeys.m in Sources */,
 				903177CE1C1F3A9E001C8DF9 /* AppDelegate.m in Sources */,
+				908AA8C11C20972B00A7DF57 /* ParseService.m in Sources */,
 				9050ECDC1C1F7B920092CF86 /* TourDetailViewController.m in Sources */,
 				903177CB1C1F3A9E001C8DF9 /* main.m in Sources */,
 				90380EF51C1F49160085DD66 /* Tour.m in Sources */,

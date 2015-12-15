@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -19,6 +19,7 @@
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="251" image="burger" translatesAutoresizingMaskIntoConstraints="NO" id="LUE-Nl-1Ik">
                         <rect key="frame" x="18" y="8" width="30" height="30"/>
+                        <animations/>
                         <constraints>
                             <constraint firstAttribute="width" constant="30" id="4g8-qH-7de"/>
                             <constraint firstAttribute="height" constant="32" id="N9V-or-3TC"/>
@@ -34,11 +35,13 @@
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="244" verticalHuggingPriority="247" horizontalCompressionResistancePriority="1000" ambiguous="YES" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FAF-Sl-sO5" userLabel="titleLabel">
                         <rect key="frame" x="56" y="14" width="244" height="21"/>
+                        <animations/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
+                <animations/>
                 <constraints>
                     <constraint firstItem="LUE-Nl-1Ik" firstAttribute="width" secondItem="ZhC-BL-S3Y" secondAttribute="width" multiplier="1/10" constant="-2" id="5KX-i9-HQo"/>
                     <constraint firstItem="LUE-Nl-1Ik" firstAttribute="leading" secondItem="ZhC-BL-S3Y" secondAttribute="leadingMargin" constant="10" id="6wd-Da-s2F"/>
@@ -61,6 +64,7 @@
                     </mask>
                 </variation>
             </tableViewCellContentView>
+            <animations/>
             <connections>
                 <outlet property="titleLabel" destination="FAF-Sl-sO5" id="9eP-tN-OMh"/>
                 <outlet property="userImageView" destination="LUE-Nl-1Ik" id="nEn-QK-UGi"/>
