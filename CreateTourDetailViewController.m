@@ -7,6 +7,7 @@
 //
 
 #import "CreateTourDetailViewController.h"
+#import <MobileCoreServices/MobileCoreServices.h>
 
 @interface CreateTourDetailViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
@@ -29,8 +30,13 @@
         self.imagePicker = [[UIImagePickerController alloc] init];
         self.imagePicker.delegate = self;
         
-        if ([UIImagePickerController isSourceTypeAvailable:(UIImagePickerControllerSourceTypeCamera)]) {
-//            self.imagePicker.mediaTypes = [[NSArray alloc] initWithObjects:(NSString *)kUTTypeImage, (NSString * )kUTTypeVideo, nil];
+        if ([UIImagePickerController isSourceTypeAvailable:(UIImagePickerControllerSourceTypeCamera)] && [UIImagePickerController isCameraDeviceAvailable:UIImagePickerControllerCameraDeviceRear]) {
+            NSArray *availableMediaTypes = [UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypeCamera];
+            if ([availableMediaTypes containsObject:(NSString *)kUTTypeMovie]) {
+                self.imagePicker.mediaTypes = [[NSArray alloc] initWithObjects:(NSString *)kUTTypeImage, (NSString *)kUTTypeMovie, nil];
+            }
+            self.imagePicker.showsCameraControls = YES;
+            
         }
         
     }
