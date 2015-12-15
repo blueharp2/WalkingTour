@@ -9,6 +9,7 @@
 #import "CreateTourViewController.h"
 #import "Location.h"
 #import <Parse/Parse.h>
+#import "POIDetailTableViewCell.h"
 
 
 
@@ -55,6 +56,9 @@
     //    UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveTour:)];
     //    self.navigationItem.rightBarButtonItem = saveButton;
     
+    UINib *nib = [UINib nibWithNibName:@"POIDetailTableViewCell" bundle:nil];
+    [[self locationTableView]registerNib:nib forCellReuseIdentifier:@"POIDetailTableViewCell"];
+    
 }
 
 #pragma mark set up TableView
@@ -68,9 +72,10 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-   UITableViewCell *cell = [self.locationTableView dequeueReusableCellWithIdentifier:@"LocationCell" forIndexPath:indexPath];
+   POIDetailTableViewCell *cell = (POIDetailTableViewCell *)[self.locationTableView dequeueReusableCellWithIdentifier:@"POIDetailTableViewCell" forIndexPath:indexPath];
 
-    //Something is not right here.
+    
+   //cell.location =
     [self.Location objectAtIndex:indexPath.row];
     
     return cell;
