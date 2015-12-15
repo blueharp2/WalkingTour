@@ -9,17 +9,12 @@
 #import "ParseResetPasswordViewController.h"
 #import "ParseSignUpViewController.h"
 #import "ParseLoginViewController.h"
-
-#import "Parse/Parse.h"
-#import <ParseUI/ParseUI.h>
-
-
+@import Parse;
+@import ParseUI;
 
 @interface ParseResetPasswordViewController () <UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *passwordReset;
-
-
 
 - (IBAction)sendResetPassword:(id)sender;
 
@@ -29,8 +24,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -39,11 +32,9 @@
 
 - (IBAction)cancelPressed:(UIBarButtonItem *)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
-
 }
 
 - (IBAction)sendResetPassword:(id)sender {
     [PFUser requestPasswordResetForEmailInBackground:@"email@example.com"];
-    
 }
 @end

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void(^ParseLoginViewControllerCompletion)(BOOL success);
+typedef void(^ParseLoginViewControllerCompletion)();
 
 @interface ParseLoginViewController : UIViewController
 

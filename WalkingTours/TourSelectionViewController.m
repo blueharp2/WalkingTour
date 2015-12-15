@@ -38,8 +38,10 @@
         
     } else {
 
-        ParseLoginViewController *loginVC = [self.storyboard instantiateViewControllerWithIdentifier:@"ParseLoginViewController"];
-        [self presentViewController:loginVC animated:YES completion:nil];
+        ParseLoginViewController *loginVC = (ParseLoginViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"ParseLoginViewController"];
+        loginVC.completion = ^{[self dismissViewControllerAnimated:YES completion:nil];
+        };
+            [self presentViewController:loginVC animated:YES completion:nil];
     }
 }
 

@@ -11,6 +11,7 @@
 @import ParseUI;
 #import "ParseLoginViewController.h"
 #import "ParseSignUpViewController.h"
+#import "TourSelectionViewController.h"
 
 
 @interface ParseLoginViewController () <UITextFieldDelegate>
@@ -29,11 +30,11 @@
 
 - (IBAction)loginButton:(id)sender {
     
-    [PFUser logInWithUsernameInBackground:@"username" password:@"password" block:^(PFUser * _Nullable user, NSError * _Nullable error) {
+    [PFUser logInWithUsernameInBackground:self.userNameField.text password:self.passwordField.text block:^(PFUser * _Nullable user, NSError * _Nullable error) {
         
         if (user && self.completion) {
             
-            self.completion(YES);
+            self.completion();
             
         } else {
             
