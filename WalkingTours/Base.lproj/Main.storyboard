@@ -291,7 +291,7 @@
         <!--CreateTourDetailVC-->
         <scene sceneID="Qhg-dh-nYD">
             <objects>
-                <viewController title="CreateTourDetailVC" id="ch6-eO-iFm" sceneMemberID="viewController">
+                <viewController title="CreateTourDetailVC" id="ch6-eO-iFm" customClass="CreateTourDetailViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="cYn-Hr-gxW"/>
                         <viewControllerLayoutGuide type="bottom" id="hOD-qw-MCN"/>
@@ -306,7 +306,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jT6-HC-cRd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1679" y="-20"/>
+            <point key="canvasLocation" x="2273" y="784"/>
         </scene>
         <!--Tour Selection View Controller-->
         <scene sceneID="xBy-Ht-Pie">
@@ -345,6 +345,7 @@
                                 </state>
                                 <connections>
                                     <action selector="createTour:" destination="GeJ-TF-SYQ" eventType="touchUpInside" id="cKM-Un-ZWu"/>
+                                    <segue destination="vsA-st-EdL" kind="show" identifier="SegueToCreateTour" id="As8-fR-r2F"/>
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="WalkingTour.png" translatesAutoresizingMaskIntoConstraints="NO" id="tZU-n3-oIP">
@@ -455,7 +456,7 @@
         <!--Create Tour ViewController-->
         <scene sceneID="PvD-xR-3JL">
             <objects>
-                <viewController title="Create Tour ViewController" id="vsA-st-EdL" customClass="CreateTourTableViewController" sceneMemberID="viewController">
+                <viewController title="Create Tour ViewController" id="vsA-st-EdL" customClass="CreateTourViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="lnd-bp-pY4"/>
                         <viewControllerLayoutGuide type="bottom" id="aDh-or-b7o"/>
@@ -464,54 +465,85 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="gha-TO-9kk">
-                                <rect key="frame" x="0.0" y="167" width="320" height="401"/>
-                                <animations/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="sectionIndexBackgroundColor" red="0.82842303299999998" green="0.91177850999999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                            </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create Your Tour" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qal-q6-3hA">
-                                <rect key="frame" x="96" y="20" width="129" height="21"/>
+                                <rect key="frame" x="96" y="84" width="129" height="21"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name of Tour" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1L6-cQ-RUl">
-                                <rect key="frame" x="20" y="49" width="280" height="30"/>
+                                <rect key="frame" x="20" y="125" width="280" height="30"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Tour Description" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wq2-4m-Ca4">
-                                <rect key="frame" x="20" y="87" width="280" height="30"/>
+                                <rect key="frame" x="20" y="165" width="280" height="30"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mFF-Dj-GkE">
+                                <rect key="frame" x="111" y="225" width="98" height="30"/>
+                                <animations/>
+                                <color key="backgroundColor" red="0.82842303299999998" green="0.91177850999999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Add Locations"/>
+                                <connections>
+                                    <action selector="addLocationsButton:" destination="vsA-st-EdL" eventType="touchUpInside" id="ZUz-TM-8pE"/>
+                                    <segue destination="ch6-eO-iFm" kind="show" identifier="SegueToCreateTourDetailVC" id="UAk-Yw-x3i"/>
+                                </connections>
+                            </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="gha-TO-9kk">
+                                <rect key="frame" x="0.0" y="288" width="320" height="280"/>
+                                <animations/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="sectionIndexBackgroundColor" red="0.82842303299999998" green="0.91177850999999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="t88-UP-tJm">
+                                        <rect key="frame" x="0.0" y="92" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="t88-UP-tJm" id="m3q-8v-K4s">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <animations/>
+                                        </tableViewCellContentView>
+                                        <animations/>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="gha-TO-9kk" firstAttribute="leading" secondItem="HCd-lq-wYg" secondAttribute="leading" id="0L5-Bi-9l1"/>
-                            <constraint firstAttribute="trailing" secondItem="1L6-cQ-RUl" secondAttribute="trailing" constant="20" id="Ix8-SY-gig"/>
-                            <constraint firstItem="1L6-cQ-RUl" firstAttribute="top" secondItem="Qal-q6-3hA" secondAttribute="bottom" constant="8" id="KIq-yh-EgP"/>
-                            <constraint firstItem="Qal-q6-3hA" firstAttribute="top" secondItem="lnd-bp-pY4" secondAttribute="bottom" id="QUr-gO-G6h"/>
-                            <constraint firstItem="Wq2-4m-Ca4" firstAttribute="leading" secondItem="1L6-cQ-RUl" secondAttribute="leading" id="QhX-3q-YCj"/>
-                            <constraint firstItem="aDh-or-b7o" firstAttribute="top" secondItem="gha-TO-9kk" secondAttribute="bottom" id="Zjh-gh-60O"/>
-                            <constraint firstItem="1L6-cQ-RUl" firstAttribute="leading" secondItem="HCd-lq-wYg" secondAttribute="leading" constant="20" id="a6I-p0-hQ9"/>
-                            <constraint firstItem="gha-TO-9kk" firstAttribute="top" secondItem="Wq2-4m-Ca4" secondAttribute="bottom" constant="50" id="adS-y9-rrb"/>
-                            <constraint firstItem="Wq2-4m-Ca4" firstAttribute="top" secondItem="1L6-cQ-RUl" secondAttribute="bottom" constant="8" id="bFj-w2-gaJ"/>
-                            <constraint firstItem="Wq2-4m-Ca4" firstAttribute="trailing" secondItem="1L6-cQ-RUl" secondAttribute="trailing" id="bNv-uV-42D"/>
-                            <constraint firstAttribute="trailing" secondItem="gha-TO-9kk" secondAttribute="trailing" id="dpK-mk-R8H"/>
-                            <constraint firstItem="Qal-q6-3hA" firstAttribute="centerX" secondItem="HCd-lq-wYg" secondAttribute="centerX" id="wZN-1C-74h"/>
+                            <constraint firstItem="gha-TO-9kk" firstAttribute="top" secondItem="mFF-Dj-GkE" secondAttribute="bottom" constant="33" id="1FL-10-yGa"/>
+                            <constraint firstItem="mFF-Dj-GkE" firstAttribute="centerX" secondItem="HCd-lq-wYg" secondAttribute="centerX" id="5KY-NF-MI6"/>
+                            <constraint firstItem="Wq2-4m-Ca4" firstAttribute="leading" secondItem="HCd-lq-wYg" secondAttribute="leading" constant="20" id="63d-SY-JCg"/>
+                            <constraint firstItem="Wq2-4m-Ca4" firstAttribute="centerX" secondItem="HCd-lq-wYg" secondAttribute="centerX" id="8AW-On-XWG"/>
+                            <constraint firstItem="Qal-q6-3hA" firstAttribute="top" secondItem="lnd-bp-pY4" secondAttribute="bottom" constant="20" id="8mW-Ed-8Jb"/>
+                            <constraint firstItem="1L6-cQ-RUl" firstAttribute="top" secondItem="Qal-q6-3hA" secondAttribute="bottom" constant="20" id="AwY-GO-5gI"/>
+                            <constraint firstItem="Qal-q6-3hA" firstAttribute="centerX" secondItem="HCd-lq-wYg" secondAttribute="centerX" id="Jrj-3U-USv"/>
+                            <constraint firstItem="gha-TO-9kk" firstAttribute="leading" secondItem="HCd-lq-wYg" secondAttribute="leading" id="TMa-nB-7kr"/>
+                            <constraint firstAttribute="trailing" secondItem="Wq2-4m-Ca4" secondAttribute="trailing" constant="20" id="Y37-oq-emk"/>
+                            <constraint firstAttribute="bottom" secondItem="gha-TO-9kk" secondAttribute="bottom" id="b15-ut-DgQ"/>
+                            <constraint firstItem="mFF-Dj-GkE" firstAttribute="top" secondItem="Wq2-4m-Ca4" secondAttribute="bottom" constant="30" id="b6P-e2-OAs"/>
+                            <constraint firstItem="1L6-cQ-RUl" firstAttribute="centerX" secondItem="HCd-lq-wYg" secondAttribute="centerX" id="hwd-tb-nlg"/>
+                            <constraint firstItem="1L6-cQ-RUl" firstAttribute="leading" secondItem="HCd-lq-wYg" secondAttribute="leading" constant="20" id="l7t-b1-wfD"/>
+                            <constraint firstAttribute="trailing" secondItem="gha-TO-9kk" secondAttribute="trailing" id="lQi-pt-fyz"/>
+                            <constraint firstItem="Wq2-4m-Ca4" firstAttribute="top" secondItem="1L6-cQ-RUl" secondAttribute="bottom" constant="10" id="q5a-6h-3bp"/>
+                            <constraint firstAttribute="trailing" secondItem="1L6-cQ-RUl" secondAttribute="trailing" constant="20" id="woJ-aC-Fh4"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="addLocationButton" destination="mFF-Dj-GkE" id="4yG-rf-iBb"/>
+                        <outlet property="nameOfTourTextField" destination="1L6-cQ-RUl" id="Cvu-tr-3ZM"/>
+                        <outlet property="tourDescriptionTextField" destination="Wq2-4m-Ca4" id="IFe-1h-104"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yYS-7i-1Z2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2265" y="28"/>
+            <point key="canvasLocation" x="2273" y="90"/>
         </scene>
         <!--List TableView-->
         <scene sceneID="Etf-BX-3GD">

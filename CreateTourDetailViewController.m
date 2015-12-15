@@ -18,6 +18,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveTour:)];
+    self.navigationItem.rightBarButtonItem = saveButton;
 }
 
 - (void)didReceiveMemoryWarning {
