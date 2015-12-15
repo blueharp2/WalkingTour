@@ -12,6 +12,8 @@
 @interface CategoryTableViewCell : UITableViewCell
 
 @property (strong, nonatomic) NSString *category;
+@property (nonatomic) float checkboxAlpha;
 - (void)setCategory:(NSString *)category;
+- (void)setCheckboxAlpha:(float)checkboxAlpha;
 
 @end

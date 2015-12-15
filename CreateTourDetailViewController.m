@@ -50,6 +50,7 @@ static const NSArray *categories;
     
     UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveTour:)];
     self.navigationItem.rightBarButtonItem = saveButton;
+    self.selectedCategories = [[NSMutableArray alloc] init];
     [self setUpGreyOutView];
 }
 
@@ -205,15 +206,21 @@ static const NSArray *categories;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     CategoryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     [cell setCategory:categories[indexPath.row]];
+    if ([self.selectedCategories indexOfObject:categories[indexPath.row]]) {
+        [cell setCheckboxAlpha:1.0];
+    } else {
+        [cell setCheckboxAlpha:0.0];
+    }
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ([self.selectedCategories indexOfObject:categories[indexPath.row]]) {
+    if (self.selectedCategories.count > 0 && [self.selectedCategories indexOfObject:categories[indexPath.row]]) {
         [self.selectedCategories removeObjectAtIndex:[self.selectedCategories indexOfObject:categories[indexPath.row]]];
     } else {
         [self.selectedCategories addObject:categories[indexPath.row]];
     }
+    [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
 }
 
 @end
