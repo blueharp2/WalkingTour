@@ -10,6 +10,8 @@
 #import "Location.h"
 #import <Parse/Parse.h>
 #import "POIDetailTableViewCell.h"
+#import "CreateTourDetailViewController.h"
+
 
 
 
@@ -37,21 +39,14 @@
 -(void)viewDidLoad{
     [super viewDidLoad];
     [self setupMainViewController];
-    
 
-}
-
-
-- (IBAction)addLocationsButton:(id)sender {
-    
-    
 }
 
 -(void)setupMainViewController{
 
     [self.locationTableView setDelegate:self];
     [self.locationTableView setDataSource:self];
-    [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveButtionSelected:)]];
+    [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveButtonSelected:)]];
     
     //    UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveTour:)];
     //    self.navigationItem.rightBarButtonItem = saveButton;
@@ -59,6 +54,10 @@
     UINib *nib = [UINib nibWithNibName:@"POIDetailTableViewCell" bundle:nil];
     [[self locationTableView]registerNib:nib forCellReuseIdentifier:@"POIDetailTableViewCell"];
     
+}
+
+- (IBAction)addLocationsButton:(id)sender {
+    [self.navigationController pushViewController:[[CreateTourDetailViewController alloc]init] animated:YES];
 }
 
 #pragma mark set up TableView
@@ -83,7 +82,7 @@
 
 #pragma mark Save to Parse
 
--(void)saveButtionSelected:(UIBarButtonItem *)sender{
+-(void)saveButtonSelected:(UIBarButtonItem *)sender{
     
 }
 
