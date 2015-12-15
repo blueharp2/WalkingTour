@@ -572,10 +572,10 @@
             </objects>
             <point key="canvasLocation" x="2857" y="-7"/>
         </scene>
-        <!--Detail ViewController-->
+        <!--TourDetailViewController-->
         <scene sceneID="dRw-18-JAy">
             <objects>
-                <viewController title="Detail ViewController" id="16i-zP-Ize" customClass="TourDetailViewController" sceneMemberID="viewController">
+                <viewController title="TourDetailViewController" id="16i-zP-Ize" customClass="TourDetailViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="WgN-IX-MKI"/>
                         <viewControllerLayoutGuide type="bottom" id="STd-o3-vpi"/>

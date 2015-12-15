@@ -7,6 +7,7 @@
 //
 
 #import "TourMapViewController.h"
+#import "TourDetailViewController.h"
 @import UIKit;
 @import MapKit;
 @import CoreLocation;
@@ -64,12 +65,21 @@
     if (!annotationView) {
         annotationView = [[MKPinAnnotationView alloc]initWithAnnotation:annotation reuseIdentifier:@"AnnotationView"];
     }
-    
+    //Add a detail disclosure button.
     annotationView.canShowCallout = true;
-    UIButton *rightCallout = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
-    annotationView.rightCalloutAccessoryView = rightCallout;
+    UIButton *rightCalloutButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+    annotationView.rightCalloutAccessoryView = rightCalloutButton;
+    
+    // Add a custom image to the callout.
+    
+//    UIImage *myCustomImage = [[UIImage alloc]initWithImage:[UIImage imageNamed:@"MyCustomImage.png"]];
     
     return annotationView;
+}
+
+- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
+    //Put the segue name here...
+    [self performSegueWithIdentifier:@"DetailViewController" sender:view];
 }
 
 //Uncomment this one if you want an overlay circle around the pin.
@@ -113,14 +123,18 @@
 
 
 
-/*
+
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"TourDetailViewController"]) {
+        if ([sender isKindOfClass:[MKAnnotationView class]]) {
+            MKAnnotationView *annotationView = (MKAnnotationView *)sender;
+            TourDetailViewController *tourDetailViewController = (TourDetailViewController *)segue.destinationViewController;
+            
+        }
+    }    // Pass the selected object to the new view controller.
 }
-*/
+
 
 @end
