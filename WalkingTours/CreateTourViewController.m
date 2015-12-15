@@ -12,11 +12,12 @@
 #import "POIDetailTableViewCell.h"
 #import "CreateTourDetailViewController.h"
 #import "ParseService.h"
+#import "Tour.h"
 
 
 
 
-@interface CreateTourViewController() <UITableViewDataSource, UITableViewDelegate>
+@interface CreateTourViewController() <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *nameOfTourTextField;
 @property (weak, nonatomic) IBOutlet UITextField *tourDescriptionTextField;
@@ -47,6 +48,8 @@
 
     [self.locationTableView setDelegate:self];
     [self.locationTableView setDataSource:self];
+    [self.nameOfTourTextField setDelegate:self];
+    [self.tourDescriptionTextField setDelegate:self];
     [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveButtonSelected:)]];
     
     //    UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveTour:)];
@@ -60,6 +63,22 @@
 - (IBAction)addLocationsButton:(id)sender {
     [self.navigationController pushViewController:[[CreateTourDetailViewController alloc]init] animated:YES];
 }
+
+
+
+-(void)saveTourToParse{
+    
+    Location *startLocation = self.location.firstObject;
+    NSString *name = self.nameOfTourTextField.text;
+    NSString *description = self.tourDescriptionTextField.text;
+    PFUser *user = [PFUser currentUser];
+    
+
+    Tour *tour = [[Tour alloc]initWithNameOfTour:name descriptionText:description startLocation:startLocation.location user:user];
+    [ParseService saveToParse: tour locations:self.location];
+    
+}
+
 
 #pragma mark set up TableView
 
@@ -81,11 +100,14 @@
     return cell;
 }
 
+//custom setter on location Array it reloads data
 
 #pragma mark Save to Parse
 
 -(void)saveButtonSelected:(UIBarButtonItem *)sender{
- 
+
+//check if there is text and at least one location
+    //if not present Alert and do not save
     
     
    // ParseService saveToParse:<#(Tour *)#> locations:<#(NSArray *)#>
