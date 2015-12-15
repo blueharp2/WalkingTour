@@ -14,12 +14,6 @@
 
 @interface ParseSignUpViewController () <UITextFieldDelegate>
 
-@property (weak, nonatomic) IBOutlet UITextField *usernameSignUp;
-@property (weak, nonatomic) IBOutlet UITextField *passwordSignUp;
-@property (weak, nonatomic) IBOutlet UITextField *emailSignUp;
-
-- (IBAction)saveSignUp:(id)sender;
-
 @end
 
 @implementation ParseSignUpViewController
@@ -32,14 +26,45 @@
     [super didReceiveMemoryWarning];
 }
 
-- (IBAction)cancelButtonPressed:(id)sender {
-    UIViewController *vc = [self presentingViewController];
-    [self dismissViewControllerAnimated:YES completion: nil];
-    
-    [[vc presentingViewController] dismissViewControllerAnimated:YES completion:nil];
-}
-
-
 - (IBAction)saveSignUp:(id)sender {
+    
+    PFUser *user = [PFUser user];
+    user.username = _usernameSignUp.text;
+    user.password = _passwordSignUp.text;
+    user.email = _emailSignUp.text;
+    
+    [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        
+        NSString *userMessage = @"Registration is successful.";
+        
+        if (!error) {
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Alert" message:userMessage preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:nil];
+        } else {
+            
+        }
+    }];
 }
+
 @end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
