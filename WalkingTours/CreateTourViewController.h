@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CreateTourViewController : UITableViewController
+@interface CreateTourViewController : UIViewController
 
 @end

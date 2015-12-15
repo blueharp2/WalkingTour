@@ -8,6 +8,7 @@
 
 #import "CreateTourViewController.h"
 #import "Location.h"
+#import <Parse/Parse.h>
 
 
 
@@ -36,8 +37,7 @@
     [super viewDidLoad];
     [self setupMainViewController];
     
-    UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveTour:)];
-    self.navigationItem.rightBarButtonItem = saveButton;
+
 }
 
 
@@ -47,8 +47,13 @@
 }
 
 -(void)setupMainViewController{
+
     [self.locationTableView setDelegate:self];
     [self.locationTableView setDataSource:self];
+    [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveButtionSelected:)]];
+    
+    //    UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveTour:)];
+    //    self.navigationItem.rightBarButtonItem = saveButton;
     
 }
 
@@ -69,6 +74,12 @@
     [self.Location objectAtIndex:indexPath.row];
     
     return cell;
+}
+
+#pragma mark Save to Parse
+
+-(void)saveButtionSelected:(UIBarButtonItem *)sender{
+    
 }
 
 @end
