@@ -364,7 +364,7 @@
         <!--MapView and TableView-->
         <scene sceneID="UoJ-JZ-cjF">
             <objects>
-                <viewController title="MapView and TableView" id="tqM-E3-5K0" sceneMemberID="viewController">
+                <viewController title="MapView and TableView" id="tqM-E3-5K0" customClass="FindToursViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="02n-Ua-OER"/>
                         <viewControllerLayoutGuide type="bottom" id="5vw-EB-vwN"/>
@@ -385,8 +385,29 @@
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="GYQ-Tm-WcJ" firstAttribute="leading" secondItem="B61-L7-Fg8" secondAttribute="leading" id="1wy-XT-TTL"/>
+                            <constraint firstAttribute="trailing" secondItem="dEP-ma-FrS" secondAttribute="trailing" id="4TG-7p-rAX"/>
+                            <constraint firstItem="5vw-EB-vwN" firstAttribute="top" secondItem="dEP-ma-FrS" secondAttribute="bottom" constant="45" id="8LS-yK-2Eu"/>
+                            <constraint firstItem="GYQ-Tm-WcJ" firstAttribute="top" secondItem="02n-Ua-OER" secondAttribute="bottom" constant="33" id="8fQ-70-tHV"/>
+                            <constraint firstItem="5vw-EB-vwN" firstAttribute="top" secondItem="dEP-ma-FrS" secondAttribute="bottom" constant="20" id="Mhb-Sa-nZe"/>
+                            <constraint firstAttribute="trailing" secondItem="GYQ-Tm-WcJ" secondAttribute="trailing" id="NlF-93-XLN"/>
+                            <constraint firstItem="dEP-ma-FrS" firstAttribute="top" secondItem="GYQ-Tm-WcJ" secondAttribute="bottom" constant="1" id="Xsx-gv-xYL"/>
+                            <constraint firstItem="dEP-ma-FrS" firstAttribute="top" secondItem="GYQ-Tm-WcJ" secondAttribute="bottom" id="i9p-dw-i16"/>
+                            <constraint firstItem="dEP-ma-FrS" firstAttribute="leading" secondItem="B61-L7-Fg8" secondAttribute="leading" id="lHt-RS-1nC"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="i9p-dw-i16"/>
+                                <exclude reference="Mhb-Sa-nZe"/>
+                            </mask>
+                        </variation>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="mapView" destination="GYQ-Tm-WcJ" id="3Kx-Rx-Dr3"/>
+                        <outlet property="toursTableView" destination="dEP-ma-FrS" id="0g8-Lf-TO4"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="J62-pQ-oqn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -395,7 +416,7 @@
         <!--Map View of Locations-->
         <scene sceneID="TVQ-kY-mxI">
             <objects>
-                <viewController title="Map View of Locations" id="44c-cJ-4BY" sceneMemberID="viewController">
+                <viewController title="Map View of Locations" id="44c-cJ-4BY" customClass="TourMapViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="kEa-1E-IhN"/>
                         <viewControllerLayoutGuide type="bottom" id="qo6-hW-7Xe"/>
@@ -411,8 +432,17 @@
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="qo6-hW-7Xe" firstAttribute="top" secondItem="4ml-uu-TJU" secondAttribute="bottom" constant="42" id="Af8-Ka-t38"/>
+                            <constraint firstItem="4ml-uu-TJU" firstAttribute="top" secondItem="kEa-1E-IhN" secondAttribute="bottom" constant="32" id="OBD-WQ-8bD"/>
+                            <constraint firstItem="4ml-uu-TJU" firstAttribute="leading" secondItem="rfd-ts-r9L" secondAttribute="leading" id="Qcy-iQ-BtL"/>
+                            <constraint firstAttribute="trailing" secondItem="4ml-uu-TJU" secondAttribute="trailing" id="YXn-UJ-Q1B"/>
+                        </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="mapView" destination="4ml-uu-TJU" id="Ygp-qU-DX0"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0iQ-L2-MJt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -498,6 +528,12 @@
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="bYn-7j-rTq" secondAttribute="trailing" id="7dj-iu-ZoM"/>
+                            <constraint firstItem="bYn-7j-rTq" firstAttribute="top" secondItem="Tqw-Cp-IzH" secondAttribute="bottom" id="Ako-Fi-t88"/>
+                            <constraint firstItem="HgW-jL-Idc" firstAttribute="top" secondItem="bYn-7j-rTq" secondAttribute="bottom" id="RIX-Yl-ozc"/>
+                            <constraint firstItem="bYn-7j-rTq" firstAttribute="leading" secondItem="Gfc-hj-cvs" secondAttribute="leading" id="ohe-3m-0Jy"/>
+                        </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                 </viewController>
