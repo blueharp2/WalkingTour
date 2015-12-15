@@ -8,17 +8,21 @@
 
 #import "CreateTourDetailViewController.h"
 #import <MobileCoreServices/MobileCoreServices.h>
+#import "CategoryTableViewCell.h"
 @import CoreLocation;
 #import "Tour.h"
 #import "Location.h"
 @import Parse;
 
-@interface CreateTourDetailViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+static const NSArray *categories;
+
+@interface CreateTourDetailViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITableViewDataSource, UITableViewDelegate>
 
 - (IBAction)cameraButtonPressed:(UIButton *)sender;
 @property (strong, nonatomic) UIImagePickerController *imagePicker;
-@property (weak, nonatomic) IBOutlet UIView *greyOutView;
-@property (weak, nonatomic) IBOutlet UITableView *categoryTableView;
+@property (strong, nonatomic) UIView *greyOutView;
+@property (strong, nonatomic) UITableView *categoryTableView;
+@property (strong, nonatomic) NSMutableArray *selectedCategories;
 
 @end
 
@@ -33,6 +37,34 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.greyOutView setFrame:CGRectMake(self.view.center.x, self.view.center.y, 0, 0)];
+    [self.categoryTableView setFrame:CGRectMake(self.greyOutView.center.x, self.greyOutView.center.y, 0, 0)];
+    [self.greyOutView setNeedsLayout];
+    [self.categoryTableView setNeedsLayout];
+    [self.view layoutIfNeeded];
+}
+
+- (void)setCategoryOptions {
+    categories = @[@"Restaurant", @"Cafe", @"Art", @"Museum", @"History", @"Shopping", @"Nightlife"];
+}
+
+- (void)setUpTableView {
+    self.categoryTableView = [[UITableView alloc] initWithFrame:CGRectMake(self.view.center.x, self.view.center.y, 0, 0)];
+    self.categoryTableView.dataSource = self;
+    self.categoryTableView.delegate = self;
+    UINib *categoryNib = [UINib nibWithNibName:@"CategoryTableViewCell" bundle:[NSBundle mainBundle]];
+    [self.categoryTableView registerNib:categoryNib forCellReuseIdentifier:@"cell"];
+    
+    [self.categoryTableView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    
+    NSLayoutConstraint *bottom = [NSLayoutConstraint constraintWithItem:self.categoryTableView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeBottom multiplier:1.0 constant:30];
+    NSLayoutConstraint *height = [NSLayoutConstraint constraintWithItem:self.categoryTableView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeHeight multiplier:0.8 constant:0.0];
+    NSLayoutConstraint *width = [NSLayoutConstraint constraintWithItem:self.categoryTableView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeWidth multiplier:0.8 constant:0.0];
+    NSLayoutConstraint *centerX = [NSLayoutConstraint constraintWithItem:self.categoryTableView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0.0];
 }
 
 - (void)loadImagePicker {
@@ -54,7 +86,17 @@
 }
 
 - (void)saveTour:(UIBarButtonItem *)sender {
-    
+    [UIView animateKeyframesWithDuration:0.8 delay:0 options:UIViewKeyframeAnimationOptionCalculationModeLinear animations:^{
+        [UIView addKeyframeWithRelativeStartTime:0.0 relativeDuration:0.5 animations:^{
+            //Animate greyout view to full screen size
+            self.greyOutView.frame = CGRectMake(self.view.center.x, self.view.center.y, self.view.frame.size.width, self.view.frame.size.height);
+        }];
+        [UIView addKeyframeWithRelativeStartTime:0.5 relativeDuration:0.5 animations:^{
+            //Animate table view to most of screen size
+        }];
+    } completion:^(BOOL finished) {
+        //
+    }];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
@@ -98,6 +140,24 @@
             NSLog(@"Something went terribly wrong.");
         }
     }];
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return categories.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    CategoryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    cell.category = categories[indexPath.row];
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if ([self.selectedCategories indexOfObject:categories[indexPath.row]]) {
+        [self.selectedCategories removeObjectAtIndex:[self.selectedCategories indexOfObject:categories[indexPath.row]]];
+    } else {
+        [self.selectedCategories addObject:categories[indexPath.row]];
+    }
 }
 
 @end
