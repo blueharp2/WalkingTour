@@ -8,6 +8,10 @@
 
 #import "FindToursViewController.h"
 #import "Location.h"
+#import "Tour.h"
+#import "Location.h"
+#import "POIDetailTableViewCell.h"
+
 @import CoreLocation;
 @import MapKit;
 
@@ -19,7 +23,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *toursTableView;
 
 @property (strong, nonatomic) CLLocationManager *locationManager;
-@property (strong, nonatomic) NSArray *locationsFromParse;
+@property (strong, nonatomic) NSArray <Location*> *locationsFromParse;
 
 
 @end
@@ -28,40 +32,53 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    
-    [self.mapView setDelegate:self];
-    [self.mapView setShowsUserLocation: YES];
-//    [self.mapView.layer setCornerRadius:20.0];
+    [self setupViewController];
     
 //    [self login];
     PFQuery *query = [PFQuery queryWithClassName:@"Location"];
+    // Get user location.
     [self.locationManager requestLocation];
-//    PFGeoPoint *userLocation = (self.locationManager.location);
     PFGeoPoint *userLocation = [PFGeoPoint geoPointWithLatitude:self.locationManager.location.coordinate.latitude longitude:self.locationManager.location.coordinate.longitude];
+    //find locations near user location.
     [query whereKey:@"location" nearGeoPoint:userLocation];
-    
     [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         if (!error) {
-            NSLog(@"Succesfully retrieved %lu locations.", objects.count);
-            self.locationsFromParse = [[NSArray alloc] initWithArray:objects];
-            for ( Location *location in self.locationsFromParse) {
-                CLLocationCoordinate2D parsedLocation = CLLocationCoordinate2DMake(location.location.latitude, location.location.longitude);
-                __weak typeof (self) weakSelf = self;
+            
+            for (PFObject *object in objects) {
                 
-                MKPointAnnotation *newPoint = [[MKPointAnnotation alloc]init];
-                newPoint.coordinate = parsedLocation;
-                newPoint.title = @"Test Location";
+                NSString *locationName = object[@"locationName"];
+                NSString *locationDescription = object[@"locationDescription"];
+                NSArray *categories = object[@"categories"];
                 
-                [self.mapView addAnnotation:newPoint];
-
+                PFGeoPoint *geopoint = (PFGeoPoint *)object[@"location"];
+                Tour *tour = (Tour *)object[@"tour"];
+//                tour.nameOfTour = tour[@];
+//                tour.descriptionText;
+//                tour.startLocation;
+//                tour.user;
+                
+                
+//                Location *location = [[Location alloc]initWithLocationName:locationName locationDescription:<#(NSString *)#> photo:<#(PFFile *)#> categories:<#(NSArray *)#> location:geopoint tour:<#(Tour *)#>]
             }
+            
+//            NSLog(@"Succesfully retrieved %lu locations.", objects.count);
+//            self.locationsFromParse = [[NSArray alloc] initWithArray:objects];
+//            for ( Location *location in self.locationsFromParse) {
+//                CLLocationCoordinate2D parsedLocation = CLLocationCoordinate2DMake(location.location.latitude, location.location.longitude);
+//                
+////                __weak typeof (self) weakSelf = self;
+//                
+//                MKPointAnnotation *newPoint = [[MKPointAnnotation alloc]init];
+//                newPoint.coordinate = parsedLocation;
+//                newPoint.title = @"Test Location";
+//                
+//                [self.mapView addAnnotation:newPoint];
+
+//            }
         } else {
             NSLog(@"Error: %@ %@", error, [error userInfo]);
         }
     }];
-
-
 }
 
 - (void)didReceiveMemoryWarning {
@@ -73,6 +90,21 @@
     [super viewDidDisappear:animated];
 
     [_locationManager stopMonitoringSignificantLocationChanges];
+}
+
+- (void)setupViewController
+{
+    //Setup tableView
+    [self.toursTableView setDelegate:self];
+    [self.toursTableView setDataSource:self];
+    
+    UINib *nib = [UINib nibWithNibName:@"POIDetailTableViewCell" bundle:nil];
+    [[self toursTableView] registerNib:nib forCellReuseIdentifier:@"POIDetailTableViewCell"];
+    
+    //Setup up MapView
+    [self.mapView setDelegate:self];
+    [self.mapView setShowsUserLocation: YES];
+    
 }
 
 #pragma mark - CLLocationManager
@@ -103,19 +135,24 @@
         }
     
     
-    #pragma mark - tableView
+    #pragma mark - UITableView protocol functions.
 
-    
     - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-        return 8;
+        
+        if (self.locationsFromParse != nil) {
+            return self.locationsFromParse.count;
+            
+        }
+        return 0;
     }
 
 
-//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    
-//   
-//    
-//}
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    POIDetailTableViewCell *cell = (POIDetailTableViewCell*) [self.toursTableView dequeueReusableCellWithIdentifier:@"POIDetailTableViewCell"];
+    cell.location = [self.locationsFromParse objectAtIndex:indexPath.row];
+    return cell;
+}
 
 #pragma mark - Navigation
 

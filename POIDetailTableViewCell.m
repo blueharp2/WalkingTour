@@ -7,8 +7,21 @@
 //
 
 #import "POIDetailTableViewCell.h"
+#import "Location.h"
+
+@interface POIDetailTableViewCell ()
+@property (weak, nonatomic) IBOutlet UIImageView *tourImageView;
+@property (weak, nonatomic) IBOutlet UILabel *tourNameLabel;
+@end
 
 @implementation POIDetailTableViewCell
+
+- (void)setLocation:(Location *)location {
+    self.tourNameLabel.text = location.locationName;
+    
+    self.tourImageView.image = location.photo;
+}
+
 
 - (void)awakeFromNib {
     // Initialization code

@@ -8,9 +8,13 @@
 
 #import "TourMapViewController.h"
 #import "TourDetailViewController.h"
+#import "Tour.h"
+#import "Location.h"
+
 @import UIKit;
 @import MapKit;
 @import CoreLocation;
+
 @interface TourMapViewController () <MKMapViewDelegate, CLLocationManagerDelegate>
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
@@ -28,12 +32,40 @@
     [self.mapView setDelegate:self];
     [self.mapView setShowsUserLocation: YES];
 
-    // Do any additional setup after loading the view.
+    PFQuery *query = [PFQuery queryWithClassName:@"Location"];
+    [self.locationManager requestLocation];
+ 
+    // Get user location.
+    PFGeoPoint *userLocation = [PFGeoPoint geoPointWithLatitude:self.locationManager.location.coordinate.latitude longitude:self.locationManager.location.coordinate.longitude];
+    
+    //find locations near user location.
+    [query whereKey:@"location" nearGeoPoint:userLocation];
+    [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+        if (!error) {
+            
+            for (PFObject *object in objects) {
+                
+                for (PFObject *object in objects) {
+                    
+                    NSString *locationName = object[@"locationName"];
+                    NSString *locationDescription = object[@"locationDescription"];
+                    NSArray *categories = object[@"categories"];
+                    
+                    PFGeoPoint *geopoint = (PFGeoPoint *)object[@"location"];
+                    Tour *tour = (Tour *)object[@"tour"];
+                }
+            }
+            
+                } else {
+                    NSLog(@"Error: %@ %@", error, [error userInfo]);
+                }
+            }];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+    
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -92,7 +124,6 @@
 //    return circleRenderer;
 //}
 
-
 #pragma mark - CLLocationManager
 
 -(void) startStandardUpdates
@@ -119,10 +150,6 @@
     _locationManager.delegate = self;
     [_locationManager startMonitoringSignificantLocationChanges];
 }
-
-
-
-
 
 #pragma mark - Navigation
 
