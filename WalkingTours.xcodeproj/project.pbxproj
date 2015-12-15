@@ -252,6 +252,10 @@
 		903177C81C1F3A9E001C8DF9 /* WalkingTours */ = {
 			isa = PBXGroup;
 			children = (
+				90380EFC1C1F7E350085DD66 /* CreateTourTableViewController.h */,
+				90380EFD1C1F7E350085DD66 /* CreateTourTableViewController.m */,
+				90380EF91C1F6EA30085DD66 /* TourDetailViewController.h */,
+				90380EFA1C1F6EA30085DD66 /* TourDetailViewController.m */,
 				90380EF21C1F48730085DD66 /* Models */,
 				903177CC1C1F3A9E001C8DF9 /* AppDelegate.h */,
 				903177CD1C1F3A9E001C8DF9 /* AppDelegate.m */,
@@ -444,6 +448,7 @@
 			files = (
 				3D7264071C1F716E00ABEEFD /* ParseLoginViewController.m in Sources */,
 				3D43CF2D1C1F4E4D00118998 /* ParseSignUpViewController.m in Sources */,
+				90380EFB1C1F6EA30085DD66 /* TourDetailViewController.m in Sources */,
 				BFD441891C1F6574004F8CDE /* FindToursViewController.m in Sources */,
 				903177D11C1F3A9E001C8DF9 /* ViewController.m in Sources */,
 				9050ECDF1C1F82F20092CF86 /* CreateTourDetailViewController.m in Sources */,
@@ -454,6 +459,7 @@
 				9050ECD91C1F78E80092CF86 /* VideoPlayerView.m in Sources */,
 				3D43CF161C1F43B400118998 /* ParseKeys.m in Sources */,
 				903177CE1C1F3A9E001C8DF9 /* AppDelegate.m in Sources */,
+				90380EFE1C1F7E350085DD66 /* CreateTourTableViewController.m in Sources */,
 				9050ECDC1C1F7B920092CF86 /* TourDetailViewController.m in Sources */,
 				903177CB1C1F3A9E001C8DF9 /* main.m in Sources */,
 				90380EF51C1F49160085DD66 /* Tour.m in Sources */,
