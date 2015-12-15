@@ -7,6 +7,7 @@
 //
 
 #import "CreateTourViewController.h"
+#import "Location.h"
 
 
 
@@ -19,6 +20,7 @@
 - (IBAction)addLocationsButton:(id)sender;
 
 @property (weak, nonatomic) IBOutlet UITableView *locationTableView;
+@property (strong, nonatomic) NSArray<Location *> *Location;
 
 
 @end
@@ -40,6 +42,8 @@
 
 
 - (IBAction)addLocationsButton:(id)sender {
+    
+    
 }
 
 -(void)setupMainViewController{
@@ -48,6 +52,23 @@
     
 }
 
+#pragma mark set up TableView
 
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    if (self.Location !=nil) {
+        return self.Location.count;
+    }
+    return 0;
+}
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+   UITableViewCell *cell = [self.locationTableView dequeueReusableCellWithIdentifier:@"LocationCell" forIndexPath:indexPath];
+
+    //Something is not right here.
+    [self.Location objectAtIndex:indexPath.row];
+    
+    return cell;
+}
 
 @end
