@@ -583,12 +583,14 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MeJ-Tg-42J">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MeJ-Tg-42J" customClass="VideoPlayerView">
                                 <rect key="frame" x="0.0" y="28" width="320" height="200"/>
                                 <animations/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="200" id="Gco-gN-sWY"/>
+                                    <constraint firstItem="Q8D-Ok-M3Z" firstAttribute="centerX" secondItem="MeJ-Tg-42J" secondAttribute="centerX" id="QU0-wh-R4d"/>
+                                    <constraint firstItem="Q8D-Ok-M3Z" firstAttribute="centerY" secondItem="MeJ-Tg-42J" secondAttribute="centerY" id="hXx-OU-HKT"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -604,10 +606,14 @@
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="playButton" destination="Q8D-Ok-M3Z" id="A3a-wl-0as"/>
+                        <outlet property="playerView" destination="MeJ-Tg-42J" id="f41-b7-YTh"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jtp-dI-fuk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3256" y="-7"/>
+            <point key="canvasLocation" x="3316" y="-7"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Tcs-cV-O0U">
