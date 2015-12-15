@@ -18,9 +18,9 @@
 
 @implementation TourSelectionViewController
 
-- (IBAction)selectTour:(id)sender {
-    
+- (IBAction)selectTour:(UIButton *)sender {
 }
+
 
 - (IBAction)createTour:(id)sender {
     
