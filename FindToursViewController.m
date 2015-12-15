@@ -23,6 +23,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *toursTableView;
 
 @property (strong, nonatomic) CLLocationManager *locationManager;
+
 @property (strong, nonatomic) NSArray <Location*> *locationsFromParse;
 
 
@@ -32,12 +33,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setupViewController];
     
+    self.locationManager = [[CLLocationManager alloc]init];
+    [self.locationManager requestWhenInUseAuthorization];
+    [self.locationManager setDelegate:self];
+
+    [self setupViewController];
 //    [self login];
     PFQuery *query = [PFQuery queryWithClassName:@"Location"];
     // Get user location.
-    [self.locationManager requestLocation];
     PFGeoPoint *userLocation = [PFGeoPoint geoPointWithLatitude:self.locationManager.location.coordinate.latitude longitude:self.locationManager.location.coordinate.longitude];
     //find locations near user location.
     [query whereKey:@"location" nearGeoPoint:userLocation];
@@ -47,11 +51,19 @@
             for (PFObject *object in objects) {
                 
                 NSString *locationName = object[@"locationName"];
+                NSLog(locationName);
                 NSString *locationDescription = object[@"locationDescription"];
+                NSLog(locationDescription);
                 NSArray *categories = object[@"categories"];
+                for (NSUInteger i = 0; i < [categories count]; i ++) {
+                    NSLog(@" The category name is: %@", categories[i]);
+                }
                 
                 PFGeoPoint *geopoint = (PFGeoPoint *)object[@"location"];
+                NSLog(@"geopoint is %f %f", geopoint.latitude, geopoint.longitude);
                 Tour *tour = (Tour *)object[@"tour"];
+                NSLog(tour.nameOfTour);
+                NSLog(<#NSString * _Nonnull format, ...#>)
 //                tour.nameOfTour = tour[@];
 //                tour.descriptionText;
 //                tour.startLocation;
@@ -105,6 +117,19 @@
     [self.mapView setDelegate:self];
     [self.mapView setShowsUserLocation: YES];
     
+    
+}
+
+
+- (void)setRegionForCoordinate:(MKCoordinateRegion)region {
+    [self.mapView setRegion:region animated:YES];
+}
+
+- (void)setMapForCoordinateWithLatitude: (double)lat  andLongitude:(double)longa {
+    
+    CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(lat, longa);
+    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(coordinate, 2000.0, 2000.0);
+    [self setRegionForCoordinate:region];
 }
 
 #pragma mark - CLLocationManager
@@ -133,6 +158,11 @@
             _locationManager.delegate = self;
             [_locationManager startMonitoringSignificantLocationChanges];
         }
+
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
+    NSLog(@"%@", locations);
+}
     
     
     #pragma mark - UITableView protocol functions.

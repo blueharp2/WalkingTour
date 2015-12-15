@@ -260,7 +260,6 @@
 				903177CF1C1F3A9E001C8DF9 /* ViewController.h */,
 				903177D01C1F3A9E001C8DF9 /* ViewController.m */,
 				903177D51C1F3A9E001C8DF9 /* Assets.xcassets */,
-				903177D71C1F3A9E001C8DF9 /* LaunchScreen.storyboard */,
 				903177DA1C1F3A9E001C8DF9 /* Info.plist */,
 				903177C91C1F3A9E001C8DF9 /* Supporting Files */,
 				3D43CF1F1C1F478D00118998 /* WalkingTours58.png */,
@@ -348,6 +347,7 @@
 			children = (
 				903177D21C1F3A9E001C8DF9 /* Main.storyboard */,
 				BF7EAC381C207FC40076E432 /* POIDetailTableViewCell.xib */,
+				903177D71C1F3A9E001C8DF9 /* LaunchScreen.storyboard */,
 			);
 			name = Views;
 			path = ..;
@@ -566,6 +566,7 @@
 				903177D81C1F3A9E001C8DF9 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			path = WalkingTours;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

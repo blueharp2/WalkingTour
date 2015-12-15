@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ch6-eO-iFm">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="tqM-E3-5K0">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
@@ -413,7 +413,7 @@
                             <constraint firstAttribute="trailing" secondItem="4ml-uu-TJU" secondAttribute="trailing" id="YXn-UJ-Q1B"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="SCN-L8-RGR"/>
+                    <tabBarItem key="tabBarItem" title="MapView" image="linea--basic-map" id="SCN-L8-RGR"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="mapView" destination="4ml-uu-TJU" id="Ygp-qU-DX0"/>
@@ -638,5 +638,6 @@
     </scenes>
     <resources>
         <image name="WalkingTour.png" width="321" height="430"/>
+        <image name="linea--basic-map" width="28" height="30"/>
     </resources>
 </document>

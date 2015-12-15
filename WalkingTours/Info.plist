@@ -37,8 +37,6 @@
 	<array>
 		<string>MKDirectionsModePedestrian</string>
 	</array>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>This app requires your location to find tours near you.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>This app requires your location to find tours near you.</string>
 	<key>UILaunchStoryboardName</key>
