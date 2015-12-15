@@ -312,8 +312,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P06-Ev-jeT">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P06-Ev-jeT">
                                 <rect key="frame" x="20" y="266" width="287" height="46"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="46" id="gn3-Ls-9Va"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="GurmukhiMN-Bold" family="Gurmukhi MN" pointSize="25"/>
                                 <state key="normal" title="Create your own Tour">
                                     <color key="titleColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -324,11 +327,34 @@
                                     <segue destination="vsA-st-EdL" kind="show" identifier="SegueToCreateTour" id="As8-fR-r2F"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="WalkingTour.png" translatesAutoresizingMaskIntoConstraints="NO" id="tZU-n3-oIP">
-                                <rect key="frame" x="33" y="53" width="310" height="461"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iZU-Lr-KvV">
+                                <rect key="frame" x="20" y="163" width="287" height="47"/>
+                                <fontDescription key="fontDescription" name="GurmukhiMN-Bold" family="Gurmukhi MN" pointSize="25"/>
+                                <state key="normal" title="Select your Tour">
+                                    <color key="titleColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="createTour:" destination="GeJ-TF-SYQ" eventType="touchUpInside" id="cYh-7W-Ore"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WalkingTour.png" translatesAutoresizingMaskIntoConstraints="NO" id="tZU-n3-oIP">
+                                <rect key="frame" x="25" y="99" width="310" height="461"/>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.32203380520000002" green="0.7088735477" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="tZU-n3-oIP" firstAttribute="top" secondItem="NIo-Xx-Z1O" secondAttribute="bottom" constant="35" id="3Iy-Py-PyZ"/>
+                            <constraint firstItem="iZU-Lr-KvV" firstAttribute="leading" secondItem="P06-Ev-jeT" secondAttribute="leading" id="BTn-Eh-tD6"/>
+                            <constraint firstItem="iZU-Lr-KvV" firstAttribute="leading" secondItem="nEw-yN-AgX" secondAttribute="leadingMargin" constant="4" id="QZl-Wx-Q0u"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="iZU-Lr-KvV" secondAttribute="trailing" constant="-3" id="RQw-0w-qZU"/>
+                            <constraint firstItem="P06-Ev-jeT" firstAttribute="top" secondItem="iZU-Lr-KvV" secondAttribute="bottom" constant="56" id="Rh3-jS-NsI"/>
+                            <constraint firstItem="iZU-Lr-KvV" firstAttribute="top" secondItem="NIo-Xx-Z1O" secondAttribute="bottom" constant="99" id="eIe-2e-2Eb"/>
+                            <constraint firstItem="9ih-ED-jmm" firstAttribute="top" secondItem="tZU-n3-oIP" secondAttribute="bottom" constant="8" symbolic="YES" id="iXl-4H-4b7"/>
+                            <constraint firstItem="tZU-n3-oIP" firstAttribute="leading" secondItem="nEw-yN-AgX" secondAttribute="leadingMargin" constant="9" id="jpR-hQ-LKm"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="tZU-n3-oIP" secondAttribute="trailing" constant="-31" id="nbD-17-FXf"/>
+                            <constraint firstItem="iZU-Lr-KvV" firstAttribute="trailing" secondItem="P06-Ev-jeT" secondAttribute="trailing" id="zPJ-Ax-eXM"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="eTx-13-oO4"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
