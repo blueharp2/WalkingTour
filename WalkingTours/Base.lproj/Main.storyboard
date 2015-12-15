@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ch6-eO-iFm">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="16i-zP-Ize">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
@@ -534,11 +534,23 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MeJ-Tg-42J">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MeJ-Tg-42J" customClass="VideoPlayerView">
                                 <rect key="frame" x="0.0" y="28" width="320" height="200"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q8D-Ok-M3Z">
+                                        <rect key="frame" x="137" y="85" width="46" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                        <state key="normal" title="▶︎"/>
+                                        <connections>
+                                            <action selector="playButtonPressed:" destination="16i-zP-Ize" eventType="touchUpInside" id="d5N-W7-rTN"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="200" id="Gco-gN-sWY"/>
+                                    <constraint firstItem="Q8D-Ok-M3Z" firstAttribute="centerX" secondItem="MeJ-Tg-42J" secondAttribute="centerX" id="QU0-wh-R4d"/>
+                                    <constraint firstItem="Q8D-Ok-M3Z" firstAttribute="centerY" secondItem="MeJ-Tg-42J" secondAttribute="centerY" id="hXx-OU-HKT"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -553,10 +565,14 @@
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="playButton" destination="Q8D-Ok-M3Z" id="A3a-wl-0as"/>
+                        <outlet property="playerView" destination="MeJ-Tg-42J" id="f41-b7-YTh"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jtp-dI-fuk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3256" y="-7"/>
+            <point key="canvasLocation" x="3316" y="-7"/>
         </scene>
     </scenes>
     <resources>

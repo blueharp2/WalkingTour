@@ -54,17 +54,19 @@
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
-//    NSData *mediaData;
+    NSData *mediaData;
+    PFFile *mediaFile;
     if ([info objectForKey:@"UIImagePickerControllerMediaURL"]) {
         NSLog(@"So, you've made a movie...");
-//        mediaData = [NSData dataWithContentsOfURL:[info objectForKey:@"UIImagePickerControllerMediaURL"]];
+        mediaData = [NSData dataWithContentsOfURL:[info objectForKey:@"UIImagePickerControllerMediaURL"]];
+        mediaFile = [PFFile fileWithName:[NSString stringWithFormat:@"%i.mp4", rand() / 2] data:mediaData];
     }
     if ([info objectForKey:@"UIImagePickerControllerEditedImage"]) {
         NSLog(@"Ah, just a photo?");
-//        mediaData = UIImageJPEGRepresentation([info objectForKey:@""], 1.0);
+        mediaData = UIImageJPEGRepresentation([info objectForKey:@""], 1.0);
+        mediaFile = [PFFile fileWithName:[NSString stringWithFormat:@"%i.jpg",rand() / 2] data:mediaData];
     }
-//    PFFile *imageFile = [PFFile fileWithData:mediaData];
-//    [self addTestModelsToParse:imageFile];
+    [self addTestModelsToParse:mediaFile];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
