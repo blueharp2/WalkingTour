@@ -19,7 +19,20 @@
 - (void)setLocation:(Location *)location {
     self.tourNameLabel.text = location.locationName;
     
-    self.tourImageView.image = location.photo;
+    [location.photo getDataInBackgroundWithBlock:^(NSData * _Nullable data, NSError * _Nullable error) {
+        if (error) {
+            NSLog(@"Error unwrapping image");
+        }
+        if (data) {
+            UIImage *image = [UIImage imageWithData:data];
+            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+ 
+                self.tourImageView.image = image;
+            }];
+        }
+    }];
+    
+    
 }
 
 

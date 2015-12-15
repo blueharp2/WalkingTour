@@ -37,56 +37,40 @@
     self.locationManager = [[CLLocationManager alloc]init];
     [self.locationManager requestWhenInUseAuthorization];
     [self.locationManager setDelegate:self];
-
     [self setupViewController];
 //    [self login];
     PFQuery *query = [PFQuery queryWithClassName:@"Location"];
     // Get user location.
     PFGeoPoint *userLocation = [PFGeoPoint geoPointWithLatitude:self.locationManager.location.coordinate.latitude longitude:self.locationManager.location.coordinate.longitude];
+    [self setMapForCoordinateWithLatitude:userLocation.latitude andLongitude:userLocation.longitude];
+
     //find locations near user location.
     [query whereKey:@"location" nearGeoPoint:userLocation];
-    [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
-        if (!error) {
-            
-            for (PFObject *object in objects) {
-                
-                NSString *locationName = object[@"locationName"];
-                NSLog(locationName);
-                NSString *locationDescription = object[@"locationDescription"];
-                NSLog(locationDescription);
-                NSArray *categories = object[@"categories"];
-                for (NSUInteger i = 0; i < [categories count]; i ++) {
-                    NSLog(@" The category name is: %@", categories[i]);
-                }
-                
-                PFGeoPoint *geopoint = (PFGeoPoint *)object[@"location"];
-                NSLog(@"geopoint is %f %f", geopoint.latitude, geopoint.longitude);
-                Tour *tour = (Tour *)object[@"tour"];
-                NSLog(tour.nameOfTour);
-                NSLog(<#NSString * _Nonnull format, ...#>)
-//                tour.nameOfTour = tour[@];
-//                tour.descriptionText;
-//                tour.startLocation;
-//                tour.user;
-                
-                
-//                Location *location = [[Location alloc]initWithLocationName:locationName locationDescription:<#(NSString *)#> photo:<#(PFFile *)#> categories:<#(NSArray *)#> location:geopoint tour:<#(Tour *)#>]
-            }
-            
-//            NSLog(@"Succesfully retrieved %lu locations.", objects.count);
-//            self.locationsFromParse = [[NSArray alloc] initWithArray:objects];
-//            for ( Location *location in self.locationsFromParse) {
-//                CLLocationCoordinate2D parsedLocation = CLLocationCoordinate2DMake(location.location.latitude, location.location.longitude);
-//                
-////                __weak typeof (self) weakSelf = self;
-//                
-//                MKPointAnnotation *newPoint = [[MKPointAnnotation alloc]init];
-//                newPoint.coordinate = parsedLocation;
-//                newPoint.title = @"Test Location";
-//                
-//                [self.mapView addAnnotation:newPoint];
 
-//            }
+    [query getFirstObjectInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+        if (object) {
+            Location *location = (Location *)object;
+            
+            PFQuery *tourQuery = [PFQuery queryWithClassName:@"Tour"];
+            [tourQuery whereKey:@"objectId" equalTo:location.tour.objectId];
+            [tourQuery getFirstObjectInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+                if ([object isKindOfClass:[Tour class]]) {
+                    location.tour = (Tour *)object;
+                    NSLog(@"%@", location.tour.nameOfTour);
+                    Tour *tour = (Tour *)object;
+                    NSLog(@"%@", tour.nameOfTour);
+                    self.locationsFromParse = [[NSArray alloc]init];
+                    if (self.locationsFromParse.count > 0) {
+                        [self.locationsFromParse arrayByAddingObject: location];
+                    } else {
+                        self.locationsFromParse = @[location];
+                    }
+                    [self.toursTableView reloadData];
+
+                }
+            }];
+            
+            
         } else {
             NSLog(@"Error: %@ %@", error, [error userInfo]);
         }
@@ -128,7 +112,7 @@
 - (void)setMapForCoordinateWithLatitude: (double)lat  andLongitude:(double)longa {
     
     CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(lat, longa);
-    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(coordinate, 2000.0, 2000.0);
+    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(coordinate, 1000.0, 1000.0);
     [self setRegionForCoordinate:region];
 }
 
@@ -180,7 +164,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     POIDetailTableViewCell *cell = (POIDetailTableViewCell*) [self.toursTableView dequeueReusableCellWithIdentifier:@"POIDetailTableViewCell"];
-    cell.location = [self.locationsFromParse objectAtIndex:indexPath.row];
+    [cell setLocation:[self.locationsFromParse objectAtIndex:indexPath.row]];
     return cell;
 }
 
