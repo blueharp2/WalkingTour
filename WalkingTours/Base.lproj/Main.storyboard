@@ -537,6 +537,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="addLocationButton" destination="mFF-Dj-GkE" id="4yG-rf-iBb"/>
+                        <outlet property="locationTableView" destination="gha-TO-9kk" id="eKo-O0-ceZ"/>
                         <outlet property="nameOfTourTextField" destination="1L6-cQ-RUl" id="Cvu-tr-3ZM"/>
                         <outlet property="tourDescriptionTextField" destination="Wq2-4m-Ca4" id="IFe-1h-104"/>
                     </connections>
