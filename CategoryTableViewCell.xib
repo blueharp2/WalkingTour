@@ -16,31 +16,21 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="czy-wV-bxD">
-                        <rect key="frame" x="8" y="11" width="277.5" height="21"/>
+                        <rect key="frame" x="8" y="11" width="304" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="❂" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tVy-fw-Kam">
-                        <rect key="frame" x="293.5" y="11" width="18.5" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                        <color key="textColor" red="0.13685504197362097" green="0.38555657694398449" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="bottomMargin" secondItem="tVy-fw-Kam" secondAttribute="bottom" constant="3.5" id="1Wn-Kj-8PK"/>
                     <constraint firstItem="czy-wV-bxD" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="3" id="Bzy-vu-QVx"/>
                     <constraint firstAttribute="leadingMargin" secondItem="czy-wV-bxD" secondAttribute="leading" id="JlB-pf-9Xn"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="tVy-fw-Kam" secondAttribute="trailing" id="b4h-iI-1i0"/>
-                    <constraint firstItem="tVy-fw-Kam" firstAttribute="leading" secondItem="czy-wV-bxD" secondAttribute="trailing" constant="8" id="gWh-7n-kDM"/>
-                    <constraint firstItem="tVy-fw-Kam" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="3" id="x0b-En-lT5"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="czy-wV-bxD" secondAttribute="trailing" id="Xsl-JY-NKg"/>
                     <constraint firstAttribute="bottomMargin" secondItem="czy-wV-bxD" secondAttribute="bottom" constant="3.5" id="zha-aT-HPH"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="categoryLabel" destination="czy-wV-bxD" id="OdS-fF-Ryp"/>
-                <outlet property="checkboxLabel" destination="tVy-fw-Kam" id="yj7-8X-c61"/>
             </connections>
         </tableViewCell>
     </objects>

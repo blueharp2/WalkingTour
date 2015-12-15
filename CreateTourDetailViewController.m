@@ -206,21 +206,15 @@ static const NSArray *categories;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     CategoryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     [cell setCategory:categories[indexPath.row]];
-    if ([self.selectedCategories indexOfObject:categories[indexPath.row]]) {
-        [cell setCheckboxAlpha:1.0];
-    } else {
-        [cell setCheckboxAlpha:0.0];
-    }
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (self.selectedCategories.count > 0 && [self.selectedCategories indexOfObject:categories[indexPath.row]]) {
-        [self.selectedCategories removeObjectAtIndex:[self.selectedCategories indexOfObject:categories[indexPath.row]]];
+    if ([tableView cellForRowAtIndexPath:indexPath].accessoryType == UITableViewCellAccessoryCheckmark) {
+        [tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryNone;
     } else {
-        [self.selectedCategories addObject:categories[indexPath.row]];
+        [tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryCheckmark;
     }
-    [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
 }
 
 @end
