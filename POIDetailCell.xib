@@ -32,22 +32,14 @@
                             </mask>
                         </variation>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="752" verticalCompressionResistancePriority="751" text="UserName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sgg-Ho-HSt" userLabel="userNameLabel">
-                        <rect key="frame" x="56" y="8" width="51" height="12"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="244" verticalHuggingPriority="247" horizontalCompressionResistancePriority="1000" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FAF-Sl-sO5" userLabel="titleLabel">
-                        <rect key="frame" x="56" y="25" width="244" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="244" verticalHuggingPriority="247" horizontalCompressionResistancePriority="1000" ambiguous="YES" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FAF-Sl-sO5" userLabel="titleLabel">
+                        <rect key="frame" x="56" y="14" width="244" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="sgg-Ho-HSt" firstAttribute="trailing" secondItem="ZhC-BL-S3Y" secondAttribute="trailingMargin" id="37c-GV-Wq6"/>
-                    <constraint firstItem="FAF-Sl-sO5" firstAttribute="top" secondItem="sgg-Ho-HSt" secondAttribute="bottom" id="3Ew-47-2Kz"/>
                     <constraint firstItem="LUE-Nl-1Ik" firstAttribute="width" secondItem="ZhC-BL-S3Y" secondAttribute="width" multiplier="1/10" constant="-2" id="5KX-i9-HQo"/>
                     <constraint firstItem="LUE-Nl-1Ik" firstAttribute="leading" secondItem="ZhC-BL-S3Y" secondAttribute="leadingMargin" constant="10" id="6wd-Da-s2F"/>
                     <constraint firstAttribute="bottom" secondItem="FAF-Sl-sO5" secondAttribute="bottom" id="BuX-sc-oRs"/>
@@ -55,31 +47,23 @@
                     <constraint firstAttribute="bottomMargin" secondItem="FAF-Sl-sO5" secondAttribute="bottom" id="SxG-tu-uZy"/>
                     <constraint firstItem="LUE-Nl-1Ik" firstAttribute="bottom" secondItem="ZhC-BL-S3Y" secondAttribute="bottomMargin" constant="-3" id="UuO-Rb-2c4"/>
                     <constraint firstItem="FAF-Sl-sO5" firstAttribute="trailing" secondItem="ZhC-BL-S3Y" secondAttribute="trailingMargin" id="WAu-Xv-Wjv"/>
-                    <constraint firstItem="sgg-Ho-HSt" firstAttribute="top" secondItem="ZhC-BL-S3Y" secondAttribute="topMargin" id="Ypm-Lz-nfW"/>
                     <constraint firstAttribute="trailing" secondItem="FAF-Sl-sO5" secondAttribute="trailing" constant="20" symbolic="YES" id="axI-6e-BSb"/>
-                    <constraint firstItem="sgg-Ho-HSt" firstAttribute="leading" secondItem="LUE-Nl-1Ik" secondAttribute="trailing" constant="8" id="f1p-7a-54O"/>
-                    <constraint firstItem="sgg-Ho-HSt" firstAttribute="height" secondItem="ZhC-BL-S3Y" secondAttribute="height" multiplier="1/5" id="fx6-xE-onh"/>
                     <constraint firstItem="FAF-Sl-sO5" firstAttribute="leading" secondItem="LUE-Nl-1Ik" secondAttribute="trailing" constant="8" id="hsq-bE-bK5"/>
-                    <constraint firstItem="FAF-Sl-sO5" firstAttribute="top" secondItem="sgg-Ho-HSt" secondAttribute="bottom" constant="5" id="l7i-QQ-7z4"/>
                     <constraint firstItem="FAF-Sl-sO5" firstAttribute="top" secondItem="ZhC-BL-S3Y" secondAttribute="top" constant="10" id="umc-Rc-VPv"/>
                 </constraints>
                 <variation key="default">
                     <mask key="constraints">
                         <exclude reference="5KX-i9-HQo"/>
-                        <exclude reference="37c-GV-Wq6"/>
-                        <exclude reference="fx6-xE-onh"/>
-                        <exclude reference="3Ew-47-2Kz"/>
-                        <exclude reference="SxG-tu-uZy"/>
                         <exclude reference="BuX-sc-oRs"/>
-                        <exclude reference="umc-Rc-VPv"/>
+                        <exclude reference="SxG-tu-uZy"/>
                         <exclude reference="WAu-Xv-Wjv"/>
+                        <exclude reference="umc-Rc-VPv"/>
                     </mask>
                 </variation>
             </tableViewCellContentView>
             <connections>
                 <outlet property="titleLabel" destination="FAF-Sl-sO5" id="9eP-tN-OMh"/>
                 <outlet property="userImageView" destination="LUE-Nl-1Ik" id="nEn-QK-UGi"/>
-                <outlet property="userNameLabel" destination="sgg-Ho-HSt" id="Dr6-Fh-KFA"/>
             </connections>
             <point key="canvasLocation" x="333" y="147"/>
         </tableViewCell>

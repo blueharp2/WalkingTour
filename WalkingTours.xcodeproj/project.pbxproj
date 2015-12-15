@@ -207,10 +207,6 @@
 		3D43CF271C1F47D600118998 /* PARSE */ = {
 			isa = PBXGroup;
 			children = (
-				903177D21C1F3A9E001C8DF9 /* Main.storyboard */,
-				BF7EAC381C207FC40076E432 /* POIDetailCell.xib */,
-				BF7EAC3A1C2080160076E432 /* POIDetailTableViewCell.h */,
-				BF7EAC3B1C2080160076E432 /* POIDetailTableViewCell.m */,
 				3D43CF141C1F43B400118998 /* ParseKeys.h */,
 				3D43CF151C1F43B400118998 /* ParseKeys.m */,
 				3D43CF281C1F47F400118998 /* ParseLoginViewController.h */,
@@ -228,16 +224,11 @@
 		903177BD1C1F3A9E001C8DF9 = {
 			isa = PBXGroup;
 			children = (
-				BFD4418A1C1F6C21004F8CDE /* TourMapViewController.h */,
-				BFD4418B1C1F6C21004F8CDE /* TourMapViewController.m */,
-				BFD441871C1F6574004F8CDE /* FindToursViewController.h */,
-				BFD441881C1F6574004F8CDE /* FindToursViewController.m */,
+				BF7EAC3D1C2085B20076E432 /* Controllers */,
 				9050ECD71C1F78E80092CF86 /* VideoPlayerView.h */,
 				9050ECD81C1F78E80092CF86 /* VideoPlayerView.m */,
-				9050ECDA1C1F7B920092CF86 /* TourDetailViewController.h */,
-				9050ECDB1C1F7B920092CF86 /* TourDetailViewController.m */,
-				9050ECDD1C1F82F20092CF86 /* CreateTourDetailViewController.h */,
-				9050ECDE1C1F82F20092CF86 /* CreateTourDetailViewController.m */,
+				BF7EAC411C20863D0076E432 /* CustomCell */,
+				BF7EAC401C2086020076E432 /* Views */,
 				3D43CF271C1F47D600118998 /* PARSE */,
 				903177C81C1F3A9E001C8DF9 /* WalkingTours */,
 				903177E21C1F3A9E001C8DF9 /* WalkingToursTests */,
@@ -313,6 +304,55 @@
 				90380EF71C1F4C590085DD66 /* Location.m */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		BF7EAC3D1C2085B20076E432 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				BF7EAC3E1C2085DD0076E432 /* Tours */,
+				BFD441871C1F6574004F8CDE /* FindToursViewController.h */,
+				BFD441881C1F6574004F8CDE /* FindToursViewController.m */,
+				BF7EAC3F1C2085E60076E432 /* Create */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		BF7EAC3E1C2085DD0076E432 /* Tours */ = {
+			isa = PBXGroup;
+			children = (
+				9050ECDA1C1F7B920092CF86 /* TourDetailViewController.h */,
+				9050ECDB1C1F7B920092CF86 /* TourDetailViewController.m */,
+				BFD4418A1C1F6C21004F8CDE /* TourMapViewController.h */,
+				BFD4418B1C1F6C21004F8CDE /* TourMapViewController.m */,
+			);
+			name = Tours;
+			sourceTree = "<group>";
+		};
+		BF7EAC3F1C2085E60076E432 /* Create */ = {
+			isa = PBXGroup;
+			children = (
+				9050ECDD1C1F82F20092CF86 /* CreateTourDetailViewController.h */,
+				9050ECDE1C1F82F20092CF86 /* CreateTourDetailViewController.m */,
+			);
+			name = Create;
+			sourceTree = "<group>";
+		};
+		BF7EAC401C2086020076E432 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				903177D21C1F3A9E001C8DF9 /* Main.storyboard */,
+				BF7EAC381C207FC40076E432 /* POIDetailCell.xib */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		BF7EAC411C20863D0076E432 /* CustomCell */ = {
+			isa = PBXGroup;
+			children = (
+				BF7EAC3A1C2080160076E432 /* POIDetailTableViewCell.h */,
+				BF7EAC3B1C2080160076E432 /* POIDetailTableViewCell.m */,
+			);
+			name = CustomCell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
