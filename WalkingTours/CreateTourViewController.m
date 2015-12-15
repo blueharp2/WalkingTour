@@ -64,8 +64,8 @@
 #pragma mark set up TableView
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    if (self.Location !=nil) {
-        return self.Location.count;
+    if (self.location !=nil) {
+        return self.location.count;
     }
     return 0;
 }
@@ -76,7 +76,7 @@
 
     
    //cell.location =
-    [self.Location objectAtIndex:indexPath.row];
+    [self.location objectAtIndex:indexPath.row];
     
     return cell;
 }
