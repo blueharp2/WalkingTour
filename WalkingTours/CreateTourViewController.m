@@ -107,6 +107,7 @@
 -(void)saveButtonSelected:(UIBarButtonItem *)sender{
 
     if (self.nameOfTourTextField.text.length != 0) {
+        NSLog(@"We have text!");
         // [ParseService saveToParse:<#(Tour *)#> locations:<#(NSArray *)#>]
     }else {
         UIAlertController *noTextinFieldAlert = [UIAlertController alertControllerWithTitle:@"Please enter the name of your tour" message:@"Thank you" preferredStyle:UIAlertControllerStyleAlert];
@@ -116,6 +117,7 @@
     }
     
     if (self.location.count !=0) {
+        NSLog(@"We have a location!");
         // [ParseService saveToParse:<#(Tour *)#> locations:<#(NSArray *)#>]
     }else{
     
