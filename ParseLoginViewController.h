@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void(^ParseLoginViewControllerCompletion)(BOOL success);
+
 @interface ParseLoginViewController : UIViewController
+
+@property (copy, nonatomic) ParseLoginViewControllerCompletion completion;
 
 @end

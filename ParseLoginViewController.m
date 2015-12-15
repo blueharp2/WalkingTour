@@ -29,34 +29,24 @@
 
 - (IBAction)loginButton:(id)sender {
     
-[PFUser logInWithUsernameInBackground:@"username" password:@"password" block:^(PFUser * _Nullable user, NSError * _Nullable error) {
-    
-        if (user) {
+    [PFUser logInWithUsernameInBackground:@"username" password:@"password" block:^(PFUser * _Nullable user, NSError * _Nullable error) {
+        
+        if (user && self.completion) {
             
-            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"TourSelectionViewController" bundle:[NSBundle mainBundle]];
-            UIViewController *myController = [storyboard instantiateViewControllerWithIdentifier:@"TourSelectionViewController"];
-            [self presentViewController:myController animated:YES completion:nil];
-            
-//            let mainPageNav = UINavigationController(rootViewController: mainPage)
-//            
-//            let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-            
-//            appDelegate.window?.rootViewController = mainPageNav
-
-            [self performSegueWithIdentifier:@"TourSelectionVeiwController" sender:nil];
+            self.completion(YES);
             
         } else {
-                
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Login Error" message:@"Username and/or Password are invalid" preferredStyle:UIAlertControllerStyleAlert];
-        
-        UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
-            NSLog(@"You pressed button OK");
-        }];
-        
-        [alert addAction:defaultAction];
-
-        [self presentViewController:alert animated:YES completion:nil];
-                
+            
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Login Error" message:@"Username and/or Password are invalid" preferredStyle:UIAlertControllerStyleAlert];
+            
+            UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+                NSLog(@"You pressed button OK");
+            }];
+            
+            [alert addAction:defaultAction];
+            
+            [self presentViewController:alert animated:YES completion:nil];
+            
         }
     }];
 }

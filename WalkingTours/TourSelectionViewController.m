@@ -8,6 +8,8 @@
 
 #import "TourSelectionViewController.h"
 #import "Parse/Parse.h"
+#import "ParseLoginViewController.h"
+#import "ParseSignUpViewController.h"
 
 
 @interface TourSelectionViewController ()
@@ -28,10 +30,25 @@
     [super viewDidLoad];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+
+    PFUser *currentUser = [PFUser currentUser];
+    if (currentUser) {
+        NSLog(@"LoggedIn");
+        
+    } else {
+
+        ParseLoginViewController *loginVC = [self.storyboard instantiateViewControllerWithIdentifier:@"ParseLoginViewController"];
+        [self presentViewController:loginVC animated:YES completion:nil];
+    }
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
 
-
-
 @end
+
+
+
+

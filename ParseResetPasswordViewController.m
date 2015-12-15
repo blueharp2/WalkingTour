@@ -19,6 +19,8 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *passwordReset;
 
+
+
 - (IBAction)sendResetPassword:(id)sender;
 
 @end
@@ -27,13 +29,21 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
 
+- (IBAction)cancelPressed:(UIBarButtonItem *)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+
+}
 
 - (IBAction)sendResetPassword:(id)sender {
+    [PFUser requestPasswordResetForEmailInBackground:@"email@example.com"];
+    
 }
 @end

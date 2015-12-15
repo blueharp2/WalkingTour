@@ -26,6 +26,11 @@
     [super didReceiveMemoryWarning];
 }
 
+- (IBAction)cancelPressed:(UIBarButtonItem *)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+
+}
+
 - (IBAction)saveSignUp:(id)sender {
     
     PFUser *user = [PFUser user];
@@ -38,9 +43,10 @@
         NSString *userMessage = @"Registration is successful.";
         
         if (!error) {
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Alert" message:userMessage preferredStyle:UIAlertControllerStyleAlert];
-            UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:nil];
+//            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Alert" message:userMessage preferredStyle:UIAlertControllerStyleAlert];
+//            UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:nil];
         } else {
+             NSString *errorString = [error userInfo][@"error"];
             
         }
     }];
