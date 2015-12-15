@@ -58,7 +58,7 @@
         return nil; }
     
     // Add view.
-    MKPinAnnotationView *annotationView = (MKPinAnnotationView *) [_locationManager dequeueReusableAnnotationViewWithIdentifier: @"AnnotationView"];
+    MKPinAnnotationView *annotationView = (MKPinAnnotationView *) [ mapView dequeueReusableAnnotationViewWithIdentifier: @"AnnotationView"];
     annotationView.annotation = annotation;
     
     if (!annotationView) {
@@ -113,14 +113,16 @@
 
 
 
-/*
+
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"DetailViewController"]) {
+        if ([sender isKindOfClass:[MKAnnotationView class]]) {
+            MKAnnotationView *annotationView = (MKAnnotationView *)sender;
+        }
+    }    // Pass the selected object to the new view controller.
 }
-*/
+
 
 @end
