@@ -58,7 +58,7 @@
         return nil; }
     
     // Add view.
-    MKPinAnnotationView *annotationView = (MKPinAnnotationView *) [ mapView dequeueReusableAnnotationViewWithIdentifier: @"AnnotationView"];
+    MKPinAnnotationView *annotationView = (MKPinAnnotationView *) [mapView dequeueReusableAnnotationViewWithIdentifier: @"AnnotationView"];
     annotationView.annotation = annotation;
     
     if (!annotationView) {
