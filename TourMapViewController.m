@@ -16,6 +16,7 @@
 @import MapKit;
 @import CoreLocation;
 
+
 @interface TourMapViewController () <MKMapViewDelegate, CLLocationManagerDelegate>
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
@@ -27,6 +28,18 @@
 @end
 
 @implementation TourMapViewController
+
+- (void)setCurrentTour:(NSString*)currentTour {
+    _currentTour = currentTour;
+    
+    [ParseService fetchLocationsWithTourId:currentTour completion:^(BOOL success, NSArray *results) {
+        if (success) {
+            [self setLocationsFromParse:results];
+        }
+    }];
+    
+    
+}
 
 - (void)setLocationsFromParse:(NSArray<Location *> *)locationsFromParse {
     _locationsFromParse = locationsFromParse;
@@ -45,73 +58,14 @@
     [self.mapView setDelegate:self];
     [self.mapView setShowsUserLocation: YES];
     
-//Location Manager setUp
+    //Location Manager setUp
     self.locationManager = [[CLLocationManager alloc]init];
     [self.locationManager requestWhenInUseAuthorization];
     [self.locationManager setDelegate:self];
     
-  // Gets user location and set map region
+    // Gets user location and set map region
     CLLocation *location = [self.locationManager location];
     [self setMapForCoordinateWithLatitude:location.coordinate.latitude andLongitude:location.coordinate.longitude];
-    //    CLLocationCoordinate2D coordinate = [location coordinate];
-//    CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(47.624441, -122.335913);
-    
-    [ParseService fetchLocationsWithTourId:@"mFhSwIB6bT" completion:^(BOOL success, NSArray *results) {
-        if (success) {
-            [self setLocationsFromParse:results];
-        }
-    }];
- 
-
-//    //    [self login];
-//    PFQuery *query = [PFQuery queryWithClassName:@"Location"];
-//    // Get user location.
-//    PFGeoPoint *userLocation = [PFGeoPoint geoPointWithLatitude:self.locationManager.location.coordinate.latitude longitude:self.locationManager.location.coordinate.longitude];
-//    [self setMapForCoordinateWithLatitude:userLocation.latitude andLongitude:userLocation.longitude];
-//    
-//    //find locations near user location.
-//    [query whereKey:@"location" nearGeoPoint:userLocation];
-    
-//    [query getFirstObjectInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
-//        if (object) {
-//            Location *location = (Location *)object;
-//            
-//            PFQuery *tourQuery = [PFQuery queryWithClassName:@"Tour"];
-//            [tourQuery whereKey:@"objectId" equalTo:location.tour.objectId];
-//            [tourQuery getFirstObjectInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
-//                if ([object isKindOfClass:[Tour class]]) {
-//                    location.tour = (Tour *)object;
-//                    NSLog(@"%@", location.tour.nameOfTour);
-//                    Tour *tour = (Tour *)object;
-//                    NSLog(@"%@", tour.nameOfTour);
-//                    
-//                    
-////                    CLLocationCoordinate2D touchMapCoordinate = [self.locationMapView convertPoint:touchPoint toCoordinateFromView:self.locationMapView];
-//                    
-//                    MKPointAnnotation *newPoint = [[MKPointAnnotation alloc]init];
-//                    PFGeoPoint *newLocation = [PFGeoPoint geoPointWithLatitude: tour.startLocation.latitude longitude:tour.startLocation.longitude];
-//
-//                    newPoint.title = tour.nameOfTour;
-//                    
-//                    [self.mapView addAnnotation:newPoint];
-//                    [self.mapView  addAnnotation: newLocation];
-//
-//                    self.locationsFromParse = [[NSArray alloc]init];
-//                    if (self.locationsFromParse.count > 0) {
-//                        [self.locationsFromParse arrayByAddingObject: location];
-//                    } else {
-//                        self.locationsFromParse = @[location];
-//                    }
-//                    
-//                }
-//            }];
-//            
-//            
-//        } else {
-//            NSLog(@"Error: %@ %@", error, [error userInfo]);
-//        }
-//    }];
-
 }
 
 - (void)didReceiveMemoryWarning {
@@ -161,7 +115,7 @@
     
     // Add a custom image to the callout.
     
-//    UIImage *myCustomImage = [[UIImage alloc]initWithImage:[UIImage imageNamed:@"MyCustomImage.png"]];
+    //    UIImage *myCustomImage = [[UIImage alloc]initWithImage:[UIImage imageNamed:@"MyCustomImage.png"]];
     
     return annotationView;
 }
@@ -206,12 +160,12 @@
 
 #pragma mark - Navigation
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
     if ([segue.identifier isEqualToString:@"TourDetailViewController"]) {
         if ([sender isKindOfClass:[MKAnnotationView class]]) {
             MKAnnotationView *annotationView = (MKAnnotationView *)sender;
             TourDetailViewController *tourDetailViewController = (TourDetailViewController *)segue.destinationViewController;
-            
         }
     }    // Pass the selected object to the new view controller.
 }
