@@ -17,18 +17,24 @@
 
 @interface TourListViewController ()<UITableViewDelegate, UITableViewDataSource>
 
+@property (strong, nonatomic)NSArray * datasource;
+
 @end
 
 @implementation TourListViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-
+- (NSArray *)datasource {
+    
+    
+    return _datasource;
 }
+
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
