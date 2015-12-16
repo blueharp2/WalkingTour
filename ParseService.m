@@ -13,7 +13,6 @@
 
 @implementation ParseService
 
-
 + (void)saveToParse:(Tour *)tour locations:(NSArray *)locations {
     NSArray *saveArray = [NSArray arrayWithObjects:tour, locations, nil];
     [PFObject saveAllInBackground:saveArray block:^(BOOL succeeded, NSError * _Nullable error) {
