@@ -26,8 +26,8 @@
 - (IBAction)addLocationsButton:(id)sender;
 
 @property (weak, nonatomic) IBOutlet UITableView *locationTableView;
-@property (strong, nonatomic) NSArray<Location *> *locations;
-@property (strong, nonatomic) NSArray<UIImage *> *images;
+@property (strong, nonatomic) NSMutableArray<Location *> *locations;
+@property (strong, nonatomic) NSMutableArray<UIImage *> *images;
 
 
 
@@ -56,29 +56,13 @@
     [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveButtonSelected:)]];
     
     UINib *nib = [UINib nibWithNibName:@"LocationTableViewCell" bundle:nil];
-    [[self locationTableView]registerNib:nib forCellReuseIdentifier:@"LocationTableViewCell"];
+    [[self locationTableView]registerNib:nib forCellReuseIdentifier:@"locationtableviewcell"];
     
 }
 
 - (IBAction)addLocationsButton:(id)sender {
 //    [self.navigationController pushViewController:[[CreateTourDetailViewController alloc]init] animated:YES];
 }
-
-
-
--(void)saveTourToParse{
-    
-    Location *startLocation = self.locations.firstObject;
-    NSString *name = self.nameOfTourTextField.text;
-    NSString *description = self.tourDescriptionTextField.text;
-    PFUser *user = [PFUser currentUser];
-    
-
-    Tour *tour = [[Tour alloc]initWithNameOfTour:name descriptionText:description startLocation:startLocation.location user:user];
-    [ParseService saveToParse: tour locations:self.locations];
-    
-}
-
 
 #pragma mark set up TableView
 
@@ -91,7 +75,8 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-   LocationTableViewCell *cell = (LocationTableViewCell *)[self.locationTableView dequeueReusableCellWithIdentifier:@"LocationTableViewCell" forIndexPath:indexPath];
+   LocationTableViewCell *cell = (LocationTableViewCell *)[self.locationTableView dequeueReusableCellWithIdentifier:@"locationtableviewcell" forIndexPath:indexPath];
+    NSLog(@"%@", [self.locations[indexPath.row] class]);
     [cell setLocation:self.locations[indexPath.row]];
     [cell setImage:self.images[indexPath.row]];
     return cell;
@@ -121,16 +106,23 @@
         return;
     }
     Tour *tour = [[Tour alloc] initWithNameOfTour:self.nameOfTourTextField.text descriptionText:self.tourDescriptionTextField.text startLocation:self.locations.firstObject.location user:[PFUser currentUser]];
-    NSArray *saveArray = [[NSArray alloc] init];
+    NSMutableArray *saveArray;
     for (Location *location in self.locations) {
         location.tour = tour;
         if (saveArray.count == 0) {
-            saveArray = @[location];
+            saveArray = [NSMutableArray arrayWithObject:location];
         } else {
-            [saveArray arrayByAddingObject:location];
+            [saveArray addObject:location];
         }
     }
-    [ParseService saveToParse:tour locations:saveArray];
+    
+    [ParseService saveToParse:tour locations:saveArray completion:^(BOOL success, NSError *error) {
+        if (success) {
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        } else {
+            NSLog(@"Error saving: %@", error.localizedFailureReason);
+        }
+    }];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -144,11 +136,11 @@
 
 - (void)didFinishSavingLocationWithLocation:(Location *)location image:(UIImage *)image {
     if (self.locations.count > 0) {
-        [self.locations arrayByAddingObject:location];
-        [self.images arrayByAddingObject:image];
+        [self.locations addObject:location];
+        [self.images addObject:image];
     } else {
-        self.locations = @[location];
-        self.images = @[image];
+        self.locations = [NSMutableArray arrayWithObject:location];
+        self.images = [NSMutableArray arrayWithObject:image];
     }
     [self.locationTableView reloadData];
 }

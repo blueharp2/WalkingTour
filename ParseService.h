@@ -11,10 +11,11 @@
 
 typedef void(^locationsFetchCompletion)(BOOL success, NSArray *results);
 typedef void(^toursFetchCompletion)(BOOL success, NSArray *results);
+typedef void(^tourSaveCompletion)(BOOL success, NSError *error);
 
 @interface ParseService : NSObject
 
-+ (void)saveToParse:(Tour *)tour locations:(NSArray *)locations;
++ (void)saveToParse:(Tour *)tour locations:(NSArray *)locations completion:(tourSaveCompletion)completion;
 + (void)fetchLocationsWithTourId:(NSString *)tourId completion:(locationsFetchCompletion)completion;
 + (void)fetchToursNearLocation:(CLLocationCoordinate2D)location completion:(toursFetchCompletion)completion;
 

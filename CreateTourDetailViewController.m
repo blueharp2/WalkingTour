@@ -223,8 +223,13 @@ static const NSArray *categories;
         NSLog(@"So, you've made a movie...");
         videoData = [NSData dataWithContentsOfURL:[info objectForKey:@"UIImagePickerControllerMediaURL"]];
         videoFile = [PFFile fileWithName:[NSString stringWithFormat:@"%i.mp4", rand() / 2] data:videoData];
+        NSLog(@"%@", [info objectForKey:@"UIImagePickerControllerMediaURL"]);
+        
         //screenshot the video and turn it into image data here.
-        photoData = [self getStillImageDataFromMovieUrl:[NSURL URLWithString:[info objectForKey:@"UIImagePickerControllerMediaURL"]]];
+        UIImage *photo = [self getStillImageDataFromMovieUrl:[info objectForKey:@"UIImagePickerControllerMediaURL"]];
+        self.image = photo;
+        NSData *stillImageData = UIImageJPEGRepresentation(photo, 1.0);
+        photoData = stillImageData;
         photoFile = [PFFile fileWithName:[NSString stringWithFormat:@"%i.jpg",rand() / 2] data:photoData];
     }
     if ([info objectForKey:@"UIImagePickerControllerEditedImage"]) {
@@ -238,7 +243,7 @@ static const NSArray *categories;
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (NSData *)getStillImageDataFromMovieUrl:(NSURL *)url {
+- (UIImage *)getStillImageDataFromMovieUrl:(NSURL *)url {
     AVURLAsset *asset = [[AVURLAsset alloc] initWithURL:url options:nil];
     if (asset) {
         AVAssetImageGenerator *assetImageGenerator = [[AVAssetImageGenerator alloc] initWithAsset:asset];
@@ -254,8 +259,7 @@ static const NSArray *categories;
             NSLog(@"Image generator error: %@", imageGeneratorError.localizedDescription);
         } else {
             UIImage *stillImage = stillImageRef ? [[UIImage alloc] initWithCGImage:stillImageRef] : nil;
-            NSData *stillImageData = UIImageJPEGRepresentation(stillImage, 1.0);
-            return stillImageData;
+            return stillImage;
         }
     }
     return nil;
