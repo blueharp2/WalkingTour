@@ -61,10 +61,10 @@
     
     CLLocation *location = [self.locationManager location];
     [self setMapForCoordinateWithLatitude:location.coordinate.latitude andLongitude:location.coordinate.longitude];
-//    CLLocationCoordinate2D coordinate = [location coordinate];
+    //    CLLocationCoordinate2D coordinate = [location coordinate];
     CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(47.624441, -122.335913);
-
-
+    
+    
     [ParseService fetchToursNearLocation:coordinate completion:^(BOOL success, NSArray *results) {
         if (success) {
             [self setLocationsFromParse:results];
@@ -80,7 +80,7 @@
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
-
+    
     [_locationManager stopMonitoringSignificantLocationChanges];
 }
 
@@ -96,7 +96,7 @@
     //Setup up MapView
     [self.mapView setDelegate:self];
     [self.mapView setShowsUserLocation: YES];
-//    [self.locationManager]
+    //    [self.locationManager]
     
     
 }
@@ -115,7 +115,7 @@
 #pragma mark - MKMapViewDelegate
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation
-    {
+{
     if ([annotation isKindOfClass:[MKUserLocation class]]) {
         return nil;
     }
@@ -128,17 +128,17 @@
     {
         annotationView = [[MKPinAnnotationView alloc]initWithAnnotation:annotation reuseIdentifier:@"AnnotationView"];
     }
-        
+    
     //Add a detail disclosure button.
     annotationView.canShowCallout = true;
-        annotationView.animatesDrop = true;
-        annotationView.pinTintColor = [UIColor orangeColor];
+    annotationView.animatesDrop = true;
+    annotationView.pinTintColor = [UIColor orangeColor];
     UIButton *rightCalloutButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
     annotationView.rightCalloutAccessoryView = rightCalloutButton;
     
     // Add a custom image to the callout.
     
-//        UIImage *myCustomImage = [[UIImage alloc]initWithImage:[UIImage imageNamed:@"map-marker.png"]];
+    //        UIImage *myCustomImage = [[UIImage alloc]initWithImage:[UIImage imageNamed:@"map-marker.png"]];
     
     return annotationView;
 }
@@ -148,49 +148,49 @@
 }
 
 #pragma mark - CLLocationManager
-    
+
 -(void) startStandardUpdates
-    {
-        
-            if (nil == _locationManager)
-                    _locationManager = [[CLLocationManager alloc] init];
-        
-            _locationManager.delegate = self;
-            _locationManager.desiredAccuracy = kCLLocationAccuracyKilometer;
-        
-            // Set a movement threshold for new events.
-            _locationManager.distanceFilter = 100; // meters
-        
-            [_locationManager startUpdatingLocation];
-        }
+{
     
-    - (void)startSignificantChangeUpdates
-    {
-        
-            if (nil == _locationManager)
-                    _locationManager = [[CLLocationManager alloc] init];
-        
-            _locationManager.delegate = self;
-            [_locationManager startMonitoringSignificantLocationChanges];
-        }
+    if (nil == _locationManager)
+        _locationManager = [[CLLocationManager alloc] init];
+    
+    _locationManager.delegate = self;
+    _locationManager.desiredAccuracy = kCLLocationAccuracyKilometer;
+    
+    // Set a movement threshold for new events.
+    _locationManager.distanceFilter = 100; // meters
+    
+    [_locationManager startUpdatingLocation];
+}
+
+- (void)startSignificantChangeUpdates
+{
+    
+    if (nil == _locationManager)
+        _locationManager = [[CLLocationManager alloc] init];
+    
+    _locationManager.delegate = self;
+    [_locationManager startMonitoringSignificantLocationChanges];
+}
 
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations
-    {
+{
     NSLog(@"%@", locations);
 }
-    
-    
-    #pragma mark - UITableView protocol functions.
 
-    - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-        
-        if (self.toursFromParse != nil) {
-            return self.toursFromParse.count;
-            
-        }
-        return 0;
+
+#pragma mark - UITableView protocol functions.
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
+    if (self.toursFromParse != nil)
+    {
+        return self.toursFromParse.count;
     }
+    return 0;
+}
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -210,13 +210,17 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"TourMapViewController"]) {
         if ([sender isKindOfClass:[MKAnnotationView class]]) {
-//            MKAnnotationView *annotationView = (MKAnnotationView *)sender;
+            //            MKAnnotationView *annotationView = (MKAnnotationView *)sender;
             TourMapViewController *tourMapViewController = (TourMapViewController *)segue.destinationViewController;
             
-            
+        }
+        
+        if ([sender isKindOfClass: [UITableViewCell class]]) {
+            TourMapViewController *tourMapViewController = (TourMapViewController *)segue.destinationViewController;
+//            tourMapViewController =
             
         }
-    }    // Pass the selected object to the new view controller.
+    }
 }
 
 
