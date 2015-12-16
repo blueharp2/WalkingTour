@@ -31,14 +31,11 @@
 -(void)setToursFromParse:(NSArray<Tour *> *)toursFromParse;
 
 
-
-
-
 @end
 
 @implementation FindToursViewController
 
-- (void)setLocationsFromParse:(NSArray<Location *> *)toursFromParse {
+- (void)setToursFromParse:(NSArray<Tour *> *)toursFromParse {
     _toursFromParse = toursFromParse;
     
     for (Tour *tour in toursFromParse) {
@@ -48,17 +45,21 @@
         newPoint.title = tour.nameOfTour;
         
         [self.mapView addAnnotation:newPoint];
+        [self.toursTableView reloadData];
     }
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.locationManager = [[CLLocationManager alloc]init];
+    //Location Manager setup
+     self.locationManager = [[CLLocationManager alloc]init];
     [self.locationManager requestWhenInUseAuthorization];
     [self.locationManager setDelegate:self];
+    
     [self setupViewController];
     
+    // Gets user location and set map region
     CLLocation *location = [self.locationManager location];
     [self setMapForCoordinateWithLatitude:location.coordinate.latitude andLongitude:location.coordinate.longitude];
     //    CLLocationCoordinate2D coordinate = [location coordinate];
@@ -67,7 +68,7 @@
     
     [ParseService fetchToursNearLocation:coordinate completion:^(BOOL success, NSArray *results) {
         if (success) {
-            [self setLocationsFromParse:results];
+            [self setToursFromParse:results];
             [self.toursTableView reloadData];
         }
     }];
@@ -96,8 +97,6 @@
     //Setup up MapView
     [self.mapView setDelegate:self];
     [self.mapView setShowsUserLocation: YES];
-    //    [self.locationManager]
-    
     
 }
 
@@ -145,6 +144,8 @@
 
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
     [self performSegueWithIdentifier:@"TabBarController" sender:view];
+    
+    
 }
 
 #pragma mark - CLLocationManager
@@ -185,11 +186,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    if (self.toursFromParse != nil)
-    {
         return self.toursFromParse.count;
-    }
-    return 0;
 }
 
 
@@ -203,6 +200,12 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [self performSegueWithIdentifier:@"TabBarController" sender:self];
+//    if ([segue.identifier isEqualToString:@"TourMapViewController"]) {
+//
+//    TourMapViewController *tourMapViewController = (TourMapViewController *)segue.destinationViewController;
+//    tourMapViewController.currentTour = [self.toursFromParse objectAtIndex:indexPath.row];
+//    }
+    
 }
 
 #pragma mark - Navigation
@@ -212,13 +215,14 @@
         if ([sender isKindOfClass:[MKAnnotationView class]]) {
             //            MKAnnotationView *annotationView = (MKAnnotationView *)sender;
             TourMapViewController *tourMapViewController = (TourMapViewController *)segue.destinationViewController;
+//            tourMapViewController.currentTour = rightCalloutButton.MKAnnotationView.title;
             
         }
         
         if ([sender isKindOfClass: [UITableViewCell class]]) {
             TourMapViewController *tourMapViewController = (TourMapViewController *)segue.destinationViewController;
-//            tourMapViewController =
             
+//            tourMapViewController.currentTour = [self.toursFromParse objectAtIndex:indexPath.row];
         }
     }
 }

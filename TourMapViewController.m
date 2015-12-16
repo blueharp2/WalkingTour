@@ -10,6 +10,7 @@
 #import "TourDetailViewController.h"
 #import "Tour.h"
 #import "Location.h"
+#import "ParseService.h"
 
 @import UIKit;
 @import MapKit;
@@ -20,71 +21,96 @@
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 
 @property (strong, nonatomic) CLLocationManager *locationManager;
-@property (strong, nonatomic) Tour *currentTour;
+//@property (strong, nonatomic) Tour *currentTour;
 @property (strong, nonatomic) NSArray <Location*> *locationsFromParse;
 
 @end
 
 @implementation TourMapViewController
 
+- (void)setLocationsFromParse:(NSArray<Location *> *)locationsFromParse {
+    _locationsFromParse = locationsFromParse;
+    
+    for (Location *location in locationsFromParse) {
+        MKPointAnnotation *newPoint = [[MKPointAnnotation alloc]init];
+        newPoint.coordinate = CLLocationCoordinate2DMake(location.location.latitude, location.location.longitude);
+        newPoint.title = location.locationName;
+        [self.mapView addAnnotation:newPoint];
+    }
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     [self.mapView setDelegate:self];
     [self.mapView setShowsUserLocation: YES];
-
+    
+//Location Manager setUp
     self.locationManager = [[CLLocationManager alloc]init];
     [self.locationManager requestWhenInUseAuthorization];
     [self.locationManager setDelegate:self];
-
-    //    [self login];
-    PFQuery *query = [PFQuery queryWithClassName:@"Location"];
-    // Get user location.
-    PFGeoPoint *userLocation = [PFGeoPoint geoPointWithLatitude:self.locationManager.location.coordinate.latitude longitude:self.locationManager.location.coordinate.longitude];
-    [self setMapForCoordinateWithLatitude:userLocation.latitude andLongitude:userLocation.longitude];
     
-    //find locations near user location.
-    [query whereKey:@"location" nearGeoPoint:userLocation];
+  // Gets user location and set map region
+    CLLocation *location = [self.locationManager location];
+    [self setMapForCoordinateWithLatitude:location.coordinate.latitude andLongitude:location.coordinate.longitude];
+    //    CLLocationCoordinate2D coordinate = [location coordinate];
+//    CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(47.624441, -122.335913);
     
-    [query getFirstObjectInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
-        if (object) {
-            Location *location = (Location *)object;
-            
-            PFQuery *tourQuery = [PFQuery queryWithClassName:@"Tour"];
-            [tourQuery whereKey:@"objectId" equalTo:location.tour.objectId];
-            [tourQuery getFirstObjectInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
-                if ([object isKindOfClass:[Tour class]]) {
-                    location.tour = (Tour *)object;
-                    NSLog(@"%@", location.tour.nameOfTour);
-                    Tour *tour = (Tour *)object;
-                    NSLog(@"%@", tour.nameOfTour);
-                    
-                    
-//                    CLLocationCoordinate2D touchMapCoordinate = [self.locationMapView convertPoint:touchPoint toCoordinateFromView:self.locationMapView];
-                    
-                    MKPointAnnotation *newPoint = [[MKPointAnnotation alloc]init];
-                    PFGeoPoint *newLocation = [PFGeoPoint geoPointWithLatitude: tour.startLocation.latitude longitude:tour.startLocation.longitude];
-
-                    newPoint.title = tour.nameOfTour;
-                    
-                    [self.mapView addAnnotation:newPoint];
-                    [self.mapView  addAnnotation: newLocation];
-
-                    self.locationsFromParse = [[NSArray alloc]init];
-                    if (self.locationsFromParse.count > 0) {
-                        [self.locationsFromParse arrayByAddingObject: location];
-                    } else {
-                        self.locationsFromParse = @[location];
-                    }
-                    
-                }
-            }];
-            
-            
-        } else {
-            NSLog(@"Error: %@ %@", error, [error userInfo]);
+    [ParseService fetchLocationsWithTourId:@"mFhSwIB6bT" completion:^(BOOL success, NSArray *results) {
+        if (success) {
+            [self setLocationsFromParse:results];
         }
     }];
+ 
+
+//    //    [self login];
+//    PFQuery *query = [PFQuery queryWithClassName:@"Location"];
+//    // Get user location.
+//    PFGeoPoint *userLocation = [PFGeoPoint geoPointWithLatitude:self.locationManager.location.coordinate.latitude longitude:self.locationManager.location.coordinate.longitude];
+//    [self setMapForCoordinateWithLatitude:userLocation.latitude andLongitude:userLocation.longitude];
+//    
+//    //find locations near user location.
+//    [query whereKey:@"location" nearGeoPoint:userLocation];
+    
+//    [query getFirstObjectInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+//        if (object) {
+//            Location *location = (Location *)object;
+//            
+//            PFQuery *tourQuery = [PFQuery queryWithClassName:@"Tour"];
+//            [tourQuery whereKey:@"objectId" equalTo:location.tour.objectId];
+//            [tourQuery getFirstObjectInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+//                if ([object isKindOfClass:[Tour class]]) {
+//                    location.tour = (Tour *)object;
+//                    NSLog(@"%@", location.tour.nameOfTour);
+//                    Tour *tour = (Tour *)object;
+//                    NSLog(@"%@", tour.nameOfTour);
+//                    
+//                    
+////                    CLLocationCoordinate2D touchMapCoordinate = [self.locationMapView convertPoint:touchPoint toCoordinateFromView:self.locationMapView];
+//                    
+//                    MKPointAnnotation *newPoint = [[MKPointAnnotation alloc]init];
+//                    PFGeoPoint *newLocation = [PFGeoPoint geoPointWithLatitude: tour.startLocation.latitude longitude:tour.startLocation.longitude];
+//
+//                    newPoint.title = tour.nameOfTour;
+//                    
+//                    [self.mapView addAnnotation:newPoint];
+//                    [self.mapView  addAnnotation: newLocation];
+//
+//                    self.locationsFromParse = [[NSArray alloc]init];
+//                    if (self.locationsFromParse.count > 0) {
+//                        [self.locationsFromParse arrayByAddingObject: location];
+//                    } else {
+//                        self.locationsFromParse = @[location];
+//                    }
+//                    
+//                }
+//            }];
+//            
+//            
+//        } else {
+//            NSLog(@"Error: %@ %@", error, [error userInfo]);
+//        }
+//    }];
 
 }
 
@@ -107,15 +133,11 @@
 - (void)setMapForCoordinateWithLatitude: (double)lat  andLongitude:(double)longa {
     
     CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(lat, longa);
-    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(coordinate, 2000.0, 2000.0);
+    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(coordinate, 700.0, 700.0);
     [self setRegionForCoordinate:region];
 }
+
 #pragma mark - MKMapViewDelegate
-
-- (void) createMapAnnotation {
-
-
-}
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
     if ([annotation isKindOfClass:[MKUserLocation class]]) {
@@ -125,11 +147,15 @@
     MKPinAnnotationView *annotationView = (MKPinAnnotationView *) [mapView dequeueReusableAnnotationViewWithIdentifier: @"AnnotationView"];
     annotationView.annotation = annotation;
     
-    if (!annotationView) {
+    if (!annotationView)
+    {
         annotationView = [[MKPinAnnotationView alloc]initWithAnnotation:annotation reuseIdentifier:@"AnnotationView"];
     }
+    
     //Add a detail disclosure button.
     annotationView.canShowCallout = true;
+    annotationView.animatesDrop = true;
+    annotationView.pinTintColor = [UIColor orangeColor];
     UIButton *rightCalloutButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
     annotationView.rightCalloutAccessoryView = rightCalloutButton;
     
@@ -144,16 +170,6 @@
     //Put the segue name here...
     [self performSegueWithIdentifier:@"DetailViewController" sender:view];
 }
-
-//Uncomment this one if you want an overlay circle around the pin.
-
-//- (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id<MKOverlay>)overlay {
-//    MKCircleRenderer *circleRenderer = [[MKCircleRenderer alloc] initWithOverlay:overlay];
-//    circleRenderer.strokeColor = [UIColor blueColor];
-//    circleRenderer.fillColor = [UIColor redColor];
-//    circleRenderer.alpha = 0.5;
-//    return circleRenderer;
-//}
 
 #pragma mark - CLLocationManager
 
@@ -181,6 +197,12 @@
     _locationManager.delegate = self;
     [_locationManager startMonitoringSignificantLocationChanges];
 }
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations
+{
+    NSLog(@"%@", locations);
+}
+
 
 #pragma mark - Navigation
 
