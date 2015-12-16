@@ -7,8 +7,34 @@
 //
 
 #import "POIDetailTableViewCell.h"
+#import "Location.h"
+
+@interface POIDetailTableViewCell ()
+@property (weak, nonatomic) IBOutlet UIImageView *tourImageView;
+@property (weak, nonatomic) IBOutlet UILabel *tourNameLabel;
+@end
 
 @implementation POIDetailTableViewCell
+
+- (void)setLocation:(Location *)location {
+    self.tourNameLabel.text = location.locationName;
+    
+    [location.photo getDataInBackgroundWithBlock:^(NSData * _Nullable data, NSError * _Nullable error) {
+        if (error) {
+            NSLog(@"Error unwrapping image");
+        }
+        if (data) {
+            UIImage *image = [UIImage imageWithData:data];
+            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+ 
+                self.tourImageView.image = image;
+            }];
+        }
+    }];
+    
+    
+}
+
 
 - (void)awakeFromNib {
     // Initialization code
