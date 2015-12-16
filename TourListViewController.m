@@ -7,12 +7,16 @@
 //
 
 #import "TourListViewController.h"
-#import "Location.h"
-#import "Tour.h"
+#import "TourDetailViewController.h"
+#import "LocationTableViewCell.h"
 #import "POIDetailTableViewCell.h"
+#import "Tour.h"
+#import "ParseService.h"
+@import Parse;
+@import ParseUI;
+
 @interface TourListViewController ()<UITableViewDelegate, UITableViewDataSource>
-@property (weak, nonatomic) IBOutlet UITableView *tourListTableView;
-@property (strong, nonatomic) NSArray <Tour*>*tours;
+
 
 @end
 
@@ -20,53 +24,86 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+
 }
 
-- (void)setupViewController
-{
-    //Setup tableView
-    [self.tourListTableView setDelegate:self];
-    [self.tourListTableView setDataSource:self];
-    
-    UINib *nib = [UINib nibWithNibName:@"POIDetailTableViewCell" bundle:nil];
-    [[self tourListTableView] registerNib:nib forCellReuseIdentifier:@"POIDetailTableViewCell"];
-}
-
-
-#pragma mark - UITableView protocol functions.
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
-    if (self.tours != nil) {
-        return self.tours.count;
-        
+- (id)initWithStyle:(UITableViewStyle)style {
+    self = [super initWithStyle:style];
+    if (self) {
+                    // This table displays items in the Todo class
+        self.parseClassName = @"Location";
+        self.pullToRefreshEnabled = YES;
+        self.paginationEnabled = NO;
+        self.objectsPerPage = 25;
     }
-    return 0;
+    return self;
 }
 
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (PFQuery *)queryForTable {
+    PFQuery *query = [PFQuery queryWithClassName:self.parseClassName];
     
-    POIDetailTableViewCell *cell = (POIDetailTableViewCell*) [self.tourListTableView dequeueReusableCellWithIdentifier:@"POIDetailTableViewCell"];
-    [cell setTour:[self.tours objectAtIndex:indexPath.row]];
+                // If no objects are loaded in memory, we look to the cache
+                // first to fill the table and then subsequently do a query
+                // against the network.
+    if ([self.objects count] == 0) {
+        query.cachePolicy = kPFCachePolicyCacheThenNetwork;
+    }
+    
+    [query orderByDescending:@"createdAt"];
+    
+    return query;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(PFObject *)object {
+    static NSString *CellIdentifier = @"locationtableviewcell";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
+                                      reuseIdentifier:CellIdentifier];
+    }
+    
+            // Configure the cell to show todo item with a priority at the bottom
+    
+//    cell.locationLabel.text = [object objectForKey:@"locationName"];
+//    cell.detailTextLabel.text = [NSString stringWithFormat:@"locatinDescription: %@",
+//                                 [object objectForKey:@"locationDescription"]];
+//    
     return cell;
 }
 
+        //Segue to POIDetailTableView when cell is selected
 
-/*
-#pragma mark - Navigation
+//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+//    if ([segue.identifier isEqualToString:@"POIDetailTableViewCell"]) {
+//        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+//        TourDetailViewController *destViewController = segue.destinationViewController;
+//        destViewController.locationData = [recipes objectAtIndex:indexPath.row];
+//    }
+//}
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
+    
 @end
+
+
+
+
+
+//
+//+ (void)fetchLocationsWithTourId:(NSString *)tourId completion:(locationsFetchCompletion)completion {
+//    PFQuery *query = [PFQuery queryWithClassName:@"Location"];
+//    [query whereKey:@"objectId" equalTo:tourId];
+//    [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+//        if (error) {
+//            NSLog(@"%@", error.localizedFailureReason);
+//            completion(NO, nil);
+//        }
+//        if (objects) {
+//            completion(YES, objects);
+//        }
+//    }];
+//}
