@@ -42,6 +42,7 @@ static const NSArray *categories;
     [self.mapView setShowsUserLocation:YES];
     [self requestPermissions];
     [self.locationManager setDelegate:self];
+    [self locationControllerDidUpdateLocation:_locationManager.location];
     
 }
 
