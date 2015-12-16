@@ -12,10 +12,11 @@
 @import MobileCoreServices;
 @import CoreLocation;
 @import Parse;
+@import MapKit;
 
 static const NSArray *categories;
 
-@interface CreateTourDetailViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITableViewDataSource, UITableViewDelegate>
+@interface CreateTourDetailViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITableViewDataSource, UITableViewDelegate, MKMapViewDelegate>
 
 - (IBAction)cameraButtonPressed:(UIButton *)sender;
 @property (strong, nonatomic) UIImagePickerController *imagePicker;
