@@ -12,6 +12,7 @@
 #import "Location.h"
 #import "POIDetailTableViewCell.h"
 
+@import UIKit;
 @import CoreLocation;
 @import MapKit;
 
@@ -104,7 +105,6 @@
     
 }
 
-
 - (void)setRegionForCoordinate:(MKCoordinateRegion)region {
     [self.mapView setRegion:region animated:YES];
 }
@@ -114,6 +114,38 @@
     CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(lat, longa);
     MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(coordinate, 1000.0, 1000.0);
     [self setRegionForCoordinate:region];
+}
+
+#pragma mark - MKMapViewDelegate
+
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation
+    {
+    if ([annotation isKindOfClass:[MKUserLocation class]]) {
+        return nil; }
+    
+    // Add view.
+    MKPinAnnotationView *annotationView = (MKPinAnnotationView *) [mapView dequeueReusableAnnotationViewWithIdentifier: @"AnnotationView"];
+    annotationView.annotation = annotation;
+    
+    if (!annotationView)
+    {
+        annotationView = [[MKPinAnnotationView alloc]initWithAnnotation:annotation reuseIdentifier:@"AnnotationView"];
+    }
+    //Add a detail disclosure button.
+    annotationView.canShowCallout = true;
+    UIButton *rightCalloutButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+    annotationView.rightCalloutAccessoryView = rightCalloutButton;
+    
+    // Add a custom image to the callout.
+    
+//        UIImage *myCustomImage = [[UIImage alloc]initWithImage:[UIImage imageNamed:@"map-marker.png"]];
+    
+    return annotationView;
+}
+
+- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
+    //Put the segue name here...
+    [self performSegueWithIdentifier:@"DetailViewController" sender:view];
 }
 
 #pragma mark - CLLocationManager
@@ -144,7 +176,8 @@
         }
 
 
-- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations
+    {
     NSLog(@"%@", locations);
 }
     

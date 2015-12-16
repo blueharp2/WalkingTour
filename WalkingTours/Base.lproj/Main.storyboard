@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ch6-eO-iFm">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="tqM-E3-5K0">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
@@ -56,7 +56,6 @@
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="kes-x4-yde">
                                 <rect key="frame" x="20" y="201" width="280" height="30"/>
-                                <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
@@ -152,7 +151,6 @@
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DAU-0r-x6W">
                                 <rect key="frame" x="128" y="235" width="65" height="36"/>
-                                <animations/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="65" id="eo4-MG-b70"/>
                                 </constraints>
@@ -215,7 +213,6 @@
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="KIn-UW-axy">
                                 <rect key="frame" x="20" y="264" width="280" height="30"/>
-                                <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
@@ -289,14 +286,12 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gaj-h6-TIr">
                                 <rect key="frame" x="144" y="269" width="32" height="30"/>
-                                <animations/>
                                 <state key="normal" title="Cam"/>
                                 <connections>
                                     <action selector="cameraButtonPressed:" destination="ch6-eO-iFm" eventType="touchUpInside" id="Zhd-7Z-GQP"/>
                                 </connections>
                             </button>
                         </subviews>
-                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Gaj-h6-TIr" firstAttribute="centerX" secondItem="gHZ-FA-2cS" secondAttribute="centerX" id="F1o-pT-LRI"/>
@@ -392,6 +387,7 @@
                     <connections>
                         <outlet property="mapView" destination="GYQ-Tm-WcJ" id="3Kx-Rx-Dr3"/>
                         <outlet property="toursTableView" destination="dEP-ma-FrS" id="0g8-Lf-TO4"/>
+                        <segue destination="lAJ-Ob-e5p" kind="show" id="Ifx-M8-5Zo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="J62-pQ-oqn" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -422,7 +418,7 @@
                             <constraint firstAttribute="trailing" secondItem="4ml-uu-TJU" secondAttribute="trailing" id="YXn-UJ-Q1B"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="MapView" image="linea--basic-map" id="SCN-L8-RGR"/>
+                    <tabBarItem key="tabBarItem" title="Tours Map" image="linea--basic-map" id="SCN-L8-RGR"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="mapView" destination="4ml-uu-TJU" id="Ygp-qU-DX0"/>
@@ -479,7 +475,7 @@
                                         <rect key="frame" x="0.0" y="28" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="t88-UP-tJm" id="m3q-8v-K4s">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -521,7 +517,7 @@
         <!--List TableView-->
         <scene sceneID="Etf-BX-3GD">
             <objects>
-                <viewController title="List TableView" id="I1h-KJ-pRF" sceneMemberID="viewController">
+                <viewController title="List TableView" id="I1h-KJ-pRF" customClass="TourListViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Tqw-Cp-IzH"/>
                         <viewControllerLayoutGuide type="bottom" id="HgW-jL-Idc"/>
@@ -543,8 +539,11 @@
                             <constraint firstItem="bYn-7j-rTq" firstAttribute="leading" secondItem="Gfc-hj-cvs" secondAttribute="leading" id="ohe-3m-0Jy"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="el2-b4-kYB"/>
+                    <tabBarItem key="tabBarItem" title="Tours List" image="iosListOutline" id="el2-b4-kYB"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="tourListTableView" destination="bYn-7j-rTq" id="CSc-ZR-XAJ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h2j-IS-vEX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -573,7 +572,6 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q8D-Ok-M3Z">
                                         <rect key="frame" x="137" y="85" width="46" height="30"/>
-                                        <animations/>
                                         <fontDescription key="fontDescription" type="system" pointSize="32"/>
                                         <state key="normal" title="▶︎"/>
                                         <connections>
@@ -581,7 +579,6 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <animations/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="200" id="Gco-gN-sWY"/>
@@ -649,6 +646,7 @@
     </scenes>
     <resources>
         <image name="WalkingTour.png" width="321" height="430"/>
+        <image name="iosListOutline" width="23" height="31"/>
         <image name="linea--basic-map" width="28" height="30"/>
     </resources>
 </document>
