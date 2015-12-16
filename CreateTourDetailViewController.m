@@ -270,7 +270,7 @@ static const NSArray *categories;
 }
 
 -(void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status{
-    if (status == kCLAuthorizationStatusAuthorizedAlways){
+    if (status == kCLAuthorizationStatusAuthorizedWhenInUse){
         [self.mapView setShowsUserLocation:YES];
     }
 }
@@ -305,14 +305,13 @@ static const NSArray *categories;
     
     annotationView.annotation = annotation;
     
-    //if (!annotationView) {
     annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"AnnotationView"];
     
     annotationView.canShowCallout = YES;
     UIButton *rightCallout = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
     
     annotationView.rightCalloutAccessoryView = rightCallout;
-    //    }
+
     return annotationView;
     
 }
