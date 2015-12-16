@@ -6,8 +6,11 @@
 //  Copyright © 2015 Lindsey Boggio. All rights reserved.
 //
 
+#import "ParseLoginViewController.h"
+#import "ParseSignUpViewController.h"
 #import "TourSelectionViewController.h"
-#import "Parse/Parse.h"
+@import Parse;
+
 
 
 @interface TourSelectionViewController ()
@@ -28,10 +31,23 @@
     [super viewDidLoad];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
+- (void)viewDidAppear:(BOOL)animated {
+    PFUser *currentUser = [PFUser currentUser];
+    if (currentUser) {
+        // do stuff with the user
+    } else {
+
+        
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        ParseLoginViewController *myController = [storyboard instantiateViewControllerWithIdentifier:@"ParseLoginViewController"];
+        
+        myController.completion = ^() {
+            [myController dismissViewControllerAnimated:YES completion:nil];
+        };
+        
+        [self presentViewController:myController animated:YES completion:nil];
+    
+    }
 }
-
-
 
 @end
