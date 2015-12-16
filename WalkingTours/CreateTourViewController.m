@@ -17,7 +17,7 @@
 
 
 
-@interface CreateTourViewController() <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
+@interface CreateTourViewController() <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, CreateTourDetailViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *nameOfTourTextField;
 @property (weak, nonatomic) IBOutlet UITextField *tourDescriptionTextField;
@@ -133,6 +133,20 @@
     
    // [ParseService saveToParse:<#(Tour *)#> locations:<#(NSArray *)#>]
     
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier  isEqual: @"SegueToCreateTourDetailVC"]) {
+        if ([segue.destinationViewController isKindOfClass:[CreateTourDetailViewController class]]) {
+            CreateTourDetailViewController *detailVC = (CreateTourDetailViewController *)segue.destinationViewController;
+            detailVC.delegate = self;
+        }
+    }
+}
+
+- (void)didFinishSavingLocationWithLocation:(Location *)location {
+    //do something with the location
+    NSLog(@"%@", location.categories);
 }
 
 @end
