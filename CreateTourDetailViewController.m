@@ -71,7 +71,7 @@ static const NSArray *categories;
 - (void)setUpFinalSaveButton {
     self.finalSaveButton = [[UIButton alloc] initWithFrame:CGRectMake(self.view.center.x, self.view.center.y, 0, 0)];
     [self.finalSaveButton setTitle:@"Save" forState:UIControlStateNormal];
-    self.finalSaveButton.titleLabel.tintColor = [UIColor blueColor];
+    [self.finalSaveButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
     [self.finalSaveButton setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.view addSubview:self.finalSaveButton];
     [self.finalSaveButton addTarget:self action:@selector(saveLocationWithCategories:) forControlEvents:UIControlEventTouchUpInside];

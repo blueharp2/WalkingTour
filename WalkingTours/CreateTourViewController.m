@@ -26,6 +26,7 @@
 - (IBAction)addLocationsButton:(id)sender;
 
 @property (weak, nonatomic) IBOutlet UITableView *locationTableView;
+@property (strong, nonatomic) NSArray<Location *> *locations;
 
 
 
@@ -68,14 +69,14 @@
 
 -(void)saveTourToParse{
     
-    Location *startLocation = self.location.firstObject;
+    Location *startLocation = self.locations.firstObject;
     NSString *name = self.nameOfTourTextField.text;
     NSString *description = self.tourDescriptionTextField.text;
     PFUser *user = [PFUser currentUser];
     
 
     Tour *tour = [[Tour alloc]initWithNameOfTour:name descriptionText:description startLocation:startLocation.location user:user];
-    [ParseService saveToParse: tour locations:self.location];
+    [ParseService saveToParse: tour locations:self.locations];
     
 }
 
@@ -83,8 +84,8 @@
 #pragma mark set up TableView
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    if (self.location !=nil) {
-        return self.location.count;
+    if (self.locations !=nil) {
+        return self.locations.count;
     }
     return 0;
 }
@@ -95,7 +96,7 @@
 
     
    //cell.location =
-    [self.location objectAtIndex:indexPath.row];
+    [self.locations objectAtIndex:indexPath.row];
     
     return cell;
 }
@@ -105,34 +106,35 @@
 #pragma mark Save to Parse
 
 -(void)saveButtonSelected:(UIBarButtonItem *)sender{
-
     if (self.nameOfTourTextField.text.length != 0) {
         NSLog(@"We have text!");
-        // [ParseService saveToParse:<#(Tour *)#> locations:<#(NSArray *)#>]
-    }else {
+    } else {
         UIAlertController *noTextinFieldAlert = [UIAlertController alertControllerWithTitle:@"Please enter the name of your tour" message:@"Thank you" preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){}];
         [noTextinFieldAlert addAction:defaultAction];
         [self presentViewController:noTextinFieldAlert animated:YES completion:nil];
+        return;
     }
-    
-    if (self.location.count !=0) {
+    if (self.locations.count !=0) {
         NSLog(@"We have a location!");
-        // [ParseService saveToParse:<#(Tour *)#> locations:<#(NSArray *)#>]
-    }else{
-    
+    } else {
         UIAlertController *noLocationAlert = [UIAlertController alertControllerWithTitle:@"Please add at least one location" message:@"Thank you" preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){}];
         [noLocationAlert addAction:defaultAction];
         [self presentViewController:noLocationAlert animated:YES completion:nil];
+        return;
     }
-    
-//check if there is text and at least one location
-    //if not present Alert and do not save
-    
-    
-   // [ParseService saveToParse:<#(Tour *)#> locations:<#(NSArray *)#>]
-    
+    Tour *tour = [[Tour alloc] initWithNameOfTour:self.nameOfTourTextField.text descriptionText:self.tourDescriptionTextField.text startLocation:self.locations.firstObject.location user:[PFUser currentUser]];
+    NSArray *saveArray = [[NSArray alloc] init];
+    for (Location *location in self.locations) {
+        location.tour = tour;
+        if (saveArray.count == 0) {
+            saveArray = @[location];
+        } else {
+            [saveArray arrayByAddingObject:location];
+        }
+    }
+    [ParseService saveToParse:tour locations:saveArray];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -145,8 +147,12 @@
 }
 
 - (void)didFinishSavingLocationWithLocation:(Location *)location {
-    //do something with the location
-    NSLog(@"%@", location.categories);
+    if (self.locations.count > 0) {
+        [self.locations arrayByAddingObject:location];
+    } else {
+        self.locations = @[location];
+    }
+    [self.locationTableView reloadData];
 }
 
 @end
