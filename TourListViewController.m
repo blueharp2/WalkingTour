@@ -30,31 +30,9 @@
 
 }
 
-- (id)initWithStyle:(UITableViewStyle)style {
-    self = [super initWithStyle:style];
-    if (self) {
-                    // This table displays items in the Todo class
-        self.parseClassName = @"Location";
-        self.pullToRefreshEnabled = YES;
-        self.paginationEnabled = NO;
-        self.objectsPerPage = 25;
-    }
-    return self;
-}
-
-- (PFQuery *)queryForTable {
-    PFQuery *query = [PFQuery queryWithClassName:self.parseClassName];
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-                // If no objects are loaded in memory, we look to the cache
-                // first to fill the table and then subsequently do a query
-                // against the network.
-    if ([self.objects count] == 0) {
-        query.cachePolicy = kPFCachePolicyCacheThenNetwork;
-    }
-    
-    [query orderByDescending:@"createdAt"];
-    
-    return query;
+    return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(PFObject *)object {
@@ -70,15 +48,8 @@
     
     return cell;
 }
+   
 
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-
-    LocationTableViewCell *loc = (LocationTableViewCell *)cell;
-    [loc setLocation: [self.objects objectAtIndex:indexPath.row]];
-    
-    
-    
-}
         //Segue to POIDetailTableView when cell is selected
 
 //- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

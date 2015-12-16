@@ -12,7 +12,7 @@
 @import ParseUI;
 
 
-@interface TourListViewController : PFQueryTableViewController
+@interface TourListViewController : UIViewController
 
 
 @end
