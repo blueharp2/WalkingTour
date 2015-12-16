@@ -24,9 +24,12 @@
     }];
 }
 
-+ (void)fetchLocationsWithTourId:(NSString *)tourId completion:(locationsFetchCompletion)completion {
++ (void)fetchLocationsWithTourId:(NSString *)tourId completion:(locationsFetchCompletion)completion
+{
+    
     PFQuery *query = [PFQuery queryWithClassName:@"Location"];
-    [query whereKey:@"objectId" equalTo:tourId];
+    [query whereKey:@"tour" equalTo:[PFObject objectWithoutDataWithClassName:@"Tour" objectId:tourId]];
+    
     [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         if (error) {
             NSLog(@"%@", error.localizedFailureReason);

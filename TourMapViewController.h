@@ -12,6 +12,8 @@
 
 @interface TourMapViewController : UIViewController
 
-@property (strong, nonatomic) Tour *currentTour;
+@property (strong, nonatomic) NSString *currentTour;
+
+- (void)setCurrentTour:(NSString*)currentTour;
 
 @end
