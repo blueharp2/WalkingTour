@@ -141,7 +141,7 @@
     if ([segue.identifier  isEqual: @"SegueToCreateTourDetailVC"]) {
         if ([segue.destinationViewController isKindOfClass:[CreateTourDetailViewController class]]) {
             CreateTourDetailViewController *detailVC = (CreateTourDetailViewController *)segue.destinationViewController;
-            detailVC.delegate = self;
+            detailVC.createTourDetailDelegate = self;
         }
     }
 }
