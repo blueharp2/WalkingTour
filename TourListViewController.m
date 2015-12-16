@@ -17,6 +17,7 @@
 
 @interface TourListViewController ()<UITableViewDelegate, UITableViewDataSource>
 
+@property (strong, nonatomic)NSArray * datasource;
 
 @end
 
@@ -24,38 +25,20 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-
+- (NSArray *)datasource {
+    
+    
+    return _datasource;
 }
 
-- (id)initWithStyle:(UITableViewStyle)style {
-    self = [super initWithStyle:style];
-    if (self) {
-                    // This table displays items in the Todo class
-        self.parseClassName = @"Location";
-        self.pullToRefreshEnabled = YES;
-        self.paginationEnabled = NO;
-        self.objectsPerPage = 25;
-    }
-    return self;
-}
 
-- (PFQuery *)queryForTable {
-    PFQuery *query = [PFQuery queryWithClassName:self.parseClassName];
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-                // If no objects are loaded in memory, we look to the cache
-                // first to fill the table and then subsequently do a query
-                // against the network.
-    if ([self.objects count] == 0) {
-        query.cachePolicy = kPFCachePolicyCacheThenNetwork;
-    }
-    
-    [query orderByDescending:@"createdAt"];
-    
-    return query;
+    return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(PFObject *)object {
@@ -63,18 +46,15 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
-                                      reuseIdentifier:CellIdentifier];
+        
+        [tableView registerNib:[UINib nibWithNibName:@"LocationTableViewCell" bundle:nil] forCellReuseIdentifier:@"locationtableviewcell"];
+        cell = [tableView dequeueReusableCellWithIdentifier:@"locationtableviewcell"];
     }
     
-            // Configure the cell to show todo item with a priority at the bottom
     
-//    cell.locationLabel.text = [object objectForKey:@"locationName"];
-//    cell.detailTextLabel.text = [NSString stringWithFormat:@"locatinDescription: %@",
-//                                 [object objectForKey:@"locationDescription"]];
-//    
     return cell;
 }
+   
 
         //Segue to POIDetailTableView when cell is selected
 
