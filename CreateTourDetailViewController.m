@@ -40,6 +40,9 @@ static const NSArray *categories;
     [self setUpGreyOutView];
     self.mapView.delegate = self;
     [self.mapView setShowsUserLocation:YES];
+    [self requestPermissions];
+    [self.locationManager setDelegate:self];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -48,6 +51,11 @@ static const NSArray *categories;
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
+}
+-(void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+    [self.locationManager stopMonitoringSignificantLocationChanges];
 }
 
 #pragma mark - Setup Functions
@@ -210,9 +218,15 @@ static const NSArray *categories;
 
 #pragma mark LocationController
 
+-(void)requestPermissions{
+    self.locationManager = [[CLLocationManager alloc]init];
+    [self.locationManager requestWhenInUseAuthorization];
+    
+}
+
 -(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(nonnull NSArray<CLLocation *> *)location{
-   // [self.delegate locationControllerDidUpdateLocation:location.lastObject];
-    //[self setLocation:location.lastObject];
+   [self.delegate locationControllerDidUpdateLocation:location.lastObject];
+    [self setLocation:location.lastObject];
     
 }
 
@@ -222,6 +236,13 @@ static const NSArray *categories;
     }
 }
 
+-(void)locationControllerDidUpdateLocation: (CLLocation *)location{
+    [self setRegion: MKCoordinateRegionMakeWithDistance(location.coordinate, 300.0, 300.0)];
+}
+
+-(void) setRegion: (MKCoordinateRegion) region{
+    [self.mapView setRegion:region animated:YES];
+}
 
 #pragma mark set up Map
 
@@ -230,7 +251,7 @@ static const NSArray *categories;
     _locationManager.delegate = self;
     _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     _locationManager.distanceFilter = 100;
-   // [_locationManager requestAlwaysAutorization];
+  //[_locationManager requestAlwaysAutorization];
 
 }
 #pragma mark MKMapViewDelegate
@@ -245,8 +266,9 @@ static const NSArray *categories;
     
     annotationView.annotation = annotation;
     
-    //    if (!annotationView) {
+    //if (!annotationView) {
     annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"AnnotationView"];
+    
     annotationView.canShowCallout = YES;
     UIButton *rightCallout = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
     
@@ -254,6 +276,18 @@ static const NSArray *categories;
     //    }
     return annotationView;
     
+}
+
+-(IBAction)handleLongPressGestured:(UILongPressGestureRecognizer *)sender{
+    if (sender.state ==UIGestureRecognizerStateBegan) {
+        CGPoint touchPoint = [sender locationInView:self.mapView];
+        CLLocationCoordinate2D coordinate = [self.mapView convertPoint:touchPoint toCoordinateFromView:self.mapView];
+        
+        MKPointAnnotation *newPoint = [[MKPointAnnotation alloc]init];
+        newPoint.coordinate = coordinate;
+        
+        [self.mapView addAnnotation:newPoint];
+    }
 }
 
 
