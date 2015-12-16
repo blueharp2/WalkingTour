@@ -14,5 +14,10 @@
 
 @interface TourListViewController : UIViewController
 
+@property (strong, nonatomic) NSString *currentTour;
+
+- (void)setCurrentTour:(NSString*)currentTour;
+
+
 
 @end

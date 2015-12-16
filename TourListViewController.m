@@ -8,16 +8,23 @@
 
 #import "TourListViewController.h"
 #import "TourDetailViewController.h"
+#import "TourMapViewController.h"
 #import "LocationTableViewCell.h"
 #import "POIDetailTableViewCell.h"
+#import "FindToursViewController.h"
+
 #import "Tour.h"
 #import "ParseService.h"
+@import UIKit;
 @import Parse;
 @import ParseUI;
 
 @interface TourListViewController ()<UITableViewDelegate, UITableViewDataSource>
 
-@property (strong, nonatomic)NSArray * datasource;
+@property (strong, nonatomic) NSArray <Location*> *locationsFromParse;
+@property (weak, nonatomic) IBOutlet UITableView *tourListTableView;
+@property (strong, nonatomic) NSArray <Tour*> *toursFromParse;
+
 
 @end
 
@@ -25,65 +32,51 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    
 }
 
-- (NSArray *)datasource {
+- (void)setCurrentTour:(NSString*)currentTour {
+    currentTour = currentTour;
     
-    
-    return _datasource;
+    [ParseService fetchLocationsWithTourId:currentTour completion:^(BOOL success, NSArray *results) {
+        if (success) {
+            self.locationsFromParse = results;
+            [self.tourListTableView reloadData];
+        }
+    }];
 }
 
+- (void)setupViewController
+{
+    //Setup tableView
+    [self.tourListTableView setDelegate:self];
+    [self.tourListTableView setDataSource:self];
+    
+    UINib *nib = [UINib nibWithNibName:@"LocationTableViewCell" bundle:nil];
+    [[self tourListTableView] registerNib:nib forCellReuseIdentifier:@"LocationTableViewCell"];
+}
+
+#pragma mark - TABLEVIEW
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return 0;
+    return self.locationsFromParse.count;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(PFObject *)object {
-    static NSString *CellIdentifier = @"locationtableviewcell";
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        
-        [tableView registerNib:[UINib nibWithNibName:@"LocationTableViewCell" bundle:nil] forCellReuseIdentifier:@"locationtableviewcell"];
-        cell = [tableView dequeueReusableCellWithIdentifier:@"locationtableviewcell"];
-    }
-    
-    
+    LocationTableViewCell *cell = (LocationTableViewCell*) [self.tourListTableView dequeueReusableCellWithIdentifier:@"LocationTableViewCell"];
+    [cell setLocation:[self.locationsFromParse objectAtIndex:indexPath.row]];
     return cell;
 }
-   
 
-        //Segue to POIDetailTableView when cell is selected
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    NSString *tourId = self.locationsFromParse[indexPath.row].objectId;
+    [self performSegueWithIdentifier:@"TabBarController" sender:tourId];
+}
 
-//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-//    if ([segue.identifier isEqualToString:@"POIDetailTableViewCell"]) {
-//        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-//        TourDetailViewController *destViewController = segue.destinationViewController;
-//        destViewController.locationData = [recipes objectAtIndex:indexPath.row];
-//    }
-//}
+#pragma mark SEGUE
+
 
     
 @end
-
-
-
-
-
-//
-//+ (void)fetchLocationsWithTourId:(NSString *)tourId completion:(locationsFetchCompletion)completion {
-//    PFQuery *query = [PFQuery queryWithClassName:@"Location"];
-//    [query whereKey:@"objectId" equalTo:tourId];
-//    [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
-//        if (error) {
-//            NSLog(@"%@", error.localizedFailureReason);
-//            completion(NO, nil);
-//        }
-//        if (objects) {
-//            completion(YES, objects);
-//        }
-//    }];
-//}
