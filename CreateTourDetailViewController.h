@@ -12,7 +12,7 @@
 
 @protocol CreateTourDetailViewControllerDelegate <NSObject>
 
-- (void)didFinishSavingLocationWithLocation:(Location *)location;
+- (void)didFinishSavingLocationWithLocation:(Location *)location image:(UIImage *)image;
 
 @end
 

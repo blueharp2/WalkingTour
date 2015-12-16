@@ -12,6 +12,8 @@
 @interface LocationTableViewCell : UITableViewCell
 
 @property (strong, nonatomic) Location *location;
+@property (strong, nonatomic) UIImage *image;
 - (void)setLocation:(Location *)location;
+- (void)setImage:(UIImage *)image;
 
 @end

@@ -27,6 +27,7 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *locationTableView;
 @property (strong, nonatomic) NSArray<Location *> *locations;
+@property (strong, nonatomic) NSArray<UIImage *> *images;
 
 
 
@@ -91,9 +92,8 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
    LocationTableViewCell *cell = (LocationTableViewCell *)[self.locationTableView dequeueReusableCellWithIdentifier:@"LocationTableViewCell" forIndexPath:indexPath];
-
     [cell setLocation:self.locations[indexPath.row]];
-    
+    [cell setImage:self.images[indexPath.row]];
     return cell;
 }
 
@@ -142,11 +142,13 @@
     }
 }
 
-- (void)didFinishSavingLocationWithLocation:(Location *)location {
+- (void)didFinishSavingLocationWithLocation:(Location *)location image:(UIImage *)image {
     if (self.locations.count > 0) {
         [self.locations arrayByAddingObject:location];
+        [self.images arrayByAddingObject:image];
     } else {
         self.locations = @[location];
+        self.images = @[image];
     }
     [self.locationTableView reloadData];
 }
