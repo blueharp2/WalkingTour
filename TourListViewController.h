@@ -7,7 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LocationTableViewCell.h"
+@import Parse;
+@import ParseUI;
 
-@interface TourListViewController : UIViewController
+
+@interface TourListViewController : PFQueryTableViewController
+
+@property (weak, nonatomic) UIImageView *locationImageView;
+@property (weak, nonatomic) UILabel *locationLabel;
 
 @end
