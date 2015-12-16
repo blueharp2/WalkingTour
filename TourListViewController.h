@@ -14,7 +14,5 @@
 
 @interface TourListViewController : PFQueryTableViewController
 
-@property (weak, nonatomic) UIImageView *locationImageView;
-@property (weak, nonatomic) UILabel *locationLabel;
 
 @end

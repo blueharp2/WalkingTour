@@ -17,7 +17,6 @@
 
 @interface TourListViewController ()<UITableViewDelegate, UITableViewDataSource>
 
-
 @end
 
 @implementation TourListViewController
@@ -63,19 +62,23 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
-                                      reuseIdentifier:CellIdentifier];
+        
+        [tableView registerNib:[UINib nibWithNibName:@"LocationTableViewCell" bundle:nil] forCellReuseIdentifier:@"locationtableviewcell"];
+        cell = [tableView dequeueReusableCellWithIdentifier:@"locationtableviewcell"];
     }
     
-            // Configure the cell to show todo item with a priority at the bottom
     
-//    cell.locationLabel.text = [object objectForKey:@"locationName"];
-//    cell.detailTextLabel.text = [NSString stringWithFormat:@"locatinDescription: %@",
-//                                 [object objectForKey:@"locationDescription"]];
-//    
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+
+    LocationTableViewCell *loc = (LocationTableViewCell *)cell;
+    [loc setLocation: [self.objects objectAtIndex:indexPath.row]];
+    
+    
+    
+}
         //Segue to POIDetailTableView when cell is selected
 
 //- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
