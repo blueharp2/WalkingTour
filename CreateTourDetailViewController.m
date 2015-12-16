@@ -177,24 +177,25 @@ static const NSArray *categories;
         [self loadImagePicker];
 }
 
-//- (void)saveLocation:(UIBarButtonItem *)sender {
-//    if (self.locationNameTextField.text.length > 0 && self.locationDescriptionTextField.text.length > 0 && self.geoPoint != nil) {
-//        //Create a location with no tour and no categories.
-//        //If a photo isn't taken it'll pass a nil reference.
-//        Location *location = [[Location alloc] initWithLocationName:self.locationNameTextField.text locationDescription:self.locationDescriptionTextField.text photo:self.mediaFile categories:nil location:self.geoPoint tour:nil];
-//        self.location = location;
-//        [self displayCategories];
-//    } else {
-//        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"What!?!" message:@"Fill everything out!" preferredStyle:UIAlertControllerStyleAlert];
-//        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
-//        [alertController addAction:okAction];
-//        [self presentViewController:alertController animated:YES completion:nil];
-//    }
-//}
+- (void)saveLocation:(UIBarButtonItem *)sender {
+    if (self.locationNameTextField.text.length > 0 && self.locationDescriptionTextField.text.length > 0 && self.geoPoint != nil) {
+        //Create a location with no tour and no categories.
+        //If a photo isn't taken it'll pass a nil reference.
+        Location *locationToSave = [[Location alloc] initWithLocationName:self.locationNameTextField.text locationDescription:self.locationDescriptionTextField.text photo:self.mediaFile categories:nil location:self.geoPoint tour:nil];
+        self.createdLocation = locationToSave;
+        [self displayCategories];
+    } else {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"What!?!" message:@"Fill everything out!" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+        [alertController addAction:okAction];
+        [self presentViewController:alertController animated:YES completion:nil];
+    }
+}
 
 - (void)saveLocationWithCategories:(UIButton *)sender {
     if (self.createdLocation != nil && self.selectedCategories.count > 0) {
         self.createdLocation.categories = self.selectedCategories;
+        self.navigationController.navigationBarHidden = NO;
         if (self.createTourDetailDelegate) {
             [self.createTourDetailDelegate didFinishSavingLocationWithLocation:self.createdLocation];
         }
@@ -219,7 +220,7 @@ static const NSArray *categories;
     }
     if ([info objectForKey:@"UIImagePickerControllerEditedImage"]) {
         NSLog(@"Ah, just a photo?");
-        mediaData = UIImageJPEGRepresentation([info objectForKey:@""], 1.0);
+        mediaData = UIImageJPEGRepresentation([info objectForKey:@"UIImagePickerControllerEditedImage"], 1.0);
         mediaFile = [PFFile fileWithName:[NSString stringWithFormat:@"%i.jpg",rand() / 2] data:mediaData];
     }
     self.mediaFile = mediaFile;
@@ -324,6 +325,8 @@ static const NSArray *categories;
         
         MKPointAnnotation *newPoint = [[MKPointAnnotation alloc]init];
         newPoint.coordinate = coordinate;
+        
+        self.geoPoint = [PFGeoPoint geoPointWithLatitude:newPoint.coordinate.latitude longitude:newPoint.coordinate.longitude];
         
         [self.mapView addAnnotation:newPoint];
     }

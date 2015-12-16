@@ -9,7 +9,7 @@
 #import "CreateTourViewController.h"
 #import "Location.h"
 #import <Parse/Parse.h>
-#import "POIDetailTableViewCell.h"
+#import "LocationTableViewCell.h"
 #import "CreateTourDetailViewController.h"
 #import "ParseService.h"
 #import "Tour.h"
@@ -34,30 +34,28 @@
 
 @implementation CreateTourViewController
 
--(void) setLocationTableView:(UITableView *)locationTableView{
-    [self.locationTableView reloadData];
-}
-
-
 -(void)viewDidLoad{
     [super viewDidLoad];
     [self setupMainViewController];
 
 }
 
--(void)setupMainViewController{
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    NSLog(@"View appeared");
+    [self.locationTableView reloadData];
+}
 
-    [self.locationTableView setDelegate:self];
-    [self.locationTableView setDataSource:self];
+-(void)setupMainViewController{
+    
+    self.locationTableView.delegate = self;
+    self.locationTableView.dataSource = self;
     [self.nameOfTourTextField setDelegate:self];
     [self.tourDescriptionTextField setDelegate:self];
     [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveButtonSelected:)]];
     
-    //    UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveTour:)];
-    //    self.navigationItem.rightBarButtonItem = saveButton;
-    
-    UINib *nib = [UINib nibWithNibName:@"POIDetailTableViewCell" bundle:nil];
-    [[self locationTableView]registerNib:nib forCellReuseIdentifier:@"POIDetailTableViewCell"];
+    UINib *nib = [UINib nibWithNibName:@"LocationTableViewCell" bundle:nil];
+    [[self locationTableView]registerNib:nib forCellReuseIdentifier:@"LocationTableViewCell"];
     
 }
 
@@ -92,11 +90,9 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-   POIDetailTableViewCell *cell = (POIDetailTableViewCell *)[self.locationTableView dequeueReusableCellWithIdentifier:@"POIDetailTableViewCell" forIndexPath:indexPath];
+   LocationTableViewCell *cell = (LocationTableViewCell *)[self.locationTableView dequeueReusableCellWithIdentifier:@"LocationTableViewCell" forIndexPath:indexPath];
 
-    
-   //cell.location =
-    [self.locations objectAtIndex:indexPath.row];
+    [cell setLocation:self.locations[indexPath.row]];
     
     return cell;
 }
