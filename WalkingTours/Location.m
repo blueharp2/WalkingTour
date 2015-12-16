@@ -13,6 +13,7 @@
 @dynamic locationName;
 @dynamic locationDescription;
 @dynamic photo;
+@dynamic video;
 @dynamic categories;
 @dynamic location;
 @dynamic tour;
@@ -28,6 +29,7 @@
 -(id)initWithLocationName:(NSString *)locationName
       locationDescription:(NSString *)locationDescription
                     photo:(PFFile *)photo
+                    video:(PFFile *)video
                categories:(NSArray *)categories
                  location:(PFGeoPoint *)location
                      tour:(Tour *)tour{
@@ -36,6 +38,7 @@
         self.locationName = locationName;
         self.locationDescription = locationDescription;
         self.photo = photo;
+        self.video = video;
         self.categories = categories;
         self.location = location;
         self.tour = tour;

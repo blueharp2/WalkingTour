@@ -29,18 +29,27 @@
 - (void)setLocation:(Location *)location {
     _location = location;
     self.locationLabel.text = location.locationName;
-    [location.photo getDataInBackgroundWithBlock:^(NSData * _Nullable data, NSError * _Nullable error) {
-        if (error) {
-            NSLog(@"%@", error.localizedFailureReason);
-            self.locationImageView.backgroundColor = [UIColor colorWithRed:0.000 green:0.152 blue:1.000 alpha:1.000];
-        }
-        if (data) {
-            UIImage *image = [UIImage imageWithData:data];
-            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                self.locationImageView.image = image;
-            }];
-        }
-    }];
+//    if ([location.photo.url containsString:@".jpg"]) {
+//        [location.photo getDataInBackgroundWithBlock:^(NSData * _Nullable data, NSError * _Nullable error) {
+//            if (error) {
+//                NSLog(@"%@", error.localizedFailureReason);
+//                self.locationImageView.backgroundColor = [UIColor colorWithRed:0.000 green:0.152 blue:1.000 alpha:1.000];
+//            }
+//            if (data) {
+//                UIImage *image = [UIImage imageWithData:data];
+//                [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+//                    self.locationImageView.image = image;
+//                }];
+//            }
+//        }];
+//    } else {
+//        //get a screenshot from the video
+//    }
+}
+
+- (void)setImage:(UIImage *)image {
+    _image = image;
+    self.locationImageView.image = image;
 }
 
 @end

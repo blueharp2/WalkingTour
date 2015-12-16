@@ -14,6 +14,7 @@
 @property (copy, nonatomic) NSString *locationName;
 @property (copy, nonatomic) NSString *locationDescription;
 @property (strong, nonatomic) PFFile *photo;
+@property (strong, nonatomic) PFFile *video;
 @property (strong, nonatomic) NSArray *categories;
 @property (strong, nonatomic) PFGeoPoint *location;
 @property (strong, nonatomic) Tour *tour;
@@ -22,6 +23,7 @@
 -(id)initWithLocationName:(NSString *)locationName
    locationDescription:(NSString *)locationDescription
                  photo:(PFFile *)photo
+                 video:(PFFile *)video
             categories:(NSArray *)categories
               location:(PFGeoPoint *)location
                   tour:(Tour *)tour;

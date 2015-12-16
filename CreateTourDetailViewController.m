@@ -23,7 +23,9 @@ static const NSArray *categories;
 @property (strong, nonatomic) UITableView *categoryTableView;
 @property (strong, nonatomic) UIButton *finalSaveButton;
 @property (strong, nonatomic) NSMutableArray *selectedCategories;
-@property (strong, nonatomic) PFFile *mediaFile;
+@property (strong, nonatomic) PFFile *videoFile;
+@property (strong, nonatomic) PFFile *photoFile;
+@property (strong, nonatomic) UIImage *image;
 @property (strong, nonatomic) PFGeoPoint *geoPoint;
 @property (strong, nonatomic) Location *createdLocation;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
@@ -177,26 +179,27 @@ static const NSArray *categories;
         [self loadImagePicker];
 }
 
-//- (void)saveLocation:(UIBarButtonItem *)sender {
-//    if (self.locationNameTextField.text.length > 0 && self.locationDescriptionTextField.text.length > 0 && self.geoPoint != nil) {
-//        //Create a location with no tour and no categories.
-//        //If a photo isn't taken it'll pass a nil reference.
-//        Location *location = [[Location alloc] initWithLocationName:self.locationNameTextField.text locationDescription:self.locationDescriptionTextField.text photo:self.mediaFile categories:nil location:self.geoPoint tour:nil];
-//        self.location = location;
-//        [self displayCategories];
-//    } else {
-//        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"What!?!" message:@"Fill everything out!" preferredStyle:UIAlertControllerStyleAlert];
-//        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
-//        [alertController addAction:okAction];
-//        [self presentViewController:alertController animated:YES completion:nil];
-//    }
-//}
+- (void)saveLocation:(UIBarButtonItem *)sender {
+    if (self.locationNameTextField.text.length > 0 && self.locationDescriptionTextField.text.length > 0 && self.geoPoint != nil) {
+        //Create a location with no tour and no categories.
+        //If a photo isn't taken it'll pass a nil reference.
+        Location *locationToSave = [[Location alloc] initWithLocationName:self.locationNameTextField.text locationDescription:self.locationDescriptionTextField.text photo:self.photoFile video:self.videoFile categories:nil location:self.geoPoint tour:nil];
+        self.createdLocation = locationToSave;
+        [self displayCategories];
+    } else {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"What!?!" message:@"Fill everything out!" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+        [alertController addAction:okAction];
+        [self presentViewController:alertController animated:YES completion:nil];
+    }
+}
 
 - (void)saveLocationWithCategories:(UIButton *)sender {
     if (self.createdLocation != nil && self.selectedCategories.count > 0) {
         self.createdLocation.categories = self.selectedCategories;
+        self.navigationController.navigationBarHidden = NO;
         if (self.createTourDetailDelegate) {
-            [self.createTourDetailDelegate didFinishSavingLocationWithLocation:self.createdLocation];
+            [self.createTourDetailDelegate didFinishSavingLocationWithLocation:self.createdLocation image:self.image];
         }
         [self.navigationController popViewControllerAnimated:YES];
     }
@@ -210,19 +213,24 @@ static const NSArray *categories;
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
-    NSData *mediaData;
-    PFFile *mediaFile;
+    NSData *photoData;
+    NSData *videoData;
+    PFFile *photoFile;
+    PFFile *videoFile;
     if ([info objectForKey:@"UIImagePickerControllerMediaURL"]) {
         NSLog(@"So, you've made a movie...");
-        mediaData = [NSData dataWithContentsOfURL:[info objectForKey:@"UIImagePickerControllerMediaURL"]];
-        mediaFile = [PFFile fileWithName:[NSString stringWithFormat:@"%i.mp4", rand() / 2] data:mediaData];
+        videoData = [NSData dataWithContentsOfURL:[info objectForKey:@"UIImagePickerControllerMediaURL"]];
+        videoFile = [PFFile fileWithName:[NSString stringWithFormat:@"%i.mp4", rand() / 2] data:videoData];
+        //screenshot the video and turn it into photo here.
     }
     if ([info objectForKey:@"UIImagePickerControllerEditedImage"]) {
         NSLog(@"Ah, just a photo?");
-        mediaData = UIImageJPEGRepresentation([info objectForKey:@""], 1.0);
-        mediaFile = [PFFile fileWithName:[NSString stringWithFormat:@"%i.jpg",rand() / 2] data:mediaData];
+        photoData = UIImageJPEGRepresentation([info objectForKey:@"UIImagePickerControllerEditedImage"], 1.0);
+        photoFile = [PFFile fileWithName:[NSString stringWithFormat:@"%i.jpg",rand() / 2] data:photoData];
+        self.image = [info objectForKey:@"UIImagePickerControllerEditedImage"];
     }
-    self.mediaFile = mediaFile;
+    self.photoFile = photoFile;
+    self.videoFile = videoFile;
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -324,6 +332,8 @@ static const NSArray *categories;
         
         MKPointAnnotation *newPoint = [[MKPointAnnotation alloc]init];
         newPoint.coordinate = coordinate;
+        
+        self.geoPoint = [PFGeoPoint geoPointWithLatitude:newPoint.coordinate.latitude longitude:newPoint.coordinate.longitude];
         
         [self.mapView addAnnotation:newPoint];
     }
