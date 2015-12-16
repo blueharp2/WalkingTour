@@ -24,11 +24,14 @@ static const NSArray *categories;
 @property (strong, nonatomic) UIButton *finalSaveButton;
 @property (strong, nonatomic) NSMutableArray *selectedCategories;
 @property (strong, nonatomic) PFFile *mediaFile;
-@property (strong, nonatomic) PFGeoPoint *geoPoint;
-@property (strong, nonatomic) Location *location;
+<<<<<<< HEAD
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet UITextField *locationNameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *locationDescriptionTextField;
+=======
+@property (strong, nonatomic) PFGeoPoint *geoPoint;
+@property (strong, nonatomic) Location *location;
+>>>>>>> master
 
 @end
 
