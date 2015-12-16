@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Tour.h"
 @import CoreLocation;
 
 @interface TourMapViewController : UIViewController
+
+@property (strong, nonatomic) Tour *currentTour;
 
 @end
