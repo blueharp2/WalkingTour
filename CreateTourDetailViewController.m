@@ -25,8 +25,6 @@ static const NSArray *categories;
 @property (strong, nonatomic) PFFile *mediaFile;
 @property (strong, nonatomic) PFGeoPoint *geoPoint;
 @property (strong, nonatomic) Location *location;
-@property (weak, nonatomic) IBOutlet UITextField *locationNameTextField;
-@property (weak, nonatomic) IBOutlet UITextField *locationDescriptionTextField;
 
 @end
 
@@ -114,10 +112,6 @@ static const NSArray *categories;
 
 - (void)displayCategories {
     [self.view layoutIfNeeded];
-//    NSLayoutConstraint *top = [NSLayoutConstraint constraintWithItem:self.greyOutView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTop multiplier:1.0 constant:self.view.frame.size.height / 2];
-//    NSLayoutConstraint *trailing = [NSLayoutConstraint constraintWithItem:self.greyOutView attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:self.view.frame.size.width / 2];
-//    NSLayoutConstraint *bottom = [NSLayoutConstraint constraintWithItem:self.greyOutView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeBottom multiplier:1.0 constant:-(self.view.frame.size.height / 2)];
-//    NSLayoutConstraint *leading = [NSLayoutConstraint constraintWithItem:self.greyOutView attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeLeading multiplier:1.0 constant:-(self.view.frame.size.width / 2)];
     NSLayoutConstraint *top = [NSLayoutConstraint constraintWithItem:self.greyOutView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTop multiplier:1.0 constant:0];
     NSLayoutConstraint *trailing = [NSLayoutConstraint constraintWithItem:self.greyOutView attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:0];
     NSLayoutConstraint *bottom = [NSLayoutConstraint constraintWithItem:self.greyOutView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0];
@@ -137,11 +131,6 @@ static const NSArray *categories;
     tableViewHeight.active = YES;
     tableViewWidth.active = YES;
     tableViewCenterX.active = YES;
-    
-//    top.constant = 0;
-//    trailing.constant = 0;
-//    bottom.constant = 0;
-//    leading.constant = 0;
     
     NSLayoutConstraint *buttonTop = [NSLayoutConstraint constraintWithItem:self.finalSaveButton attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTop multiplier:1.0 constant:20];
     NSLayoutConstraint *buttonTrailing = [NSLayoutConstraint constraintWithItem:self.finalSaveButton attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:-20];
@@ -173,20 +162,20 @@ static const NSArray *categories;
         [self loadImagePicker];
 }
 
-- (void)saveLocation:(UIBarButtonItem *)sender {
+//- (void)saveLocation:(UIBarButtonItem *)sender {
 //    if (self.locationNameTextField.text.length > 0 && self.locationDescriptionTextField.text.length > 0 && self.geoPoint != nil) {
-        //Create a location with no tour and no categories.
-        //If a photo isn't taken it'll pass a nil reference.
-        Location *location = [[Location alloc] initWithLocationName:self.locationNameTextField.text locationDescription:self.locationDescriptionTextField.text photo:self.mediaFile categories:nil location:self.geoPoint tour:nil];
-        self.location = location;
-        [self displayCategories];
+//        //Create a location with no tour and no categories.
+//        //If a photo isn't taken it'll pass a nil reference.
+//        Location *location = [[Location alloc] initWithLocationName:self.locationNameTextField.text locationDescription:self.locationDescriptionTextField.text photo:self.mediaFile categories:nil location:self.geoPoint tour:nil];
+//        self.location = location;
+//        [self displayCategories];
 //    } else {
 //        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"What!?!" message:@"Fill everything out!" preferredStyle:UIAlertControllerStyleAlert];
 //        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
 //        [alertController addAction:okAction];
 //        [self presentViewController:alertController animated:YES completion:nil];
 //    }
-}
+//}
 
 - (void)saveLocationWithCategories:(UIButton *)sender {
     if (self.location != nil && self.selectedCategories.count > 0) {
