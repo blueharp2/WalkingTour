@@ -61,7 +61,7 @@
 }
 
 - (IBAction)addLocationsButton:(id)sender {
-    [self.navigationController pushViewController:[[CreateTourDetailViewController alloc]init] animated:YES];
+//    [self.navigationController pushViewController:[[CreateTourDetailViewController alloc]init] animated:YES];
 }
 
 

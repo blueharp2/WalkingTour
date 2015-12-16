@@ -7,11 +7,10 @@
 //
 
 #import "CreateTourDetailViewController.h"
-#import <MobileCoreServices/MobileCoreServices.h>
 #import "CategoryTableViewCell.h"
-@import CoreLocation;
-#import "Tour.h"
 #import "Location.h"
+@import MobileCoreServices;
+@import CoreLocation;
 @import Parse;
 
 static const NSArray *categories;
@@ -23,6 +22,7 @@ static const NSArray *categories;
 @property (strong, nonatomic) UIView *greyOutView;
 @property (strong, nonatomic) UITableView *categoryTableView;
 @property (strong, nonatomic) NSMutableArray *selectedCategories;
+@property (strong, nonatomic) PFFile *mediaFile;
 
 @end
 
@@ -31,26 +31,8 @@ static const NSArray *categories;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-//    PFQuery *query = [PFQuery queryWithClassName:@"Location"];
-//    [query getFirstObjectInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
-//        if (object) {
-//            Location *location = (Location *)object;
-//            PFQuery *tourQuery = [PFQuery queryWithClassName:@"Tour"];
-//            [tourQuery whereKey:@"objectId" equalTo:location.tour.objectId];
-//            [tourQuery getFirstObjectInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
-//                if ([object isKindOfClass:[Tour class]]) {
-//                    location.tour = (Tour *)object;
-//                    NSLog(@"%@", location.tour.nameOfTour);
-//                    Tour *tour = (Tour *)object;
-//                    NSLog(@"%@", tour.nameOfTour);
-//                }
-//            }];
-//        }
-//    }];
-    
     UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveTour:)];
     self.navigationItem.rightBarButtonItem = saveButton;
-    self.selectedCategories = [[NSMutableArray alloc] init];
     [self setUpGreyOutView];
 }
 
@@ -61,6 +43,8 @@ static const NSArray *categories;
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 }
+
+#pragma mark - Setup Functions
 
 - (void)setCategoryOptions {
     categories = @[@"Restaurant", @"Cafe", @"Art", @"Museum", @"History", @"Shopping", @"Nightlife"];
@@ -93,6 +77,8 @@ static const NSArray *categories;
     [self.view addSubview:self.categoryTableView];
 }
 
+#pragma mark - User Interaction Functions
+
 - (void)loadImagePicker {
     if (!self.imagePicker) {
         self.imagePicker = [[UIImagePickerController alloc] init];
@@ -111,7 +97,7 @@ static const NSArray *categories;
     [self presentViewController:self.imagePicker animated:YES completion:nil];
 }
 
-- (void)saveTour:(UIBarButtonItem *)sender {
+- (void)displayCategories {
     [self.view layoutIfNeeded];
     NSLayoutConstraint *top = [NSLayoutConstraint constraintWithItem:self.greyOutView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTop multiplier:1.0 constant:self.view.frame.size.height / 2];
     NSLayoutConstraint *trailing = [NSLayoutConstraint constraintWithItem:self.greyOutView attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:self.view.frame.size.width / 2];
@@ -155,6 +141,16 @@ static const NSArray *categories;
     }];
 }
 
+- (IBAction)cameraButtonPressed:(UIButton *)sender {
+        [self loadImagePicker];
+}
+
+- (void)saveTour:(UIBarButtonItem *)sender {
+    
+}
+
+#pragma mark - UIImagePickerControllerDelegate
+
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     NSLog(@"Why'd you cancel?");
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -173,31 +169,11 @@ static const NSArray *categories;
         mediaData = UIImageJPEGRepresentation([info objectForKey:@""], 1.0);
         mediaFile = [PFFile fileWithName:[NSString stringWithFormat:@"%i.jpg",rand() / 2] data:mediaData];
     }
-    [self addTestModelsToParse:mediaFile];
+    self.mediaFile = mediaFile;
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (IBAction)cameraButtonPressed:(UIButton *)sender {
-//    [self loadImagePicker];
-    [self saveTour:nil];
-}
-
-- (void)addTestModelsToParse:(PFFile *)media {
-    CLLocationCoordinate2D location = CLLocationCoordinate2DMake(47.623544, -122.336224);
-    PFGeoPoint *geoPoint = [PFGeoPoint geoPointWithLatitude:location.latitude longitude:location.longitude];
-    Tour *tour1 = [[Tour alloc] initWithNameOfTour:@"Tour 1" descriptionText:@"This is a tour." startLocation:geoPoint user:[PFUser currentUser]];
-    Location *location1 = [[Location alloc] initWithLocationName:@"Code Fellows" locationDescription:@"This is where we practically live" photo:media categories:@[@"School", @"Education"] location:geoPoint tour:tour1];
-    PFGeoPoint *geoPoint2 = [PFGeoPoint geoPointWithLatitude:47.627825 longitude:-122.337412];
-    Location *location2 = [[Location alloc] initWithLocationName:@"The Park" locationDescription:@"I remember what the sun was like..." photo:media categories:@[@"Park", @"Not Coding"] location:geoPoint2 tour:tour1];
-    NSArray *objectArray = [NSArray arrayWithObjects:tour1, location1, location2, nil];
-    [PFObject saveAllInBackground:objectArray block:^(BOOL succeeded, NSError * _Nullable error) {
-        if (succeeded) {
-            NSLog(@"They saved!");
-        } else {
-            NSLog(@"Something went terribly wrong.");
-        }
-    }];
-}
+#pragma mark - UITableViewControllerDelegate & UITableViewControllerDatasource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return categories.count;
@@ -215,6 +191,34 @@ static const NSArray *categories;
     } else {
         [tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryCheckmark;
     }
+    if (self.selectedCategories.count > 0) {
+        if ([self.selectedCategories containsObject:categories[indexPath.row]]) {
+            [self.selectedCategories removeObjectAtIndex:[self.selectedCategories indexOfObject:[categories objectAtIndex:indexPath.row]]];
+        } else {
+            [self.selectedCategories addObject:categories[indexPath.row]];
+        }
+    } else {
+        self.selectedCategories = [NSMutableArray arrayWithObject:categories[indexPath.row]];
+    }
 }
+
+#pragma mark - Test Funcs
+
+//- (void)addTestModelsToParse:(PFFile *)media {
+//    CLLocationCoordinate2D location = CLLocationCoordinate2DMake(47.623544, -122.336224);
+//    PFGeoPoint *geoPoint = [PFGeoPoint geoPointWithLatitude:location.latitude longitude:location.longitude];
+//    Tour *tour1 = [[Tour alloc] initWithNameOfTour:@"Tour 1" descriptionText:@"This is a tour." startLocation:geoPoint user:[PFUser currentUser]];
+//    Location *location1 = [[Location alloc] initWithLocationName:@"Code Fellows" locationDescription:@"This is where we practically live" photo:media categories:@[@"School", @"Education"] location:geoPoint tour:tour1];
+//    PFGeoPoint *geoPoint2 = [PFGeoPoint geoPointWithLatitude:47.627825 longitude:-122.337412];
+//    Location *location2 = [[Location alloc] initWithLocationName:@"The Park" locationDescription:@"I remember what the sun was like..." photo:media categories:@[@"Park", @"Not Coding"] location:geoPoint2 tour:tour1];
+//    NSArray *objectArray = [NSArray arrayWithObjects:tour1, location1, location2, nil];
+//    [PFObject saveAllInBackground:objectArray block:^(BOOL succeeded, NSError * _Nullable error) {
+//        if (succeeded) {
+//            NSLog(@"They saved!");
+//        } else {
+//            NSLog(@"Something went terribly wrong.");
+//        }
+//    }];
+//}
 
 @end
