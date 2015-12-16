@@ -144,8 +144,7 @@
 }
 
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
-    //Put the segue name here...
-    [self performSegueWithIdentifier:@"DetailViewController" sender:view];
+    [self performSegueWithIdentifier:@"TabBarController" sender:view];
 }
 
 #pragma mark - CLLocationManager
@@ -199,6 +198,11 @@
     POIDetailTableViewCell *cell = (POIDetailTableViewCell*) [self.toursTableView dequeueReusableCellWithIdentifier:@"POIDetailTableViewCell"];
     [cell setLocation:[self.locationsFromParse objectAtIndex:indexPath.row]];
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self performSegueWithIdentifier:@"TabBarController" sender:self];
 }
 
 #pragma mark - Navigation

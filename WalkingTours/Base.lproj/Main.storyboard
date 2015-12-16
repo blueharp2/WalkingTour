@@ -387,7 +387,7 @@
                     <connections>
                         <outlet property="mapView" destination="GYQ-Tm-WcJ" id="3Kx-Rx-Dr3"/>
                         <outlet property="toursTableView" destination="dEP-ma-FrS" id="0g8-Lf-TO4"/>
-                        <segue destination="lAJ-Ob-e5p" kind="show" id="Ifx-M8-5Zo"/>
+                        <segue destination="lAJ-Ob-e5p" kind="show" identifier="TabBarController" id="Ifx-M8-5Zo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="J62-pQ-oqn" userLabel="First Responder" sceneMemberID="firstResponder"/>
