@@ -10,14 +10,14 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SearchTableViewCell" rowHeight="50" id="o5G-XJ-2k7" customClass="SearchTableViewCell">
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="POIDetailTableViewCell" rowHeight="50" id="o5G-XJ-2k7" customClass="POIDetailTableViewCell">
             <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="o5G-XJ-2k7" id="ZhC-BL-S3Y">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="49.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="251" image="burger" translatesAutoresizingMaskIntoConstraints="NO" id="LUE-Nl-1Ik">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="251" image="map-marker" translatesAutoresizingMaskIntoConstraints="NO" id="LUE-Nl-1Ik">
                         <rect key="frame" x="18" y="8" width="30" height="30"/>
                         <animations/>
                         <constraints>
@@ -33,9 +33,14 @@
                             </mask>
                         </variation>
                     </imageView>
+<<<<<<< HEAD:POIDetailTableViewCell.xib
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="244" verticalHuggingPriority="247" horizontalCompressionResistancePriority="1000" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FAF-Sl-sO5" userLabel="titleLabel">
+                        <rect key="frame" x="56" y="8" width="244" height="30"/>
+=======
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="244" verticalHuggingPriority="247" horizontalCompressionResistancePriority="1000" ambiguous="YES" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FAF-Sl-sO5" userLabel="titleLabel">
                         <rect key="frame" x="56" y="14" width="244" height="21"/>
                         <animations/>
+>>>>>>> master:POIDetailCell.xib
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -51,7 +56,9 @@
                     <constraint firstItem="LUE-Nl-1Ik" firstAttribute="bottom" secondItem="ZhC-BL-S3Y" secondAttribute="bottomMargin" constant="-3" id="UuO-Rb-2c4"/>
                     <constraint firstItem="FAF-Sl-sO5" firstAttribute="trailing" secondItem="ZhC-BL-S3Y" secondAttribute="trailingMargin" id="WAu-Xv-Wjv"/>
                     <constraint firstAttribute="trailing" secondItem="FAF-Sl-sO5" secondAttribute="trailing" constant="20" symbolic="YES" id="axI-6e-BSb"/>
+                    <constraint firstItem="FAF-Sl-sO5" firstAttribute="centerY" secondItem="LUE-Nl-1Ik" secondAttribute="centerY" id="gGw-EP-VT9"/>
                     <constraint firstItem="FAF-Sl-sO5" firstAttribute="leading" secondItem="LUE-Nl-1Ik" secondAttribute="trailing" constant="8" id="hsq-bE-bK5"/>
+                    <constraint firstItem="FAF-Sl-sO5" firstAttribute="top" secondItem="ZhC-BL-S3Y" secondAttribute="top" constant="8" id="r1s-Vh-hyY"/>
                     <constraint firstItem="FAF-Sl-sO5" firstAttribute="top" secondItem="ZhC-BL-S3Y" secondAttribute="top" constant="10" id="umc-Rc-VPv"/>
                 </constraints>
                 <variation key="default">
@@ -66,13 +73,13 @@
             </tableViewCellContentView>
             <animations/>
             <connections>
-                <outlet property="titleLabel" destination="FAF-Sl-sO5" id="9eP-tN-OMh"/>
-                <outlet property="userImageView" destination="LUE-Nl-1Ik" id="nEn-QK-UGi"/>
+                <outlet property="tourImageView" destination="LUE-Nl-1Ik" id="gCp-fE-Zm8"/>
+                <outlet property="tourNameLabel" destination="FAF-Sl-sO5" id="3MI-ws-Qb5"/>
             </connections>
             <point key="canvasLocation" x="333" y="147"/>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="burger" width="300" height="223"/>
+        <image name="map-marker" width="15" height="31"/>
     </resources>
 </document>
