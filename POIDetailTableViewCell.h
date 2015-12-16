@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Location.h"
 
 @interface POIDetailTableViewCell : UITableViewCell
 
 //create a property to hold a POI
-//@property Question *question;
+@property (strong, nonatomic) PFObject *object;
+@property (strong, nonatomic) Location *location;
 
 @end
