@@ -24,6 +24,7 @@
 @property (strong, nonatomic) CLLocationManager *locationManager;
 //@property (strong, nonatomic) Tour *currentTour;
 @property (strong, nonatomic) NSArray <Location*> *locationsFromParse;
+//@property (strong, nonatomic) NSMutableDictionary 
 
 @end
 
@@ -48,7 +49,12 @@
         MKPointAnnotation *newPoint = [[MKPointAnnotation alloc]init];
         newPoint.coordinate = CLLocationCoordinate2DMake(location.location.latitude, location.location.longitude);
         newPoint.title = location.locationName;
+        newPoint.subtitle = location.objectId;
         [self.mapView addAnnotation:newPoint];
+        
+        //Create Dictionary..
+        
+        
     }
 }
 
@@ -123,6 +129,7 @@
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
     //Put the segue name here...
     [self performSegueWithIdentifier:@"DetailViewController" sender:view];
+    //Find the objectID as a key in the dictionary
 }
 
 #pragma mark - CLLocationManager
