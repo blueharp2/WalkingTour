@@ -471,6 +471,7 @@
                     <connections>
                         <outlet property="mapView" destination="GYQ-Tm-WcJ" id="3Kx-Rx-Dr3"/>
                         <outlet property="toursTableView" destination="dEP-ma-FrS" id="0g8-Lf-TO4"/>
+                        <segue destination="lAJ-Ob-e5p" kind="show" identifier="TabBarController" id="Ifx-M8-5Zo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="J62-pQ-oqn" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -498,12 +499,18 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="qo6-hW-7Xe" firstAttribute="top" secondItem="4ml-uu-TJU" secondAttribute="bottom" constant="42" id="Af8-Ka-t38"/>
+                            <constraint firstItem="qo6-hW-7Xe" firstAttribute="top" secondItem="4ml-uu-TJU" secondAttribute="bottom" id="IKW-QP-Ria"/>
                             <constraint firstItem="4ml-uu-TJU" firstAttribute="top" secondItem="kEa-1E-IhN" secondAttribute="bottom" constant="32" id="OBD-WQ-8bD"/>
                             <constraint firstItem="4ml-uu-TJU" firstAttribute="leading" secondItem="rfd-ts-r9L" secondAttribute="leading" id="Qcy-iQ-BtL"/>
                             <constraint firstAttribute="trailing" secondItem="4ml-uu-TJU" secondAttribute="trailing" id="YXn-UJ-Q1B"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="Af8-Ka-t38"/>
+                            </mask>
+                        </variation>
                     </view>
-                    <tabBarItem key="tabBarItem" title="MapView" image="linea--basic-map" id="SCN-L8-RGR"/>
+                    <tabBarItem key="tabBarItem" title="Tours Map" image="linea--basic-map" id="SCN-L8-RGR"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="mapView" destination="4ml-uu-TJU" id="Ygp-qU-DX0"/>
@@ -610,7 +617,7 @@
         <!--List TableView-->
         <scene sceneID="Etf-BX-3GD">
             <objects>
-                <viewController title="List TableView" id="I1h-KJ-pRF" sceneMemberID="viewController">
+                <viewController title="List TableView" id="I1h-KJ-pRF" customClass="TourListViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Tqw-Cp-IzH"/>
                         <viewControllerLayoutGuide type="bottom" id="HgW-jL-Idc"/>
@@ -634,8 +641,11 @@
                             <constraint firstItem="bYn-7j-rTq" firstAttribute="leading" secondItem="Gfc-hj-cvs" secondAttribute="leading" id="ohe-3m-0Jy"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="el2-b4-kYB"/>
+                    <tabBarItem key="tabBarItem" title="Tours List" image="iosListOutline" id="el2-b4-kYB"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="tourListTableView" destination="bYn-7j-rTq" id="CSc-ZR-XAJ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h2j-IS-vEX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -743,6 +753,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="iosListOutline" width="23" height="31"/>
         <image name="linea--basic-map" width="28" height="30"/>
     </resources>
 </document>

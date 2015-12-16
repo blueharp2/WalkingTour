@@ -7,11 +7,14 @@
 //
 
 #import "FindToursViewController.h"
+#import "TourMapViewController.h"
 #import "Location.h"
 #import "Tour.h"
 #import "Location.h"
 #import "POIDetailTableViewCell.h"
+#import "ParseService.h"
 
+@import UIKit;
 @import CoreLocation;
 @import MapKit;
 
@@ -24,12 +27,29 @@
 
 @property (strong, nonatomic) CLLocationManager *locationManager;
 
-@property (strong, nonatomic) NSArray <Location*> *locationsFromParse;
+@property (strong, nonatomic) NSArray <Tour*> *toursFromParse;
+-(void)setToursFromParse:(NSArray<Tour *> *)toursFromParse;
+
+
+
 
 
 @end
 
 @implementation FindToursViewController
+
+- (void)setLocationsFromParse:(NSArray<Location *> *)toursFromParse {
+    _toursFromParse = toursFromParse;
+    
+    for (Tour *tour in toursFromParse) {
+        
+        MKPointAnnotation *newPoint = [[MKPointAnnotation alloc]init];
+        newPoint.coordinate = CLLocationCoordinate2DMake(tour.startLocation.latitude, tour.startLocation.longitude);
+        newPoint.title = tour.nameOfTour;
+        
+        [self.mapView addAnnotation:newPoint];
+    }
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -38,41 +58,17 @@
     [self.locationManager requestWhenInUseAuthorization];
     [self.locationManager setDelegate:self];
     [self setupViewController];
-//    [self login];
-    PFQuery *query = [PFQuery queryWithClassName:@"Location"];
-    // Get user location.
-    PFGeoPoint *userLocation = [PFGeoPoint geoPointWithLatitude:self.locationManager.location.coordinate.latitude longitude:self.locationManager.location.coordinate.longitude];
-    [self setMapForCoordinateWithLatitude:userLocation.latitude andLongitude:userLocation.longitude];
-
-    //find locations near user location.
-    [query whereKey:@"location" nearGeoPoint:userLocation];
-
-    [query getFirstObjectInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
-        if (object) {
-            Location *location = (Location *)object;
-            
-            PFQuery *tourQuery = [PFQuery queryWithClassName:@"Tour"];
-            [tourQuery whereKey:@"objectId" equalTo:location.tour.objectId];
-            [tourQuery getFirstObjectInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
-                if ([object isKindOfClass:[Tour class]]) {
-                    location.tour = (Tour *)object;
-                    NSLog(@"%@", location.tour.nameOfTour);
-                    Tour *tour = (Tour *)object;
-                    NSLog(@"%@", tour.nameOfTour);
-                    self.locationsFromParse = [[NSArray alloc]init];
-                    if (self.locationsFromParse.count > 0) {
-                        [self.locationsFromParse arrayByAddingObject: location];
-                    } else {
-                        self.locationsFromParse = @[location];
-                    }
-                    [self.toursTableView reloadData];
-
-                }
-            }];
-            
-            
-        } else {
-            NSLog(@"Error: %@ %@", error, [error userInfo]);
+    
+    CLLocation *location = [self.locationManager location];
+    [self setMapForCoordinateWithLatitude:location.coordinate.latitude andLongitude:location.coordinate.longitude];
+    //    CLLocationCoordinate2D coordinate = [location coordinate];
+    CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(47.624441, -122.335913);
+    
+    
+    [ParseService fetchToursNearLocation:coordinate completion:^(BOOL success, NSArray *results) {
+        if (success) {
+            [self setLocationsFromParse:results];
+            [self.toursTableView reloadData];
         }
     }];
 }
@@ -84,7 +80,7 @@
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
-
+    
     [_locationManager stopMonitoringSignificantLocationChanges];
 }
 
@@ -100,10 +96,10 @@
     //Setup up MapView
     [self.mapView setDelegate:self];
     [self.mapView setShowsUserLocation: YES];
+    //    [self.locationManager]
     
     
 }
-
 
 - (void)setRegionForCoordinate:(MKCoordinateRegion)region {
     [self.mapView setRegion:region animated:YES];
@@ -112,69 +108,121 @@
 - (void)setMapForCoordinateWithLatitude: (double)lat  andLongitude:(double)longa {
     
     CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(lat, longa);
-    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(coordinate, 1000.0, 1000.0);
+    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(coordinate, 700.0, 700.0);
     [self setRegionForCoordinate:region];
 }
 
+#pragma mark - MKMapViewDelegate
+
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation
+{
+    if ([annotation isKindOfClass:[MKUserLocation class]]) {
+        return nil;
+    }
+    
+    // Add view.
+    MKPinAnnotationView *annotationView = (MKPinAnnotationView *) [mapView dequeueReusableAnnotationViewWithIdentifier: @"AnnotationView"];
+    annotationView.annotation = annotation;
+    
+    if (!annotationView)
+    {
+        annotationView = [[MKPinAnnotationView alloc]initWithAnnotation:annotation reuseIdentifier:@"AnnotationView"];
+    }
+    
+    //Add a detail disclosure button.
+    annotationView.canShowCallout = true;
+    annotationView.animatesDrop = true;
+    annotationView.pinTintColor = [UIColor orangeColor];
+    UIButton *rightCalloutButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+    annotationView.rightCalloutAccessoryView = rightCalloutButton;
+    
+    // Add a custom image to the callout.
+    
+    //        UIImage *myCustomImage = [[UIImage alloc]initWithImage:[UIImage imageNamed:@"map-marker.png"]];
+    
+    return annotationView;
+}
+
+- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
+    [self performSegueWithIdentifier:@"TabBarController" sender:view];
+}
+
 #pragma mark - CLLocationManager
-    
+
 -(void) startStandardUpdates
-    {
-        
-            if (nil == _locationManager)
-                    _locationManager = [[CLLocationManager alloc] init];
-        
-            _locationManager.delegate = self;
-            _locationManager.desiredAccuracy = kCLLocationAccuracyKilometer;
-        
-            // Set a movement threshold for new events.
-            _locationManager.distanceFilter = 500; // meters
-        
-            [_locationManager startUpdatingLocation];
-        }
+{
     
-    - (void)startSignificantChangeUpdates
-    {
-        
-            if (nil == _locationManager)
-                    _locationManager = [[CLLocationManager alloc] init];
-        
-            _locationManager.delegate = self;
-            [_locationManager startMonitoringSignificantLocationChanges];
-        }
+    if (nil == _locationManager)
+        _locationManager = [[CLLocationManager alloc] init];
+    
+    _locationManager.delegate = self;
+    _locationManager.desiredAccuracy = kCLLocationAccuracyKilometer;
+    
+    // Set a movement threshold for new events.
+    _locationManager.distanceFilter = 100; // meters
+    
+    [_locationManager startUpdatingLocation];
+}
+
+- (void)startSignificantChangeUpdates
+{
+    
+    if (nil == _locationManager)
+        _locationManager = [[CLLocationManager alloc] init];
+    
+    _locationManager.delegate = self;
+    [_locationManager startMonitoringSignificantLocationChanges];
+}
 
 
-- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations
+{
     NSLog(@"%@", locations);
 }
-    
-    
-    #pragma mark - UITableView protocol functions.
 
-    - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-        
-        if (self.locationsFromParse != nil) {
-            return self.locationsFromParse.count;
-            
-        }
-        return 0;
+
+#pragma mark - UITableView protocol functions.
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
+    if (self.toursFromParse != nil)
+    {
+        return self.toursFromParse.count;
     }
+    return 0;
+}
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     POIDetailTableViewCell *cell = (POIDetailTableViewCell*) [self.toursTableView dequeueReusableCellWithIdentifier:@"POIDetailTableViewCell"];
-    [cell setLocation:[self.locationsFromParse objectAtIndex:indexPath.row]];
+    [cell setTour:[self.toursFromParse objectAtIndex:indexPath.row]];
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self performSegueWithIdentifier:@"TabBarController" sender:self];
 }
 
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-//    // Get the new view controller using [segue destinationViewController].
-//    // Pass the selected object to the new view controller.
-//}
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"TourMapViewController"]) {
+        if ([sender isKindOfClass:[MKAnnotationView class]]) {
+            //            MKAnnotationView *annotationView = (MKAnnotationView *)sender;
+            TourMapViewController *tourMapViewController = (TourMapViewController *)segue.destinationViewController;
+            
+        }
+        
+        if ([sender isKindOfClass: [UITableViewCell class]]) {
+            TourMapViewController *tourMapViewController = (TourMapViewController *)segue.destinationViewController;
+//            tourMapViewController =
+            
+        }
+    }
+}
+
 
 
 @end
