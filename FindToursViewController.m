@@ -59,6 +59,7 @@
     [self setupViewController];
     
     CLLocation *location = [self.locationManager location];
+    [self setMapForCoordinateWithLatitude:location.coordinate.latitude andLongitude:location.coordinate.longitude];
 //    CLLocationCoordinate2D coordinate = [location coordinate];
     CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(47.624441, -122.335913);
 
@@ -94,6 +95,7 @@
     //Setup up MapView
     [self.mapView setDelegate:self];
     [self.mapView setShowsUserLocation: YES];
+//    [self.locationManager]
     
     
 }
@@ -105,7 +107,7 @@
 - (void)setMapForCoordinateWithLatitude: (double)lat  andLongitude:(double)longa {
     
     CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(lat, longa);
-    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(coordinate, 1000.0, 1000.0);
+    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(coordinate, 700.0, 700.0);
     [self setRegionForCoordinate:region];
 }
 
@@ -156,7 +158,7 @@
             _locationManager.desiredAccuracy = kCLLocationAccuracyKilometer;
         
             // Set a movement threshold for new events.
-            _locationManager.distanceFilter = 500; // meters
+            _locationManager.distanceFilter = 100; // meters
         
             [_locationManager startUpdatingLocation];
         }
