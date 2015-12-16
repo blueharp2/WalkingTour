@@ -13,13 +13,13 @@
 
 @implementation ParseService
 
-+ (void)saveToParse:(Tour *)tour locations:(NSArray *)locations {
++ (void)saveToParse:(Tour *)tour locations:(NSArray *)locations completion:(tourSaveCompletion)completion {
     NSArray *saveArray = [NSArray arrayWithObjects:tour, locations, nil];
     [PFObject saveAllInBackground:saveArray block:^(BOOL succeeded, NSError * _Nullable error) {
         if (succeeded) {
-            NSLog(@"They saved!");
+            completion(YES, nil);
         } else {
-            NSLog(@"Something went terribly wrong.");
+            completion(NO, error);
         }
     }];
 }

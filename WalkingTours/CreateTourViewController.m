@@ -64,22 +64,6 @@
 //    [self.navigationController pushViewController:[[CreateTourDetailViewController alloc]init] animated:YES];
 }
 
-
-
--(void)saveTourToParse{
-    
-    Location *startLocation = self.locations.firstObject;
-    NSString *name = self.nameOfTourTextField.text;
-    NSString *description = self.tourDescriptionTextField.text;
-    PFUser *user = [PFUser currentUser];
-    
-
-    Tour *tour = [[Tour alloc]initWithNameOfTour:name descriptionText:description startLocation:startLocation.location user:user];
-    [ParseService saveToParse: tour locations:self.locations];
-    
-}
-
-
 #pragma mark set up TableView
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -132,7 +116,13 @@
         }
     }
     
-    [ParseService saveToParse:tour locations:saveArray];
+    [ParseService saveToParse:tour locations:saveArray completion:^(BOOL success, NSError *error) {
+        if (success) {
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        } else {
+            NSLog(@"Error saving: %@", error.localizedFailureReason);
+        }
+    }];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
