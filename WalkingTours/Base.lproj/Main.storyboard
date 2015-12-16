@@ -661,6 +661,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="iosListOutline" width="23" height="31"/>
         <image name="linea--basic-map" width="28" height="30"/>
     </resources>
 </document>

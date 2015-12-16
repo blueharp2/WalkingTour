@@ -57,6 +57,18 @@
                     NSLog(@"%@", location.tour.nameOfTour);
                     Tour *tour = (Tour *)object;
                     NSLog(@"%@", tour.nameOfTour);
+                    
+                    
+//                    CLLocationCoordinate2D touchMapCoordinate = [self.locationMapView convertPoint:touchPoint toCoordinateFromView:self.locationMapView];
+                    
+                    MKPointAnnotation *newPoint = [[MKPointAnnotation alloc]init];
+                    PFGeoPoint *newLocation = [PFGeoPoint geoPointWithLatitude: tour.startLocation.latitude longitude:tour.startLocation.longitude];
+
+                    newPoint.title = tour.nameOfTour;
+                    
+                    [self.mapView addAnnotation:newPoint];
+                    [self.mapView  addAnnotation: newLocation];
+
                     self.locationsFromParse = [[NSArray alloc]init];
                     if (self.locationsFromParse.count > 0) {
                         [self.locationsFromParse arrayByAddingObject: location];
@@ -98,6 +110,11 @@
     [self setRegionForCoordinate:region];
 }
 #pragma mark - MKMapViewDelegate
+
+- (void) createMapAnnotation {
+
+
+}
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
     if ([annotation isKindOfClass:[MKUserLocation class]]) {
