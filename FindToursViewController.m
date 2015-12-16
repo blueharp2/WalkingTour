@@ -8,6 +8,7 @@
 
 #import "FindToursViewController.h"
 #import "TourMapViewController.h"
+#import "TourListViewController.h"
 #import "Location.h"
 #import "Tour.h"
 #import "Location.h"
@@ -43,6 +44,7 @@
         MKPointAnnotation *newPoint = [[MKPointAnnotation alloc]init];
         newPoint.coordinate = CLLocationCoordinate2DMake(tour.startLocation.latitude, tour.startLocation.longitude);
         newPoint.title = tour.nameOfTour;
+        newPoint.subtitle = tour.objectId;
         
         [self.mapView addAnnotation:newPoint];
         [self.toursTableView reloadData];
@@ -53,7 +55,7 @@
     [super viewDidLoad];
     
     //Location Manager setup
-     self.locationManager = [[CLLocationManager alloc]init];
+    self.locationManager = [[CLLocationManager alloc]init];
     [self.locationManager requestWhenInUseAuthorization];
     [self.locationManager setDelegate:self];
     
@@ -145,7 +147,6 @@
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
     [self performSegueWithIdentifier:@"TabBarController" sender:view];
     
-    
 }
 
 #pragma mark - CLLocationManager
@@ -184,13 +185,15 @@
 
 #pragma mark - UITableView protocol functions.
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
     
-        return self.toursFromParse.count;
+    return self.toursFromParse.count;
 }
 
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     
     POIDetailTableViewCell *cell = (POIDetailTableViewCell*) [self.toursTableView dequeueReusableCellWithIdentifier:@"POIDetailTableViewCell"];
     [cell setTour:[self.toursFromParse objectAtIndex:indexPath.row]];
@@ -199,30 +202,34 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self performSegueWithIdentifier:@"TabBarController" sender:self];
-//    if ([segue.identifier isEqualToString:@"TourMapViewController"]) {
-//
-//    TourMapViewController *tourMapViewController = (TourMapViewController *)segue.destinationViewController;
-//    tourMapViewController.currentTour = [self.toursFromParse objectAtIndex:indexPath.row];
-//    }
-    
+    NSString *tourId = self.toursFromParse[indexPath.row].objectId;
+    [self performSegueWithIdentifier:@"TabBarController" sender:tourId];
 }
 
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"TourMapViewController"]) {
+    if ([segue.identifier isEqualToString:@"TabBarController"]) {
         if ([sender isKindOfClass:[MKAnnotationView class]]) {
-            //            MKAnnotationView *annotationView = (MKAnnotationView *)sender;
-            TourMapViewController *tourMapViewController = (TourMapViewController *)segue.destinationViewController;
-//            tourMapViewController.currentTour = rightCalloutButton.MKAnnotationView.title;
             
-        }
-        
-        if ([sender isKindOfClass: [UITableViewCell class]]) {
-            TourMapViewController *tourMapViewController = (TourMapViewController *)segue.destinationViewController;
+            MKAnnotationView *annotationView = (MKAnnotationView *)sender;
+            UITabBarController *tabBar = (UITabBarController *)segue.destinationViewController;
             
-//            tourMapViewController.currentTour = [self.toursFromParse objectAtIndex:indexPath.row];
+            TourMapViewController *tourMapViewController = (TourMapViewController *)tabBar.viewControllers.firstObject;
+            TourListViewController *tourListViewController = (TourListViewController *)tabBar.viewControllers[1];
+            
+            [tourMapViewController setCurrentTour:annotationView.annotation.subtitle];
+            
+        } else {
+            
+            UITabBarController *tabBar = (UITabBarController *)segue.destinationViewController;
+            
+            TourMapViewController *tourMapViewController = (TourMapViewController *)tabBar.viewControllers.firstObject;
+            TourListViewController *tourListViewController = (TourListViewController *)tabBar.viewControllers[1];
+            
+            if ([sender isKindOfClass:[NSString class]]) {
+                [tourMapViewController setCurrentTour:sender];
+            }
         }
     }
 }
