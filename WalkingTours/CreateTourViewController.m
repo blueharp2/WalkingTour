@@ -9,7 +9,7 @@
 #import "CreateTourViewController.h"
 #import "Location.h"
 #import <Parse/Parse.h>
-#import "POIDetailTableViewCell.h"
+#import "LocationTableViewCell.h"
 #import "CreateTourDetailViewController.h"
 #import "ParseService.h"
 #import "Tour.h"
@@ -27,6 +27,7 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *locationTableView;
 @property (strong, nonatomic) NSArray<Location *> *locations;
+@property (strong, nonatomic) NSArray<UIImage *> *images;
 
 
 
@@ -34,30 +35,28 @@
 
 @implementation CreateTourViewController
 
--(void) setLocationTableView:(UITableView *)locationTableView{
-    [self.locationTableView reloadData];
-}
-
-
 -(void)viewDidLoad{
     [super viewDidLoad];
     [self setupMainViewController];
 
 }
 
--(void)setupMainViewController{
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    NSLog(@"View appeared");
+    [self.locationTableView reloadData];
+}
 
-    [self.locationTableView setDelegate:self];
-    [self.locationTableView setDataSource:self];
+-(void)setupMainViewController{
+    
+    self.locationTableView.delegate = self;
+    self.locationTableView.dataSource = self;
     [self.nameOfTourTextField setDelegate:self];
     [self.tourDescriptionTextField setDelegate:self];
     [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveButtonSelected:)]];
     
-    //    UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveTour:)];
-    //    self.navigationItem.rightBarButtonItem = saveButton;
-    
-    UINib *nib = [UINib nibWithNibName:@"POIDetailTableViewCell" bundle:nil];
-    [[self locationTableView]registerNib:nib forCellReuseIdentifier:@"POIDetailTableViewCell"];
+    UINib *nib = [UINib nibWithNibName:@"LocationTableViewCell" bundle:nil];
+    [[self locationTableView]registerNib:nib forCellReuseIdentifier:@"LocationTableViewCell"];
     
 }
 
@@ -92,12 +91,9 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-   POIDetailTableViewCell *cell = (POIDetailTableViewCell *)[self.locationTableView dequeueReusableCellWithIdentifier:@"POIDetailTableViewCell" forIndexPath:indexPath];
-
-    
-   //cell.location =
-    [self.locations objectAtIndex:indexPath.row];
-    
+   LocationTableViewCell *cell = (LocationTableViewCell *)[self.locationTableView dequeueReusableCellWithIdentifier:@"LocationTableViewCell" forIndexPath:indexPath];
+    [cell setLocation:self.locations[indexPath.row]];
+    [cell setImage:self.images[indexPath.row]];
     return cell;
 }
 
@@ -146,11 +142,13 @@
     }
 }
 
-- (void)didFinishSavingLocationWithLocation:(Location *)location {
+- (void)didFinishSavingLocationWithLocation:(Location *)location image:(UIImage *)image {
     if (self.locations.count > 0) {
         [self.locations arrayByAddingObject:location];
+        [self.images arrayByAddingObject:image];
     } else {
         self.locations = @[location];
+        self.images = @[image];
     }
     [self.locationTableView reloadData];
 }
