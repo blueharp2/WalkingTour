@@ -129,7 +129,6 @@
 
 -(void) startStandardUpdates
 {
-    
     if (nil == _locationManager)
         _locationManager = [[CLLocationManager alloc] init];
     
