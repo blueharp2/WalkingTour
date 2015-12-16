@@ -20,7 +20,7 @@
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 
 @property (strong, nonatomic) CLLocationManager *locationManager;
-
+@property (strong, nonatomic) NSArray <Location*> *locationsFromParse;
 
 @end
 
@@ -32,34 +32,47 @@
     [self.mapView setDelegate:self];
     [self.mapView setShowsUserLocation: YES];
 
+    self.locationManager = [[CLLocationManager alloc]init];
+    [self.locationManager requestWhenInUseAuthorization];
+    [self.locationManager setDelegate:self];
+
+    //    [self login];
     PFQuery *query = [PFQuery queryWithClassName:@"Location"];
-    [self.locationManager requestLocation];
- 
     // Get user location.
     PFGeoPoint *userLocation = [PFGeoPoint geoPointWithLatitude:self.locationManager.location.coordinate.latitude longitude:self.locationManager.location.coordinate.longitude];
+    [self setMapForCoordinateWithLatitude:userLocation.latitude andLongitude:userLocation.longitude];
     
     //find locations near user location.
     [query whereKey:@"location" nearGeoPoint:userLocation];
-    [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
-        if (!error) {
+    
+    [query getFirstObjectInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+        if (object) {
+            Location *location = (Location *)object;
             
-            for (PFObject *object in objects) {
-                
-                for (PFObject *object in objects) {
+            PFQuery *tourQuery = [PFQuery queryWithClassName:@"Tour"];
+            [tourQuery whereKey:@"objectId" equalTo:location.tour.objectId];
+            [tourQuery getFirstObjectInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+                if ([object isKindOfClass:[Tour class]]) {
+                    location.tour = (Tour *)object;
+                    NSLog(@"%@", location.tour.nameOfTour);
+                    Tour *tour = (Tour *)object;
+                    NSLog(@"%@", tour.nameOfTour);
+                    self.locationsFromParse = [[NSArray alloc]init];
+                    if (self.locationsFromParse.count > 0) {
+                        [self.locationsFromParse arrayByAddingObject: location];
+                    } else {
+                        self.locationsFromParse = @[location];
+                    }
                     
-                    NSString *locationName = object[@"locationName"];
-                    NSString *locationDescription = object[@"locationDescription"];
-                    NSArray *categories = object[@"categories"];
-                    
-                    PFGeoPoint *geopoint = (PFGeoPoint *)object[@"location"];
-                    Tour *tour = (Tour *)object[@"tour"];
-                }
-            }
-            
-                } else {
-                    NSLog(@"Error: %@ %@", error, [error userInfo]);
                 }
             }];
+            
+            
+        } else {
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+        }
+    }];
+
 }
 
 - (void)didReceiveMemoryWarning {
