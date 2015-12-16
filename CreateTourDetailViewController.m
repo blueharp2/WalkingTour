@@ -10,6 +10,8 @@
 #import "CategoryTableViewCell.h"
 @import MobileCoreServices;
 @import CoreLocation;
+@import CoreMedia;
+@import AVFoundation;
 @import Parse;
 @import MapKit;
 
@@ -221,7 +223,9 @@ static const NSArray *categories;
         NSLog(@"So, you've made a movie...");
         videoData = [NSData dataWithContentsOfURL:[info objectForKey:@"UIImagePickerControllerMediaURL"]];
         videoFile = [PFFile fileWithName:[NSString stringWithFormat:@"%i.mp4", rand() / 2] data:videoData];
-        //screenshot the video and turn it into photo here.
+        //screenshot the video and turn it into image data here.
+        photoData = [self getStillImageDataFromMovieUrl:[NSURL URLWithString:[info objectForKey:@"UIImagePickerControllerMediaURL"]]];
+        photoFile = [PFFile fileWithName:[NSString stringWithFormat:@"%i.jpg",rand() / 2] data:photoData];
     }
     if ([info objectForKey:@"UIImagePickerControllerEditedImage"]) {
         NSLog(@"Ah, just a photo?");
@@ -232,6 +236,29 @@ static const NSArray *categories;
     self.photoFile = photoFile;
     self.videoFile = videoFile;
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (NSData *)getStillImageDataFromMovieUrl:(NSURL *)url {
+    AVURLAsset *asset = [[AVURLAsset alloc] initWithURL:url options:nil];
+    if (asset) {
+        AVAssetImageGenerator *assetImageGenerator = [[AVAssetImageGenerator alloc] initWithAsset:asset];
+        assetImageGenerator.appliesPreferredTrackTransform = YES;
+        assetImageGenerator.apertureMode = AVAssetImageGeneratorApertureModeEncodedPixels;
+        
+        CGImageRef stillImageRef;
+        CFTimeInterval stillImageTime = 0.5;
+        NSError *imageGeneratorError;
+        stillImageRef = [assetImageGenerator copyCGImageAtTime:CMTimeMake(stillImageTime, 60) actualTime:nil error:&imageGeneratorError];
+        
+        if (!stillImageRef) {
+            NSLog(@"Image generator error: %@", imageGeneratorError.localizedDescription);
+        } else {
+            UIImage *stillImage = stillImageRef ? [[UIImage alloc] initWithCGImage:stillImageRef] : nil;
+            NSData *stillImageData = UIImageJPEGRepresentation(stillImage, 1.0);
+            return stillImageData;
+        }
+    }
+    return nil;
 }
 
 #pragma mark - UITableViewControllerDelegate & UITableViewControllerDatasource
