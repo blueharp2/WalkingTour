@@ -16,21 +16,21 @@
 
 @implementation POIDetailTableViewCell
 
-- (void)setLocation:(Location *)location {
-    self.tourNameLabel.text = location.locationName;
+- (void)setTour:(Tour *)tour {
+    self.tourNameLabel.text = tour.nameOfTour;
     
-    [location.photo getDataInBackgroundWithBlock:^(NSData * _Nullable data, NSError * _Nullable error) {
-        if (error) {
-            NSLog(@"Error unwrapping image");
-        }
-        if (data) {
-            UIImage *image = [UIImage imageWithData:data];
-            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
- 
-                self.tourImageView.image = image;
-            }];
-        }
-    }];
+//    [tour.photo getDataInBackgroundWithBlock:^(NSData * _Nullable data, NSError * _Nullable error) {
+//        if (error) {
+//            NSLog(@"Error unwrapping image");
+//        }
+//        if (data) {
+//            UIImage *image = [UIImage imageWithData:data];
+//            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+// 
+//                self.tourImageView.image = image;
+//            }];
+//        }
+//    }];
     
     
 }

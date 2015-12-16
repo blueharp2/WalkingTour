@@ -12,7 +12,7 @@
 #import "POIDetailTableViewCell.h"
 @interface TourListViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tourListTableView;
-@property (strong, nonatomic) NSArray <Location*>*locations;
+@property (strong, nonatomic) NSArray <Tour*>*tours;
 
 @end
 
@@ -43,8 +43,8 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    if (self.locations != nil) {
-        return self.locations.count;
+    if (self.tours != nil) {
+        return self.tours.count;
         
     }
     return 0;
@@ -54,7 +54,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     POIDetailTableViewCell *cell = (POIDetailTableViewCell*) [self.tourListTableView dequeueReusableCellWithIdentifier:@"POIDetailTableViewCell"];
-    [cell setLocation:[self.locations objectAtIndex:indexPath.row]];
+    [cell setTour:[self.tours objectAtIndex:indexPath.row]];
     return cell;
 }
 

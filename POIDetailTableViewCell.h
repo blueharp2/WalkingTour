@@ -13,6 +13,6 @@
 
 //create a property to hold a POI
 @property (strong, nonatomic) PFObject *object;
-@property (strong, nonatomic) Location *location;
+@property (strong, nonatomic) Tour *tour;
 
 @end

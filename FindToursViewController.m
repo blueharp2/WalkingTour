@@ -11,6 +11,7 @@
 #import "Tour.h"
 #import "Location.h"
 #import "POIDetailTableViewCell.h"
+#import "ParseService.h"
 
 @import UIKit;
 @import CoreLocation;
@@ -25,12 +26,29 @@
 
 @property (strong, nonatomic) CLLocationManager *locationManager;
 
-@property (strong, nonatomic) NSArray <Location*> *locationsFromParse;
+@property (strong, nonatomic) NSArray <Tour*> *toursFromParse;
+-(void)setToursFromParse:(NSArray<Tour *> *)toursFromParse;
+
+
+
 
 
 @end
 
 @implementation FindToursViewController
+
+- (void)setLocationsFromParse:(NSArray<Location *> *)toursFromParse {
+    _toursFromParse = toursFromParse;
+    
+    for (Tour *tour in toursFromParse) {
+        
+        MKPointAnnotation *newPoint = [[MKPointAnnotation alloc]init];
+        newPoint.coordinate = CLLocationCoordinate2DMake(tour.startLocation.latitude, tour.startLocation.longitude);
+        newPoint.title = tour.nameOfTour;
+        
+        [self.mapView addAnnotation:newPoint];
+    }
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -39,41 +57,16 @@
     [self.locationManager requestWhenInUseAuthorization];
     [self.locationManager setDelegate:self];
     [self setupViewController];
-//    [self login];
-    PFQuery *query = [PFQuery queryWithClassName:@"Location"];
-    // Get user location.
-    PFGeoPoint *userLocation = [PFGeoPoint geoPointWithLatitude:self.locationManager.location.coordinate.latitude longitude:self.locationManager.location.coordinate.longitude];
-    [self setMapForCoordinateWithLatitude:userLocation.latitude andLongitude:userLocation.longitude];
+    
+    CLLocation *location = [self.locationManager location];
+//    CLLocationCoordinate2D coordinate = [location coordinate];
+    CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(47.624441, -122.335913);
 
-    //find locations near user location.
-    [query whereKey:@"location" nearGeoPoint:userLocation];
 
-    [query getFirstObjectInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
-        if (object) {
-            Location *location = (Location *)object;
-            
-            PFQuery *tourQuery = [PFQuery queryWithClassName:@"Tour"];
-            [tourQuery whereKey:@"objectId" equalTo:location.tour.objectId];
-            [tourQuery getFirstObjectInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
-                if ([object isKindOfClass:[Tour class]]) {
-                    location.tour = (Tour *)object;
-                    NSLog(@"%@", location.tour.nameOfTour);
-                    Tour *tour = (Tour *)object;
-                    NSLog(@"%@", tour.nameOfTour);
-                    self.locationsFromParse = [[NSArray alloc]init];
-                    if (self.locationsFromParse.count > 0) {
-                        [self.locationsFromParse arrayByAddingObject: location];
-                    } else {
-                        self.locationsFromParse = @[location];
-                    }
-                    [self.toursTableView reloadData];
-
-                }
-            }];
-            
-            
-        } else {
-            NSLog(@"Error: %@ %@", error, [error userInfo]);
+    [ParseService fetchToursNearLocation:coordinate completion:^(BOOL success, NSArray *results) {
+        if (success) {
+            [self setLocationsFromParse:results];
+            [self.toursTableView reloadData];
         }
     }];
 }
@@ -121,7 +114,8 @@
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation
     {
     if ([annotation isKindOfClass:[MKUserLocation class]]) {
-        return nil; }
+        return nil;
+    }
     
     // Add view.
     MKPinAnnotationView *annotationView = (MKPinAnnotationView *) [mapView dequeueReusableAnnotationViewWithIdentifier: @"AnnotationView"];
@@ -131,8 +125,11 @@
     {
         annotationView = [[MKPinAnnotationView alloc]initWithAnnotation:annotation reuseIdentifier:@"AnnotationView"];
     }
+        
     //Add a detail disclosure button.
     annotationView.canShowCallout = true;
+        annotationView.animatesDrop = true;
+        annotationView.pinTintColor = [UIColor orangeColor];
     UIButton *rightCalloutButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
     annotationView.rightCalloutAccessoryView = rightCalloutButton;
     
@@ -185,8 +182,8 @@
 
     - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
         
-        if (self.locationsFromParse != nil) {
-            return self.locationsFromParse.count;
+        if (self.toursFromParse != nil) {
+            return self.toursFromParse.count;
             
         }
         return 0;
@@ -196,7 +193,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     POIDetailTableViewCell *cell = (POIDetailTableViewCell*) [self.toursTableView dequeueReusableCellWithIdentifier:@"POIDetailTableViewCell"];
-    [cell setLocation:[self.locationsFromParse objectAtIndex:indexPath.row]];
+    [cell setTour:[self.toursFromParse objectAtIndex:indexPath.row]];
     return cell;
 }
 
