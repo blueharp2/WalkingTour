@@ -7,7 +7,22 @@
 //
 
 #import <UIKit/UIKit.h>
+@import CoreLocation;
+
+
+
+@protocol LocationControllerDelegate <NSObject>
+
+-(void)locationControllerDidUpdateLocation:(CLLocation *)location;
+
+
+@end
 
 @interface CreateTourDetailViewController : UIViewController
+
+@property (strong,nonatomic) CLLocationManager *locationManager;
+@property (strong,nonatomic) CLLocation *location;
+@property (weak, nonatomic) id delegate;
+
 
 @end

@@ -16,7 +16,7 @@
 
 static const NSArray *categories;
 
-@interface CreateTourDetailViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITableViewDataSource, UITableViewDelegate, MKMapViewDelegate>
+@interface CreateTourDetailViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITableViewDataSource, UITableViewDelegate, MKMapViewDelegate, CLLocationManagerDelegate>
 
 - (IBAction)cameraButtonPressed:(UIButton *)sender;
 @property (strong, nonatomic) UIImagePickerController *imagePicker;
@@ -38,6 +38,8 @@ static const NSArray *categories;
     UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveTour:)];
     self.navigationItem.rightBarButtonItem = saveButton;
     [self setUpGreyOutView];
+    self.mapView.delegate = self;
+    [self.mapView setShowsUserLocation:YES];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -205,6 +207,55 @@ static const NSArray *categories;
         self.selectedCategories = [NSMutableArray arrayWithObject:categories[indexPath.row]];
     }
 }
+
+#pragma mark LocationController
+
+-(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(nonnull NSArray<CLLocation *> *)location{
+   // [self.delegate locationControllerDidUpdateLocation:location.lastObject];
+    //[self setLocation:location.lastObject];
+    
+}
+
+-(void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status{
+    if (status == kCLAuthorizationStatusAuthorizedAlways){
+        [self.mapView setShowsUserLocation:YES];
+    }
+}
+
+
+#pragma mark set up Map
+
+-(void)setupMap {
+    _locationManager = [[CLLocationManager alloc]init];
+    _locationManager.delegate = self;
+    _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    _locationManager.distanceFilter = 100;
+   // [_locationManager requestAlwaysAutorization];
+
+}
+#pragma mark MKMapViewDelegate
+-(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation{
+    
+    if ([annotation isKindOfClass:[MKUserLocation class]]) {
+        return nil;
+    }
+    
+    //Add view
+    MKPinAnnotationView *annotationView = (MKPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:@"AnnotationView"];
+    
+    annotationView.annotation = annotation;
+    
+    //    if (!annotationView) {
+    annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"AnnotationView"];
+    annotationView.canShowCallout = YES;
+    UIButton *rightCallout = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+    
+    annotationView.rightCalloutAccessoryView = rightCallout;
+    //    }
+    return annotationView;
+    
+}
+
 
 #pragma mark - Test Funcs
 
