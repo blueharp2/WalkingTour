@@ -16,4 +16,7 @@
 - (void)setLocation:(Location *)location;
 - (void)setImage:(UIImage *)image;
 
++ (NSString *)reuseIdentifier;
+
+
 @end
