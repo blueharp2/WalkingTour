@@ -27,7 +27,7 @@
 
 @interface CreateTourDetailViewController : UIViewController
 
-@property (strong, nonatomic) id<CreateTourDetailViewControllerDelegate> delegate;
+@property (strong, nonatomic) id<CreateTourDetailViewControllerDelegate> createTourDetailDelegate;
 
 @property (strong,nonatomic) CLLocationManager *locationManager;
 @property (strong,nonatomic) CLLocation *location;

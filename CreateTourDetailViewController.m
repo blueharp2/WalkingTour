@@ -25,7 +25,7 @@ static const NSArray *categories;
 @property (strong, nonatomic) NSMutableArray *selectedCategories;
 @property (strong, nonatomic) PFFile *mediaFile;
 @property (strong, nonatomic) PFGeoPoint *geoPoint;
-@property (strong, nonatomic) Location *location;
+@property (strong, nonatomic) Location *createdLocation;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet UITextField *locationNameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *locationDescriptionTextField;
@@ -193,10 +193,10 @@ static const NSArray *categories;
 //}
 
 - (void)saveLocationWithCategories:(UIButton *)sender {
-    if (self.location != nil && self.selectedCategories.count > 0) {
-        self.location.categories = self.selectedCategories;
-        if (self.delegate) {
-            [self.delegate didFinishSavingLocationWithLocation:self.location];
+    if (self.createdLocation != nil && self.selectedCategories.count > 0) {
+        self.createdLocation.categories = self.selectedCategories;
+        if (self.createTourDetailDelegate) {
+            [self.createTourDetailDelegate didFinishSavingLocationWithLocation:self.createdLocation];
         }
         [self.navigationController popViewControllerAnimated:YES];
     }
