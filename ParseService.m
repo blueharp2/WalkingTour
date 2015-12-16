@@ -27,7 +27,7 @@
 
 + (void)fetchLocationsWithTourId:(NSString *)tourId completion:(locationsFetchCompletion)completion {
     PFQuery *query = [PFQuery queryWithClassName:@"Location"];
-    [query whereKey:@"tour" equalTo:tourId];
+    [query whereKey:@"objectId" equalTo:tourId];
     [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         if (error) {
             NSLog(@"%@", error.localizedFailureReason);
@@ -42,7 +42,7 @@
 + (void)fetchToursNearLocation:(CLLocationCoordinate2D)location completion:(toursFetchCompletion)completion {
     PFGeoPoint *geoPoint = [PFGeoPoint geoPointWithLatitude:location.latitude longitude:location.longitude];
     PFQuery *query = [PFQuery queryWithClassName:@"Tour"];
-    [query whereKey:@"location" nearGeoPoint:geoPoint];
+    [query whereKey:@"startingLocation" nearGeoPoint:geoPoint];
     [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         if (error) {
             NSLog(@"%@", error.localizedFailureReason);

@@ -8,7 +8,6 @@
 
 #import "CreateTourDetailViewController.h"
 #import "CategoryTableViewCell.h"
-#import "Location.h"
 @import MobileCoreServices;
 @import CoreLocation;
 @import Parse;
@@ -21,8 +20,11 @@ static const NSArray *categories;
 @property (strong, nonatomic) UIImagePickerController *imagePicker;
 @property (strong, nonatomic) UIView *greyOutView;
 @property (strong, nonatomic) UITableView *categoryTableView;
+@property (strong, nonatomic) UIButton *finalSaveButton;
 @property (strong, nonatomic) NSMutableArray *selectedCategories;
 @property (strong, nonatomic) PFFile *mediaFile;
+@property (strong, nonatomic) PFGeoPoint *geoPoint;
+@property (strong, nonatomic) Location *location;
 
 @end
 
@@ -31,7 +33,7 @@ static const NSArray *categories;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveTour:)];
+    UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveLocation:)];
     self.navigationItem.rightBarButtonItem = saveButton;
     [self setUpGreyOutView];
 }
@@ -59,7 +61,18 @@ static const NSArray *categories;
     
     [self.view addSubview:self.greyOutView];
     
+    [self setUpFinalSaveButton];
+    
     [self setUpTableView];
+}
+
+- (void)setUpFinalSaveButton {
+    self.finalSaveButton = [[UIButton alloc] initWithFrame:CGRectMake(self.view.center.x, self.view.center.y, 0, 0)];
+    [self.finalSaveButton setTitle:@"Save" forState:UIControlStateNormal];
+    [self.finalSaveButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    [self.finalSaveButton setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [self.view addSubview:self.finalSaveButton];
+    [self.finalSaveButton addTarget:self action:@selector(saveLocationWithCategories:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)setUpTableView {
@@ -99,10 +112,10 @@ static const NSArray *categories;
 
 - (void)displayCategories {
     [self.view layoutIfNeeded];
-    NSLayoutConstraint *top = [NSLayoutConstraint constraintWithItem:self.greyOutView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTop multiplier:1.0 constant:self.view.frame.size.height / 2];
-    NSLayoutConstraint *trailing = [NSLayoutConstraint constraintWithItem:self.greyOutView attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:self.view.frame.size.width / 2];
-    NSLayoutConstraint *bottom = [NSLayoutConstraint constraintWithItem:self.greyOutView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeBottom multiplier:1.0 constant:-(self.view.frame.size.height / 2)];
-    NSLayoutConstraint *leading = [NSLayoutConstraint constraintWithItem:self.greyOutView attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeLeading multiplier:1.0 constant:-(self.view.frame.size.width / 2)];
+    NSLayoutConstraint *top = [NSLayoutConstraint constraintWithItem:self.greyOutView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTop multiplier:1.0 constant:0];
+    NSLayoutConstraint *trailing = [NSLayoutConstraint constraintWithItem:self.greyOutView attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:0];
+    NSLayoutConstraint *bottom = [NSLayoutConstraint constraintWithItem:self.greyOutView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0];
+    NSLayoutConstraint *leading = [NSLayoutConstraint constraintWithItem:self.greyOutView attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeLeading multiplier:1.0 constant:0];
     
     top.active = YES;
     trailing.active = YES;
@@ -119,13 +132,12 @@ static const NSArray *categories;
     tableViewWidth.active = YES;
     tableViewCenterX.active = YES;
     
-    top.constant = 0;
-    trailing.constant = 0;
-    bottom.constant = 0;
-    leading.constant = 0;
+    NSLayoutConstraint *buttonTop = [NSLayoutConstraint constraintWithItem:self.finalSaveButton attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTop multiplier:1.0 constant:20];
+    NSLayoutConstraint *buttonTrailing = [NSLayoutConstraint constraintWithItem:self.finalSaveButton attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:-20];
     
     [UIView animateKeyframesWithDuration:0.8 delay:0 options:UIViewKeyframeAnimationOptionLayoutSubviews animations:^{
         [UIView addKeyframeWithRelativeStartTime:0.0 relativeDuration:0.5 animations:^{
+            self.navigationController.navigationBarHidden = YES;
             [self.view layoutIfNeeded];
             
         }];
@@ -133,6 +145,11 @@ static const NSArray *categories;
         tableViewBottom.constant = -30.0;
         tableViewHeight.constant = 0;
         tableViewWidth.constant = 0;
+        [UIView addKeyframeWithRelativeStartTime:0.5 relativeDuration:0.5 animations:^{
+            [self.view layoutIfNeeded];
+        }];
+        buttonTop.active = YES;
+        buttonTrailing.active = YES;
         [UIView addKeyframeWithRelativeStartTime:0.5 relativeDuration:0.5 animations:^{
             [self.view layoutIfNeeded];
         }];
@@ -145,8 +162,29 @@ static const NSArray *categories;
         [self loadImagePicker];
 }
 
-- (void)saveTour:(UIBarButtonItem *)sender {
-    
+//- (void)saveLocation:(UIBarButtonItem *)sender {
+//    if (self.locationNameTextField.text.length > 0 && self.locationDescriptionTextField.text.length > 0 && self.geoPoint != nil) {
+//        //Create a location with no tour and no categories.
+//        //If a photo isn't taken it'll pass a nil reference.
+//        Location *location = [[Location alloc] initWithLocationName:self.locationNameTextField.text locationDescription:self.locationDescriptionTextField.text photo:self.mediaFile categories:nil location:self.geoPoint tour:nil];
+//        self.location = location;
+//        [self displayCategories];
+//    } else {
+//        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"What!?!" message:@"Fill everything out!" preferredStyle:UIAlertControllerStyleAlert];
+//        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+//        [alertController addAction:okAction];
+//        [self presentViewController:alertController animated:YES completion:nil];
+//    }
+//}
+
+- (void)saveLocationWithCategories:(UIButton *)sender {
+    if (self.location != nil && self.selectedCategories.count > 0) {
+        self.location.categories = self.selectedCategories;
+        if (self.delegate) {
+            [self.delegate didFinishSavingLocationWithLocation:self.location];
+        }
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 #pragma mark - UIImagePickerControllerDelegate
