@@ -23,6 +23,9 @@ static const NSArray *categories;
 @property (strong, nonatomic) UITableView *categoryTableView;
 @property (strong, nonatomic) NSMutableArray *selectedCategories;
 @property (strong, nonatomic) PFFile *mediaFile;
+@property (weak, nonatomic) IBOutlet MKMapView *mapView;
+@property (weak, nonatomic) IBOutlet UITextField *locationNameTextField;
+@property (weak, nonatomic) IBOutlet UITextField *locationDescriptionTextField;
 
 @end
 
