@@ -27,7 +27,7 @@
 
 + (void)fetchLocationsWithTourId:(NSString *)tourId completion:(locationsFetchCompletion)completion {
     PFQuery *query = [PFQuery queryWithClassName:@"Location"];
-    [query whereKey:@"tour" equalTo:tourId];
+    [query whereKey:@"objectId" equalTo:tourId];
     [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         if (error) {
             NSLog(@"%@", error.localizedFailureReason);
