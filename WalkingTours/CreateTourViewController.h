@@ -11,6 +11,4 @@
 
 @interface CreateTourViewController : UIViewController
 
-@property (strong, nonatomic) NSArray<Location *> *location;
-
 @end
