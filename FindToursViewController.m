@@ -43,6 +43,7 @@
         MKPointAnnotation *newPoint = [[MKPointAnnotation alloc]init];
         newPoint.coordinate = CLLocationCoordinate2DMake(tour.startLocation.latitude, tour.startLocation.longitude);
         newPoint.title = tour.nameOfTour;
+        newPoint.subtitle = tour.objectId;
         
         [self.mapView addAnnotation:newPoint];
         [self.toursTableView reloadData];
@@ -144,8 +145,7 @@
 
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
     [self performSegueWithIdentifier:@"TabBarController" sender:view];
-    
-    
+
 }
 
 #pragma mark - CLLocationManager
@@ -213,9 +213,10 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"TourMapViewController"]) {
         if ([sender isKindOfClass:[MKAnnotationView class]]) {
-            //            MKAnnotationView *annotationView = (MKAnnotationView *)sender;
+            
+                        MKAnnotationView *annotationView = (MKAnnotationView *)sender;
             TourMapViewController *tourMapViewController = (TourMapViewController *)segue.destinationViewController;
-//            tourMapViewController.currentTour = rightCalloutButton.MKAnnotationView.title;
+            tourMapViewController.currentTour = annotationView.annotation.title;
             
         }
         
