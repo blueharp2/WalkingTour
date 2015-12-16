@@ -20,6 +20,7 @@
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 
 @property (strong, nonatomic) CLLocationManager *locationManager;
+@property (strong, nonatomic) *currentTour;
 @property (strong, nonatomic) NSArray <Location*> *locationsFromParse;
 
 @end

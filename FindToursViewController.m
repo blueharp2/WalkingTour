@@ -7,6 +7,7 @@
 //
 
 #import "FindToursViewController.h"
+#import "TourMapViewController.h"
 #import "Location.h"
 #import "Tour.h"
 #import "Location.h"
@@ -206,11 +207,18 @@
 
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-//    // Get the new view controller using [segue destinationViewController].
-//    // Pass the selected object to the new view controller.
-//}
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"TourMapViewController"]) {
+        if ([sender isKindOfClass:[MKAnnotationView class]]) {
+//            MKAnnotationView *annotationView = (MKAnnotationView *)sender;
+            TourMapViewController *tourMapViewController = (TourMapViewController *)segue.destinationViewController;
+            
+            
+            
+        }
+    }    // Pass the selected object to the new view controller.
+}
+
 
 
 @end
