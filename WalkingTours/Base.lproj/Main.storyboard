@@ -278,11 +278,11 @@
                                 </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign Up Walking Tours" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qdl-4U-pMt">
-                                <rect key="frame" x="28" y="97" width="265" height="30"/>
+                                <rect key="frame" x="-15" y="97" width="351" height="39"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="O3w-JN-brr"/>
+                                    <constraint firstAttribute="height" constant="39" id="O3w-JN-brr"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="24"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="27"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -310,7 +310,7 @@
                             <constraint firstItem="9w3-7n-j4o" firstAttribute="top" secondItem="lOY-cG-hJZ" secondAttribute="bottom" id="R6g-lv-Sh0"/>
                             <constraint firstItem="1i5-x6-BXp" firstAttribute="trailing" secondItem="JQd-1t-nHf" secondAttribute="trailing" id="U3t-kq-idP"/>
                             <constraint firstItem="1i5-x6-BXp" firstAttribute="leading" secondItem="JQd-1t-nHf" secondAttribute="leading" id="VCu-JW-jPU"/>
-                            <constraint firstItem="Qdl-4U-pMt" firstAttribute="leading" secondItem="0hc-PI-4mr" secondAttribute="leadingMargin" constant="12" id="WAe-1e-RXi"/>
+                            <constraint firstItem="Qdl-4U-pMt" firstAttribute="leading" secondItem="0hc-PI-4mr" secondAttribute="leadingMargin" constant="-31" id="WAe-1e-RXi"/>
                             <constraint firstItem="KIn-UW-axy" firstAttribute="top" secondItem="JQd-1t-nHf" secondAttribute="bottom" constant="25" id="Wz4-F2-RT8"/>
                             <constraint firstItem="Qdl-4U-pMt" firstAttribute="centerX" secondItem="0hc-PI-4mr" secondAttribute="centerX" id="ZWa-r3-uWs"/>
                             <constraint firstItem="Qdl-4U-pMt" firstAttribute="centerX" secondItem="1i5-x6-BXp" secondAttribute="centerX" id="cvn-cy-xgM"/>
@@ -318,7 +318,7 @@
                             <constraint firstItem="lOY-cG-hJZ" firstAttribute="leading" secondItem="0hc-PI-4mr" secondAttribute="leading" id="hjl-5v-vtr"/>
                             <constraint firstItem="D2X-tG-JB7" firstAttribute="centerX" secondItem="KIn-UW-axy" secondAttribute="centerX" id="jbg-n3-dHK"/>
                             <constraint firstItem="JQd-1t-nHf" firstAttribute="trailing" secondItem="KIn-UW-axy" secondAttribute="trailing" id="pNA-z2-HnI"/>
-                            <constraint firstItem="1i5-x6-BXp" firstAttribute="top" secondItem="Qdl-4U-pMt" secondAttribute="bottom" constant="30" id="tsz-6g-w8h"/>
+                            <constraint firstItem="1i5-x6-BXp" firstAttribute="top" secondItem="Qdl-4U-pMt" secondAttribute="bottom" constant="21" id="tsz-6g-w8h"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="IN4-2Y-vE6"/>

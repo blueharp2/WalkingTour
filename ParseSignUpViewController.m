@@ -21,7 +21,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+//    self.navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont fontWithName:@"Helvetica" size:13.0],NSFontAttributeName,
+//                                                                   [UIColor whiteColor], NSForegroundColorAttributeName,
+//                                                                   nil];
     [[UIBarButtonItem appearanceWhenContainedIn:[UINavigationBar class], nil] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor blackColor], UITextAttributeTextColor,nil] forState:UIControlStateNormal];
+    [self.navigationController.navigationBar setTintColor:[UIColor blackColor]];
 
 }
 
