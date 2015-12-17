@@ -242,7 +242,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *tourId = self.toursFromParse[indexPath.row].objectId;
+    NSString *tourId = self.toursFromParse[indexPath.section].objectId;
     [self performSegueWithIdentifier:@"TabBarController" sender:tourId];
 }
 

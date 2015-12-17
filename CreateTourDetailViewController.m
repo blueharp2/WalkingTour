@@ -62,7 +62,7 @@ static const NSArray *categories;
     self.mapView.delegate = self;
     [self requestPermissions];
     [self.locationManager setDelegate:self];
-    [self locationControllerDidUpdateLocation:_locationManager.location];
+//    [self locationControllerDidUpdateLocation:_locationManager.location];
     
 }
 
@@ -395,7 +395,8 @@ static const NSArray *categories;
     if (status == kCLAuthorizationStatusAuthorizedWhenInUse){
         [self.mapView setShowsUserLocation:YES];
         MKCoordinateRegion currentRegion = MKCoordinateRegionMakeWithDistance(self.locationManager.location.coordinate, 300, 300);
-        [self.mapView setRegion:currentRegion];
+        [self setRegion:currentRegion];
+//        [self locationControllerDidUpdateLocation:self.locationManager.location];
     }
 }
 
