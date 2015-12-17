@@ -339,10 +339,10 @@
             </objects>
             <point key="canvasLocation" x="1808" y="-306"/>
         </scene>
-        <!--CreateTourDetailVC-->
+        <!--Create Tour Detail View Controller-->
         <scene sceneID="Qhg-dh-nYD">
             <objects>
-                <viewController title="CreateTourDetailVC" id="ch6-eO-iFm" customClass="CreateTourDetailViewController" sceneMemberID="viewController">
+                <viewController id="ch6-eO-iFm" customClass="CreateTourDetailViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="cYn-Hr-gxW"/>
                         <viewControllerLayoutGuide type="bottom" id="hOD-qw-MCN"/>
@@ -621,10 +621,10 @@
             </objects>
             <point key="canvasLocation" x="4154" y="-895"/>
         </scene>
-        <!--Create Tour ViewController-->
+        <!--Create Tour View Controller-->
         <scene sceneID="PvD-xR-3JL">
             <objects>
-                <viewController title="Create Tour ViewController" id="vsA-st-EdL" customClass="CreateTourViewController" sceneMemberID="viewController">
+                <viewController id="vsA-st-EdL" customClass="CreateTourViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="lnd-bp-pY4"/>
                         <viewControllerLayoutGuide type="bottom" id="aDh-or-b7o"/>
