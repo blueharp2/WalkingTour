@@ -212,6 +212,9 @@
     
     POIDetailTableViewCell *cell = (POIDetailTableViewCell*) [self.toursTableView dequeueReusableCellWithIdentifier:@"POIDetailTableViewCell"];
     [cell setTour:[self.toursFromParse objectAtIndex:indexPath.row]];
+    
+//    cell.viewForFirstBaselineLayout.frame = CGRectOffset(cell.frame, 10, 10);
+
     return cell;
 }
 
@@ -222,7 +225,7 @@
 
 -(CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 90;
+    return 100;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -232,8 +235,15 @@
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+//    cell.contentView.layer.cornerRadius = 5;
+//    cell.contentView.layer.masksToBounds = YES;
+//    cell.backgroundColor = [UIColor clearColor];
     
-    cell.backgroundColor = [UIColor clearColor];
+    cell.layer.cornerRadius = 10;
+    cell.layer.masksToBounds = true;
+//    cell.view.frame = CGRectOffset(cell.frame, 10, 10);
+//    cell.viewForFirstBaselineLayout.frame = CGRectOffset(cell.frame, 10, 10);
+
     
 }
 
