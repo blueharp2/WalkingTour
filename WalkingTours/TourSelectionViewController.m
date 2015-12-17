@@ -19,13 +19,13 @@
 
 @implementation TourSelectionViewController
 
-- (IBAction)selectTour:(id)sender {
-    
-}
-
-- (IBAction)createTour:(id)sender {
-    
-}
+//- (IBAction)selectTour:(id)sender {
+//    
+//}
+//
+//- (IBAction)createTour:(id)sender {
+//    
+//}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
