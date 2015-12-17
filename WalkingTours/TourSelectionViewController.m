@@ -41,21 +41,12 @@
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         UINavigationController *navController = [storyboard instantiateViewControllerWithIdentifier:@"LoginNavigationController"];
         if ([navController.viewControllers.firstObject isKindOfClass:[ParseLoginViewController class]]) {
-//            ParseLoginViewController *loginVC = (ParseLoginViewController *)navController.viewControllers.firstObject;
+            ParseLoginViewController *loginVC = (ParseLoginViewController *)navController.viewControllers.firstObject;
+            loginVC.completion = ^ {
+                [self dismissViewControllerAnimated:YES completion:nil];
+            };
             [self presentViewController:navController animated:YES completion:nil];
-//            [navController pushViewController:loginVC animated:NO];
         }
-
-        
-//        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//        ParseLoginViewController *myController = [storyboard instantiateViewControllerWithIdentifier:@"ParseLoginViewController"];
-//        
-//        myController.completion = ^() {
-//            [self dismissViewControllerAnimated:YES completion:nil];
-//        };
-//        
-//        [self presentViewController:myController animated:YES completion:nil];
-    
     }
 }
 
