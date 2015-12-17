@@ -36,5 +36,6 @@
 
 - (IBAction)sendResetPassword:(id)sender {
     [PFUser requestPasswordResetForEmailInBackground:self.passwordReset.text];
+    
 }
 @end

@@ -48,7 +48,6 @@
 
 - (void)setupViewController
 {
-    //Setup tableView
     [self.tourListTableView setDelegate:self];
     [self.tourListTableView setDataSource:self];
     

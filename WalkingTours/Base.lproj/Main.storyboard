@@ -37,7 +37,7 @@
                                     <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <segue destination="jae-n2-KAo" kind="show" identifier="signup" id="MHu-rp-kh2"/>
+                                    <segue destination="srd-cu-ehJ" kind="show" identifier="signup" id="MHu-rp-kh2"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RC8-SS-wum">
@@ -46,7 +46,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="AzG-NM-7ds" kind="show" identifier="resetPassword" id="jsj-tm-2t2"/>
+                                    <segue destination="nGg-Dh-6oD" kind="show" identifier="resetPassword" id="jsj-tm-2t2"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="ee5-Nu-KTa">
@@ -178,7 +178,14 @@
                         </constraints>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" id="FSE-BI-D4p"/>
+                    <navigationItem key="navigationItem" id="FSE-BI-D4p">
+                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="9GB-uU-F70">
+                            <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="cancelPressed:" destination="AzG-NM-7ds" id="9mz-21-yUS"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
@@ -187,7 +194,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s7S-G0-8XD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1292" y="-1314"/>
+            <point key="canvasLocation" x="1824" y="-1314"/>
         </scene>
         <!--Parse Sign Up View Controller-->
         <scene sceneID="6un-rb-EQb">
@@ -257,7 +264,14 @@
                             <constraint firstItem="1i5-x6-BXp" firstAttribute="top" secondItem="Qdl-4U-pMt" secondAttribute="bottom" constant="24" id="tsz-6g-w8h"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="IN4-2Y-vE6"/>
+                    <navigationItem key="navigationItem" id="IN4-2Y-vE6">
+                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="ffb-NA-x0z">
+                            <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="cancelPressed:" destination="jae-n2-KAo" id="O4b-3B-x1c"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="emailSignUp" destination="KIn-UW-axy" id="3sy-6i-y7w"/>
@@ -267,7 +281,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tHM-ZH-Gad" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1679" y="-652"/>
+            <point key="canvasLocation" x="2036" y="-652"/>
         </scene>
         <!--CreateTourDetailVC-->
         <scene sceneID="Qhg-dh-nYD">
@@ -395,7 +409,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zF5-X0-P4J" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2273" y="-644"/>
+            <point key="canvasLocation" x="2805" y="-644"/>
         </scene>
         <!--Find Tours Nearby-->
         <scene sceneID="UoJ-JZ-cjF">
@@ -448,7 +462,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="J62-pQ-oqn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3048" y="-644"/>
+            <point key="canvasLocation" x="3580" y="-644"/>
         </scene>
         <!--Map View of Locations-->
         <scene sceneID="TVQ-kY-mxI">
@@ -489,7 +503,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0iQ-L2-MJt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4102" y="-865"/>
+            <point key="canvasLocation" x="5166" y="-865"/>
         </scene>
         <!--Create Tour ViewController-->
         <scene sceneID="PvD-xR-3JL">
@@ -614,7 +628,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h2j-IS-vEX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4102" y="-244"/>
+            <point key="canvasLocation" x="4634" y="-244"/>
         </scene>
         <!--TourDetailViewController-->
         <scene sceneID="dRw-18-JAy">
@@ -672,7 +686,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jtp-dI-fuk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4597" y="-848"/>
+            <point key="canvasLocation" x="5661" y="-848"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Tcs-cV-O0U">
@@ -690,7 +704,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YhS-cJ-YMt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2273" y="-1402"/>
+            <point key="canvasLocation" x="2805" y="-1402"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="LsT-JT-Dzg">
@@ -708,7 +722,43 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s8p-xg-sTa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3526" y="-644"/>
+            <point key="canvasLocation" x="4058" y="-644"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="3rf-wK-Arz">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="nGg-Dh-6oD" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Rgx-xk-8Mo">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="AzG-NM-7ds" kind="relationship" relationship="rootViewController" id="inI-sz-1N4"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3lb-fL-s2X" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1467" y="-1314"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="HU7-Wx-hxm">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="srd-cu-ehJ" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="MeL-qa-nxQ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="jae-n2-KAo" kind="relationship" relationship="rootViewController" id="fSp-HR-GTT"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="27n-I8-pbD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1679" y="-652"/>
         </scene>
     </scenes>
     <resources>
