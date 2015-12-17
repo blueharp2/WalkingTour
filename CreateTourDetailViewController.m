@@ -188,16 +188,53 @@ static const NSArray *categories;
 }
 
 - (void)saveLocation:(UIBarButtonItem *)sender {
-    if (self.locationNameTextField.text.length > 0 && self.locationDescriptionTextField.text.length > 0 && self.geoPoint != nil) {
+    NSString *alertMessage = @"Please fill all fields out.";
+    if (self.locationNameTextField.text.length == 0) {
+        alertMessage = @"Please enter a location name.";
+        [self presentAlertWithMessage:alertMessage];
+        return;
+    }
+    if (self.locationDescriptionTextField.text.length == 0) {
+        alertMessage = @"Please enter a location description.";
+        [self presentAlertWithMessage:alertMessage];
+        return;
+    }
+    if (self.geoPoint == nil) {
+        alertMessage = @"Please drop a pin for your location.";
+        [self presentAlertWithMessage:alertMessage];
+        return;
+    }
+    if (self.photoFile == nil) {
+        [self presentNoPhotoWarning];
+        return;
+    }
+    Location *locationToSave = [[Location alloc] initWithLocationName:self.locationNameTextField.text locationDescription:self.locationDescriptionTextField.text photo:self.photoFile video:self.videoFile categories:nil location:self.geoPoint tour:nil];
+    self.createdLocation = locationToSave;
+    [self displayCategories];
+}
+
+- (void)presentAlertWithMessage:(NSString *)alertMessage {
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"What!?!" message:alertMessage preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+    [alertController addAction:okAction];
+    [self presentViewController:alertController animated:YES completion:nil];
+}
+
+- (void)presentNoPhotoWarning {
+    UIAlertController *photoAlert = [UIAlertController alertControllerWithTitle:@"No Photo/Video" message:@"Did you want to add a photo or video?" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *yesAction = [UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self loadImagePicker];
+    }];
+    UIAlertAction *noAction = [UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
         Location *locationToSave = [[Location alloc] initWithLocationName:self.locationNameTextField.text locationDescription:self.locationDescriptionTextField.text photo:self.photoFile video:self.videoFile categories:nil location:self.geoPoint tour:nil];
         self.createdLocation = locationToSave;
         [self displayCategories];
-    } else {
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"What!?!" message:@"Fill everything out!" preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
-        [alertController addAction:okAction];
-        [self presentViewController:alertController animated:YES completion:nil];
-    }
+    }];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+    [photoAlert addAction:yesAction];
+    [photoAlert addAction:noAction];
+    [photoAlert addAction:cancelAction];
+    [self presentViewController:photoAlert animated:YES completion:nil];
 }
 
 - (void)saveLocationWithCategories:(UIButton *)sender {

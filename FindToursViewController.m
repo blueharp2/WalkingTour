@@ -15,12 +15,7 @@
 #import "POIDetailTableViewCell.h"
 #import "ParseService.h"
 #import "Gradient.h"
-
-@import UIKit;
-@import CoreLocation;
-@import MapKit;
 @import QuartzCore;
-
 @import Parse;
 @import ParseUI;
 
