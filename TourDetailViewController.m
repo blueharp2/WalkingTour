@@ -24,11 +24,7 @@ static const NSString *ItemStatusContext;
 
 @property (nonatomic, strong) NSString *locationData;
 
-//property for segue from TourListViewController
-
 - (IBAction)playButtonPressed:(UIButton *)sender;
-
-
 
 @end
 

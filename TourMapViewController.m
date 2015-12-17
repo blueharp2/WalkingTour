@@ -38,8 +38,6 @@
             [self setLocationsFromParse:results];
         }
     }];
-    
-    
 }
 
 - (void)setLocationsFromParse:(NSArray<Location *> *)locationsFromParse {
@@ -59,7 +57,6 @@
         } else {
             _locationsWithObjectId = [NSMutableDictionary dictionaryWithObject:location forKey:location.objectId];
         }
-        
     }
 }
 
@@ -106,14 +103,14 @@
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
     if ([annotation isKindOfClass:[MKUserLocation class]]) {
-        return nil; }
+        return nil;
+    }
     
     // Add view.
     MKPinAnnotationView *annotationView = (MKPinAnnotationView *) [mapView dequeueReusableAnnotationViewWithIdentifier: @"AnnotationView"];
     annotationView.annotation = annotation;
     
-    if (!annotationView)
-    {
+    if (!annotationView) {
         annotationView = [[MKPinAnnotationView alloc]initWithAnnotation:annotation reuseIdentifier:@"AnnotationView"];
     }
     
@@ -141,8 +138,7 @@
 
 #pragma mark - CLLocationManager
 
--(void) startStandardUpdates
-{
+-(void) startStandardUpdates {
     if (nil == _locationManager)
         _locationManager = [[CLLocationManager alloc] init];
     
@@ -155,9 +151,7 @@
     [_locationManager startUpdatingLocation];
 }
 
-- (void)startSignificantChangeUpdates
-{
-    
+- (void)startSignificantChangeUpdates {
     if (nil == _locationManager)
         _locationManager = [[CLLocationManager alloc] init];
     
@@ -165,18 +159,15 @@
     [_locationManager startMonitoringSignificantLocationChanges];
 }
 
-- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations
-{
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
     NSLog(@"%@", locations);
 }
 
 
 #pragma mark - Navigation
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"TourDetailViewController"]) {
-//            MKAnnotationView *annotationView = (MKAnnotationView *)sender;
             TourDetailViewController *tourDetailViewController = (TourDetailViewController *)segue.destinationViewController;
         if ([sender isKindOfClass: [Location class]]) {
             

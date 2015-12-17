@@ -15,12 +15,7 @@
 #import "POIDetailTableViewCell.h"
 #import "ParseService.h"
 #import "Gradient.h"
-
-@import UIKit;
-@import CoreLocation;
-@import MapKit;
 @import QuartzCore;
-
 @import Parse;
 @import ParseUI;
 
@@ -190,7 +185,8 @@
 - (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
     if (status == kCLAuthorizationStatusAuthorizedWhenInUse) {
         [self.mapView setShowsUserLocation:YES];
-        [self.mapView setCenterCoordinate:self.mapView.userLocation.location.coordinate animated:YES];
+        MKCoordinateRegion currentRegion = MKCoordinateRegionMakeWithDistance(self.locationManager.location.coordinate, 300, 300);
+        [self.mapView setRegion:currentRegion];
     }
 }
 

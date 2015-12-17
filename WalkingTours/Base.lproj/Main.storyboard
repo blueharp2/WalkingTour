@@ -346,29 +346,34 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="eTz-S3-rke">
-                                <rect key="frame" x="0.0" y="64" width="320" height="150"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="284"/>
                                 <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="150" id="pww-y7-heL"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="pww-y7-heL"/>
+                                    </mask>
+                                </variation>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="Bth-Pg-O4F" appends="YES" id="cps-H3-9bc"/>
                                 </connections>
                             </mapView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Location Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SU1-GD-Ons">
-                                <rect key="frame" x="8" y="222" width="304" height="30"/>
+                                <rect key="frame" x="20" y="356" width="280" height="30"/>
                                 <color key="textColor" red="0.2784313725" green="0.50980392159999999" blue="0.85490196080000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Location Description" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JOQ-pC-1Ce">
-                                <rect key="frame" x="8" y="260" width="304" height="30"/>
+                                <rect key="frame" x="20" y="394" width="280" height="30"/>
                                 <color key="textColor" red="0.2784313725" green="0.50980392159999999" blue="0.85490196080000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gaj-h6-TIr">
-                                <rect key="frame" x="274" y="166" width="36" height="36"/>
+                                <rect key="frame" x="274" y="300" width="36" height="36"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="36" id="e2B-bb-cCO"/>
                                     <constraint firstAttribute="height" constant="36" id="xy7-YZ-7Yx"/>
@@ -378,44 +383,40 @@
                                     <action selector="cameraButtonPressed:" destination="ch6-eO-iFm" eventType="touchUpInside" id="Zhd-7Z-GQP"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Drop a pin to create a location for your tour." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yoq-0w-59d">
+                                <rect key="frame" x="20" y="432" width="280" height="44.5"/>
+                                <fontDescription key="fontDescription" name="Futura-MediumItalic" family="Futura" pointSize="17"/>
+                                <color key="textColor" red="0.2784313725" green="0.50980392159999999" blue="0.85490196080000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="eTz-S3-rke" firstAttribute="height" secondItem="gHZ-FA-2cS" secondAttribute="height" multiplier="0.5" id="0hW-dQ-fUG"/>
+                            <constraint firstItem="yoq-0w-59d" firstAttribute="leading" secondItem="gHZ-FA-2cS" secondAttribute="leading" constant="20" symbolic="YES" id="1s9-4L-lz1"/>
                             <constraint firstItem="eTz-S3-rke" firstAttribute="leading" secondItem="gHZ-FA-2cS" secondAttribute="leading" id="3oN-hX-VbD"/>
-                            <constraint firstAttribute="trailing" secondItem="JOQ-pC-1Ce" secondAttribute="trailing" constant="8" id="5MM-Qd-e2n"/>
-                            <constraint firstItem="Gaj-h6-TIr" firstAttribute="centerX" secondItem="gHZ-FA-2cS" secondAttribute="centerX" id="F1o-pT-LRI"/>
+                            <constraint firstAttribute="trailing" secondItem="JOQ-pC-1Ce" secondAttribute="trailing" constant="20" symbolic="YES" id="9Vu-tT-z6b"/>
+                            <constraint firstAttribute="trailing" secondItem="SU1-GD-Ons" secondAttribute="trailing" constant="20" symbolic="YES" id="CCX-v4-Fbe"/>
                             <constraint firstAttribute="trailing" secondItem="eTz-S3-rke" secondAttribute="trailing" id="IcX-vm-dkC"/>
                             <constraint firstItem="SU1-GD-Ons" firstAttribute="top" secondItem="Gaj-h6-TIr" secondAttribute="bottom" constant="20" id="JRa-A0-KoV"/>
-                            <constraint firstItem="JOQ-pC-1Ce" firstAttribute="leading" secondItem="gHZ-FA-2cS" secondAttribute="leading" constant="8" id="KjZ-6V-Qqs"/>
+                            <constraint firstAttribute="trailing" secondItem="yoq-0w-59d" secondAttribute="trailing" constant="20" symbolic="YES" id="OAw-Lr-ZKm"/>
                             <constraint firstItem="JOQ-pC-1Ce" firstAttribute="top" secondItem="SU1-GD-Ons" secondAttribute="bottom" constant="8" id="Rig-f3-QyG"/>
-                            <constraint firstItem="Gaj-h6-TIr" firstAttribute="top" secondItem="eTz-S3-rke" secondAttribute="bottom" constant="-52" id="UWi-xk-LQn"/>
-                            <constraint firstItem="Gaj-h6-TIr" firstAttribute="centerY" secondItem="gHZ-FA-2cS" secondAttribute="centerY" constant="29" id="VYm-UK-sW1"/>
-                            <constraint firstItem="SU1-GD-Ons" firstAttribute="leading" secondItem="gHZ-FA-2cS" secondAttribute="leading" constant="8" id="W5e-AQ-O6a"/>
                             <constraint firstAttribute="trailing" secondItem="Gaj-h6-TIr" secondAttribute="trailing" constant="10" id="a0V-Vd-aRe"/>
-                            <constraint firstItem="Gaj-h6-TIr" firstAttribute="leading" secondItem="eTz-S3-rke" secondAttribute="trailing" constant="-56" id="cde-9c-fcG"/>
+                            <constraint firstItem="SU1-GD-Ons" firstAttribute="leading" secondItem="gHZ-FA-2cS" secondAttribute="leading" constant="20" symbolic="YES" id="a2t-KS-l8n"/>
                             <constraint firstItem="SU1-GD-Ons" firstAttribute="top" secondItem="eTz-S3-rke" secondAttribute="bottom" constant="8" id="ent-zw-Jkf"/>
-                            <constraint firstItem="Gaj-h6-TIr" firstAttribute="top" secondItem="eTz-S3-rke" secondAttribute="bottom" constant="-40" id="p2E-W7-mi4"/>
-                            <constraint firstItem="Gaj-h6-TIr" firstAttribute="leading" secondItem="eTz-S3-rke" secondAttribute="trailing" constant="-40" id="pgU-hm-BT1"/>
+                            <constraint firstItem="yoq-0w-59d" firstAttribute="top" secondItem="JOQ-pC-1Ce" secondAttribute="bottom" constant="8" id="g7E-W5-wTJ"/>
+                            <constraint firstItem="JOQ-pC-1Ce" firstAttribute="leading" secondItem="gHZ-FA-2cS" secondAttribute="leading" constant="20" symbolic="YES" id="hwI-kz-HGa"/>
                             <constraint firstItem="eTz-S3-rke" firstAttribute="top" secondItem="cYn-Hr-gxW" secondAttribute="bottom" id="pz5-B7-waD"/>
-                            <constraint firstAttribute="trailing" secondItem="SU1-GD-Ons" secondAttribute="trailing" constant="8" id="uNo-Mk-zpo"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="F1o-pT-LRI"/>
-                                <exclude reference="UWi-xk-LQn"/>
-                                <exclude reference="VYm-UK-sW1"/>
-                                <exclude reference="cde-9c-fcG"/>
-                                <exclude reference="p2E-W7-mi4"/>
-                                <exclude reference="pgU-hm-BT1"/>
-                            </mask>
-                        </variation>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="cameraButton" destination="Gaj-h6-TIr" id="U86-Xp-PQa"/>
                         <outlet property="locationDescriptionTextField" destination="JOQ-pC-1Ce" id="Mwz-oO-dzT"/>
                         <outlet property="locationNameTextField" destination="SU1-GD-Ons" id="UGY-4E-uAj"/>
+                        <outlet property="mapHeightConstraint" destination="0hW-dQ-fUG" id="537-6P-Yb2"/>
                         <outlet property="mapView" destination="eTz-S3-rke" id="UwY-Qn-ERC"/>
+                        <outlet property="pinDropReminderLabel" destination="yoq-0w-59d" id="3zn-uI-z0R"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jT6-HC-cRd" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -448,7 +449,7 @@
                                     <constraint firstAttribute="height" constant="46" id="gn3-Ls-9Va"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="25"/>
-                                <state key="normal" title="Create your own tour">
+                                <state key="normal" title="Create a tour">
                                     <color key="titleColor" red="0.27843137254901962" green="0.50980392156862742" blue="0.85490196078431369" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <variation key="default">
@@ -463,8 +464,8 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iZU-Lr-KvV">
                                 <rect key="frame" x="16" y="104" width="288" height="45"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="25"/>
-                                <state key="normal" title="Select your tour">
-                                    <color key="titleColor" red="0.27843137254901962" green="0.50980392156862742" blue="0.85490196078431369" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Select a tour">
+                                    <color key="titleColor" red="0.27840076974743694" green="0.51002020468252163" blue="0.85375236742424243" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
                                     <segue destination="tqM-E3-5K0" kind="show" id="1Gy-tP-J2d"/>
