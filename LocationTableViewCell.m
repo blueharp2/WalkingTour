@@ -14,11 +14,9 @@
 @property (weak, nonatomic) IBOutlet UIImageView *locationImageView;
 @property (weak, nonatomic) IBOutlet UILabel *locationLabel;
 
-
 @end
 
 @implementation LocationTableViewCell
-
 
 - (void)awakeFromNib {
     self.locationImageView.layer.cornerRadius = 5.0;
@@ -28,30 +26,9 @@
     [super setSelected:selected animated:animated];
 }
 
-+ (NSString *)reuseIdentifier {
-    return @"CustomCellIdentifier";
-}
-
 - (void)setLocation:(Location *)location {
     _location = location;
     self.locationLabel.text = location.locationName;
-    
-//    if ([location.photo.url containsString:@".jpg"]) {
-//        [location.photo getDataInBackgroundWithBlock:^(NSData * _Nullable data, NSError * _Nullable error) {
-//            if (error) {
-//                NSLog(@"%@", error.localizedFailureReason);
-//                self.locationImageView.backgroundColor = [UIColor colorWithRed:0.000 green:0.152 blue:1.000 alpha:1.000];
-//            }
-//            if (data) {
-//                UIImage *image = [UIImage imageWithData:data];
-//                [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-//                    self.locationImageView.image = image;
-//                }];
-//            }
-//        }];
-//    } else {
-//        //get a screenshot from the video
-//    }
 }
 
 - (void)setImage:(UIImage *)image {

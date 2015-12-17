@@ -25,6 +25,10 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
+- (IBAction)cancelPressed:(UIBarButtonItem *)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+
+}
 
 - (IBAction)saveSignUp:(id)sender {
     
