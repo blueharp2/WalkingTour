@@ -8,9 +8,12 @@
 
 #import <UIKit/UIKit.h>
 @import AVFoundation;
+#import "Location.h"
 
 @interface TourDetailViewController : UIViewController
 
-@property (strong, nonatomic) NSURL *videoURL;
+//@property (strong, nonatomic) NSURL *videoURL;
+@property (strong, nonatomic) Location *location;
+- (void)setLocation:(Location *)location;
 
 @end
