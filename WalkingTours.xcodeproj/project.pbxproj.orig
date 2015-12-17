@@ -34,9 +34,24 @@
 		3D7264021C1F687D00ABEEFD /* WalkingTour.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D7264011C1F687D00ABEEFD /* WalkingTour.png */; };
 		3D7264051C1F6BCC00ABEEFD /* TourSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D7264041C1F6BCC00ABEEFD /* TourSelectionViewController.m */; };
 		3D7264071C1F716E00ABEEFD /* ParseLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D7264061C1F716E00ABEEFD /* ParseLoginViewController.m */; };
+<<<<<<< HEAD
+		90090C991C2339630040EE94 /* Rectangle 1.png in Resources */ = {isa = PBXBuildFile; fileRef = 90090C901C2339630040EE94 /* Rectangle 1.png */; };
+		90090C9A1C2339630040EE94 /* Rectangle 1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 90090C911C2339630040EE94 /* Rectangle 1@2x.png */; };
+		90090C9B1C2339630040EE94 /* Rectangle 1@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 90090C921C2339630040EE94 /* Rectangle 1@3x.png */; };
+		90090C9C1C2339630040EE94 /* Rectangle 2 Copy 2.png in Resources */ = {isa = PBXBuildFile; fileRef = 90090C931C2339630040EE94 /* Rectangle 2 Copy 2.png */; };
+		90090C9D1C2339630040EE94 /* Rectangle 2 Copy 2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 90090C941C2339630040EE94 /* Rectangle 2 Copy 2@2x.png */; };
+		90090C9E1C2339630040EE94 /* Rectangle 2 Copy 2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 90090C951C2339630040EE94 /* Rectangle 2 Copy 2@3x.png */; };
+		90090C9F1C2339630040EE94 /* Rectangle 3 Copy.png in Resources */ = {isa = PBXBuildFile; fileRef = 90090C961C2339630040EE94 /* Rectangle 3 Copy.png */; };
+		90090CA01C2339630040EE94 /* Rectangle 3 Copy@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 90090C971C2339630040EE94 /* Rectangle 3 Copy@2x.png */; };
+		90090CA11C2339630040EE94 /* Rectangle 3 Copy@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 90090C981C2339630040EE94 /* Rectangle 3 Copy@3x.png */; };
+=======
+		3D9A58701C2329F90056A624 /* sandfootprints 700h.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3D9A586F1C2329F90056A624 /* sandfootprints 700h.jpg */; };
+		3D9A58721C232C180056A624 /* newyorkpin copy700h.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3D9A58711C232C180056A624 /* newyorkpin copy700h.jpg */; };
+>>>>>>> master
+		902868C61C22804D005224A4 /* photo.png in Resources */ = {isa = PBXBuildFile; fileRef = 902868C51C22804D005224A4 /* photo.png */; };
+		902868C81C228BD3005224A4 /* idaho.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 902868C71C228BD3005224A4 /* idaho.jpg */; };
 		903177CB1C1F3A9E001C8DF9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 903177CA1C1F3A9E001C8DF9 /* main.m */; };
 		903177CE1C1F3A9E001C8DF9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 903177CD1C1F3A9E001C8DF9 /* AppDelegate.m */; };
-		903177D11C1F3A9E001C8DF9 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 903177D01C1F3A9E001C8DF9 /* ViewController.m */; };
 		903177D41C1F3A9E001C8DF9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 903177D21C1F3A9E001C8DF9 /* Main.storyboard */; };
 		903177D61C1F3A9E001C8DF9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 903177D51C1F3A9E001C8DF9 /* Assets.xcassets */; };
 		903177D91C1F3A9E001C8DF9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 903177D71C1F3A9E001C8DF9 /* LaunchScreen.storyboard */; };
@@ -51,11 +66,9 @@
 		90AE88D11C209290005536B4 /* CategoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 90AE88CF1C209290005536B4 /* CategoryTableViewCell.m */; };
 		90AE88D21C209290005536B4 /* CategoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 90AE88D01C209290005536B4 /* CategoryTableViewCell.xib */; };
 		90F4E22B1C1FA7B3002A75B2 /* CreateTourViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90F4E22A1C1FA7B3002A75B2 /* CreateTourViewController.m */; };
-<<<<<<< HEAD
-=======
 		90FD33551C210AAA002FFD1A /* LocationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 90FD33531C210AAA002FFD1A /* LocationTableViewCell.m */; };
 		90FD33561C210AAA002FFD1A /* LocationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 90FD33541C210AAA002FFD1A /* LocationTableViewCell.xib */; };
->>>>>>> master
+		BF5FECB61C22909D00E7A16D /* Gradient.m in Sources */ = {isa = PBXBuildFile; fileRef = BF5FECB51C22909D00E7A16D /* Gradient.m */; };
 		BF7EAC391C207FC40076E432 /* POIDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF7EAC381C207FC40076E432 /* POIDetailTableViewCell.xib */; };
 		BF7EAC3C1C2080160076E432 /* POIDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BF7EAC3B1C2080160076E432 /* POIDetailTableViewCell.m */; };
 		BFAD24D11C20ECED009557DF /* TourListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFAD24D01C20ECED009557DF /* TourListViewController.m */; };
@@ -113,12 +126,26 @@
 		3D7264031C1F6BCC00ABEEFD /* TourSelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TourSelectionViewController.h; path = WalkingTours/TourSelectionViewController.h; sourceTree = "<group>"; };
 		3D7264041C1F6BCC00ABEEFD /* TourSelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TourSelectionViewController.m; path = WalkingTours/TourSelectionViewController.m; sourceTree = "<group>"; };
 		3D7264061C1F716E00ABEEFD /* ParseLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParseLoginViewController.m; sourceTree = "<group>"; };
+<<<<<<< HEAD
+		90090C901C2339630040EE94 /* Rectangle 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Rectangle 1.png"; sourceTree = "<group>"; };
+		90090C911C2339630040EE94 /* Rectangle 1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Rectangle 1@2x.png"; sourceTree = "<group>"; };
+		90090C921C2339630040EE94 /* Rectangle 1@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Rectangle 1@3x.png"; sourceTree = "<group>"; };
+		90090C931C2339630040EE94 /* Rectangle 2 Copy 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Rectangle 2 Copy 2.png"; sourceTree = "<group>"; };
+		90090C941C2339630040EE94 /* Rectangle 2 Copy 2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Rectangle 2 Copy 2@2x.png"; sourceTree = "<group>"; };
+		90090C951C2339630040EE94 /* Rectangle 2 Copy 2@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Rectangle 2 Copy 2@3x.png"; sourceTree = "<group>"; };
+		90090C961C2339630040EE94 /* Rectangle 3 Copy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Rectangle 3 Copy.png"; sourceTree = "<group>"; };
+		90090C971C2339630040EE94 /* Rectangle 3 Copy@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Rectangle 3 Copy@2x.png"; sourceTree = "<group>"; };
+		90090C981C2339630040EE94 /* Rectangle 3 Copy@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Rectangle 3 Copy@3x.png"; sourceTree = "<group>"; };
+=======
+		3D9A586F1C2329F90056A624 /* sandfootprints 700h.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "sandfootprints 700h.jpg"; sourceTree = "<group>"; };
+		3D9A58711C232C180056A624 /* newyorkpin copy700h.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "newyorkpin copy700h.jpg"; sourceTree = "<group>"; };
+>>>>>>> master
+		902868C51C22804D005224A4 /* photo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = photo.png; sourceTree = "<group>"; };
+		902868C71C228BD3005224A4 /* idaho.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = idaho.jpg; sourceTree = "<group>"; };
 		903177C61C1F3A9E001C8DF9 /* WalkingTours.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WalkingTours.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		903177CA1C1F3A9E001C8DF9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		903177CC1C1F3A9E001C8DF9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		903177CD1C1F3A9E001C8DF9 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		903177CF1C1F3A9E001C8DF9 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		903177D01C1F3A9E001C8DF9 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		903177D31C1F3A9E001C8DF9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		903177D51C1F3A9E001C8DF9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		903177D81C1F3A9E001C8DF9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -146,12 +173,11 @@
 		90AE88D01C209290005536B4 /* CategoryTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CategoryTableViewCell.xib; sourceTree = "<group>"; };
 		90F4E2291C1FA7B3002A75B2 /* CreateTourViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CreateTourViewController.h; path = WalkingTours/CreateTourViewController.h; sourceTree = "<group>"; };
 		90F4E22A1C1FA7B3002A75B2 /* CreateTourViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CreateTourViewController.m; path = WalkingTours/CreateTourViewController.m; sourceTree = "<group>"; };
-<<<<<<< HEAD
-=======
 		90FD33521C210AAA002FFD1A /* LocationTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationTableViewCell.h; sourceTree = "<group>"; };
 		90FD33531C210AAA002FFD1A /* LocationTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationTableViewCell.m; sourceTree = "<group>"; };
 		90FD33541C210AAA002FFD1A /* LocationTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LocationTableViewCell.xib; sourceTree = "<group>"; };
->>>>>>> master
+		BF5FECB41C22909D00E7A16D /* Gradient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Gradient.h; sourceTree = "<group>"; };
+		BF5FECB51C22909D00E7A16D /* Gradient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Gradient.m; sourceTree = "<group>"; };
 		BF7EAC381C207FC40076E432 /* POIDetailTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = POIDetailTableViewCell.xib; sourceTree = "<group>"; };
 		BF7EAC3A1C2080160076E432 /* POIDetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = POIDetailTableViewCell.h; sourceTree = "<group>"; };
 		BF7EAC3B1C2080160076E432 /* POIDetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = POIDetailTableViewCell.m; sourceTree = "<group>"; };
@@ -281,12 +307,24 @@
 				90380EF21C1F48730085DD66 /* Models */,
 				903177CC1C1F3A9E001C8DF9 /* AppDelegate.h */,
 				903177CD1C1F3A9E001C8DF9 /* AppDelegate.m */,
-				903177CF1C1F3A9E001C8DF9 /* ViewController.h */,
-				903177D01C1F3A9E001C8DF9 /* ViewController.m */,
 				903177D51C1F3A9E001C8DF9 /* Assets.xcassets */,
+				90090C901C2339630040EE94 /* Rectangle 1.png */,
+				90090C911C2339630040EE94 /* Rectangle 1@2x.png */,
+				90090C921C2339630040EE94 /* Rectangle 1@3x.png */,
+				90090C931C2339630040EE94 /* Rectangle 2 Copy 2.png */,
+				90090C941C2339630040EE94 /* Rectangle 2 Copy 2@2x.png */,
+				90090C951C2339630040EE94 /* Rectangle 2 Copy 2@3x.png */,
+				90090C961C2339630040EE94 /* Rectangle 3 Copy.png */,
+				90090C971C2339630040EE94 /* Rectangle 3 Copy@2x.png */,
+				90090C981C2339630040EE94 /* Rectangle 3 Copy@3x.png */,
+				902868C51C22804D005224A4 /* photo.png */,
+				902868C71C228BD3005224A4 /* idaho.jpg */,
 				903177DA1C1F3A9E001C8DF9 /* Info.plist */,
 				903177C91C1F3A9E001C8DF9 /* Supporting Files */,
 				3D43CF1F1C1F478D00118998 /* WalkingTours58.png */,
+				3D7264011C1F687D00ABEEFD /* WalkingTour.png */,
+				3D9A586F1C2329F90056A624 /* sandfootprints 700h.jpg */,
+				3D9A58711C232C180056A624 /* newyorkpin copy700h.jpg */,
 				3D43CF201C1F478D00118998 /* WalkingTours60.png */,
 				3D43CF211C1F478D00118998 /* WalkingTours80.png */,
 				3D43CF221C1F478D00118998 /* WalkingTours120.png */,
@@ -297,7 +335,6 @@
 		903177C91C1F3A9E001C8DF9 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				3D7264011C1F687D00ABEEFD /* WalkingTour.png */,
 				903177CA1C1F3A9E001C8DF9 /* main.m */,
 			);
 			name = "Supporting Files";
@@ -351,6 +388,8 @@
 				BFD4418B1C1F6C21004F8CDE /* TourMapViewController.m */,
 				BFAD24CF1C20ECED009557DF /* TourListViewController.h */,
 				BFAD24D01C20ECED009557DF /* TourListViewController.m */,
+				BF5FECB41C22909D00E7A16D /* Gradient.h */,
+				BF5FECB51C22909D00E7A16D /* Gradient.m */,
 				9050ECDA1C1F7B920092CF86 /* TourDetailViewController.h */,
 				9050ECDB1C1F7B920092CF86 /* TourDetailViewController.m */,
 			);
@@ -498,17 +537,33 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				90090C9D1C2339630040EE94 /* Rectangle 2 Copy 2@2x.png in Resources */,
 				3D43CF261C1F478D00118998 /* WalkingTours120.png in Resources */,
 				90AE88D21C209290005536B4 /* CategoryTableViewCell.xib in Resources */,
+				902868C61C22804D005224A4 /* photo.png in Resources */,
+				3D9A58701C2329F90056A624 /* sandfootprints 700h.jpg in Resources */,
 				90FD33561C210AAA002FFD1A /* LocationTableViewCell.xib in Resources */,
 				3D7264021C1F687D00ABEEFD /* WalkingTour.png in Resources */,
+				90090C9F1C2339630040EE94 /* Rectangle 3 Copy.png in Resources */,
 				3D43CF231C1F478D00118998 /* WalkingTours58.png in Resources */,
+				90090C9B1C2339630040EE94 /* Rectangle 1@3x.png in Resources */,
 				903177D91C1F3A9E001C8DF9 /* LaunchScreen.storyboard in Resources */,
 				BF7EAC391C207FC40076E432 /* POIDetailTableViewCell.xib in Resources */,
 				903177D61C1F3A9E001C8DF9 /* Assets.xcassets in Resources */,
 				3D43CF241C1F478D00118998 /* WalkingTours60.png in Resources */,
 				903177D41C1F3A9E001C8DF9 /* Main.storyboard in Resources */,
+				90090C9A1C2339630040EE94 /* Rectangle 1@2x.png in Resources */,
 				3D43CF251C1F478D00118998 /* WalkingTours80.png in Resources */,
+<<<<<<< HEAD
+				90090C9E1C2339630040EE94 /* Rectangle 2 Copy 2@3x.png in Resources */,
+				90090C9C1C2339630040EE94 /* Rectangle 2 Copy 2.png in Resources */,
+				90090CA11C2339630040EE94 /* Rectangle 3 Copy@3x.png in Resources */,
+				90090C991C2339630040EE94 /* Rectangle 1.png in Resources */,
+				90090CA01C2339630040EE94 /* Rectangle 3 Copy@2x.png in Resources */,
+=======
+				3D9A58721C232C180056A624 /* newyorkpin copy700h.jpg in Resources */,
+>>>>>>> master
+				902868C81C228BD3005224A4 /* idaho.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -539,7 +594,6 @@
 				3D43CF2D1C1F4E4D00118998 /* ParseSignUpViewController.m in Sources */,
 				90F4E22B1C1FA7B3002A75B2 /* CreateTourViewController.m in Sources */,
 				BFD441891C1F6574004F8CDE /* FindToursViewController.m in Sources */,
-				903177D11C1F3A9E001C8DF9 /* ViewController.m in Sources */,
 				9050ECDF1C1F82F20092CF86 /* CreateTourDetailViewController.m in Sources */,
 				90380EF81C1F4C590085DD66 /* Location.m in Sources */,
 				3D43CF301C1F4E5B00118998 /* ParseResetPasswordViewController.m in Sources */,
@@ -553,6 +607,7 @@
 				BFAD24D11C20ECED009557DF /* TourListViewController.m in Sources */,
 				903177CB1C1F3A9E001C8DF9 /* main.m in Sources */,
 				90380EF51C1F49160085DD66 /* Tour.m in Sources */,
+				BF5FECB61C22909D00E7A16D /* Gradient.m in Sources */,
 				3D7264051C1F6BCC00ABEEFD /* TourSelectionViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
