@@ -76,22 +76,7 @@
     [self performSegueWithIdentifier:@"TourDetailViewController" sender:tourId];
 }
 
-#pragma mark SEGUE
-
-//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-//    
-//    if ([sender isKindOfClass:[NSString class]]) {
-//    }
-//    }
-
-
 @end
-
-
-
-
-//        MKAnnotationView *annotationView = (MKAnnotationView *)sender;
-//        TourDetailViewController *tourDetailViewController = (TourDetailViewController *)segue.destinationViewController;
 
 
 
