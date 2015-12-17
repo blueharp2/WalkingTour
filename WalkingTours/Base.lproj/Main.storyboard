@@ -441,10 +441,10 @@
             </objects>
             <point key="canvasLocation" x="2805" y="-644"/>
         </scene>
-        <!--Find Tours Nearby-->
+        <!--Find Tours-->
         <scene sceneID="UoJ-JZ-cjF">
             <objects>
-                <viewController title="Find Tours Nearby" id="tqM-E3-5K0" customClass="FindToursViewController" sceneMemberID="viewController">
+                <viewController title="Find Tours" id="tqM-E3-5K0" customClass="FindToursViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="02n-Ua-OER"/>
                         <viewControllerLayoutGuide type="bottom" id="5vw-EB-vwN"/>
@@ -533,7 +533,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0iQ-L2-MJt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5166" y="-865"/>
+            <point key="canvasLocation" x="4154" y="-895"/>
         </scene>
         <!--Create Tour ViewController-->
         <scene sceneID="PvD-xR-3JL">
@@ -658,7 +658,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h2j-IS-vEX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4634" y="-244"/>
+            <point key="canvasLocation" x="4154" y="-264"/>
         </scene>
         <!--TourDetailViewController-->
         <scene sceneID="dRw-18-JAy">
@@ -673,8 +673,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ab4-nZ-Lpj">
-                                <rect key="frame" x="16" y="280" width="288" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <rect key="frame" x="16" y="280" width="288" height="23"/>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -697,9 +697,9 @@
                                     <constraint firstItem="Q8D-Ok-M3Z" firstAttribute="centerY" secondItem="MeJ-Tg-42J" secondAttribute="centerY" id="hXx-OU-HKT"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X4c-dm-N9G">
-                                <rect key="frame" x="16" y="308" width="288" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X4c-dm-N9G">
+                                <rect key="frame" x="16" y="311" width="288" height="23"/>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -727,7 +727,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jtp-dI-fuk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5661" y="-848"/>
+            <point key="canvasLocation" x="4634" y="-604"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Tcs-cV-O0U">
