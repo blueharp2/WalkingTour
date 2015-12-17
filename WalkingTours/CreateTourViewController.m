@@ -21,6 +21,7 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *nameOfTourTextField;
 @property (weak, nonatomic) IBOutlet UITextField *tourDescriptionTextField;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *addLocationButtonBottomConstraint;
 
 @property (weak, nonatomic) IBOutlet UIButton *addLocationButton;
 - (IBAction)addLocationsButton:(id)sender;
@@ -39,7 +40,15 @@
     [super viewDidLoad];
     [self setupMainViewController];
     self.addLocationButton.layer.cornerRadius = self.addLocationButton.frame.size.width / 2;
+}
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    if (self.locations.count == 0) {
+        self.addLocationButtonBottomConstraint.constant = self.view.frame.size.height / 2;
+    } else {
+        self.addLocationButtonBottomConstraint.constant = 30;
+    }
 }
 
 -(void)setupMainViewController{

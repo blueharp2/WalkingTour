@@ -403,7 +403,7 @@ static const NSArray *categories;
     [self setRegion: MKCoordinateRegionMakeWithDistance(location.coordinate, 300.0, 300.0)];
 }
 
--(void) setRegion: (MKCoordinateRegion) region {
+-(void)setRegion:(MKCoordinateRegion) region {
     [self.mapView setRegion:region animated:YES];
 }
 

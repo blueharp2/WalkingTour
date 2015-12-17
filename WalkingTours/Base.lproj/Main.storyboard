@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1509" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="K2L-KG-DHg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="K2L-KG-DHg">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
@@ -333,10 +333,10 @@
             </objects>
             <point key="canvasLocation" x="1808" y="-306"/>
         </scene>
-        <!--CreateTourDetailVC-->
+        <!--Add Location-->
         <scene sceneID="Qhg-dh-nYD">
             <objects>
-                <viewController title="CreateTourDetailVC" id="ch6-eO-iFm" customClass="CreateTourDetailViewController" sceneMemberID="viewController">
+                <viewController title="Add Location" id="ch6-eO-iFm" customClass="CreateTourDetailViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="cYn-Hr-gxW"/>
                         <viewControllerLayoutGuide type="bottom" id="hOD-qw-MCN"/>
@@ -378,7 +378,7 @@
                                     <constraint firstAttribute="width" constant="36" id="e2B-bb-cCO"/>
                                     <constraint firstAttribute="height" constant="36" id="xy7-YZ-7Yx"/>
                                 </constraints>
-                                <state key="normal" image="photo.png"/>
+                                <state key="normal" image="photo"/>
                                 <connections>
                                     <action selector="cameraButtonPressed:" destination="ch6-eO-iFm" eventType="touchUpInside" id="Zhd-7Z-GQP"/>
                                 </connections>
@@ -598,10 +598,10 @@
             </objects>
             <point key="canvasLocation" x="4154" y="-895"/>
         </scene>
-        <!--Create Tour ViewController-->
+        <!--Create Tour-->
         <scene sceneID="PvD-xR-3JL">
             <objects>
-                <viewController title="Create Tour ViewController" id="vsA-st-EdL" customClass="CreateTourViewController" sceneMemberID="viewController">
+                <viewController title="Create Tour" id="vsA-st-EdL" customClass="CreateTourViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="lnd-bp-pY4"/>
                         <viewControllerLayoutGuide type="bottom" id="aDh-or-b7o"/>
@@ -660,12 +660,11 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="gha-TO-9kk" firstAttribute="top" secondItem="mFF-Dj-GkE" secondAttribute="bottom" constant="33" id="1FL-10-yGa"/>
                             <constraint firstItem="mFF-Dj-GkE" firstAttribute="centerX" secondItem="HCd-lq-wYg" secondAttribute="centerX" id="5KY-NF-MI6"/>
                             <constraint firstItem="Wq2-4m-Ca4" firstAttribute="leading" secondItem="HCd-lq-wYg" secondAttribute="leading" constant="20" id="63d-SY-JCg"/>
-                            <constraint firstItem="aDh-or-b7o" firstAttribute="top" secondItem="mFF-Dj-GkE" secondAttribute="bottom" constant="20" id="6gE-1M-QPw"/>
+                            <constraint firstItem="aDh-or-b7o" firstAttribute="top" secondItem="mFF-Dj-GkE" secondAttribute="bottom" constant="30" id="6gE-1M-QPw"/>
                             <constraint firstItem="Wq2-4m-Ca4" firstAttribute="centerX" secondItem="HCd-lq-wYg" secondAttribute="centerX" id="8AW-On-XWG"/>
                             <constraint firstItem="Qal-q6-3hA" firstAttribute="top" secondItem="lnd-bp-pY4" secondAttribute="bottom" constant="20" id="8mW-Ed-8Jb"/>
                             <constraint firstItem="1L6-cQ-RUl" firstAttribute="top" secondItem="Qal-q6-3hA" secondAttribute="bottom" constant="20" id="AwY-GO-5gI"/>
@@ -673,7 +672,6 @@
                             <constraint firstItem="gha-TO-9kk" firstAttribute="leading" secondItem="HCd-lq-wYg" secondAttribute="leading" id="TMa-nB-7kr"/>
                             <constraint firstAttribute="trailing" secondItem="Wq2-4m-Ca4" secondAttribute="trailing" constant="20" id="Y37-oq-emk"/>
                             <constraint firstAttribute="bottom" secondItem="gha-TO-9kk" secondAttribute="bottom" id="b15-ut-DgQ"/>
-                            <constraint firstItem="mFF-Dj-GkE" firstAttribute="top" secondItem="Wq2-4m-Ca4" secondAttribute="bottom" constant="30" id="b6P-e2-OAs"/>
                             <constraint firstItem="gha-TO-9kk" firstAttribute="top" secondItem="Wq2-4m-Ca4" secondAttribute="bottom" constant="40" id="eCe-2K-mkQ"/>
                             <constraint firstItem="1L6-cQ-RUl" firstAttribute="centerX" secondItem="HCd-lq-wYg" secondAttribute="centerX" id="hwd-tb-nlg"/>
                             <constraint firstItem="1L6-cQ-RUl" firstAttribute="leading" secondItem="HCd-lq-wYg" secondAttribute="leading" constant="20" id="l7t-b1-wfD"/>
@@ -681,16 +679,11 @@
                             <constraint firstItem="Wq2-4m-Ca4" firstAttribute="top" secondItem="1L6-cQ-RUl" secondAttribute="bottom" constant="10" id="q5a-6h-3bp"/>
                             <constraint firstAttribute="trailing" secondItem="1L6-cQ-RUl" secondAttribute="trailing" constant="20" id="woJ-aC-Fh4"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="1FL-10-yGa"/>
-                                <exclude reference="b6P-e2-OAs"/>
-                            </mask>
-                        </variation>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="addLocationButton" destination="mFF-Dj-GkE" id="4yG-rf-iBb"/>
+                        <outlet property="addLocationButtonBottomConstraint" destination="6gE-1M-QPw" id="5xf-Xf-uUK"/>
                         <outlet property="locationTableView" destination="gha-TO-9kk" id="eKo-O0-ceZ"/>
                         <outlet property="nameOfTourTextField" destination="1L6-cQ-RUl" id="Cvu-tr-3ZM"/>
                         <outlet property="tourDescriptionTextField" destination="Wq2-4m-Ca4" id="IFe-1h-104"/>
@@ -776,7 +769,7 @@
                                     <constraint firstItem="Q8D-Ok-M3Z" firstAttribute="centerY" secondItem="MeJ-Tg-42J" secondAttribute="centerY" id="hXx-OU-HKT"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X4c-dm-N9G">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X4c-dm-N9G">
                                 <rect key="frame" x="16" y="343" width="288" height="22"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                                 <color key="textColor" red="0.2784313725" green="0.50980392159999999" blue="0.85490196080000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -849,7 +842,7 @@
         <image name="iosListOutline" width="23" height="31"/>
         <image name="linea--basic-map" width="28" height="30"/>
         <image name="newyorkpin copy700h.jpg" width="564" height="700"/>
-        <image name="photo.png" width="512" height="512"/>
+        <image name="photo" width="40" height="40"/>
         <image name="seattle" width="3264" height="2448"/>
     </resources>
     <inferredMetricsTieBreakers>
