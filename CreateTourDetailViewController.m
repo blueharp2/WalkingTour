@@ -17,7 +17,7 @@
 
 static const NSArray *categories;
 
-@interface CreateTourDetailViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITableViewDataSource, UITableViewDelegate, MKMapViewDelegate, CLLocationManagerDelegate>
+@interface CreateTourDetailViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITableViewDataSource, UITableViewDelegate, MKMapViewDelegate, CLLocationManagerDelegate, UITextFieldDelegate>
 
 @property (strong, nonatomic) UIImagePickerController *imagePicker;
 @property (strong, nonatomic) UIView *greyOutView;
@@ -62,8 +62,9 @@ static const NSArray *categories;
     self.mapView.delegate = self;
     [self requestPermissions];
     [self.locationManager setDelegate:self];
-//    [self locationControllerDidUpdateLocation:_locationManager.location];
     
+    self.locationNameTextField.delegate = self;
+    self.locationDescriptionTextField.delegate = self;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -457,6 +458,16 @@ static const NSArray *categories;
         self.mapPinAnnotation = newPoint;
         [self.mapView addAnnotation:newPoint];
     }
+}
+
+#pragma mark - UITextFieldDelegate
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    if (textField.tag == 0 && self.locationDescriptionTextField.text.length == 0) {
+        [self.locationDescriptionTextField becomeFirstResponder];
+    }
+    return YES;
 }
 
 @end
