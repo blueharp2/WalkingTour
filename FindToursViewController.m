@@ -14,10 +14,12 @@
 #import "Location.h"
 #import "POIDetailTableViewCell.h"
 #import "ParseService.h"
+#import "Gradient.h"
 
 @import UIKit;
 @import CoreLocation;
 @import MapKit;
+@import QuartzCore;
 
 @import Parse;
 @import ParseUI;
@@ -98,6 +100,13 @@
     //Setup up MapView
     [self.mapView setDelegate:self];
     [self.mapView setShowsUserLocation: YES];
+    
+    CAGradientLayer *gradientLayer = [Gradient blueGradient];
+    gradientLayer.frame = CGRectMake(0, 0, self.view.bounds.size.width, 1000.0); // Insted of a 1000, you can calculate the height of the tableView... cant use tableView height, its not set yet.
+    
+    UIView *tableBackgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.toursTableView.bounds.size.width, self.toursTableView.bounds.size.height)];
+    [tableBackgroundView.layer insertSublayer:gradientLayer atIndex:0];
+    [self.toursTableView setBackgroundView:tableBackgroundView];
     
 }
 
@@ -220,6 +229,12 @@
 {
     NSString *tourId = self.toursFromParse[indexPath.row].objectId;
     [self performSegueWithIdentifier:@"TabBarController" sender:tourId];
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    cell.backgroundColor = [UIColor clearColor];
+    
 }
 
 #pragma mark - Navigation

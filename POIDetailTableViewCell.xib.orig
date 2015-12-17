@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -10,21 +10,25 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="POIDetailTableViewCell" rowHeight="50" id="o5G-XJ-2k7" customClass="POIDetailTableViewCell">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="POIDetailTableViewCell" rowHeight="60" id="o5G-XJ-2k7" customClass="POIDetailTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="323" height="60"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="o5G-XJ-2k7" id="ZhC-BL-S3Y">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
+                <rect key="frame" x="0.0" y="0.0" width="323" height="59"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+<<<<<<< HEAD
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="251" image="map-marker" translatesAutoresizingMaskIntoConstraints="NO" id="LUE-Nl-1Ik">
+                        <rect key="frame" x="15" y="4" width="33" height="33"/>
+=======
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="1000" verticalHuggingPriority="251" image="map-marker" translatesAutoresizingMaskIntoConstraints="NO" id="LUE-Nl-1Ik">
                         <rect key="frame" x="18" y="8" width="30" height="30"/>
-                        <animations/>
+>>>>>>> master
                         <constraints>
-                            <constraint firstAttribute="width" constant="30" id="4g8-qH-7de"/>
+                            <constraint firstAttribute="width" constant="33" id="4g8-qH-7de"/>
                             <constraint firstAttribute="height" constant="32" id="N9V-or-3TC"/>
                             <constraint firstAttribute="width" secondItem="LUE-Nl-1Ik" secondAttribute="height" multiplier="1:1" id="TFA-EM-aRW"/>
-                            <constraint firstAttribute="height" constant="30" id="tyk-Sd-2iR"/>
+                            <constraint firstAttribute="height" constant="33" id="tyk-Sd-2iR"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -33,30 +37,29 @@
                             </mask>
                         </variation>
                     </imageView>
-<<<<<<< HEAD:POIDetailTableViewCell.xib
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="244" verticalHuggingPriority="247" horizontalCompressionResistancePriority="1000" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FAF-Sl-sO5" userLabel="titleLabel">
-                        <rect key="frame" x="56" y="8" width="244" height="30"/>
-=======
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="244" verticalHuggingPriority="247" horizontalCompressionResistancePriority="1000" ambiguous="YES" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FAF-Sl-sO5" userLabel="titleLabel">
-                        <rect key="frame" x="56" y="14" width="244" height="21"/>
-                        <animations/>
->>>>>>> master:POIDetailCell.xib
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+<<<<<<< HEAD
+                        <rect key="frame" x="56" y="8" width="247" height="23"/>
+                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+=======
+                        <rect key="frame" x="56" y="8" width="244" height="30"/>
+                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
+                        <color key="textColor" red="0.2784313725" green="0.50980392159999999" blue="0.85490196080000003" alpha="1" colorSpace="calibratedRGB"/>
+>>>>>>> master
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
-                <animations/>
                 <constraints>
                     <constraint firstItem="LUE-Nl-1Ik" firstAttribute="width" secondItem="ZhC-BL-S3Y" secondAttribute="width" multiplier="1/10" constant="-2" id="5KX-i9-HQo"/>
-                    <constraint firstItem="LUE-Nl-1Ik" firstAttribute="leading" secondItem="ZhC-BL-S3Y" secondAttribute="leadingMargin" constant="10" id="6wd-Da-s2F"/>
+                    <constraint firstItem="LUE-Nl-1Ik" firstAttribute="leading" secondItem="ZhC-BL-S3Y" secondAttribute="leadingMargin" constant="7" id="6wd-Da-s2F"/>
                     <constraint firstAttribute="bottom" secondItem="FAF-Sl-sO5" secondAttribute="bottom" id="BuX-sc-oRs"/>
                     <constraint firstAttribute="topMargin" secondItem="LUE-Nl-1Ik" secondAttribute="top" id="OFg-QI-V4A"/>
                     <constraint firstAttribute="bottomMargin" secondItem="FAF-Sl-sO5" secondAttribute="bottom" id="SxG-tu-uZy"/>
-                    <constraint firstItem="LUE-Nl-1Ik" firstAttribute="bottom" secondItem="ZhC-BL-S3Y" secondAttribute="bottomMargin" constant="-3" id="UuO-Rb-2c4"/>
+                    <constraint firstItem="LUE-Nl-1Ik" firstAttribute="bottom" secondItem="ZhC-BL-S3Y" secondAttribute="bottomMargin" id="UuO-Rb-2c4"/>
                     <constraint firstItem="FAF-Sl-sO5" firstAttribute="trailing" secondItem="ZhC-BL-S3Y" secondAttribute="trailingMargin" id="WAu-Xv-Wjv"/>
                     <constraint firstAttribute="trailing" secondItem="FAF-Sl-sO5" secondAttribute="trailing" constant="20" symbolic="YES" id="axI-6e-BSb"/>
-                    <constraint firstItem="FAF-Sl-sO5" firstAttribute="centerY" secondItem="LUE-Nl-1Ik" secondAttribute="centerY" id="gGw-EP-VT9"/>
+                    <constraint firstItem="FAF-Sl-sO5" firstAttribute="centerY" secondItem="LUE-Nl-1Ik" secondAttribute="centerY" constant="-1.5" id="gGw-EP-VT9"/>
                     <constraint firstItem="FAF-Sl-sO5" firstAttribute="leading" secondItem="LUE-Nl-1Ik" secondAttribute="trailing" constant="8" id="hsq-bE-bK5"/>
                     <constraint firstItem="FAF-Sl-sO5" firstAttribute="top" secondItem="ZhC-BL-S3Y" secondAttribute="top" constant="8" id="r1s-Vh-hyY"/>
                     <constraint firstItem="FAF-Sl-sO5" firstAttribute="top" secondItem="ZhC-BL-S3Y" secondAttribute="top" constant="10" id="umc-Rc-VPv"/>
@@ -71,12 +74,11 @@
                     </mask>
                 </variation>
             </tableViewCellContentView>
-            <animations/>
             <connections>
                 <outlet property="tourImageView" destination="LUE-Nl-1Ik" id="gCp-fE-Zm8"/>
                 <outlet property="tourNameLabel" destination="FAF-Sl-sO5" id="3MI-ws-Qb5"/>
             </connections>
-            <point key="canvasLocation" x="333" y="147"/>
+            <point key="canvasLocation" x="334.5" y="152"/>
         </tableViewCell>
     </objects>
     <resources>
