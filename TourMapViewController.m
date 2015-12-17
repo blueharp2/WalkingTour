@@ -128,7 +128,7 @@
 
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
     //Put the segue name here...
-    [self performSegueWithIdentifier:@"DetailViewController" sender:view];
+    [self performSegueWithIdentifier:@"TourDetailViewController" sender:view];
     //Find the objectID as a key in the dictionary
 }
 
