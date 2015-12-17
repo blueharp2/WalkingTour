@@ -33,48 +33,36 @@ static const NSString *ItemStatusContext;
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setButtonStatus];
-    [self testVideoStream];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
 
-- (void)testVideoStream {
-    PFQuery *query = [PFQuery queryWithClassName:@"Location"];
-    [query whereKeyExists:@"photo"];
-    [query getFirstObjectInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
-        if (error) {
-            NSLog(@"There was an error");
-        }
-        if (object) {
-            if ([object isKindOfClass:[Location class]]) {
-                Location *location = (Location *)object;
-                if ([location.photo isKindOfClass:[PFFile class]]) {
-                    PFFile *photoFile = (PFFile *)location.photo;
-                    NSURL *mediaURL = [NSURL URLWithString:photoFile.url];
-                    if ([[NSString stringWithFormat:@"%@", mediaURL] containsString:@".mp4"]) {
-                        [self loadVideoAsset:mediaURL];
-                    } else {
-                        [photoFile getDataInBackgroundWithBlock:^(NSData * _Nullable data, NSError * _Nullable error) {
-                            if (error) {
-                                NSLog(@"Error unwrapping image");
-                            }
-                            if (data) {
-                                UIImage *image = [UIImage imageWithData:data];
-                                [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                                    UIImageView *imageView = [[UIImageView alloc] initWithFrame:self.playerView.frame];
-                                    imageView.contentMode = UIViewContentModeScaleAspectFill;
-                                    [self.playerView addSubview:imageView];
-                                    imageView.image = image;
-                                }];
-                            }
-                        }];
-                    }
+- (void)setLocation:(Location *)location {
+    _location = location;
+    
+    if (location.video) {
+        NSURL *videoUrl = [NSURL URLWithString:location.video.url];
+        [self loadVideoAsset:videoUrl];
+    } else {
+        if (location.photo) {
+            [location.photo getDataInBackgroundWithBlock:^(NSData * _Nullable data, NSError * _Nullable error) {
+                if (error) {
+                    NSLog(@"%@", error.localizedFailureReason);
                 }
-            }
+                if (data) {
+                    UIImage *image = [UIImage imageWithData:data];
+                    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                        UIImageView *imageView = [[UIImageView alloc] initWithFrame:self.playerView.frame];
+                        imageView.contentMode = UIViewContentModeScaleAspectFill;
+                        [self.playerView addSubview:imageView];
+                        imageView.image = image;
+                    }];
+                }
+            }];
         }
-    }];
+    }
 }
 
 - (void)loadVideoAsset:(NSURL *)url {
@@ -143,4 +131,5 @@ static const NSString *ItemStatusContext;
         }
     }];
 }
+
 @end
