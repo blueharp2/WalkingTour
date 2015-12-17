@@ -58,11 +58,6 @@
                                     <outlet property="delegate" destination="wsN-44-hsF" id="E8c-aX-KzJ"/>
                                 </connections>
                             </textField>
-<<<<<<< HEAD
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="kes-x4-yde">
-                                <rect key="frame" x="24" y="177" width="272" height="30"/>
-                                <animations/>
-=======
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="kes-x4-yde">
                                 <rect key="frame" x="20" y="179" width="280" height="30"/>
                                 <constraints>
@@ -90,12 +85,6 @@
                                     <action selector="loginButton:" destination="wsN-44-hsF" eventType="touchUpInside" id="v6J-bh-Xxo"/>
                                 </connections>
                             </button>
-<<<<<<< HEAD
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hrs-cf-THY">
-                                <rect key="frame" x="123" y="274" width="73" height="38"/>
-                                <animations/>
-                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="20"/>
-=======
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hrs-cf-THY">
                                 <rect key="frame" x="109" y="323" width="102" height="45"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="27"/>
@@ -369,7 +358,12 @@
                                 <animations/>
                             </imageView>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="eTz-S3-rke">
+<<<<<<< HEAD
+                                <rect key="frame" x="0.0" y="64" width="320" height="150"/>
+                                <animations/>
+=======
                                 <rect key="frame" x="0.0" y="64" width="320" height="284"/>
+>>>>>>> master
                                 <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="150" id="pww-y7-heL"/>
@@ -384,19 +378,34 @@
                                 </connections>
                             </mapView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Location Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SU1-GD-Ons">
+<<<<<<< HEAD
+                                <rect key="frame" x="8" y="222" width="304" height="30"/>
+                                <animations/>
+=======
                                 <rect key="frame" x="20" y="356" width="280" height="30"/>
+>>>>>>> master
                                 <color key="textColor" red="0.2784313725" green="0.50980392159999999" blue="0.85490196080000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Location Description" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JOQ-pC-1Ce">
+<<<<<<< HEAD
+                                <rect key="frame" x="8" y="260" width="304" height="30"/>
+                                <animations/>
+=======
                                 <rect key="frame" x="20" y="394" width="280" height="30"/>
+>>>>>>> master
                                 <color key="textColor" red="0.2784313725" green="0.50980392159999999" blue="0.85490196080000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gaj-h6-TIr">
+<<<<<<< HEAD
+                                <rect key="frame" x="274" y="166" width="36" height="36"/>
+                                <animations/>
+=======
                                 <rect key="frame" x="274" y="300" width="36" height="36"/>
+>>>>>>> master
                                 <constraints>
                                     <constraint firstAttribute="width" constant="36" id="e2B-bb-cCO"/>
                                     <constraint firstAttribute="height" constant="36" id="xy7-YZ-7Yx"/>
@@ -491,13 +500,8 @@
                                 <rect key="frame" x="16" y="104" width="288" height="45"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="25"/>
-<<<<<<< HEAD
-                                <state key="normal" title="Select your tour">
-                                    <color key="titleColor" red="0.27843137254901962" green="0.50980392156862742" blue="0.85490196078431369" alpha="1" colorSpace="calibratedRGB"/>
-=======
                                 <state key="normal" title="Select a tour">
                                     <color key="titleColor" red="0.27840076974743694" green="0.51002020468252163" blue="0.85375236742424243" alpha="1" colorSpace="calibratedRGB"/>
->>>>>>> master
                                 </state>
                                 <connections>
                                     <segue destination="tqM-E3-5K0" kind="show" id="1Gy-tP-J2d"/>
@@ -544,7 +548,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dEP-ma-FrS">
-                                <rect key="frame" x="8" y="299" width="304" height="261"/>
+                                <rect key="frame" x="0.0" y="292" width="320" height="276"/>
+                                <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="GYQ-Tm-WcJ">
@@ -564,15 +569,15 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="GYQ-Tm-WcJ" firstAttribute="leading" secondItem="B61-L7-Fg8" secondAttribute="leading" id="1wy-XT-TTL"/>
+                            <constraint firstAttribute="trailing" secondItem="dEP-ma-FrS" secondAttribute="trailing" id="4TG-7p-rAX"/>
+                            <constraint firstItem="5vw-EB-vwN" firstAttribute="top" secondItem="dEP-ma-FrS" secondAttribute="bottom" id="8LS-yK-2Eu"/>
                             <constraint firstItem="GYQ-Tm-WcJ" firstAttribute="top" secondItem="02n-Ua-OER" secondAttribute="bottom" id="8fQ-70-tHV"/>
                             <constraint firstItem="GYQ-Tm-WcJ" firstAttribute="height" secondItem="B61-L7-Fg8" secondAttribute="height" multiplier="0.4" id="8og-eG-LFz"/>
                             <constraint firstItem="5vw-EB-vwN" firstAttribute="top" secondItem="dEP-ma-FrS" secondAttribute="bottom" constant="20" id="Mhb-Sa-nZe"/>
                             <constraint firstAttribute="trailing" secondItem="GYQ-Tm-WcJ" secondAttribute="trailing" id="NlF-93-XLN"/>
-                            <constraint firstItem="dEP-ma-FrS" firstAttribute="leading" secondItem="B61-L7-Fg8" secondAttribute="leading" constant="8" id="VRP-Zr-KG9"/>
-                            <constraint firstItem="5vw-EB-vwN" firstAttribute="top" secondItem="dEP-ma-FrS" secondAttribute="bottom" constant="8" id="bDm-6C-083"/>
-                            <constraint firstItem="dEP-ma-FrS" firstAttribute="top" secondItem="GYQ-Tm-WcJ" secondAttribute="bottom" constant="8" id="bi5-Tp-fvy"/>
+                            <constraint firstItem="dEP-ma-FrS" firstAttribute="top" secondItem="GYQ-Tm-WcJ" secondAttribute="bottom" constant="1" id="Xsx-gv-xYL"/>
                             <constraint firstItem="dEP-ma-FrS" firstAttribute="top" secondItem="GYQ-Tm-WcJ" secondAttribute="bottom" id="i9p-dw-i16"/>
-                            <constraint firstAttribute="trailing" secondItem="dEP-ma-FrS" secondAttribute="trailing" constant="8" id="uqK-40-0ed"/>
+                            <constraint firstItem="dEP-ma-FrS" firstAttribute="leading" secondItem="B61-L7-Fg8" secondAttribute="leading" id="lHt-RS-1nC"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -653,24 +658,28 @@
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create your tour" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qal-q6-3hA">
                                 <rect key="frame" x="96" y="84" width="128" height="23"/>
+                                <animations/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                                 <color key="textColor" red="0.2784313725" green="0.50980392159999999" blue="0.85490196080000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name of Tour" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1L6-cQ-RUl">
-                                <rect key="frame" x="20" y="126" width="280" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name of Tour" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1L6-cQ-RUl">
+                                <rect key="frame" x="20" y="127" width="280" height="30"/>
+                                <animations/>
                                 <color key="textColor" red="0.2784313725" green="0.50980392159999999" blue="0.85490196080000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Tour Description" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wq2-4m-Ca4">
-                                <rect key="frame" x="20" y="166" width="280" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Tour Description" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wq2-4m-Ca4">
+                                <rect key="frame" x="20" y="167" width="280" height="30"/>
+                                <animations/>
                                 <color key="textColor" red="0.2784313725" green="0.50980392159999999" blue="0.85490196080000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="gha-TO-9kk">
-                                <rect key="frame" x="0.0" y="236" width="320" height="332"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="gha-TO-9kk">
+                                <rect key="frame" x="0.0" y="237" width="320" height="331"/>
+                                <animations/>
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="sectionIndexBackgroundColor" red="0.82842303299999998" green="0.91177850999999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
@@ -688,6 +697,7 @@
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mFF-Dj-GkE">
                                 <rect key="frame" x="138" y="503" width="45" height="45"/>
+                                <animations/>
                                 <color key="backgroundColor" red="0.82842303299999998" green="0.91177850999999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="EhU-dv-uKs"/>
@@ -808,6 +818,7 @@
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ab4-nZ-Lpj">
                                 <rect key="frame" x="16" y="312" width="288" height="23"/>
+                                <animations/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                                 <color key="textColor" red="0.2784313725" green="0.50980392159999999" blue="0.85490196080000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -834,6 +845,7 @@
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X4c-dm-N9G">
                                 <rect key="frame" x="16" y="343" width="288" height="22"/>
+                                <animations/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                                 <color key="textColor" red="0.2784313725" green="0.50980392159999999" blue="0.85490196080000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
