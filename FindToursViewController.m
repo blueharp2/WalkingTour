@@ -89,19 +89,15 @@
     [self.toursTableView setDelegate:self];
     [self.toursTableView setDataSource:self];
     
+    UIImageView *tempImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"TableViewBackground.png"]];
+    [tempImageView setFrame:self.toursTableView.frame];
+    
     UINib *nib = [UINib nibWithNibName:@"POIDetailTableViewCell" bundle:nil];
     [[self toursTableView] registerNib:nib forCellReuseIdentifier:@"POIDetailTableViewCell"];
     
     //Setup up MapView
     [self.mapView setDelegate:self];
     [self.mapView setShowsUserLocation: YES];
-    
-    CAGradientLayer *gradientLayer = [Gradient blueGradient];
-    gradientLayer.frame = CGRectMake(0, 0, self.view.bounds.size.width, 1000.0); // Insted of a 1000, you can calculate the height of the tableView... cant use tableView height, its not set yet.
-    
-    UIView *tableBackgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.toursTableView.bounds.size.width, self.toursTableView.bounds.size.height)];
-    [tableBackgroundView.layer insertSublayer:gradientLayer atIndex:0];
-    [self.toursTableView setBackgroundView:tableBackgroundView];
     
 }
 
@@ -197,17 +193,40 @@
 
 #pragma mark - UITableView protocol functions.
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    
     return self.toursFromParse.count;
 }
 
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 1;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 1.0;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *headerView = [UIView new];
+    [headerView setBackgroundColor:[UIColor clearColor]];
+    
+    return headerView;
+}
+
+//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+//{
+//    
+//    return self.toursFromParse.count;
+//}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
     POIDetailTableViewCell *cell = (POIDetailTableViewCell*) [self.toursTableView dequeueReusableCellWithIdentifier:@"POIDetailTableViewCell"];
-    [cell setTour:[self.toursFromParse objectAtIndex:indexPath.row]];
+    [cell setTour:[self.toursFromParse objectAtIndex:indexPath.section]];
+    
     return cell;
 }
 
@@ -218,7 +237,7 @@
 
 -(CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 90;
+    return 100;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -227,10 +246,10 @@
     [self performSegueWithIdentifier:@"TabBarController" sender:tourId];
 }
 
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    cell.backgroundColor = [UIColor clearColor];
-    
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    cell.layer.cornerRadius = 5;
+    cell.layer.masksToBounds = true;
 }
 
 #pragma mark - Navigation

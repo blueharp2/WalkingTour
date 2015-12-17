@@ -511,7 +511,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dEP-ma-FrS">
-                                <rect key="frame" x="0.0" y="292" width="320" height="276"/>
+                                <rect key="frame" x="8" y="299" width="304" height="261"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="GYQ-Tm-WcJ">
@@ -529,15 +529,15 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="GYQ-Tm-WcJ" firstAttribute="leading" secondItem="B61-L7-Fg8" secondAttribute="leading" id="1wy-XT-TTL"/>
-                            <constraint firstAttribute="trailing" secondItem="dEP-ma-FrS" secondAttribute="trailing" id="4TG-7p-rAX"/>
-                            <constraint firstItem="5vw-EB-vwN" firstAttribute="top" secondItem="dEP-ma-FrS" secondAttribute="bottom" id="8LS-yK-2Eu"/>
                             <constraint firstItem="GYQ-Tm-WcJ" firstAttribute="top" secondItem="02n-Ua-OER" secondAttribute="bottom" id="8fQ-70-tHV"/>
                             <constraint firstItem="GYQ-Tm-WcJ" firstAttribute="height" secondItem="B61-L7-Fg8" secondAttribute="height" multiplier="0.4" id="8og-eG-LFz"/>
                             <constraint firstItem="5vw-EB-vwN" firstAttribute="top" secondItem="dEP-ma-FrS" secondAttribute="bottom" constant="20" id="Mhb-Sa-nZe"/>
                             <constraint firstAttribute="trailing" secondItem="GYQ-Tm-WcJ" secondAttribute="trailing" id="NlF-93-XLN"/>
-                            <constraint firstItem="dEP-ma-FrS" firstAttribute="top" secondItem="GYQ-Tm-WcJ" secondAttribute="bottom" constant="1" id="Xsx-gv-xYL"/>
+                            <constraint firstItem="dEP-ma-FrS" firstAttribute="leading" secondItem="B61-L7-Fg8" secondAttribute="leading" constant="8" id="VRP-Zr-KG9"/>
+                            <constraint firstItem="5vw-EB-vwN" firstAttribute="top" secondItem="dEP-ma-FrS" secondAttribute="bottom" constant="8" id="bDm-6C-083"/>
+                            <constraint firstItem="dEP-ma-FrS" firstAttribute="top" secondItem="GYQ-Tm-WcJ" secondAttribute="bottom" constant="8" id="bi5-Tp-fvy"/>
                             <constraint firstItem="dEP-ma-FrS" firstAttribute="top" secondItem="GYQ-Tm-WcJ" secondAttribute="bottom" id="i9p-dw-i16"/>
-                            <constraint firstItem="dEP-ma-FrS" firstAttribute="leading" secondItem="B61-L7-Fg8" secondAttribute="leading" id="lHt-RS-1nC"/>
+                            <constraint firstAttribute="trailing" secondItem="dEP-ma-FrS" secondAttribute="trailing" constant="8" id="uqK-40-0ed"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -611,40 +611,40 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create your tour" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qal-q6-3hA">
-                                <rect key="frame" x="96" y="84" width="128" height="22.5"/>
+                                <rect key="frame" x="96" y="84" width="128" height="23"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                                 <color key="textColor" red="0.2784313725" green="0.50980392159999999" blue="0.85490196080000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name of Tour" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1L6-cQ-RUl">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name of Tour" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1L6-cQ-RUl">
                                 <rect key="frame" x="20" y="126" width="280" height="30"/>
                                 <color key="textColor" red="0.2784313725" green="0.50980392159999999" blue="0.85490196080000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Tour Description" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wq2-4m-Ca4">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Tour Description" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wq2-4m-Ca4">
                                 <rect key="frame" x="20" y="166" width="280" height="30"/>
                                 <color key="textColor" red="0.2784313725" green="0.50980392159999999" blue="0.85490196080000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="gha-TO-9kk">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="gha-TO-9kk">
                                 <rect key="frame" x="0.0" y="236" width="320" height="332"/>
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="sectionIndexBackgroundColor" red="0.82842303299999998" green="0.91177850999999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="LocationCell" id="t88-UP-tJm">
-                                        <rect key="frame" x="0.0" y="49.5" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="50" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="t88-UP-tJm" id="m3q-8v-K4s">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mFF-Dj-GkE">
-                                <rect key="frame" x="137.5" y="503" width="45" height="45"/>
+                                <rect key="frame" x="138" y="503" width="45" height="45"/>
                                 <color key="backgroundColor" red="0.82842303299999998" green="0.91177850999999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="EhU-dv-uKs"/>
@@ -753,7 +753,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ab4-nZ-Lpj">
-                                <rect key="frame" x="16" y="312" width="288" height="22.5"/>
+                                <rect key="frame" x="16" y="312" width="288" height="23"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                                 <color key="textColor" red="0.2784313725" green="0.50980392159999999" blue="0.85490196080000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -776,8 +776,8 @@
                                     <constraint firstItem="Q8D-Ok-M3Z" firstAttribute="centerY" secondItem="MeJ-Tg-42J" secondAttribute="centerY" id="hXx-OU-HKT"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X4c-dm-N9G">
-                                <rect key="frame" x="16" y="342.5" width="288" height="22.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X4c-dm-N9G">
+                                <rect key="frame" x="16" y="343" width="288" height="22"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                                 <color key="textColor" red="0.2784313725" green="0.50980392159999999" blue="0.85490196080000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
