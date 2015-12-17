@@ -24,6 +24,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    [[UIBarButtonItem appearanceWhenContainedIn:[UINavigationBar class], nil] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor blackColor], UITextAttributeTextColor,nil] forState:UIControlStateNormal];
+    [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
+
+
 }
 
         //Test for Valid Email Address
@@ -56,6 +61,18 @@
     
     [PFUser requestPasswordResetForEmailInBackground:self.passwordReset.text];
 
+}
+
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    [self.view endEditing:YES];
+}
+
+#pragma TextField Delegate
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return YES;
+    
 }
 
 @end
