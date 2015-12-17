@@ -436,7 +436,7 @@
                                     <constraint firstAttribute="height" constant="46" id="gn3-Ls-9Va"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="25"/>
-                                <state key="normal" title="Create your own tour">
+                                <state key="normal" title="Create a tour">
                                     <color key="titleColor" red="0.27843137254901962" green="0.50980392156862742" blue="0.85490196078431369" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <variation key="default">
@@ -451,7 +451,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iZU-Lr-KvV">
                                 <rect key="frame" x="16" y="104" width="288" height="45"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="25"/>
-                                <state key="normal" title="Select your tour">
+                                <state key="normal" title="Select a tour">
                                     <color key="titleColor" red="0.27840076974743694" green="0.51002020468252163" blue="0.85375236742424243" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
