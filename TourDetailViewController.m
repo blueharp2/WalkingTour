@@ -19,6 +19,8 @@ static const NSString *ItemStatusContext;
 @property (nonatomic) AVPlayerItem *playerItem;
 @property (nonatomic, weak) IBOutlet VideoPlayerView *playerView;
 @property (nonatomic, weak) IBOutlet UIButton *playButton;
+@property (weak, nonatomic) IBOutlet UILabel *locationNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *locationDescriptionLabel;
 
 @property (nonatomic, strong) NSString *locationData;
 
@@ -35,6 +37,10 @@ static const NSString *ItemStatusContext;
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setButtonStatus];
+    if (self.location) {
+        self.locationNameLabel.text = self.location.locationDescription;
+        self.locationDescriptionLabel.text = self.location.locationName;
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -43,7 +49,10 @@ static const NSString *ItemStatusContext;
 
 - (void)setLocation:(Location *)location {
     _location = location;
-    
+//    self.locationNameLabel.text = location.locationName;
+//    self.locationDescriptionLabel.text = location.locationDescription;
+//    [self.locationNameLabel setText:location.locationName];
+//    [self.locationDescriptionLabel setText:location.locationDescription];
     if (location.video) {
         NSURL *videoUrl = [NSURL URLWithString:location.video.url];
         [self loadVideoAsset:videoUrl];
@@ -56,7 +65,8 @@ static const NSString *ItemStatusContext;
                 if (data) {
                     UIImage *image = [UIImage imageWithData:data];
                     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                        UIImageView *imageView = [[UIImageView alloc] initWithFrame:self.playerView.frame];
+                        UIImageView *imageView = [[UIImageView alloc] initWithFrame:self.playerView.bounds];
+                        [imageView setClipsToBounds:YES];
                         imageView.contentMode = UIViewContentModeScaleAspectFill;
                         [self.playerView addSubview:imageView];
                         imageView.image = image;
