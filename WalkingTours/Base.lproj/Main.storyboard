@@ -382,6 +382,7 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
+                        <outlet property="cameraButton" destination="Gaj-h6-TIr" id="U86-Xp-PQa"/>
                         <outlet property="locationDescriptionTextField" destination="JOQ-pC-1Ce" id="Mwz-oO-dzT"/>
                         <outlet property="locationNameTextField" destination="SU1-GD-Ons" id="UGY-4E-uAj"/>
                         <outlet property="mapView" destination="eTz-S3-rke" id="UwY-Qn-ERC"/>
@@ -587,13 +588,13 @@
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="gha-TO-9kk">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="gha-TO-9kk">
                                 <rect key="frame" x="0.0" y="236" width="320" height="332"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="sectionIndexBackgroundColor" red="0.82842303299999998" green="0.91177850999999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="LocationCell" id="t88-UP-tJm">
-                                        <rect key="frame" x="0.0" y="28" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="49.5" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="t88-UP-tJm" id="m3q-8v-K4s">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
@@ -603,11 +604,11 @@
                                 </prototypes>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mFF-Dj-GkE">
-                                <rect key="frame" x="142" y="512" width="36" height="36"/>
-                                <color key="backgroundColor" red="0.82842303299999998" green="0.91177850999999999" blue="1" alpha="0.5" colorSpace="calibratedRGB"/>
+                                <rect key="frame" x="137.5" y="503" width="45" height="45"/>
+                                <color key="backgroundColor" red="0.82842303299999998" green="0.91177850999999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="36" id="EhU-dv-uKs"/>
-                                    <constraint firstAttribute="width" constant="36" id="F0d-5v-im0"/>
+                                    <constraint firstAttribute="height" constant="45" id="EhU-dv-uKs"/>
+                                    <constraint firstAttribute="width" constant="45" id="F0d-5v-im0"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="36"/>
                                 <state key="normal" title="＋">

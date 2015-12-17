@@ -19,7 +19,6 @@ static const NSArray *categories;
 
 @interface CreateTourDetailViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITableViewDataSource, UITableViewDelegate, MKMapViewDelegate, CLLocationManagerDelegate>
 
-- (IBAction)cameraButtonPressed:(UIButton *)sender;
 @property (strong, nonatomic) UIImagePickerController *imagePicker;
 @property (strong, nonatomic) UIView *greyOutView;
 @property (strong, nonatomic) UITableView *categoryTableView;
@@ -33,6 +32,8 @@ static const NSArray *categories;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet UITextField *locationNameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *locationDescriptionTextField;
+@property (weak, nonatomic) IBOutlet UIButton *cameraButton;
+- (IBAction)cameraButtonPressed:(UIButton *)sender;
 
 @end
 
@@ -40,6 +41,8 @@ static const NSArray *categories;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.image = [UIImage imageNamed:@"idaho.jpg"];
     
     UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveLocation:)];
     self.navigationItem.rightBarButtonItem = saveButton;
@@ -68,7 +71,7 @@ static const NSArray *categories;
 #pragma mark - Setup Functions
 
 - (void)setCategoryOptions {
-    categories = @[@"Restaurant", @"Cafe", @"Art", @"Museum", @"History", @"Shopping", @"Nightlife"];
+    categories = @[@"Restaurant", @"Cafe", @"Art", @"Museum", @"History", @"Shopping", @"Nightlife", @"Film", @"Education"];
 }
 
 - (void)setUpGreyOutView {
@@ -87,20 +90,27 @@ static const NSArray *categories;
 
 - (void)setUpFinalSaveButton {
     self.finalSaveButton = [[UIButton alloc] initWithFrame:CGRectMake(self.view.center.x, self.view.center.y, 0, 0)];
-    self.finalSaveButton.titleLabel.font = [UIFont fontWithName:@"Futura" size:14];
+    self.finalSaveButton.titleLabel.font = [UIFont fontWithName:@"Futura" size:20];
     [self.finalSaveButton setTitle:@"Save" forState:UIControlStateNormal];
-    [self.finalSaveButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    [self.finalSaveButton setTitleColor:[UIColor colorWithRed:0.278 green:0.510 blue:0.855 alpha:1.000] forState:UIControlStateNormal];
     [self.finalSaveButton setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.view addSubview:self.finalSaveButton];
     [self.finalSaveButton addTarget:self action:@selector(saveLocationWithCategories:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)setUpTableView {
-    self.categoryTableView = [[UITableView alloc] initWithFrame:CGRectMake(self.view.center.x, self.view.center.y, 0, 0)];
+    self.categoryTableView = [[UITableView alloc] initWithFrame:CGRectMake(self.view.center.x, self.view.center.y, 0, 0) style:UITableViewStyleGrouped];
+    UILabel *headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.categoryTableView.frame.origin.x -40, self.categoryTableView.frame.origin.y, self.categoryTableView.frame.size.width, 40)];
+    [headerLabel setText:@"Categories"];
+    headerLabel.font = [UIFont fontWithName:@"Futura" size:20];
+    headerLabel.textColor = [UIColor colorWithRed:0.278 green:0.510 blue:0.855 alpha:1.000];
+    [headerLabel setTextAlignment:NSTextAlignmentCenter];
+    [self.categoryTableView setTableHeaderView:headerLabel];
     
     [self setCategoryOptions];
     self.categoryTableView.dataSource = self;
     self.categoryTableView.delegate = self;
+    
     
     UINib *categoryNib = [UINib nibWithNibName:@"CategoryTableViewCell" bundle:[NSBundle mainBundle]];
     [self.categoryTableView registerNib:categoryNib forCellReuseIdentifier:@"cell"];
@@ -143,7 +153,7 @@ static const NSArray *categories;
     leading.active = YES;
     
     NSLayoutConstraint *tableViewBottom = [NSLayoutConstraint constraintWithItem:self.categoryTableView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeBottom multiplier:1.0 constant:-(self.view.frame.size.height / 2)];
-    NSLayoutConstraint *tableViewHeight = [NSLayoutConstraint constraintWithItem:self.categoryTableView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeHeight multiplier:0.6 constant:-(self.view.frame.size.height * 0.6)];
+    NSLayoutConstraint *tableViewHeight = [NSLayoutConstraint constraintWithItem:self.categoryTableView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeHeight multiplier:0.55 constant:-(self.view.frame.size.height * 0.55)];
     NSLayoutConstraint *tableViewWidth = [NSLayoutConstraint constraintWithItem:self.categoryTableView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeWidth multiplier:0.8 constant:-(self.view.frame.size.width) * 0.8];
     NSLayoutConstraint *tableViewCenterX = [NSLayoutConstraint constraintWithItem:self.categoryTableView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0.0];
     
@@ -155,9 +165,12 @@ static const NSArray *categories;
     NSLayoutConstraint *buttonTop = [NSLayoutConstraint constraintWithItem:self.finalSaveButton attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTop multiplier:1.0 constant:20];
     NSLayoutConstraint *buttonTrailing = [NSLayoutConstraint constraintWithItem:self.finalSaveButton attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:-20];
     
+    self.cameraButton.enabled = NO;
+    
     [UIView animateKeyframesWithDuration:0.8 delay:0 options:UIViewKeyframeAnimationOptionLayoutSubviews animations:^{
         [UIView addKeyframeWithRelativeStartTime:0.0 relativeDuration:0.5 animations:^{
             self.navigationController.navigationBarHidden = YES;
+            self.cameraButton.alpha = 0.0;
             [self.view layoutIfNeeded];
             
         }];
