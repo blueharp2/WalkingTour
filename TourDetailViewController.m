@@ -40,6 +40,9 @@ static const NSString *ItemStatusContext;
     if (self.location) {
         self.locationNameLabel.text = self.location.locationDescription;
         self.locationDescriptionLabel.text = self.location.locationName;
+        if (!self.location.video) {
+            self.playButton.hidden = YES;
+        }
     }
 }
 

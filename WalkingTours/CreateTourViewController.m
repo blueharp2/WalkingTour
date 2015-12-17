@@ -38,6 +38,7 @@
 -(void)viewDidLoad{
     [super viewDidLoad];
     [self setupMainViewController];
+    self.addLocationButton.layer.cornerRadius = self.addLocationButton.frame.size.width / 2;
 
 }
 
