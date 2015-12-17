@@ -32,6 +32,7 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
     PFUser *currentUser = [PFUser currentUser];
     if (currentUser) {
         // do stuff with the user

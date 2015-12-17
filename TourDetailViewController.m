@@ -47,12 +47,14 @@ static const NSString *ItemStatusContext;
     [super didReceiveMemoryWarning];
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self.playerItem removeObserver:self forKeyPath:@"status" context:&ItemStatusContext];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
+}
+
 - (void)setLocation:(Location *)location {
     _location = location;
-//    self.locationNameLabel.text = location.locationName;
-//    self.locationDescriptionLabel.text = location.locationDescription;
-//    [self.locationNameLabel setText:location.locationName];
-//    [self.locationDescriptionLabel setText:location.locationDescription];
     if (location.video) {
         NSURL *videoUrl = [NSURL URLWithString:location.video.url];
         [self loadVideoAsset:videoUrl];
