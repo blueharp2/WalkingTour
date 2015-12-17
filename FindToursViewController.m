@@ -228,6 +228,7 @@
             TourListViewController *tourListViewController = (TourListViewController *)tabBar.viewControllers[1];
             
             [tourMapViewController setCurrentTour:annotationView.annotation.subtitle];
+            [tourListViewController setCurrentTour:sender];
             
         } else {
             
@@ -238,6 +239,7 @@
             
             if ([sender isKindOfClass:[NSString class]]) {
                 [tourMapViewController setCurrentTour:sender];
+                [tourListViewController setCurrentTour:sender];
             }
         }
     }

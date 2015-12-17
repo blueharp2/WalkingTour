@@ -24,7 +24,7 @@
 @property (strong, nonatomic) CLLocationManager *locationManager;
 //@property (strong, nonatomic) Tour *currentTour;
 @property (strong, nonatomic) NSArray <Location*> *locationsFromParse;
-//@property (strong, nonatomic) NSMutableDictionary 
+@property (strong, nonatomic) NSMutableDictionary *locationsWithObjectId;
 
 @end
 
@@ -54,7 +54,7 @@
         
         //Create Dictionary..
         
-        
+        [_locationsWithObjectId setObject:location forKey:location.objectId];
     }
 }
 
@@ -128,8 +128,11 @@
 
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
     //Put the segue name here...
-    [self performSegueWithIdentifier:@"DetailViewController" sender:view];
     //Find the objectID as a key in the dictionary
+
+   Location* currentLocation = [_locationsWithObjectId objectForKey:(view.annotation.subtitle)];
+    [self performSegueWithIdentifier:@"DetailViewController" sender:currentLocation];
+
 }
 
 #pragma mark - CLLocationManager

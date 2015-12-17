@@ -20,7 +20,9 @@ static const NSString *ItemStatusContext;
 @property (nonatomic, weak) IBOutlet VideoPlayerView *playerView;
 @property (nonatomic, weak) IBOutlet UIButton *playButton;
 
-@property (nonatomic, strong) NSString *locationData;    //property for segue from TourListViewController
+@property (nonatomic, strong) NSString *locationData;
+
+//property for segue from TourListViewController
 
 - (IBAction)playButtonPressed:(UIButton *)sender;
 
