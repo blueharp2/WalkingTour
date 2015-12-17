@@ -20,14 +20,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    [[UIBarButtonItem appearanceWhenContainedIn:[UINavigationBar class], nil] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor blackColor], UITextAttributeTextColor,nil] forState:UIControlStateNormal];
+    [self.navigationController.navigationBar setTintColor:[UIColor blackColor]];
+
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-}
-- (IBAction)cancelPressed:(UIBarButtonItem *)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
-
 }
 
 - (IBAction)saveSignUp:(id)sender {
@@ -37,17 +37,43 @@
     user.password = _passwordSignUp.text;
     user.email = _emailSignUp.text;
     
+    if (_usernameSignUp.text.length > 0 && _passwordSignUp.text.length > 0 && _emailSignUp.text.length > 0) {
+
     [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
-            if ([[self presentingViewController] isKindOfClass:[ParseLoginViewController class]]) {
-                ParseLoginViewController *loginVC = (ParseLoginViewController *)[self presentingViewController];
+            if ([self.navigationController.viewControllers[0] isKindOfClass:[ParseLoginViewController class]]) {
+                ParseLoginViewController *loginVC = (ParseLoginViewController *)self.navigationController.viewControllers[0];
                 if (loginVC.completion) {
                     loginVC.completion();
                 }
             }
         }
     }];
+        
+    } else {
+        
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:@"Please complete all fields" preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+            NSLog(@"You pressed button OK");
+        }];
+        
+        [alert addAction:defaultAction];
+        
+        [self presentViewController:alert animated:YES completion:nil];}
 }
+
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    [self.view endEditing:YES];
+}
+#pragma TextField Delegate
+        
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return YES;
+    
+}
+
 
 @end
 
