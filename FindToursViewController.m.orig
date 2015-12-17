@@ -14,11 +14,8 @@
 #import "Location.h"
 #import "POIDetailTableViewCell.h"
 #import "ParseService.h"
-
-@import UIKit;
-@import CoreLocation;
-@import MapKit;
-
+#import "Gradient.h"
+@import QuartzCore;
 @import Parse;
 @import ParseUI;
 
@@ -64,7 +61,6 @@
     // Gets user location and set map region
     CLLocation *location = [self.locationManager location];
     [self setMapForCoordinateWithLatitude:location.coordinate.latitude andLongitude:location.coordinate.longitude];
-    //    CLLocationCoordinate2D coordinate = [location coordinate];
     CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(47.624441, -122.335913);
     
     
@@ -84,7 +80,7 @@
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
     
-    [_locationManager stopMonitoringSignificantLocationChanges];
+    [self.locationManager stopMonitoringSignificantLocationChanges];
 }
 
 - (void)setupViewController
@@ -92,6 +88,9 @@
     //Setup tableView
     [self.toursTableView setDelegate:self];
     [self.toursTableView setDataSource:self];
+    
+    UIImageView *tempImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"TableViewBackground.png"]];
+    [tempImageView setFrame:self.toursTableView.frame];
     
     UINib *nib = [UINib nibWithNibName:@"POIDetailTableViewCell" bundle:nil];
     [[self toursTableView] registerNib:nib forCellReuseIdentifier:@"POIDetailTableViewCell"];
@@ -145,6 +144,7 @@
 }
 
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
+    
     [self performSegueWithIdentifier:@"TabBarController" sender:view];
     
 }
@@ -182,20 +182,49 @@
     NSLog(@"%@", locations);
 }
 
+- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
+    if (status == kCLAuthorizationStatusAuthorizedWhenInUse) {
+        [self.mapView setShowsUserLocation:YES];
+        MKCoordinateRegion currentRegion = MKCoordinateRegionMakeWithDistance(self.locationManager.location.coordinate, 300, 300);
+        [self.mapView setRegion:currentRegion];
+    }
+}
+
 
 #pragma mark - UITableView protocol functions.
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return self.toursFromParse.count;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    return 1;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+<<<<<<< HEAD
+    return 3.0;
+=======
+    return 5.0;
+>>>>>>> master
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *headerView = [UIView new];
+    [headerView setBackgroundColor:[UIColor clearColor]];
     
-    return self.toursFromParse.count;
+    return headerView;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
     POIDetailTableViewCell *cell = (POIDetailTableViewCell*) [self.toursTableView dequeueReusableCellWithIdentifier:@"POIDetailTableViewCell"];
-    [cell setTour:[self.toursFromParse objectAtIndex:indexPath.row]];
+    [cell setTour:[self.toursFromParse objectAtIndex:indexPath.section]];
+    
     return cell;
 }
 
@@ -206,13 +235,19 @@
 
 -(CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 90;
+    return 100;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSString *tourId = self.toursFromParse[indexPath.row].objectId;
     [self performSegueWithIdentifier:@"TabBarController" sender:tourId];
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    cell.layer.cornerRadius = 5;
+    cell.layer.masksToBounds = true;
 }
 
 #pragma mark - Navigation
