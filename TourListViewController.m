@@ -55,6 +55,18 @@
     [[self tourListTableView] registerNib:nib forCellReuseIdentifier:@"LocationTableViewCell"];
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier  isEqual: @"TourDetailViewController"]) {
+        if ([segue.destinationViewController isKindOfClass:[TourDetailViewController class]]) {
+            TourDetailViewController *tourDetailVC = (TourDetailViewController *)segue.destinationViewController;
+            if ([sender isKindOfClass:[Location class]]) {
+                Location *location = (Location *)sender;
+                [tourDetailVC setLocation:location];
+            }
+        }
+    }
+}
+
 #pragma mark - TABLEVIEW
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -71,8 +83,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    NSString *tourId = self.locationsFromParse[indexPath.row].objectId;
-    [self performSegueWithIdentifier:@"TourDetailViewController" sender:tourId];
+    Location *location = self.locationsFromParse[indexPath.row];
+    [self performSegueWithIdentifier:@"TourDetailViewController" sender:location];
 }
 
 @end
