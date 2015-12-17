@@ -191,6 +191,13 @@
     NSLog(@"%@", locations);
 }
 
+- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
+    if (status == kCLAuthorizationStatusAuthorizedWhenInUse) {
+        [self.mapView setShowsUserLocation:YES];
+        [self.mapView setCenterCoordinate:self.mapView.userLocation.location.coordinate animated:YES];
+    }
+}
+
 
 #pragma mark - UITableView protocol functions.
 
