@@ -30,8 +30,35 @@
     [super didReceiveMemoryWarning];
 }
 
+- (BOOL) validateEmail: (UITextField *)emailSignUp {
+    NSString *emailString = self.emailSignUp.text;
+    NSString *emailRegex = @"[A-Z0-9a-z._+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
+    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
+    
+    if (([emailTest evaluateWithObject:emailString] != YES) || [emailString isEqualToString:@""]) {
+        
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:@"Enter Valid Email Address" preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+            NSLog(@"You pressed button OK");
+        }];
+        
+        [alert addAction:defaultAction];
+        
+        [self presentViewController:alert animated:YES completion:nil];
+        
+        return NO;
+        
+    } else {
+        
+        return YES;
+    }
+}
+
 - (IBAction)saveSignUp:(id)sender {
     
+if ([self validateEmail:self.emailSignUp]) {
+
     PFUser *user = [PFUser user];
     user.username = _usernameSignUp.text;
     user.password = _passwordSignUp.text;
@@ -61,6 +88,7 @@
         [alert addAction:defaultAction];
         
         [self presentViewController:alert animated:YES completion:nil];}
+    }
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
