@@ -48,7 +48,6 @@ static const NSArray *categories;
     self.navigationItem.rightBarButtonItem = saveButton;
     [self setUpGreyOutView];
     self.mapView.delegate = self;
-//    [self.mapView setShowsUserLocation:YES];
     [self requestPermissions];
     [self.locationManager setDelegate:self];
     [self locationControllerDidUpdateLocation:_locationManager.location];
@@ -76,15 +75,10 @@ static const NSArray *categories;
 
 - (void)setUpGreyOutView {
     self.greyOutView = [[UIView alloc] initWithFrame:CGRectMake(self.view.center.x, self.view.center.y, 0, 0)];
-    
     self.greyOutView.backgroundColor = [UIColor colorWithWhite:0.737 alpha:0.500];
-    
     [self.greyOutView setTranslatesAutoresizingMaskIntoConstraints:NO];
-    
     [self.view addSubview:self.greyOutView];
-    
     [self setUpFinalSaveButton];
-    
     [self setUpTableView];
 }
 
@@ -114,9 +108,7 @@ static const NSArray *categories;
     
     UINib *categoryNib = [UINib nibWithNibName:@"CategoryTableViewCell" bundle:[NSBundle mainBundle]];
     [self.categoryTableView registerNib:categoryNib forCellReuseIdentifier:@"cell"];
-    
     [self.categoryTableView setTranslatesAutoresizingMaskIntoConstraints:NO];
-    
     [self.view addSubview:self.categoryTableView];
 }
 
@@ -327,7 +319,8 @@ static const NSArray *categories;
 -(void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
     if (status == kCLAuthorizationStatusAuthorizedWhenInUse){
         [self.mapView setShowsUserLocation:YES];
-        [self.mapView setCenterCoordinate:self.mapView.userLocation.location.coordinate animated:YES];
+        MKCoordinateRegion currentRegion = MKCoordinateRegionMakeWithDistance(self.locationManager.location.coordinate, 300, 300);
+        [self.mapView setRegion:currentRegion];
     }
 }
 

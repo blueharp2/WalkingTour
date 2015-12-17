@@ -194,7 +194,8 @@
 - (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
     if (status == kCLAuthorizationStatusAuthorizedWhenInUse) {
         [self.mapView setShowsUserLocation:YES];
-        [self.mapView setCenterCoordinate:self.mapView.userLocation.location.coordinate animated:YES];
+        MKCoordinateRegion currentRegion = MKCoordinateRegionMakeWithDistance(self.locationManager.location.coordinate, 300, 300);
+        [self.mapView setRegion:currentRegion];
     }
 }
 
