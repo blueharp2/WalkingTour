@@ -23,15 +23,19 @@ static const NSArray *categories;
 @property (strong, nonatomic) UIView *greyOutView;
 @property (strong, nonatomic) UITableView *categoryTableView;
 @property (strong, nonatomic) UIButton *finalSaveButton;
+@property (strong, nonatomic) UIBarButtonItem *saveButton;
 @property (strong, nonatomic) NSMutableArray *selectedCategories;
 @property (strong, nonatomic) PFFile *videoFile;
 @property (strong, nonatomic) PFFile *photoFile;
 @property (strong, nonatomic) UIImage *image;
 @property (strong, nonatomic) PFGeoPoint *geoPoint;
 @property (strong, nonatomic) Location *createdLocation;
+@property (strong, nonatomic) MKPointAnnotation *mapPinAnnotation;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet UITextField *locationNameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *locationDescriptionTextField;
+@property (weak, nonatomic) IBOutlet UILabel *pinDropReminderLabel;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *mapHeightConstraint;
 @property (weak, nonatomic) IBOutlet UIButton *cameraButton;
 - (IBAction)cameraButtonPressed:(UIButton *)sender;
 
@@ -44,11 +48,18 @@ static const NSArray *categories;
     
     self.image = [UIImage imageNamed:@"idaho.jpg"];
     
-    UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveLocation:)];
-    self.navigationItem.rightBarButtonItem = saveButton;
+    self.saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveLocation:)];
+    self.navigationItem.rightBarButtonItem = self.saveButton;
+    self.saveButton.enabled = NO;
+    self.locationNameTextField.hidden = YES;
+    self.locationDescriptionTextField.hidden = YES;
+    self.cameraButton.hidden = YES;
+    self.locationNameTextField.alpha = 0.0;
+    self.locationDescriptionTextField.alpha = 0.0;
+    self.cameraButton.alpha = 0.0;
+    
     [self setUpGreyOutView];
     self.mapView.delegate = self;
-//    [self.mapView setShowsUserLocation:YES];
     [self requestPermissions];
     [self.locationManager setDelegate:self];
     [self locationControllerDidUpdateLocation:_locationManager.location];
@@ -76,15 +87,10 @@ static const NSArray *categories;
 
 - (void)setUpGreyOutView {
     self.greyOutView = [[UIView alloc] initWithFrame:CGRectMake(self.view.center.x, self.view.center.y, 0, 0)];
-    
     self.greyOutView.backgroundColor = [UIColor colorWithWhite:0.737 alpha:0.500];
-    
     [self.greyOutView setTranslatesAutoresizingMaskIntoConstraints:NO];
-    
     [self.view addSubview:self.greyOutView];
-    
     [self setUpFinalSaveButton];
-    
     [self setUpTableView];
 }
 
@@ -114,9 +120,7 @@ static const NSArray *categories;
     
     UINib *categoryNib = [UINib nibWithNibName:@"CategoryTableViewCell" bundle:[NSBundle mainBundle]];
     [self.categoryTableView registerNib:categoryNib forCellReuseIdentifier:@"cell"];
-    
     [self.categoryTableView setTranslatesAutoresizingMaskIntoConstraints:NO];
-    
     [self.view addSubview:self.categoryTableView];
 }
 
@@ -196,16 +200,53 @@ static const NSArray *categories;
 }
 
 - (void)saveLocation:(UIBarButtonItem *)sender {
-    if (self.locationNameTextField.text.length > 0 && self.locationDescriptionTextField.text.length > 0 && self.geoPoint != nil) {
+    NSString *alertMessage = @"Please fill all fields out.";
+    if (self.locationNameTextField.text.length == 0) {
+        alertMessage = @"Please enter a location name.";
+        [self presentAlertWithMessage:alertMessage];
+        return;
+    }
+    if (self.locationDescriptionTextField.text.length == 0) {
+        alertMessage = @"Please enter a location description.";
+        [self presentAlertWithMessage:alertMessage];
+        return;
+    }
+    if (self.geoPoint == nil) {
+        alertMessage = @"Please drop a pin for your location.";
+        [self presentAlertWithMessage:alertMessage];
+        return;
+    }
+    if (self.photoFile == nil) {
+        [self presentNoPhotoWarning];
+        return;
+    }
+    Location *locationToSave = [[Location alloc] initWithLocationName:self.locationNameTextField.text locationDescription:self.locationDescriptionTextField.text photo:self.photoFile video:self.videoFile categories:nil location:self.geoPoint tour:nil];
+    self.createdLocation = locationToSave;
+    [self displayCategories];
+}
+
+- (void)presentAlertWithMessage:(NSString *)alertMessage {
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"What!?!" message:alertMessage preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+    [alertController addAction:okAction];
+    [self presentViewController:alertController animated:YES completion:nil];
+}
+
+- (void)presentNoPhotoWarning {
+    UIAlertController *photoAlert = [UIAlertController alertControllerWithTitle:@"No Photo/Video" message:@"Did you want to add a photo or video?" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *yesAction = [UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self loadImagePicker];
+    }];
+    UIAlertAction *noAction = [UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
         Location *locationToSave = [[Location alloc] initWithLocationName:self.locationNameTextField.text locationDescription:self.locationDescriptionTextField.text photo:self.photoFile video:self.videoFile categories:nil location:self.geoPoint tour:nil];
         self.createdLocation = locationToSave;
         [self displayCategories];
-    } else {
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"What!?!" message:@"Fill everything out!" preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
-        [alertController addAction:okAction];
-        [self presentViewController:alertController animated:YES completion:nil];
-    }
+    }];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+    [photoAlert addAction:yesAction];
+    [photoAlert addAction:noAction];
+    [photoAlert addAction:cancelAction];
+    [self presentViewController:photoAlert animated:YES completion:nil];
 }
 
 - (void)saveLocationWithCategories:(UIButton *)sender {
@@ -216,6 +257,32 @@ static const NSArray *categories;
             [self.createTourDetailDelegate didFinishSavingLocationWithLocation:self.createdLocation image:self.image];
         }
         [self.navigationController popViewControllerAnimated:YES];
+    }
+}
+
+- (void)dissolvePinDropReminderLabel {
+    [UIView animateWithDuration:0.8 animations:^{
+        self.pinDropReminderLabel.alpha = 0.0;
+    }];
+}
+
+- (void)toggleViewAfterPinDrop {
+    [self.view layoutIfNeeded];
+    self.saveButton.enabled = YES;
+    if (self.locationNameTextField.alpha == 0.0) {
+        self.locationNameTextField.hidden = NO;
+        self.locationDescriptionTextField.hidden = NO;
+        self.cameraButton.hidden = NO;
+        [UIView animateWithDuration:0.4 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^{
+            self.locationNameTextField.alpha = 1.0;
+            self.locationDescriptionTextField.alpha = 1.0;
+            self.cameraButton.alpha = 1.0;
+            self.mapHeightConstraint.constant = -(self.mapView.frame.size.height / 2);
+            [self.view layoutIfNeeded];
+        } completion:^(BOOL finished) {
+            MKCoordinateRegion pinRegion = MKCoordinateRegionMakeWithDistance(CLLocationCoordinate2DMake(self.geoPoint.latitude, self.geoPoint.longitude), 300, 300);
+            [self.mapView setRegion:pinRegion animated:YES];
+        }];
     }
 }
 
@@ -327,7 +394,8 @@ static const NSArray *categories;
 -(void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
     if (status == kCLAuthorizationStatusAuthorizedWhenInUse){
         [self.mapView setShowsUserLocation:YES];
-        [self.mapView setCenterCoordinate:self.mapView.userLocation.location.coordinate animated:YES];
+        MKCoordinateRegion currentRegion = MKCoordinateRegionMakeWithDistance(self.locationManager.location.coordinate, 300, 300);
+        [self.mapView setRegion:currentRegion];
     }
 }
 
@@ -363,9 +431,13 @@ static const NSArray *categories;
     annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"AnnotationView"];
     
     annotationView.canShowCallout = YES;
+    annotationView.animatesDrop = YES;
+    annotationView.pinTintColor = [UIColor colorWithRed:0.278 green:0.510 blue:0.855 alpha:1.000];
     UIButton *rightCallout = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
     
     annotationView.rightCalloutAccessoryView = rightCallout;
+    [self dissolvePinDropReminderLabel];
+    [self toggleViewAfterPinDrop];
 
     return annotationView;
     
@@ -380,7 +452,8 @@ static const NSArray *categories;
         newPoint.coordinate = coordinate;
         
         self.geoPoint = [PFGeoPoint geoPointWithLatitude:newPoint.coordinate.latitude longitude:newPoint.coordinate.longitude];
-        
+        [self.mapView removeAnnotation:self.mapPinAnnotation];
+        self.mapPinAnnotation = newPoint;
         [self.mapView addAnnotation:newPoint];
     }
 }
