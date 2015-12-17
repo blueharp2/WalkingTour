@@ -314,29 +314,28 @@ static const NSArray *categories;
 
 #pragma mark LocationController
 
--(void)requestPermissions{
+-(void)requestPermissions {
     self.locationManager = [[CLLocationManager alloc]init];
     [self.locationManager requestWhenInUseAuthorization];
-    
 }
 
--(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(nonnull NSArray<CLLocation *> *)location{
+-(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(nonnull NSArray<CLLocation *> *)location {
    [self.delegate locationControllerDidUpdateLocation:location.lastObject];
     [self setLocation:location.lastObject];
-    
 }
 
--(void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status{
+-(void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
     if (status == kCLAuthorizationStatusAuthorizedWhenInUse){
         [self.mapView setShowsUserLocation:YES];
+        [self.mapView setCenterCoordinate:self.mapView.userLocation.location.coordinate animated:YES];
     }
 }
 
--(void)locationControllerDidUpdateLocation: (CLLocation *)location{
+-(void)locationControllerDidUpdateLocation: (CLLocation *)location {
     [self setRegion: MKCoordinateRegionMakeWithDistance(location.coordinate, 300.0, 300.0)];
 }
 
--(void) setRegion: (MKCoordinateRegion) region{
+-(void) setRegion: (MKCoordinateRegion) region {
     [self.mapView setRegion:region animated:YES];
 }
 
@@ -349,6 +348,7 @@ static const NSArray *categories;
     _locationManager.distanceFilter = 100;
 
 }
+
 #pragma mark MKMapViewDelegate
 -(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation{
     
