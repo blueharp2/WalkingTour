@@ -34,6 +34,8 @@
 		3D7264021C1F687D00ABEEFD /* WalkingTour.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D7264011C1F687D00ABEEFD /* WalkingTour.png */; };
 		3D7264051C1F6BCC00ABEEFD /* TourSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D7264041C1F6BCC00ABEEFD /* TourSelectionViewController.m */; };
 		3D7264071C1F716E00ABEEFD /* ParseLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D7264061C1F716E00ABEEFD /* ParseLoginViewController.m */; };
+		3D9A58701C2329F90056A624 /* sandfootprints 700h.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3D9A586F1C2329F90056A624 /* sandfootprints 700h.jpg */; };
+		3D9A58721C232C180056A624 /* newyorkpin copy700h.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3D9A58711C232C180056A624 /* newyorkpin copy700h.jpg */; };
 		902868C61C22804D005224A4 /* photo.png in Resources */ = {isa = PBXBuildFile; fileRef = 902868C51C22804D005224A4 /* photo.png */; };
 		902868C81C228BD3005224A4 /* idaho.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 902868C71C228BD3005224A4 /* idaho.jpg */; };
 		903177CB1C1F3A9E001C8DF9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 903177CA1C1F3A9E001C8DF9 /* main.m */; };
@@ -111,6 +113,8 @@
 		3D7264031C1F6BCC00ABEEFD /* TourSelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TourSelectionViewController.h; path = WalkingTours/TourSelectionViewController.h; sourceTree = "<group>"; };
 		3D7264041C1F6BCC00ABEEFD /* TourSelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TourSelectionViewController.m; path = WalkingTours/TourSelectionViewController.m; sourceTree = "<group>"; };
 		3D7264061C1F716E00ABEEFD /* ParseLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParseLoginViewController.m; sourceTree = "<group>"; };
+		3D9A586F1C2329F90056A624 /* sandfootprints 700h.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "sandfootprints 700h.jpg"; sourceTree = "<group>"; };
+		3D9A58711C232C180056A624 /* newyorkpin copy700h.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "newyorkpin copy700h.jpg"; sourceTree = "<group>"; };
 		902868C51C22804D005224A4 /* photo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = photo.png; sourceTree = "<group>"; };
 		902868C71C228BD3005224A4 /* idaho.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = idaho.jpg; sourceTree = "<group>"; };
 		903177C61C1F3A9E001C8DF9 /* WalkingTours.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WalkingTours.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -282,6 +286,9 @@
 				903177DA1C1F3A9E001C8DF9 /* Info.plist */,
 				903177C91C1F3A9E001C8DF9 /* Supporting Files */,
 				3D43CF1F1C1F478D00118998 /* WalkingTours58.png */,
+				3D7264011C1F687D00ABEEFD /* WalkingTour.png */,
+				3D9A586F1C2329F90056A624 /* sandfootprints 700h.jpg */,
+				3D9A58711C232C180056A624 /* newyorkpin copy700h.jpg */,
 				3D43CF201C1F478D00118998 /* WalkingTours60.png */,
 				3D43CF211C1F478D00118998 /* WalkingTours80.png */,
 				3D43CF221C1F478D00118998 /* WalkingTours120.png */,
@@ -292,7 +299,6 @@
 		903177C91C1F3A9E001C8DF9 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				3D7264011C1F687D00ABEEFD /* WalkingTour.png */,
 				903177CA1C1F3A9E001C8DF9 /* main.m */,
 			);
 			name = "Supporting Files";
@@ -496,6 +502,7 @@
 				3D43CF261C1F478D00118998 /* WalkingTours120.png in Resources */,
 				90AE88D21C209290005536B4 /* CategoryTableViewCell.xib in Resources */,
 				902868C61C22804D005224A4 /* photo.png in Resources */,
+				3D9A58701C2329F90056A624 /* sandfootprints 700h.jpg in Resources */,
 				90FD33561C210AAA002FFD1A /* LocationTableViewCell.xib in Resources */,
 				3D7264021C1F687D00ABEEFD /* WalkingTour.png in Resources */,
 				3D43CF231C1F478D00118998 /* WalkingTours58.png in Resources */,
@@ -505,6 +512,7 @@
 				3D43CF241C1F478D00118998 /* WalkingTours60.png in Resources */,
 				903177D41C1F3A9E001C8DF9 /* Main.storyboard in Resources */,
 				3D43CF251C1F478D00118998 /* WalkingTours80.png in Resources */,
+				3D9A58721C232C180056A624 /* newyorkpin copy700h.jpg in Resources */,
 				902868C81C228BD3005224A4 /* idaho.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
