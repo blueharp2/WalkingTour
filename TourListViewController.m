@@ -32,6 +32,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self setupViewController];
 }
 
 - (void)setCurrentTour:(NSString*)currentTour {
@@ -47,7 +48,6 @@
 
 - (void)setupViewController
 {
-    //Setup tableView
     [self.tourListTableView setDelegate:self];
     [self.tourListTableView setDataSource:self];
     
@@ -64,7 +64,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    LocationTableViewCell *cell = (LocationTableViewCell*) [self.tourListTableView dequeueReusableCellWithIdentifier:@"LocationTableViewCell"];
+    LocationTableViewCell *cell = (LocationTableViewCell*) [tableView dequeueReusableCellWithIdentifier:@"LocationTableViewCell"];
     [cell setLocation:[self.locationsFromParse objectAtIndex:indexPath.row]];
     return cell;
 }
@@ -72,11 +72,18 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     NSString *tourId = self.locationsFromParse[indexPath.row].objectId;
-    [self performSegueWithIdentifier:@"TabBarController" sender:tourId];
+    [self performSegueWithIdentifier:@"TourDetailViewController" sender:tourId];
 }
 
-#pragma mark SEGUE
-
-
-    
 @end
+
+
+
+
+
+
+
+
+
+
+

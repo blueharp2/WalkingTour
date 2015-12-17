@@ -14,11 +14,9 @@
 @property (weak, nonatomic) IBOutlet UIImageView *locationImageView;
 @property (weak, nonatomic) IBOutlet UILabel *locationLabel;
 
-
 @end
 
 @implementation LocationTableViewCell
-
 
 - (void)awakeFromNib {
     self.locationImageView.layer.cornerRadius = 5.0;
@@ -26,10 +24,6 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-}
-
-+ (NSString *)reuseIdentifier {
-    return @"CustomCellIdentifier";
 }
 
 - (void)setLocation:(Location *)location {
