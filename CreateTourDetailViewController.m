@@ -48,7 +48,7 @@ static const NSArray *categories;
     self.navigationItem.rightBarButtonItem = saveButton;
     [self setUpGreyOutView];
     self.mapView.delegate = self;
-    [self.mapView setShowsUserLocation:YES];
+//    [self.mapView setShowsUserLocation:YES];
     [self requestPermissions];
     [self.locationManager setDelegate:self];
     [self locationControllerDidUpdateLocation:_locationManager.location];

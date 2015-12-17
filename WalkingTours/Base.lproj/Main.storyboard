@@ -444,7 +444,6 @@
                                     </mask>
                                 </variation>
                                 <connections>
-                                    <action selector="createTour:" destination="GeJ-TF-SYQ" eventType="touchUpInside" id="cKM-Un-ZWu"/>
                                     <segue destination="vsA-st-EdL" kind="show" identifier="SegueToCreateTour" id="As8-fR-r2F"/>
                                 </connections>
                             </button>
@@ -455,7 +454,6 @@
                                     <color key="titleColor" red="0.27840076974743694" green="0.51002020468252163" blue="0.85375236742424243" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="createTour:" destination="GeJ-TF-SYQ" eventType="touchUpInside" id="cYh-7W-Ore"/>
                                     <segue destination="tqM-E3-5K0" kind="show" id="1Gy-tP-J2d"/>
                                 </connections>
                             </button>
