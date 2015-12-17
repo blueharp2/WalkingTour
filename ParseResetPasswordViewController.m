@@ -30,16 +30,37 @@
 
 
 }
+//        Test for Valid Email Address
 
-
-- (IBAction)cancelPressed:(UIBarButtonItem *)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
+- (BOOL) validateEmail: (UITextField *)passwordReset {
+    NSString *emailString = self.passwordReset.text;
+    NSString *emailRegex = @"[A-Z0-9a-z._+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
+    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
+    
+    if (([emailTest evaluateWithObject:emailString] != YES) || [emailString isEqualToString:@""])
+    {
+        
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:@"Enter Valid Email Address" preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+            NSLog(@"You pressed button OK");
+        }];
+        
+        [alert addAction:defaultAction];
+        
+        [self presentViewController:alert animated:YES completion:nil];
+        
+        return NO;
+    } else {
+        return YES;
+    }
 }
 
 - (IBAction)sendResetPassword:(id)sender {
     
-    [PFUser requestPasswordResetForEmailInBackground:self.passwordReset.text];
-
+    if ([self validateEmail:self.passwordReset]) {
+        [PFUser requestPasswordResetForEmailInBackground:self.passwordReset.text];
+    }
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
