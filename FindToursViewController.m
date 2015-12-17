@@ -64,7 +64,6 @@
     // Gets user location and set map region
     CLLocation *location = [self.locationManager location];
     [self setMapForCoordinateWithLatitude:location.coordinate.latitude andLongitude:location.coordinate.longitude];
-    //    CLLocationCoordinate2D coordinate = [location coordinate];
     CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(47.624441, -122.335913);
     
     
@@ -84,7 +83,7 @@
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
     
-    [_locationManager stopMonitoringSignificantLocationChanges];
+    [self.locationManager stopMonitoringSignificantLocationChanges];
 }
 
 - (void)setupViewController
@@ -145,6 +144,7 @@
 }
 
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
+    
     [self performSegueWithIdentifier:@"TabBarController" sender:view];
     
 }
@@ -228,7 +228,7 @@
             TourListViewController *tourListViewController = (TourListViewController *)tabBar.viewControllers[1];
             
             [tourMapViewController setCurrentTour:annotationView.annotation.subtitle];
-            [tourListViewController setCurrentTour:sender];
+            [tourListViewController setCurrentTour:annotationView.annotation.subtitle];
             
         } else {
             

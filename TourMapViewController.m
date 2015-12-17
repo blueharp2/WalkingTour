@@ -50,11 +50,16 @@
         newPoint.coordinate = CLLocationCoordinate2DMake(location.location.latitude, location.location.longitude);
         newPoint.title = location.locationName;
         newPoint.subtitle = location.objectId;
+        
         [self.mapView addAnnotation:newPoint];
         
         //Create Dictionary..
+        if (_locationsWithObjectId) {
+            [_locationsWithObjectId setObject:location forKey:location.objectId];
+        } else {
+            _locationsWithObjectId = [NSMutableDictionary dictionaryWithObject:location forKey:location.objectId];
+        }
         
-        [_locationsWithObjectId setObject:location forKey:location.objectId];
     }
 }
 
@@ -83,7 +88,7 @@
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
     
-    [_locationManager stopMonitoringSignificantLocationChanges];
+    [self.locationManager stopMonitoringSignificantLocationChanges];
 }
 
 - (void)setRegionForCoordinate:(MKCoordinateRegion)region {
@@ -127,12 +132,10 @@
 }
 
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
-    //Put the segue name here...
-    [self performSegueWithIdentifier:@"TourDetailViewController" sender:view];
-    //Find the objectID as a key in the dictionary
 
-   Location* currentLocation = [_locationsWithObjectId objectForKey:(view.annotation.subtitle)];
-    [self performSegueWithIdentifier:@"TourDetailViewController" sender:currentLocation];
+   Location* selectedLocation = [self.locationsWithObjectId objectForKey:(view.annotation.subtitle)];
+    
+    [self performSegueWithIdentifier:@"TourDetailViewController" sender:selectedLocation];
 
 }
 
@@ -147,7 +150,7 @@
     _locationManager.desiredAccuracy = kCLLocationAccuracyKilometer;
     
     // Set a movement threshold for new events.
-    _locationManager.distanceFilter = 500; // meters
+    _locationManager.distanceFilter = 100; // meters
     
     [_locationManager startUpdatingLocation];
 }
@@ -173,11 +176,18 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"TourDetailViewController"]) {
-        if ([sender isKindOfClass:[MKAnnotationView class]]) {
-            MKAnnotationView *annotationView = (MKAnnotationView *)sender;
+//            MKAnnotationView *annotationView = (MKAnnotationView *)sender;
             TourDetailViewController *tourDetailViewController = (TourDetailViewController *)segue.destinationViewController;
+        if ([sender isKindOfClass: [Location class]]) {
+            
+            Location *location = (Location *)sender;
+            
+            Location* selectedLocation = [_locationsWithObjectId objectForKey:(location.objectId)];
+            NSLog(@"%@",selectedLocation);
+            [tourDetailViewController setLocation:selectedLocation];
+
         }
-    }    // Pass the selected object to the new view controller.
+    }
 }
 
 
