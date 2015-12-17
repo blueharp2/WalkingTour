@@ -237,6 +237,17 @@ static const NSArray *categories;
         photoData = UIImageJPEGRepresentation([info objectForKey:@"UIImagePickerControllerEditedImage"], 1.0);
         photoFile = [PFFile fileWithName:[NSString stringWithFormat:@"%i.jpg",rand() / 2] data:photoData];
         self.image = [info objectForKey:@"UIImagePickerControllerEditedImage"];
+    } else if ([info objectForKey:@"UIImagePickerControllerOriginalImage"]) {
+        NSLog(@"Ah, just a photo?");
+        photoData = UIImageJPEGRepresentation([info objectForKey:@"UIImagePickerControllerOriginalImage"], 1.0);
+        photoFile = [PFFile fileWithName:[NSString stringWithFormat:@"%i.jpg",rand() / 2] data:photoData];
+        self.image = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
+    } else {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"What!?!" message:@"Why don't you pick a normal photo/video!?!" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+        [alertController addAction:okAction];
+        [self presentViewController:alertController animated:YES completion:nil];
+        return;
     }
     self.photoFile = photoFile;
     self.videoFile = videoFile;

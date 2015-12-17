@@ -41,11 +41,11 @@
 
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    NSLog(@"View appeared");
-    [self.locationTableView reloadData];
-}
+//- (void)viewWillAppear:(BOOL)animated {
+//    [super viewWillAppear:animated];
+//    NSLog(@"View appeared");
+//    [self.locationTableView reloadData];
+//}
 
 -(void)setupMainViewController{
     
@@ -56,7 +56,7 @@
     [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveButtonSelected:)]];
     
     UINib *nib = [UINib nibWithNibName:@"LocationTableViewCell" bundle:nil];
-    [[self locationTableView]registerNib:nib forCellReuseIdentifier:@"locationtableviewcell"];
+    [[self locationTableView]registerNib:nib forCellReuseIdentifier:@"LocationTableViewCell"];
     
 }
 
@@ -75,7 +75,7 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-   LocationTableViewCell *cell = (LocationTableViewCell *)[self.locationTableView dequeueReusableCellWithIdentifier:@"locationtableviewcell" forIndexPath:indexPath];
+   LocationTableViewCell *cell = (LocationTableViewCell *)[self.locationTableView dequeueReusableCellWithIdentifier:@"LocationTableViewCell" forIndexPath:indexPath];
     NSLog(@"%@", [self.locations[indexPath.row] class]);
     [cell setLocation:self.locations[indexPath.row]];
     [cell setImage:self.images[indexPath.row]];

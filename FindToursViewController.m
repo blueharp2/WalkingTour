@@ -228,7 +228,6 @@
             TourListViewController *tourListViewController = (TourListViewController *)tabBar.viewControllers[1];
             
             [tourMapViewController setCurrentTour:annotationView.annotation.subtitle];
-            
         } else {
             
             UITabBarController *tabBar = (UITabBarController *)segue.destinationViewController;
