@@ -497,10 +497,10 @@
             </objects>
             <point key="canvasLocation" x="2805" y="-644"/>
         </scene>
-        <!--Find Tours Nearby-->
+        <!--Find Tours-->
         <scene sceneID="UoJ-JZ-cjF">
             <objects>
-                <viewController title="Find Tours Nearby" id="tqM-E3-5K0" customClass="FindToursViewController" sceneMemberID="viewController">
+                <viewController title="Find Tours" id="tqM-E3-5K0" customClass="FindToursViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="02n-Ua-OER"/>
                         <viewControllerLayoutGuide type="bottom" id="5vw-EB-vwN"/>
@@ -595,7 +595,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0iQ-L2-MJt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5166" y="-865"/>
+            <point key="canvasLocation" x="4154" y="-895"/>
         </scene>
         <!--Create Tour ViewController-->
         <scene sceneID="PvD-xR-3JL">
@@ -737,7 +737,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h2j-IS-vEX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4634" y="-244"/>
+            <point key="canvasLocation" x="4154" y="-264"/>
         </scene>
         <!--TourDetailViewController-->
         <scene sceneID="dRw-18-JAy">
@@ -805,7 +805,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jtp-dI-fuk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5661" y="-848"/>
+            <point key="canvasLocation" x="4634" y="-604"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Tcs-cV-O0U">
