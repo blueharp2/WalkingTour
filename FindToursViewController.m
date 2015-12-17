@@ -59,9 +59,23 @@
     [self setupViewController];
     
     // Gets user location and set map region
+//    CLLocation *location = [self.locationManager location];
+//    [self setMapForCoordinateWithLatitude:location.coordinate.latitude andLongitude:location.coordinate.longitude];
+//    CLLocationCoordinate2D coordinate = location.coordinate;
+//    
+//    
+//    [ParseService fetchToursNearLocation:coordinate completion:^(BOOL success, NSArray *results) {
+//        if (success) {
+//            [self setToursFromParse:results];
+//            [self.toursTableView reloadData];
+//        }
+//    }];
+}
+
+- (void)fetchToursNearUser {
     CLLocation *location = [self.locationManager location];
     [self setMapForCoordinateWithLatitude:location.coordinate.latitude andLongitude:location.coordinate.longitude];
-    CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(47.624441, -122.335913);
+    CLLocationCoordinate2D coordinate = location.coordinate;
     
     
     [ParseService fetchToursNearLocation:coordinate completion:^(BOOL success, NSArray *results) {
@@ -187,6 +201,7 @@
         [self.mapView setShowsUserLocation:YES];
         MKCoordinateRegion currentRegion = MKCoordinateRegionMakeWithDistance(self.locationManager.location.coordinate, 300, 300);
         [self.mapView setRegion:currentRegion];
+        [self fetchToursNearUser];
     }
 }
 
