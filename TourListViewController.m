@@ -71,9 +71,27 @@
 
 #pragma mark - TABLEVIEW
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return self.locationsFromParse.count;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return self.locationsFromParse.count;
+    return 1;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 1.0;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *headerView = [UIView new];
+    [headerView setBackgroundColor:[UIColor clearColor]];
+    
+    return headerView;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -87,6 +105,12 @@
     
     Location *location = self.locationsFromParse[indexPath.row];
     [self performSegueWithIdentifier:@"TourDetailViewController" sender:location];
+}
+
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    cell.layer.cornerRadius = 5;
+    cell.layer.masksToBounds = true;
 }
 
 @end

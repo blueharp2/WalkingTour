@@ -29,4 +29,11 @@
     
     return headerLayer;
 }
+
+//+ (CAGradientLayer *)lindseysBlue {
+//    
+//    UIColor *customBlueColor = [UIColor colorWithRed:0.278 green:0.510 blue:0.855 alpha:1.000];
+//    
+////    UIColor *colorOne = [UIColor colorWithRed:<#(CGFloat)#> green:<#(CGFloat)#> blue:<#(CGFloat)#> alpha:<#(CGFloat)#>]
+//}
 @end
