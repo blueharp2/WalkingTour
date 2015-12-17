@@ -23,15 +23,19 @@ static const NSArray *categories;
 @property (strong, nonatomic) UIView *greyOutView;
 @property (strong, nonatomic) UITableView *categoryTableView;
 @property (strong, nonatomic) UIButton *finalSaveButton;
+@property (strong, nonatomic) UIBarButtonItem *saveButton;
 @property (strong, nonatomic) NSMutableArray *selectedCategories;
 @property (strong, nonatomic) PFFile *videoFile;
 @property (strong, nonatomic) PFFile *photoFile;
 @property (strong, nonatomic) UIImage *image;
 @property (strong, nonatomic) PFGeoPoint *geoPoint;
 @property (strong, nonatomic) Location *createdLocation;
+@property (strong, nonatomic) MKPointAnnotation *mapPinAnnotation;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet UITextField *locationNameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *locationDescriptionTextField;
+@property (weak, nonatomic) IBOutlet UILabel *pinDropReminderLabel;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *mapHeightConstraint;
 @property (weak, nonatomic) IBOutlet UIButton *cameraButton;
 - (IBAction)cameraButtonPressed:(UIButton *)sender;
 
@@ -44,8 +48,16 @@ static const NSArray *categories;
     
     self.image = [UIImage imageNamed:@"idaho.jpg"];
     
-    UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveLocation:)];
-    self.navigationItem.rightBarButtonItem = saveButton;
+    self.saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveLocation:)];
+    self.navigationItem.rightBarButtonItem = self.saveButton;
+    self.saveButton.enabled = NO;
+    self.locationNameTextField.hidden = YES;
+    self.locationDescriptionTextField.hidden = YES;
+    self.cameraButton.hidden = YES;
+    self.locationNameTextField.alpha = 0.0;
+    self.locationDescriptionTextField.alpha = 0.0;
+    self.cameraButton.alpha = 0.0;
+    
     [self setUpGreyOutView];
     self.mapView.delegate = self;
     [self requestPermissions];
@@ -248,6 +260,32 @@ static const NSArray *categories;
     }
 }
 
+- (void)dissolvePinDropReminderLabel {
+    [UIView animateWithDuration:0.8 animations:^{
+        self.pinDropReminderLabel.alpha = 0.0;
+    }];
+}
+
+- (void)toggleViewAfterPinDrop {
+    [self.view layoutIfNeeded];
+    self.saveButton.enabled = YES;
+    if (self.locationNameTextField.alpha == 0.0) {
+        self.locationNameTextField.hidden = NO;
+        self.locationDescriptionTextField.hidden = NO;
+        self.cameraButton.hidden = NO;
+        [UIView animateWithDuration:0.4 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^{
+            self.locationNameTextField.alpha = 1.0;
+            self.locationDescriptionTextField.alpha = 1.0;
+            self.cameraButton.alpha = 1.0;
+            self.mapHeightConstraint.constant = -(self.mapView.frame.size.height / 2);
+            [self.view layoutIfNeeded];
+        } completion:^(BOOL finished) {
+            MKCoordinateRegion pinRegion = MKCoordinateRegionMakeWithDistance(CLLocationCoordinate2DMake(self.geoPoint.latitude, self.geoPoint.longitude), 300, 300);
+            [self.mapView setRegion:pinRegion animated:YES];
+        }];
+    }
+}
+
 #pragma mark - UIImagePickerControllerDelegate
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
@@ -393,9 +431,13 @@ static const NSArray *categories;
     annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"AnnotationView"];
     
     annotationView.canShowCallout = YES;
+    annotationView.animatesDrop = YES;
+    annotationView.pinTintColor = [UIColor colorWithRed:0.278 green:0.510 blue:0.855 alpha:1.000];
     UIButton *rightCallout = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
     
     annotationView.rightCalloutAccessoryView = rightCallout;
+    [self dissolvePinDropReminderLabel];
+    [self toggleViewAfterPinDrop];
 
     return annotationView;
     
@@ -410,7 +452,8 @@ static const NSArray *categories;
         newPoint.coordinate = coordinate;
         
         self.geoPoint = [PFGeoPoint geoPointWithLatitude:newPoint.coordinate.latitude longitude:newPoint.coordinate.longitude];
-        
+        [self.mapView removeAnnotation:self.mapPinAnnotation];
+        self.mapPinAnnotation = newPoint;
         [self.mapView addAnnotation:newPoint];
     }
 }

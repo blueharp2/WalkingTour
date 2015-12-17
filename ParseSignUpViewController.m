@@ -27,7 +27,6 @@
 }
 - (IBAction)cancelPressed:(UIBarButtonItem *)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
-
 }
 
 - (IBAction)saveSignUp:(id)sender {
@@ -39,8 +38,8 @@
     
     [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
-            if ([[self presentingViewController] isKindOfClass:[ParseLoginViewController class]]) {
-                ParseLoginViewController *loginVC = (ParseLoginViewController *)[self presentingViewController];
+            if ([self.navigationController.viewControllers[0] isKindOfClass:[ParseLoginViewController class]]) {
+                ParseLoginViewController *loginVC = (ParseLoginViewController *)self.navigationController.viewControllers[0];
                 if (loginVC.completion) {
                     loginVC.completion();
                 }
