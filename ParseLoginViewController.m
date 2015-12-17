@@ -23,7 +23,11 @@
 @implementation ParseLoginViewController
 
 - (void)viewDidLoad {
-    [super viewDidLoad];    
+    [super viewDidLoad];
+        
+    self.navigationController.navigationBar.backgroundColor = [UIColor clearColor];
+    [self.navigationController.navigationBar setTranslucent:YES];
+    self.navigationController.view.backgroundColor = [UIColor clearColor];
 }
 
 - (IBAction)loginButton:(id)sender {
