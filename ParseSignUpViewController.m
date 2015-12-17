@@ -38,17 +38,13 @@
     user.email = _emailSignUp.text;
     
     [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        
-        NSString *userMessage = @"Registration is successful.";
-        
-        if (!error) {
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Alert" message:userMessage preferredStyle:UIAlertControllerStyleAlert];
-            UIAlertAction *alertAction = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:nil];
-            [self dismissViewControllerAnimated:YES completion:nil];
-            
-        } else {
-            NSString *errorString = [error userInfo][@"error"];
-            
+        if (succeeded) {
+            if ([[self presentingViewController] isKindOfClass:[ParseLoginViewController class]]) {
+                ParseLoginViewController *loginVC = (ParseLoginViewController *)[self presentingViewController];
+                if (loginVC.completion) {
+                    loginVC.completion();
+                }
+            }
         }
     }];
 }

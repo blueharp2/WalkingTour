@@ -41,12 +41,6 @@
 
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    NSLog(@"View appeared");
-    [self.locationTableView reloadData];
-}
-
 -(void)setupMainViewController{
     
     self.locationTableView.delegate = self;
@@ -56,12 +50,12 @@
     [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveButtonSelected:)]];
     
     UINib *nib = [UINib nibWithNibName:@"LocationTableViewCell" bundle:nil];
-    [[self locationTableView]registerNib:nib forCellReuseIdentifier:@"locationtableviewcell"];
+    [[self locationTableView]registerNib:nib forCellReuseIdentifier:@"LocationTableViewCell"];
     
 }
 
 - (IBAction)addLocationsButton:(id)sender {
-//    [self.navigationController pushViewController:[[CreateTourDetailViewController alloc]init] animated:YES];
+    
 }
 
 #pragma mark set up TableView
@@ -75,8 +69,7 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-   LocationTableViewCell *cell = (LocationTableViewCell *)[self.locationTableView dequeueReusableCellWithIdentifier:@"locationtableviewcell" forIndexPath:indexPath];
-    NSLog(@"%@", [self.locations[indexPath.row] class]);
+   LocationTableViewCell *cell = (LocationTableViewCell *)[self.locationTableView dequeueReusableCellWithIdentifier:@"LocationTableViewCell" forIndexPath:indexPath];
     [cell setLocation:self.locations[indexPath.row]];
     [cell setImage:self.images[indexPath.row]];
     return cell;
@@ -87,19 +80,15 @@
 #pragma mark Save to Parse
 
 -(void)saveButtonSelected:(UIBarButtonItem *)sender{
-    if (self.nameOfTourTextField.text.length != 0) {
-        NSLog(@"We have text!");
-    } else {
-        UIAlertController *noTextinFieldAlert = [UIAlertController alertControllerWithTitle:@"Please enter the name of your tour" message:@"Thank you" preferredStyle:UIAlertControllerStyleAlert];
+    if (self.nameOfTourTextField.text.length == 0 || self.tourDescriptionTextField.text.length == 0) {
+        UIAlertController *noTextinFieldAlert = [UIAlertController alertControllerWithTitle:@"Missing Text" message:@"Please enter the name and description for your tour" preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){}];
         [noTextinFieldAlert addAction:defaultAction];
         [self presentViewController:noTextinFieldAlert animated:YES completion:nil];
         return;
     }
-    if (self.locations.count !=0) {
-        NSLog(@"We have a location!");
-    } else {
-        UIAlertController *noLocationAlert = [UIAlertController alertControllerWithTitle:@"Please add at least one location" message:@"Thank you" preferredStyle:UIAlertControllerStyleAlert];
+    if (self.locations.count ==0) {
+        UIAlertController *noLocationAlert = [UIAlertController alertControllerWithTitle:@"Missing Locations" message:@"Please add at least one location." preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){}];
         [noLocationAlert addAction:defaultAction];
         [self presentViewController:noLocationAlert animated:YES completion:nil];

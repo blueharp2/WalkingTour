@@ -42,7 +42,7 @@
         ParseLoginViewController *myController = [storyboard instantiateViewControllerWithIdentifier:@"ParseLoginViewController"];
         
         myController.completion = ^() {
-            [myController dismissViewControllerAnimated:YES completion:nil];
+            [self dismissViewControllerAnimated:YES completion:nil];
         };
         
         [self presentViewController:myController animated:YES completion:nil];

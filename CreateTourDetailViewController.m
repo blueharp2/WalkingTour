@@ -183,8 +183,6 @@ static const NSArray *categories;
 
 - (void)saveLocation:(UIBarButtonItem *)sender {
     if (self.locationNameTextField.text.length > 0 && self.locationDescriptionTextField.text.length > 0 && self.geoPoint != nil) {
-        //Create a location with no tour and no categories.
-        //If a photo isn't taken it'll pass a nil reference.
         Location *locationToSave = [[Location alloc] initWithLocationName:self.locationNameTextField.text locationDescription:self.locationDescriptionTextField.text photo:self.photoFile video:self.videoFile categories:nil location:self.geoPoint tour:nil];
         self.createdLocation = locationToSave;
         [self displayCategories];
@@ -220,12 +218,9 @@ static const NSArray *categories;
     PFFile *photoFile;
     PFFile *videoFile;
     if ([info objectForKey:@"UIImagePickerControllerMediaURL"]) {
-        NSLog(@"So, you've made a movie...");
         videoData = [NSData dataWithContentsOfURL:[info objectForKey:@"UIImagePickerControllerMediaURL"]];
         videoFile = [PFFile fileWithName:[NSString stringWithFormat:@"%i.mp4", rand() / 2] data:videoData];
-        NSLog(@"%@", [info objectForKey:@"UIImagePickerControllerMediaURL"]);
         
-        //screenshot the video and turn it into image data here.
         UIImage *photo = [self getStillImageDataFromMovieUrl:[info objectForKey:@"UIImagePickerControllerMediaURL"]];
         self.image = photo;
         NSData *stillImageData = UIImageJPEGRepresentation(photo, 1.0);
@@ -233,10 +228,19 @@ static const NSArray *categories;
         photoFile = [PFFile fileWithName:[NSString stringWithFormat:@"%i.jpg",rand() / 2] data:photoData];
     }
     if ([info objectForKey:@"UIImagePickerControllerEditedImage"]) {
-        NSLog(@"Ah, just a photo?");
         photoData = UIImageJPEGRepresentation([info objectForKey:@"UIImagePickerControllerEditedImage"], 1.0);
         photoFile = [PFFile fileWithName:[NSString stringWithFormat:@"%i.jpg",rand() / 2] data:photoData];
         self.image = [info objectForKey:@"UIImagePickerControllerEditedImage"];
+    } else if ([info objectForKey:@"UIImagePickerControllerOriginalImage"]) {
+        photoData = UIImageJPEGRepresentation([info objectForKey:@"UIImagePickerControllerOriginalImage"], 1.0);
+        photoFile = [PFFile fileWithName:[NSString stringWithFormat:@"%i.jpg",rand() / 2] data:photoData];
+        self.image = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
+    } else {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"What!?!" message:@"Why don't you pick a normal photo/video!?!" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+        [alertController addAction:okAction];
+        [self presentViewController:alertController animated:YES completion:nil];
+        return;
     }
     self.photoFile = photoFile;
     self.videoFile = videoFile;
@@ -329,7 +333,6 @@ static const NSArray *categories;
     _locationManager.delegate = self;
     _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     _locationManager.distanceFilter = 100;
-  //[_locationManager requestAlwaysAutorization];
 
 }
 #pragma mark MKMapViewDelegate
@@ -339,7 +342,6 @@ static const NSArray *categories;
         return nil;
     }
     
-    //Add view
     MKPinAnnotationView *annotationView = (MKPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:@"AnnotationView"];
     
     annotationView.annotation = annotation;
@@ -368,25 +370,5 @@ static const NSArray *categories;
         [self.mapView addAnnotation:newPoint];
     }
 }
-
-
-#pragma mark - Test Funcs
-
-//- (void)addTestModelsToParse:(PFFile *)media {
-//    CLLocationCoordinate2D location = CLLocationCoordinate2DMake(47.623544, -122.336224);
-//    PFGeoPoint *geoPoint = [PFGeoPoint geoPointWithLatitude:location.latitude longitude:location.longitude];
-//    Tour *tour1 = [[Tour alloc] initWithNameOfTour:@"Tour 1" descriptionText:@"This is a tour." startLocation:geoPoint user:[PFUser currentUser]];
-//    Location *location1 = [[Location alloc] initWithLocationName:@"Code Fellows" locationDescription:@"This is where we practically live" photo:media categories:@[@"School", @"Education"] location:geoPoint tour:tour1];
-//    PFGeoPoint *geoPoint2 = [PFGeoPoint geoPointWithLatitude:47.627825 longitude:-122.337412];
-//    Location *location2 = [[Location alloc] initWithLocationName:@"The Park" locationDescription:@"I remember what the sun was like..." photo:media categories:@[@"Park", @"Not Coding"] location:geoPoint2 tour:tour1];
-//    NSArray *objectArray = [NSArray arrayWithObjects:tour1, location1, location2, nil];
-//    [PFObject saveAllInBackground:objectArray block:^(BOOL succeeded, NSError * _Nullable error) {
-//        if (succeeded) {
-//            NSLog(@"They saved!");
-//        } else {
-//            NSLog(@"Something went terribly wrong.");
-//        }
-//    }];
-//}
 
 @end

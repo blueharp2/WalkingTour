@@ -24,8 +24,7 @@
     }];
 }
 
-+ (void)fetchLocationsWithTourId:(NSString *)tourId completion:(locationsFetchCompletion)completion
-{
++ (void)fetchLocationsWithTourId:(NSString *)tourId completion:(locationsFetchCompletion)completion {
     
     PFQuery *query = [PFQuery queryWithClassName:@"Location"];
     [query whereKey:@"tour" equalTo:[PFObject objectWithoutDataWithClassName:@"Tour" objectId:tourId]];
@@ -45,7 +44,6 @@
     PFGeoPoint *geoPoint = [PFGeoPoint geoPointWithLatitude:location.latitude longitude:location.longitude];
     PFQuery *query = [PFQuery queryWithClassName:@"Tour"];
     [query whereKey:@"startLocation" nearGeoPoint:geoPoint];
-//    [query whereKey:@"startLocation" nearGeoPoint:geoPoint withinMiles:2.0];
     [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         if (error) {
             NSLog(@"%@", error.localizedFailureReason);

@@ -89,7 +89,7 @@ static const NSString *ItemStatusContext;
                  [self.playerView setPlayer:self.player];
             }
             else {
-                NSLog(@"The asset's tracks were not loaded:\n%@", [error localizedDescription]);
+                NSLog(@"The asset's tracks were not loaded: %@", [error localizedDescription]);
             }
         });
 
