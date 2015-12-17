@@ -32,6 +32,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self setupViewController];
 }
 
 - (void)setCurrentTour:(NSString*)currentTour {
@@ -64,7 +65,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    LocationTableViewCell *cell = (LocationTableViewCell*) [self.tourListTableView dequeueReusableCellWithIdentifier:@"LocationTableViewCell"];
+    LocationTableViewCell *cell = (LocationTableViewCell*) [tableView dequeueReusableCellWithIdentifier:@"LocationTableViewCell"];
     [cell setLocation:[self.locationsFromParse objectAtIndex:indexPath.row]];
     return cell;
 }
@@ -72,11 +73,33 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     NSString *tourId = self.locationsFromParse[indexPath.row].objectId;
-    [self performSegueWithIdentifier:@"TabBarController" sender:tourId];
+    [self performSegueWithIdentifier:@"TourDetailViewController" sender:tourId];
 }
 
 #pragma mark SEGUE
 
+//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+//    
+//    if ([sender isKindOfClass:[NSString class]]) {
+//    }
+//    }
 
-    
+
 @end
+
+
+
+
+//        MKAnnotationView *annotationView = (MKAnnotationView *)sender;
+//        TourDetailViewController *tourDetailViewController = (TourDetailViewController *)segue.destinationViewController;
+
+
+
+
+
+
+
+
+
+
+
