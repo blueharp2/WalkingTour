@@ -30,29 +30,14 @@
     [super didReceiveMemoryWarning];
 }
 
-- (IBAction)saveSignUp:(id)sender {
+- (BOOL) validateEmail: (UITextField *)emailSignUp {
+    NSString *emailString = self.emailSignUp.text;
+    NSString *emailRegex = @"[A-Z0-9a-z._+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
+    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
     
-    PFUser *user = [PFUser user];
-    user.username = _usernameSignUp.text;
-    user.password = _passwordSignUp.text;
-    user.email = _emailSignUp.text;
-    
-    if (_usernameSignUp.text.length > 0 && _passwordSignUp.text.length > 0 && _emailSignUp.text.length > 0) {
-
-    [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        if (succeeded) {
-            if ([self.navigationController.viewControllers[0] isKindOfClass:[ParseLoginViewController class]]) {
-                ParseLoginViewController *loginVC = (ParseLoginViewController *)self.navigationController.viewControllers[0];
-                if (loginVC.completion) {
-                    loginVC.completion();
-                }
-            }
-        }
-    }];
+    if (([emailTest evaluateWithObject:emailString] != YES) || [emailString isEqualToString:@""]) {
         
-    } else {
-        
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:@"Please complete all fields" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:@"Enter Valid Email Address" preferredStyle:UIAlertControllerStyleAlert];
         
         UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
             NSLog(@"You pressed button OK");
@@ -60,14 +45,58 @@
         
         [alert addAction:defaultAction];
         
-        [self presentViewController:alert animated:YES completion:nil];}
+        [self presentViewController:alert animated:YES completion:nil];
+        
+        return NO;
+        
+    } else {
+        
+        return YES;
+    }
+}
+
+- (IBAction)saveSignUp:(id)sender {
+    
+    if ([self validateEmail:self.emailSignUp]) {
+        
+        PFUser *user = [PFUser user];
+        user.username = _usernameSignUp.text;
+        user.password = _passwordSignUp.text;
+        user.email = _emailSignUp.text;
+        
+        if (_usernameSignUp.text.length > 0 && _passwordSignUp.text.length > 0 && _emailSignUp.text.length > 0) {
+            
+            [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                if (succeeded) {
+                    if ([self.navigationController.viewControllers[0] isKindOfClass:[ParseLoginViewController class]]) {
+                        ParseLoginViewController *loginVC = (ParseLoginViewController *)self.navigationController.viewControllers[0];
+                        if (loginVC.completion) {
+                            loginVC.completion();
+                        }
+                    }
+                }
+            }];
+            
+        } else {
+            
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:@"Please complete all fields" preferredStyle:UIAlertControllerStyleAlert];
+            
+            UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+                NSLog(@"You pressed button OK");
+            }];
+            
+            [alert addAction:defaultAction];
+            
+            [self presentViewController:alert animated:YES completion:nil];}
+    }
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     [self.view endEditing:YES];
 }
+
 #pragma TextField Delegate
-        
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
     return YES;
