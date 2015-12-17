@@ -107,6 +107,12 @@
     [self performSegueWithIdentifier:@"TourDetailViewController" sender:location];
 }
 
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    cell.layer.cornerRadius = 5;
+    cell.layer.masksToBounds = true;
+}
+
 @end
 
 

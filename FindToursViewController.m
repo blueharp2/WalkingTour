@@ -94,19 +94,15 @@
     [self.toursTableView setDelegate:self];
     [self.toursTableView setDataSource:self];
     
+    UIImageView *tempImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"TableViewBackground.png"]];
+    [tempImageView setFrame:self.toursTableView.frame];
+    
     UINib *nib = [UINib nibWithNibName:@"POIDetailTableViewCell" bundle:nil];
     [[self toursTableView] registerNib:nib forCellReuseIdentifier:@"POIDetailTableViewCell"];
     
     //Setup up MapView
     [self.mapView setDelegate:self];
     [self.mapView setShowsUserLocation: YES];
-    
-    CAGradientLayer *gradientLayer = [Gradient blueGradient];
-    gradientLayer.frame = CGRectMake(0, 0, self.view.bounds.size.width, 1000.0); // Insted of a 1000, you can calculate the height of the tableView... cant use tableView height, its not set yet.
-    
-    UIView *tableBackgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.toursTableView.bounds.size.width, self.toursTableView.bounds.size.height)];
-    [tableBackgroundView.layer insertSublayer:gradientLayer atIndex:0];
-    [self.toursTableView setBackgroundView:tableBackgroundView];
     
 }
 
@@ -223,6 +219,7 @@
     
     return headerView;
 }
+
 //- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 //{
 //    
@@ -231,12 +228,9 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
     POIDetailTableViewCell *cell = (POIDetailTableViewCell*) [self.toursTableView dequeueReusableCellWithIdentifier:@"POIDetailTableViewCell"];
-    [cell setTour:[self.toursFromParse objectAtIndex:indexPath.row]];
+    [cell setTour:[self.toursFromParse objectAtIndex:indexPath.section]];
     
-//    cell.viewForFirstBaselineLayout.frame = CGRectOffset(cell.frame, 10, 10);
-
     return cell;
 }
 
@@ -256,17 +250,10 @@
     [self performSegueWithIdentifier:@"TabBarController" sender:tourId];
 }
 
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-//    cell.contentView.layer.cornerRadius = 5;
-//    cell.contentView.layer.masksToBounds = YES;
-//    cell.backgroundColor = [UIColor clearColor];
-    
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
     cell.layer.cornerRadius = 5;
     cell.layer.masksToBounds = true;
-//    cell.view.frame = CGRectOffset(cell.frame, 10, 10);
-//    cell.viewForFirstBaselineLayout.frame = CGRectOffset(cell.frame, 10, 10);
-
-    
 }
 
 #pragma mark - Navigation
