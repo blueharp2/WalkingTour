@@ -23,7 +23,8 @@
 @implementation ParseLoginViewController
 
 - (void)viewDidLoad {
-    [super viewDidLoad];    
+    [super viewDidLoad];
+
 }
 
 - (IBAction)loginButton:(id)sender {
