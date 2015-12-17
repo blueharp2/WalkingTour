@@ -41,8 +41,8 @@
 
     [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
-            if ([self.parentViewController isKindOfClass:[ParseLoginViewController class]]) {
-                ParseLoginViewController *loginVC = (ParseLoginViewController *)self.parentViewController;
+            if ([self.navigationController.viewControllers[0] isKindOfClass:[ParseLoginViewController class]]) {
+                ParseLoginViewController *loginVC = (ParseLoginViewController *)self.navigationController.viewControllers[0];
                 if (loginVC.completion) {
                     loginVC.completion();
                 }
