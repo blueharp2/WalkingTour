@@ -8,6 +8,7 @@
 
 #import "CreateTourDetailViewController.h"
 #import "CategoryTableViewCell.h"
+#import "CreateTourViewController.h"
 @import MobileCoreServices;
 @import CoreLocation;
 @import CoreMedia;
@@ -31,6 +32,7 @@ static const NSArray *categories;
 @property (strong, nonatomic) PFGeoPoint *geoPoint;
 @property (strong, nonatomic) Location *createdLocation;
 @property (strong, nonatomic) MKPointAnnotation *mapPinAnnotation;
+@property (strong, nonatomic) UIColor *navBarTintColor;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet UITextField *locationNameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *locationDescriptionTextField;
@@ -58,6 +60,8 @@ static const NSArray *categories;
     self.locationDescriptionTextField.alpha = 0.0;
     self.cameraButton.alpha = 0.0;
     
+    self.navigationController.delegate = self;
+    
     [self setUpGreyOutView];
     self.mapView.delegate = self;
     [self requestPermissions];
@@ -66,6 +70,9 @@ static const NSArray *categories;
     self.locationNameTextField.delegate = self;
     self.locationDescriptionTextField.delegate = self;
     
+    UIColor *tintColor = self.navigationController.navigationBar.tintColor;
+    self.navBarTintColor = tintColor;
+    NSLog(@"%@", tintColor);
     self.navigationController.navigationBar.tintColor = [UIColor colorWithWhite:0.951 alpha:1.000];
 }
 
@@ -265,6 +272,7 @@ static const NSArray *categories;
         self.createdLocation.categories = self.selectedCategories;
         self.navigationController.navigationBarHidden = NO;
         if (self.createTourDetailDelegate) {
+//            self.navigationController.navigationBar.tintColor = self.navBarTintColor;
             [self.createTourDetailDelegate didFinishSavingLocationWithLocation:self.createdLocation image:self.image];
         }
         [self.navigationController popViewControllerAnimated:YES];
@@ -477,6 +485,14 @@ static const NSArray *categories;
         [self.locationDescriptionTextField becomeFirstResponder];
     }
     return YES;
+}
+
+#pragma mark - UINavigationControllerDelegate
+
+- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
+    if ([viewController isKindOfClass:[CreateTourViewController class]]) {
+        self.navigationController.navigationBar.tintColor = self.navBarTintColor;
+    }
 }
 
 @end
