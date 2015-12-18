@@ -368,7 +368,7 @@
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="next"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Location Description" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JOQ-pC-1Ce">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Location Description" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JOQ-pC-1Ce">
                                 <rect key="frame" x="20" y="394" width="280" height="30"/>
                                 <color key="textColor" red="0.2784313725" green="0.50980392159999999" blue="0.85490196080000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="14"/>
@@ -692,15 +692,16 @@
                             <constraint firstItem="1L6-cQ-RUl" firstAttribute="top" secondItem="Qal-q6-3hA" secondAttribute="bottom" constant="20" id="AwY-GO-5gI"/>
                             <constraint firstItem="aDh-or-b7o" firstAttribute="top" secondItem="De4-hA-ejL" secondAttribute="bottom" id="IXb-U1-2yP"/>
                             <constraint firstItem="Qal-q6-3hA" firstAttribute="centerX" secondItem="HCd-lq-wYg" secondAttribute="centerX" id="Jrj-3U-USv"/>
-                            <constraint firstItem="gha-TO-9kk" firstAttribute="leading" secondItem="HCd-lq-wYg" secondAttribute="leading" id="TMa-nB-7kr"/>
+                            <constraint firstItem="gha-TO-9kk" firstAttribute="leading" secondItem="HCd-lq-wYg" secondAttribute="leading" constant="8" id="TMa-nB-7kr"/>
                             <constraint firstItem="De4-hA-ejL" firstAttribute="leading" secondItem="HCd-lq-wYg" secondAttribute="leading" id="Tan-Rg-oir"/>
                             <constraint firstAttribute="trailing" secondItem="Wq2-4m-Ca4" secondAttribute="trailing" constant="20" id="Y37-oq-emk"/>
                             <constraint firstItem="De4-hA-ejL" firstAttribute="top" secondItem="HCd-lq-wYg" secondAttribute="top" id="Ydu-kb-hE7"/>
-                            <constraint firstAttribute="bottom" secondItem="gha-TO-9kk" secondAttribute="bottom" id="b15-ut-DgQ"/>
+                            <constraint firstAttribute="bottom" secondItem="gha-TO-9kk" secondAttribute="bottom" constant="8" id="b15-ut-DgQ"/>
+                            <constraint firstItem="mFF-Dj-GkE" firstAttribute="top" secondItem="Wq2-4m-Ca4" secondAttribute="bottom" constant="30" id="b6P-e2-OAs"/>
                             <constraint firstItem="gha-TO-9kk" firstAttribute="top" secondItem="Wq2-4m-Ca4" secondAttribute="bottom" constant="40" id="eCe-2K-mkQ"/>
                             <constraint firstItem="1L6-cQ-RUl" firstAttribute="centerX" secondItem="HCd-lq-wYg" secondAttribute="centerX" id="hwd-tb-nlg"/>
                             <constraint firstItem="1L6-cQ-RUl" firstAttribute="leading" secondItem="HCd-lq-wYg" secondAttribute="leading" constant="20" id="l7t-b1-wfD"/>
-                            <constraint firstAttribute="trailing" secondItem="gha-TO-9kk" secondAttribute="trailing" id="lQi-pt-fyz"/>
+                            <constraint firstAttribute="trailing" secondItem="gha-TO-9kk" secondAttribute="trailing" constant="8" id="lQi-pt-fyz"/>
                             <constraint firstItem="Wq2-4m-Ca4" firstAttribute="top" secondItem="1L6-cQ-RUl" secondAttribute="bottom" constant="10" id="q5a-6h-3bp"/>
                             <constraint firstAttribute="trailing" secondItem="1L6-cQ-RUl" secondAttribute="trailing" constant="20" id="woJ-aC-Fh4"/>
                             <constraint firstAttribute="trailing" secondItem="De4-hA-ejL" secondAttribute="trailing" id="z8z-b4-UoE"/>
