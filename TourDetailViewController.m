@@ -5,11 +5,10 @@
 //  Created by Miles Ranisavljevic on 12/14/15.
 //  Copyright © 2015 Lindsey Boggio. All rights reserved.
 //
-
 #import "TourDetailViewController.h"
 #import "VideoPlayerView.h"
-@import Parse;
 #import "Location.h"
+@import Parse;
 
 static const NSString *ItemStatusContext;
 
@@ -21,9 +20,7 @@ static const NSString *ItemStatusContext;
 @property (nonatomic, weak) IBOutlet UIButton *playButton;
 @property (weak, nonatomic) IBOutlet UILabel *locationNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *locationDescriptionLabel;
-
 @property (nonatomic, strong) NSString *locationData;
-
 - (IBAction)playButtonPressed:(UIButton *)sender;
 
 @end
@@ -34,8 +31,8 @@ static const NSString *ItemStatusContext;
     [super viewDidLoad];
     [self setButtonStatus];
     if (self.location) {
-        self.locationNameLabel.text = self.location.locationDescription;
-        self.locationDescriptionLabel.text = self.location.locationName;
+        self.locationNameLabel.text = self.location.locationName;
+        self.locationDescriptionLabel.text = self.location.locationDescription;
         if (!self.location.video) {
             self.playButton.hidden = YES;
         }
@@ -69,10 +66,23 @@ static const NSString *ItemStatusContext;
                         UIImageView *imageView = [[UIImageView alloc] initWithFrame:self.playerView.bounds];
                         [imageView setClipsToBounds:YES];
                         imageView.contentMode = UIViewContentModeScaleAspectFill;
+                        imageView.backgroundColor = [UIColor colorWithWhite:0 alpha:0];
+                        imageView.layer.cornerRadius = 5.0;
                         [self.playerView addSubview:imageView];
                         imageView.image = image;
                     }];
                 }
+            }];
+        } else {
+            UIImage *image = [UIImage imageNamed:@"idaho.jpg"];
+            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                UIImageView *imageView = [[UIImageView alloc] initWithFrame:self.playerView.bounds];
+                [imageView setClipsToBounds:YES];
+                imageView.contentMode = UIViewContentModeScaleAspectFill;
+                imageView.backgroundColor = [UIColor colorWithWhite:0 alpha:0];
+                imageView.layer.cornerRadius = 5.0;
+                [self.playerView addSubview:imageView];
+                imageView.image = image;
             }];
         }
     }
@@ -84,27 +94,27 @@ static const NSString *ItemStatusContext;
     NSString *tracksKey = @"tracks";
     
     [asset loadValuesAsynchronouslyForKeys:@[tracksKey] completionHandler: ^ {
-         dispatch_async(dispatch_get_main_queue(), ^ {
+        dispatch_async(dispatch_get_main_queue(), ^ {
             NSError *error;
             AVKeyValueStatus status = [asset statusOfValueForKey:tracksKey error:&error];
             
-             if (status == AVKeyValueStatusLoaded) {
-                 AVPlayerLayer *playerLayer = [AVPlayerLayer playerLayerWithPlayer:self.player];
-                 playerLayer.frame = self.playerView.bounds;
-                 [self.playerView.layer addSublayer:playerLayer];
-                 self.playerItem = [AVPlayerItem playerItemWithAsset:asset];
-                 [self.playerItem addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionInitial context:&ItemStatusContext];
-                 [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerItemDidReachEnd:) name:AVPlayerItemDidPlayToEndTimeNotification object:self.playerItem];
-                 self.player = [AVPlayer playerWithPlayerItem:self.playerItem];
-                 [playerLayer setVideoGravity:AVLayerVideoGravityResizeAspectFill];
-                 [self.playerView setPlayer:self.player];
+            if (status == AVKeyValueStatusLoaded) {
+                AVPlayerLayer *playerLayer = [AVPlayerLayer playerLayerWithPlayer:self.player];
+                playerLayer.frame = self.playerView.bounds;
+                [self.playerView.layer addSublayer:playerLayer];
+                self.playerItem = [AVPlayerItem playerItemWithAsset:asset];
+                [self.playerItem addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionInitial context:&ItemStatusContext];
+                [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerItemDidReachEnd:) name:AVPlayerItemDidPlayToEndTimeNotification object:self.playerItem];
+                self.player = [AVPlayer playerWithPlayerItem:self.playerItem];
+                [playerLayer setVideoGravity:AVLayerVideoGravityResizeAspectFill];
+                playerLayer.cornerRadius = 5.0;
+                [self.playerView setPlayer:self.player];
             }
             else {
                 NSLog(@"The asset's tracks were not loaded: %@", [error localizedDescription]);
             }
         });
-
-     }];
+    }];
 }
 
 - (void)playerItemDidReachEnd:(NSNotification *)notification {
@@ -117,8 +127,8 @@ static const NSString *ItemStatusContext;
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     if (context == &ItemStatusContext) {
         dispatch_async(dispatch_get_main_queue(), ^{
-           [self setButtonStatus];
-       });
+            [self setButtonStatus];
+        });
         return;
     }
     [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];

@@ -113,6 +113,16 @@
 
 //custom setter on location Array it reloads data
 
+#pragma mark -UITextFieldDelegate
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    if (textField.tag == 0) {
+        [self.tourDescriptionTextField becomeFirstResponder];
+    }
+    return YES;
+}
+
 #pragma mark Save to Parse
 
 -(void)saveButtonSelected:(UIBarButtonItem *)sender{
