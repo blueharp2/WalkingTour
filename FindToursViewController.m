@@ -17,7 +17,6 @@
 #import "Gradient.h"
 #import "MyExtension.h"
 #import "CustomAnnotation.h"
-@import QuartzCore;
 @import Parse;
 @import ParseUI;
 
@@ -38,19 +37,13 @@
 - (void)setToursFromParse:(NSArray<Tour *> *)toursFromParse {
     _toursFromParse = toursFromParse;
     
-    for (Tour *tour in toursFromParse) {
-        
+    for (Tour *tour in toursFromParse)
+    {
         CustomAnnotation *newPoint = [[CustomAnnotation alloc]init];
         newPoint.coordinate = CLLocationCoordinate2DMake(tour.startLocation.latitude, tour.startLocation.longitude);
         newPoint.title = tour.nameOfTour;
-        // newPoint.subtitle = tour.objectId;
         newPoint.tourId = tour.objectId;
         
-//        [newPoint setTourID:tour.objectId];
-        //        newPoint.objectID = tour.objectId;
-//        MyExtension *annotation = [[MyExtension alloc] init];
-//        [annotation setTourId:tour.objectId];
-//        
         [self.mapView addAnnotation:newPoint];
         [self.toursTableView reloadData];
     }
@@ -65,19 +58,6 @@
     [self.locationManager setDelegate:self];
     
     [self setupViewController];
-    
-    // Gets user location and set map region
-//    CLLocation *location = [self.locationManager location];
-//    [self setMapForCoordinateWithLatitude:location.coordinate.latitude andLongitude:location.coordinate.longitude];
-//    CLLocationCoordinate2D coordinate = location.coordinate;
-//    
-//    
-//    [ParseService fetchToursNearLocation:coordinate completion:^(BOOL success, NSArray *results) {
-//        if (success) {
-//            [self setToursFromParse:results];
-//            [self.toursTableView reloadData];
-//        }
-//    }];
 }
 
 - (void)fetchToursNearUser {
