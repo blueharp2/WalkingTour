@@ -21,15 +21,42 @@
 @interface TourMapViewController () <MKMapViewDelegate, CLLocationManagerDelegate>
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
+- (IBAction)nextStopButtonPressed:(UIButton *)sender;
 
 @property (strong, nonatomic) CLLocationManager *locationManager;
 //@property (strong, nonatomic) Tour *currentTour;
 @property (strong, nonatomic) NSArray <Location*> *locationsFromParse;
+@property (strong, nonatomic) Location *currentLocation;
 @property (strong, nonatomic) NSMutableDictionary *locationsWithObjectId;
 
 @end
 
 @implementation TourMapViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    [self.mapView setDelegate:self];
+    [self.mapView setShowsUserLocation: YES];
+    
+    //Location Manager setUp
+    self.locationManager = [[CLLocationManager alloc]init];
+    [self.locationManager requestWhenInUseAuthorization];
+    [self.locationManager setDelegate:self];
+    
+    // Gets user location and set map region
+    CLLocation *location = [self.locationManager location];
+    [self setMapForCoordinateWithLatitude:location.coordinate.latitude andLongitude:location.coordinate.longitude];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    [self.locationManager stopMonitoringSignificantLocationChanges];
+}
 
 - (void)setCurrentTour:(NSString*)currentTour {
     _currentTour = currentTour;
@@ -86,32 +113,20 @@
     }
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    [self.mapView setDelegate:self];
-    [self.mapView setShowsUserLocation: YES];
-    
-    //Location Manager setUp
-    self.locationManager = [[CLLocationManager alloc]init];
-    [self.locationManager requestWhenInUseAuthorization];
-    [self.locationManager setDelegate:self];
-    
-    // Gets user location and set map region
-    CLLocation *location = [self.locationManager location];
-    [self setMapForCoordinateWithLatitude:location.coordinate.latitude andLongitude:location.coordinate.longitude];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-    
-}
-
-- (void)viewDidDisappear:(BOOL)animated {
-    [super viewDidDisappear:animated];
-    
-    [self.locationManager stopMonitoringSignificantLocationChanges];
+- (IBAction)nextStopButtonPressed:(UIButton *)sender {
+    if ([self.currentLocation.locationName isEqual: @"SecretName"]) {
+        self.currentLocation = self.locationsFromParse[0];
+    } else {
+        if ([self.locationsFromParse indexOfObject:self.currentLocation] == self.locationsFromParse.count - 1) {
+            //present alert saying they're on the last stop
+        } else {
+            NSUInteger currentIndex = [self.locationsFromParse indexOfObject:self.currentLocation];
+            self.currentLocation = self.locationsFromParse[currentIndex + 1];
+        }
+    }
+    //center the map on the next item
+    MKCoordinateRegion currentPinRegion = MKCoordinateRegionMakeWithDistance(CLLocationCoordinate2DMake(self.currentLocation.location.latitude, self.currentLocation.location.longitude), 100, 100);
+    [self.mapView setRegion:currentPinRegion animated:YES];
 }
 
 - (void)setRegionForCoordinate:(MKCoordinateRegion)region {
@@ -199,7 +214,15 @@
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
-    NSLog(@"%@", locations);
+//    NSLog(@"%@", locations);
+}
+
+- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
+    if (status == kCLAuthorizationStatusAuthorizedWhenInUse) {
+        PFGeoPoint *currentGeopoint = [PFGeoPoint geoPointWithLatitude:self.locationManager.location.coordinate.latitude longitude:self.locationManager.location.coordinate.longitude];
+        Location *current = [[Location alloc] initWithLocationName:@"SecretName" locationDescription:@"" photo:nil video:nil categories:nil location:currentGeopoint tour:nil];
+        self.currentLocation = current;
+    }
 }
 
 
@@ -213,7 +236,7 @@
             Location *location = (Location *)sender;
             
             Location* selectedLocation = [_locationsWithObjectId objectForKey:(location.objectId)];
-            NSLog(@"%@",selectedLocation);
+//            NSLog(@"%@",selectedLocation);
             [tourDetailViewController setLocation:selectedLocation];
 
         }
