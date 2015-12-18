@@ -15,6 +15,8 @@
 #import "POIDetailTableViewCell.h"
 #import "ParseService.h"
 #import "Gradient.h"
+#import "MyExtension.h"
+#import "CustomAnnotation.h"
 @import QuartzCore;
 @import Parse;
 @import ParseUI;
@@ -38,11 +40,17 @@
     
     for (Tour *tour in toursFromParse) {
         
-        MKPointAnnotation *newPoint = [[MKPointAnnotation alloc]init];
+        CustomAnnotation *newPoint = [[CustomAnnotation alloc]init];
         newPoint.coordinate = CLLocationCoordinate2DMake(tour.startLocation.latitude, tour.startLocation.longitude);
         newPoint.title = tour.nameOfTour;
-        newPoint.subtitle = tour.objectId;
+        // newPoint.subtitle = tour.objectId;
+        newPoint.tourId = tour.objectId;
         
+//        [newPoint setTourID:tour.objectId];
+        //        newPoint.objectID = tour.objectId;
+//        MyExtension *annotation = [[MyExtension alloc] init];
+//        [annotation setTourId:tour.objectId];
+//        
         [self.mapView addAnnotation:newPoint];
         [self.toursTableView reloadData];
     }
@@ -158,7 +166,6 @@
 }
 
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
-    
     [self performSegueWithIdentifier:@"TabBarController" sender:view];
     
 }
@@ -273,8 +280,13 @@
             TourMapViewController *tourMapViewController = (TourMapViewController *)tabBar.viewControllers.firstObject;
             TourListViewController *tourListViewController = (TourListViewController *)tabBar.viewControllers[1];
             
-            [tourMapViewController setCurrentTour:annotationView.annotation.subtitle];
-            [tourListViewController setCurrentTour:annotationView.annotation.subtitle];
+            if ([annotationView.annotation isKindOfClass:[CustomAnnotation class]]) {
+                CustomAnnotation *annotation = (CustomAnnotation *)annotationView.annotation;
+                
+                // ...
+                [tourMapViewController setCurrentTour:annotation.tourId];
+                [tourListViewController setCurrentTour:annotation.tourId];
+            }
             
         } else {
             
