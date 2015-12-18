@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
@@ -332,10 +333,10 @@
             </objects>
             <point key="canvasLocation" x="1808" y="-306"/>
         </scene>
-        <!--Add Location-->
+        <!--Create Tour Detail View Controller-->
         <scene sceneID="Qhg-dh-nYD">
             <objects>
-                <viewController title="Add Location" id="ch6-eO-iFm" customClass="CreateTourDetailViewController" sceneMemberID="viewController">
+                <viewController id="ch6-eO-iFm" customClass="CreateTourDetailViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="cYn-Hr-gxW"/>
                         <viewControllerLayoutGuide type="bottom" id="hOD-qw-MCN"/>
@@ -510,10 +511,10 @@
             </objects>
             <point key="canvasLocation" x="2805" y="-644"/>
         </scene>
-        <!--Find Tours-->
+        <!--Find Tours View Controller-->
         <scene sceneID="UoJ-JZ-cjF">
             <objects>
-                <viewController title="Find Tours" id="tqM-E3-5K0" customClass="FindToursViewController" sceneMemberID="viewController">
+                <viewController id="tqM-E3-5K0" customClass="FindToursViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="02n-Ua-OER"/>
                         <viewControllerLayoutGuide type="bottom" id="5vw-EB-vwN"/>
@@ -576,10 +577,10 @@
             </objects>
             <point key="canvasLocation" x="3235" y="-644"/>
         </scene>
-        <!--Map View of Locations-->
+        <!--Tour Map-->
         <scene sceneID="TVQ-kY-mxI">
             <objects>
-                <viewController title="Map View of Locations" id="44c-cJ-4BY" customClass="TourMapViewController" sceneMemberID="viewController">
+                <viewController id="44c-cJ-4BY" customClass="TourMapViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="kEa-1E-IhN"/>
                         <viewControllerLayoutGuide type="bottom" id="qo6-hW-7Xe"/>
@@ -617,10 +618,10 @@
             </objects>
             <point key="canvasLocation" x="4154" y="-895"/>
         </scene>
-        <!--Create Tour-->
+        <!--Create Tour View Controller-->
         <scene sceneID="PvD-xR-3JL">
             <objects>
-                <viewController title="Create Tour" id="vsA-st-EdL" customClass="CreateTourViewController" sceneMemberID="viewController">
+                <viewController id="vsA-st-EdL" customClass="CreateTourViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="lnd-bp-pY4"/>
                         <viewControllerLayoutGuide type="bottom" id="aDh-or-b7o"/>
@@ -715,10 +716,10 @@
             </objects>
             <point key="canvasLocation" x="2273" y="90"/>
         </scene>
-        <!--TourListTableView-->
+        <!--Tour List-->
         <scene sceneID="Etf-BX-3GD">
             <objects>
-                <viewController storyboardIdentifier="TourListViewController" title="TourListTableView" id="I1h-KJ-pRF" customClass="TourListViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TourListViewController" id="I1h-KJ-pRF" customClass="TourListViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Tqw-Cp-IzH"/>
                         <viewControllerLayoutGuide type="bottom" id="HgW-jL-Idc"/>
@@ -777,11 +778,11 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Rectangle 2 Copy 2.png" translatesAutoresizingMaskIntoConstraints="NO" id="ygk-ha-HeB">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                             </imageView>
-                            <view contentMode="scaleToFill" verticalHuggingPriority="260" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MeJ-Tg-42J" customClass="VideoPlayerView">
-                                <rect key="frame" x="0.0" y="104" width="320" height="293"/>
+                            <view contentMode="scaleToFill" verticalHuggingPriority="260" translatesAutoresizingMaskIntoConstraints="NO" id="MeJ-Tg-42J" customClass="VideoPlayerView">
+                                <rect key="frame" x="20" y="104" width="280" height="280"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q8D-Ok-M3Z">
-                                        <rect key="frame" x="144" y="121" width="32" height="51"/>
+                                        <rect key="frame" x="124" y="114.5" width="32" height="51"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="32"/>
                                         <state key="normal" title="▶︎"/>
                                         <connections>
@@ -792,22 +793,25 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="200" id="Gco-gN-sWY"/>
                                     <constraint firstItem="Q8D-Ok-M3Z" firstAttribute="centerX" secondItem="MeJ-Tg-42J" secondAttribute="centerX" id="QU0-wh-R4d"/>
+                                    <constraint firstAttribute="height" constant="300" id="UYq-QU-04e"/>
+                                    <constraint firstAttribute="width" secondItem="MeJ-Tg-42J" secondAttribute="height" multiplier="1:1" id="chu-Yk-ncv"/>
                                     <constraint firstItem="Q8D-Ok-M3Z" firstAttribute="centerY" secondItem="MeJ-Tg-42J" secondAttribute="centerY" id="hXx-OU-HKT"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="Gco-gN-sWY"/>
+                                        <exclude reference="UYq-QU-04e"/>
                                     </mask>
                                 </variation>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="754" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ab4-nZ-Lpj">
-                                <rect key="frame" x="12" y="417" width="296" height="23"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="754" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ab4-nZ-Lpj">
+                                <rect key="frame" x="12" y="418" width="296" height="22.5"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                                 <color key="textColor" red="0.2784313725" green="0.50980392159999999" blue="0.85490196080000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="755" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X4c-dm-N9G">
-                                <rect key="frame" x="12" y="448" width="296" height="23"/>
+                                <rect key="frame" x="12" y="448.5" width="296" height="22.5"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                                 <color key="textColor" red="0.2784313725" green="0.50980392159999999" blue="0.85490196080000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -823,13 +827,12 @@
                             <constraint firstItem="ab4-nZ-Lpj" firstAttribute="top" secondItem="MeJ-Tg-42J" secondAttribute="bottom" constant="114" id="SA8-8Q-9ef"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ab4-nZ-Lpj" secondAttribute="trailing" constant="-4" id="SfJ-QL-Y4F"/>
                             <constraint firstItem="ab4-nZ-Lpj" firstAttribute="leading" secondItem="xyJ-0v-rmR" secondAttribute="leadingMargin" constant="-4" id="VUI-6b-U1E"/>
-                            <constraint firstItem="MeJ-Tg-42J" firstAttribute="leading" secondItem="xyJ-0v-rmR" secondAttribute="leading" id="Wrq-P2-FU6"/>
-                            <constraint firstAttribute="trailing" secondItem="MeJ-Tg-42J" secondAttribute="trailing" id="YZa-ZW-xeX"/>
+                            <constraint firstItem="MeJ-Tg-42J" firstAttribute="leading" secondItem="xyJ-0v-rmR" secondAttribute="leading" constant="20" id="Wrq-P2-FU6"/>
+                            <constraint firstAttribute="trailing" secondItem="MeJ-Tg-42J" secondAttribute="trailing" constant="20" id="YZa-ZW-xeX"/>
                             <constraint firstItem="ygk-ha-HeB" firstAttribute="top" secondItem="xyJ-0v-rmR" secondAttribute="top" id="Zlx-Wa-gyP"/>
                             <constraint firstAttribute="bottom" secondItem="ygk-ha-HeB" secondAttribute="bottom" id="cGB-5H-9X5"/>
                             <constraint firstAttribute="trailingMargin" secondItem="X4c-dm-N9G" secondAttribute="trailing" constant="-4" id="ixJ-OR-hM6"/>
                             <constraint firstItem="ygk-ha-HeB" firstAttribute="leading" secondItem="xyJ-0v-rmR" secondAttribute="leading" id="mzy-th-F9w"/>
-                            <constraint firstItem="ab4-nZ-Lpj" firstAttribute="top" secondItem="MeJ-Tg-42J" secondAttribute="bottom" constant="20" id="vWt-MX-hZ2"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
