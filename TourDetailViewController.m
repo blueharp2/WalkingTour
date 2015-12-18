@@ -7,8 +7,8 @@
 //
 #import "TourDetailViewController.h"
 #import "VideoPlayerView.h"
-@import Parse;
 #import "Location.h"
+@import Parse;
 
 static const NSString *ItemStatusContext;
 
@@ -66,6 +66,7 @@ static const NSString *ItemStatusContext;
                         UIImageView *imageView = [[UIImageView alloc] initWithFrame:self.playerView.bounds];
                         [imageView setClipsToBounds:YES];
                         imageView.contentMode = UIViewContentModeScaleAspectFill;
+                        imageView.backgroundColor = [UIColor colorWithWhite:0 alpha:0];
                         imageView.layer.cornerRadius = 5.0;
                         [self.playerView addSubview:imageView];
                         imageView.image = image;
@@ -78,6 +79,7 @@ static const NSString *ItemStatusContext;
                 UIImageView *imageView = [[UIImageView alloc] initWithFrame:self.playerView.bounds];
                 [imageView setClipsToBounds:YES];
                 imageView.contentMode = UIViewContentModeScaleAspectFill;
+                imageView.backgroundColor = [UIColor colorWithWhite:0 alpha:0];
                 imageView.layer.cornerRadius = 5.0;
                 [self.playerView addSubview:imageView];
                 imageView.image = image;
