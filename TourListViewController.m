@@ -12,8 +12,6 @@
 #import "LocationTableViewCell.h"
 #import "POIDetailTableViewCell.h"
 #import "FindToursViewController.h"
-#import "Gradient.h"
-
 #import "Tour.h"
 #import "ParseService.h"
 @import UIKit;

@@ -14,7 +14,6 @@
 #import "Location.h"
 #import "POIDetailTableViewCell.h"
 #import "ParseService.h"
-#import "Gradient.h"
 #import "MyExtension.h"
 #import "CustomAnnotation.h"
 @import Parse;
