@@ -65,6 +65,8 @@ static const NSArray *categories;
     
     self.locationNameTextField.delegate = self;
     self.locationDescriptionTextField.delegate = self;
+    
+    self.navigationController.navigationBar.tintColor = [UIColor colorWithWhite:0.951 alpha:1.000];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -103,6 +105,7 @@ static const NSArray *categories;
     [self.finalSaveButton setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.view addSubview:self.finalSaveButton];
     [self.finalSaveButton addTarget:self action:@selector(saveLocationWithCategories:) forControlEvents:UIControlEventTouchUpInside];
+    self.finalSaveButton.hidden = YES;
 }
 
 - (void)setUpTableView {
@@ -128,6 +131,8 @@ static const NSArray *categories;
 #pragma mark - User Interaction Functions
 
 - (void)loadImagePicker {
+    [self.locationNameTextField resignFirstResponder];
+    [self.locationDescriptionTextField resignFirstResponder];
     if (!self.imagePicker) {
         self.imagePicker = [[UIImagePickerController alloc] init];
         self.imagePicker.delegate = self;
@@ -146,7 +151,10 @@ static const NSArray *categories;
 }
 
 - (void)displayCategories {
+    [self.locationNameTextField resignFirstResponder];
+    [self.locationDescriptionTextField resignFirstResponder];
     [self.view layoutIfNeeded];
+    self.finalSaveButton.hidden = NO;
     NSLayoutConstraint *top = [NSLayoutConstraint constraintWithItem:self.greyOutView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTop multiplier:1.0 constant:0];
     NSLayoutConstraint *trailing = [NSLayoutConstraint constraintWithItem:self.greyOutView attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:0];
     NSLayoutConstraint *bottom = [NSLayoutConstraint constraintWithItem:self.greyOutView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0];
@@ -201,6 +209,8 @@ static const NSArray *categories;
 }
 
 - (void)saveLocation:(UIBarButtonItem *)sender {
+    [self.locationNameTextField resignFirstResponder];
+    [self.locationDescriptionTextField resignFirstResponder];
     NSString *alertMessage = @"Please fill all fields out.";
     if (self.locationNameTextField.text.length == 0) {
         alertMessage = @"Please enter a location name.";
