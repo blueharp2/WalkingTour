@@ -54,20 +54,7 @@
         [self.mapView addAnnotation:newPoint];
         [self.toursTableView reloadData];
     }
-//    [self drawPolylineForLocations:self.mapPoints];
 }
-
-//- (void)drawPolylineForLocations:(NSMutableArray *)locations {
-//    CLLocationCoordinate2D *coordinatesArray = malloc(locations.count * sizeof(CLLocationCoordinate2D));
-//    for (int i = 0; i < locations.count; i++) {
-//        CLLocation *current = locations[i];
-//        coordinatesArray[i] = current.coordinate;
-//    }
-//    MKPolyline *polyLine = [MKPolyline polylineWithCoordinates:coordinatesArray count:locations.count];
-//    free(coordinatesArray);
-//    [self.mapView addOverlay:polyLine level:MKOverlayLevelAboveRoads];
-//    [self.mapView setNeedsDisplay];
-//}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -158,10 +145,6 @@
     UIButton *rightCalloutButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
     annotationView.rightCalloutAccessoryView = rightCalloutButton;
     
-    // Add a custom image to the callout.
-    
-    //        UIImage *myCustomImage = [[UIImage alloc]initWithImage:[UIImage imageNamed:@"map-marker.png"]];
-    
     return annotationView;
 }
 
@@ -169,13 +152,6 @@
     [self performSegueWithIdentifier:@"TabBarController" sender:view];
     
 }
-
-//- (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id<MKOverlay>)overlay {
-//    MKPolylineRenderer *lineView = [[MKPolylineRenderer alloc] initWithPolyline:overlay];
-//    lineView.strokeColor = [UIColor blueColor];
-//    lineView.lineWidth = 5.0;
-//    return lineView;
-//}
 
 #pragma mark - CLLocationManager
 
@@ -194,9 +170,7 @@
     [_locationManager startUpdatingLocation];
 }
 
-- (void)startSignificantChangeUpdates
-{
-    
+- (void)startSignificantChangeUpdates {
     if (nil == _locationManager)
         _locationManager = [[CLLocationManager alloc] init];
     
@@ -205,9 +179,7 @@
 }
 
 
-- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations
-{
-    NSLog(@"%@", locations);
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
 }
 
 - (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
@@ -222,55 +194,46 @@
 
 #pragma mark - UITableView protocol functions.
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return self.toursFromParse.count;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 1;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     return 5.0;
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     UIView *headerView = [UIView new];
     [headerView setBackgroundColor:[UIColor clearColor]];
     
     return headerView;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     POIDetailTableViewCell *cell = (POIDetailTableViewCell*) [self.toursTableView dequeueReusableCellWithIdentifier:@"POIDetailTableViewCell"];
     [cell setTour:[self.toursFromParse objectAtIndex:indexPath.section]];
     
     return cell;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return UITableViewAutomaticDimension;
 }
 
--(CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+-(CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 100;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *tourId = self.toursFromParse[indexPath.section].objectId;
     [self performSegueWithIdentifier:@"TabBarController" sender:tourId];
 }
 
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     cell.layer.cornerRadius = 5;
     cell.layer.masksToBounds = true;
 }

@@ -24,7 +24,6 @@
 - (IBAction)nextStopButtonPressed:(UIButton *)sender;
 
 @property (strong, nonatomic) CLLocationManager *locationManager;
-//@property (strong, nonatomic) Tour *currentTour;
 @property (strong, nonatomic) NSArray <Location*> *locationsFromParse;
 @property (strong, nonatomic) Location *currentLocation;
 @property (strong, nonatomic) NSMutableDictionary *locationsWithObjectId;
@@ -162,16 +161,11 @@
     UIButton *rightCalloutButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
     annotationView.rightCalloutAccessoryView = rightCalloutButton;
     
-    // Add a custom image to the callout.
-    
-    //    UIImage *myCustomImage = [[UIImage alloc]initWithImage:[UIImage imageNamed:@"MyCustomImage.png"]];
-    
     return annotationView;
 }
 
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
 
-//   Location* selectedLocation = [self.locationsWithObjectId objectForKey:(view.annotation.subtitle)];
     if ([view.annotation isKindOfClass:[CustomAnnotation class]]) {
         
         CustomAnnotation *annotation = (CustomAnnotation *)view.annotation;
@@ -214,7 +208,6 @@
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
-//    NSLog(@"%@", locations);
 }
 
 - (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
@@ -236,7 +229,6 @@
             Location *location = (Location *)sender;
             
             Location* selectedLocation = [_locationsWithObjectId objectForKey:(location.objectId)];
-//            NSLog(@"%@",selectedLocation);
             [tourDetailViewController setLocation:selectedLocation];
 
         }

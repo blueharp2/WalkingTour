@@ -42,9 +42,7 @@
             
             UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Login Error" message:@"Username and/or Password are invalid" preferredStyle:UIAlertControllerStyleAlert];
             
-            UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
-                NSLog(@"You pressed button OK");
-            }];
+            UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
             
             [alert addAction:defaultAction];
             
