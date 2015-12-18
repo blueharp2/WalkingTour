@@ -448,7 +448,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="seattle" translatesAutoresizingMaskIntoConstraints="NO" id="V1A-8q-W88">
-                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P06-Ev-jeT">
                                 <rect key="frame" x="16" y="169" width="288" height="45"/>
@@ -480,7 +480,7 @@
                             </button>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="V1A-8q-W88" firstAttribute="top" secondItem="NIo-Xx-Z1O" secondAttribute="bottom" id="0as-yj-OGR"/>
+                            <constraint firstItem="V1A-8q-W88" firstAttribute="top" secondItem="NIo-Xx-Z1O" secondAttribute="bottom" constant="-64" id="0as-yj-OGR"/>
                             <constraint firstItem="iZU-Lr-KvV" firstAttribute="leading" secondItem="P06-Ev-jeT" secondAttribute="leading" id="BTn-Eh-tD6"/>
                             <constraint firstItem="V1A-8q-W88" firstAttribute="top" secondItem="iZU-Lr-KvV" secondAttribute="bottom" id="Klj-cN-88p"/>
                             <constraint firstItem="iZU-Lr-KvV" firstAttribute="leading" secondItem="nEw-yN-AgX" secondAttribute="leadingMargin" id="QZl-Wx-Q0u"/>
