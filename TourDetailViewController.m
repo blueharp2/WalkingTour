@@ -31,8 +31,8 @@ static const NSString *ItemStatusContext;
     [super viewDidLoad];
     [self setButtonStatus];
     if (self.location) {
-        self.locationNameLabel.text = self.location.locationDescription;
-        self.locationDescriptionLabel.text = self.location.locationName;
+        self.locationNameLabel.text = self.location.locationName;
+        self.locationDescriptionLabel.text = self.location.locationDescription;
         if (!self.location.video) {
             self.playButton.hidden = YES;
         }
