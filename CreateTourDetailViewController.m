@@ -308,8 +308,7 @@ static const NSArray *categories;
         NSData *stillImageData = UIImageJPEGRepresentation(photo, 1.0);
         photoData = stillImageData;
         photoFile = [PFFile fileWithName:[NSString stringWithFormat:@"%i.jpg",rand() / 2] data:photoData];
-    }
-    if ([info objectForKey:@"UIImagePickerControllerEditedImage"]) {
+    } else if ([info objectForKey:@"UIImagePickerControllerEditedImage"]) {
         photoData = UIImageJPEGRepresentation([info objectForKey:@"UIImagePickerControllerEditedImage"], 1.0);
         photoFile = [PFFile fileWithName:[NSString stringWithFormat:@"%i.jpg",rand() / 2] data:photoData];
         self.image = [info objectForKey:@"UIImagePickerControllerEditedImage"];
