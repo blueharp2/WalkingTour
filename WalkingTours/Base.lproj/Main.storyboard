@@ -650,9 +650,9 @@
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textField>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="gha-TO-9kk">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="gha-TO-9kk">
                                 <rect key="frame" x="8" y="236.5" width="304" height="323.5"/>
-                                <color key="backgroundColor" red="0.99016395260000001" green="0.99511032300000002" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mFF-Dj-GkE">
