@@ -8,6 +8,7 @@
 
 #import "CreateTourDetailViewController.h"
 #import "CategoryTableViewCell.h"
+#import "CreateTourViewController.h"
 @import MobileCoreServices;
 @import CoreLocation;
 @import CoreMedia;
@@ -31,6 +32,7 @@ static const NSArray *categories;
 @property (strong, nonatomic) PFGeoPoint *geoPoint;
 @property (strong, nonatomic) Location *createdLocation;
 @property (strong, nonatomic) MKPointAnnotation *mapPinAnnotation;
+@property (strong, nonatomic) UIColor *navBarTintColor;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet UITextField *locationNameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *locationDescriptionTextField;
@@ -58,6 +60,8 @@ static const NSArray *categories;
     self.locationDescriptionTextField.alpha = 0.0;
     self.cameraButton.alpha = 0.0;
     
+    self.navigationController.delegate = self;
+    
     [self setUpGreyOutView];
     self.mapView.delegate = self;
     [self requestPermissions];
@@ -65,6 +69,11 @@ static const NSArray *categories;
     
     self.locationNameTextField.delegate = self;
     self.locationDescriptionTextField.delegate = self;
+    
+    UIColor *tintColor = self.navigationController.navigationBar.tintColor;
+    self.navBarTintColor = tintColor;
+    NSLog(@"%@", tintColor);
+    self.navigationController.navigationBar.tintColor = [UIColor colorWithWhite:0.951 alpha:1.000];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -103,6 +112,7 @@ static const NSArray *categories;
     [self.finalSaveButton setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.view addSubview:self.finalSaveButton];
     [self.finalSaveButton addTarget:self action:@selector(saveLocationWithCategories:) forControlEvents:UIControlEventTouchUpInside];
+    self.finalSaveButton.hidden = YES;
 }
 
 - (void)setUpTableView {
@@ -128,6 +138,8 @@ static const NSArray *categories;
 #pragma mark - User Interaction Functions
 
 - (void)loadImagePicker {
+    [self.locationNameTextField resignFirstResponder];
+    [self.locationDescriptionTextField resignFirstResponder];
     if (!self.imagePicker) {
         self.imagePicker = [[UIImagePickerController alloc] init];
         self.imagePicker.delegate = self;
@@ -146,7 +158,10 @@ static const NSArray *categories;
 }
 
 - (void)displayCategories {
+    [self.locationNameTextField resignFirstResponder];
+    [self.locationDescriptionTextField resignFirstResponder];
     [self.view layoutIfNeeded];
+    self.finalSaveButton.hidden = NO;
     NSLayoutConstraint *top = [NSLayoutConstraint constraintWithItem:self.greyOutView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTop multiplier:1.0 constant:0];
     NSLayoutConstraint *trailing = [NSLayoutConstraint constraintWithItem:self.greyOutView attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:0];
     NSLayoutConstraint *bottom = [NSLayoutConstraint constraintWithItem:self.greyOutView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0];
@@ -201,6 +216,8 @@ static const NSArray *categories;
 }
 
 - (void)saveLocation:(UIBarButtonItem *)sender {
+    [self.locationNameTextField resignFirstResponder];
+    [self.locationDescriptionTextField resignFirstResponder];
     NSString *alertMessage = @"Please fill all fields out.";
     if (self.locationNameTextField.text.length == 0) {
         alertMessage = @"Please enter a location name.";
@@ -255,6 +272,7 @@ static const NSArray *categories;
         self.createdLocation.categories = self.selectedCategories;
         self.navigationController.navigationBarHidden = NO;
         if (self.createTourDetailDelegate) {
+//            self.navigationController.navigationBar.tintColor = self.navBarTintColor;
             [self.createTourDetailDelegate didFinishSavingLocationWithLocation:self.createdLocation image:self.image];
         }
         [self.navigationController popViewControllerAnimated:YES];
@@ -308,8 +326,7 @@ static const NSArray *categories;
         NSData *stillImageData = UIImageJPEGRepresentation(photo, 1.0);
         photoData = stillImageData;
         photoFile = [PFFile fileWithName:[NSString stringWithFormat:@"%i.jpg",rand() / 2] data:photoData];
-    }
-    if ([info objectForKey:@"UIImagePickerControllerEditedImage"]) {
+    } else if ([info objectForKey:@"UIImagePickerControllerEditedImage"]) {
         photoData = UIImageJPEGRepresentation([info objectForKey:@"UIImagePickerControllerEditedImage"], 1.0);
         photoFile = [PFFile fileWithName:[NSString stringWithFormat:@"%i.jpg",rand() / 2] data:photoData];
         self.image = [info objectForKey:@"UIImagePickerControllerEditedImage"];
@@ -468,6 +485,14 @@ static const NSArray *categories;
         [self.locationDescriptionTextField becomeFirstResponder];
     }
     return YES;
+}
+
+#pragma mark - UINavigationControllerDelegate
+
+- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
+    if ([viewController isKindOfClass:[CreateTourViewController class]]) {
+        self.navigationController.navigationBar.tintColor = self.navBarTintColor;
+    }
 }
 
 @end

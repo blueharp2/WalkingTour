@@ -104,7 +104,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    Location *location = self.locationsFromParse[indexPath.row];
+    Location *location = self.locationsFromParse[indexPath.section];
     [self performSegueWithIdentifier:@"TourDetailViewController" sender:location];
 }
 
