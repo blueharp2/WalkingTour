@@ -11,6 +11,7 @@
 #import "Tour.h"
 #import "Location.h"
 #import "ParseService.h"
+#import "CustomAnnotation.h"
 
 @import UIKit;
 @import MapKit;
@@ -43,11 +44,13 @@
 - (void)setLocationsFromParse:(NSArray<Location *> *)locationsFromParse {
     _locationsFromParse = locationsFromParse;
     
-    for (Location *location in locationsFromParse) {
-        MKPointAnnotation *newPoint = [[MKPointAnnotation alloc]init];
+    for (Location *location in locationsFromParse)
+    {
+        CustomAnnotation *newPoint = [[CustomAnnotation alloc]init];
         newPoint.coordinate = CLLocationCoordinate2DMake(location.location.latitude, location.location.longitude);
         newPoint.title = location.locationName;
-        newPoint.subtitle = location.objectId;
+//        newPoint.subtitle = location.objectId;
+        newPoint.tourId = location.objectId;
         
         [self.mapView addAnnotation:newPoint];
         
@@ -130,10 +133,18 @@
 
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
 
-   Location* selectedLocation = [self.locationsWithObjectId objectForKey:(view.annotation.subtitle)];
+//   Location* selectedLocation = [self.locationsWithObjectId objectForKey:(view.annotation.subtitle)];
+    if ([view.annotation isKindOfClass:[CustomAnnotation class]]) {
+        
+        CustomAnnotation *annotation = (CustomAnnotation *)view.annotation;
+        
+        Location* selectedLocation = [self.locationsWithObjectId objectForKey: annotation.tourId];
+        
+        [self performSegueWithIdentifier:@"TourDetailViewController" sender:selectedLocation];
+        
+    }
     
-    [self performSegueWithIdentifier:@"TourDetailViewController" sender:selectedLocation];
-
+    
 }
 
 #pragma mark - CLLocationManager
@@ -180,6 +191,5 @@
         }
     }
 }
-
 
 @end
