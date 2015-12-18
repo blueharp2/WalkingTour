@@ -61,19 +61,45 @@
 
 #pragma mark set up TableView
 
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    if (self.locations !=nil) {
-        return self.locations.count;
-    }
-    return 0;
+#pragma mark - UITableView protocol functions.
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return self.locations.count;
 }
 
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+
+    return 1;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 5.0;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *headerView = [UIView new];
+    [headerView setBackgroundColor:[UIColor clearColor]];
+    
+    return headerView;
+}
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     
    LocationTableViewCell *cell = (LocationTableViewCell *)[self.locationTableView dequeueReusableCellWithIdentifier:@"LocationTableViewCell" forIndexPath:indexPath];
-    [cell setLocation:self.locations[indexPath.row]];
-    [cell setImage:self.images[indexPath.row]];
+    [cell setLocation:self.locations[indexPath.section]];
+    [cell setImage:self.images[indexPath.section]];
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    cell.layer.cornerRadius = 5;
+    cell.layer.masksToBounds = true;
 }
 
 //custom setter on location Array it reloads data
