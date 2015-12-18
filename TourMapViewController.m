@@ -44,8 +44,10 @@
 - (void)setLocationsFromParse:(NSArray<Location *> *)locationsFromParse {
     _locationsFromParse = locationsFromParse;
     
-    for (Location *location in locationsFromParse)
-    {
+//    MKRoute *myRoute = [[MKRoute alloc] init];
+    MKDirectionsRequest *directionsRequest = [[MKDirectionsRequest alloc] init];
+    NSMutableArray<MKMapItem *> *placemarks;
+    for (Location *location in locationsFromParse) {
         CustomAnnotation *newPoint = [[CustomAnnotation alloc]init];
         newPoint.coordinate = CLLocationCoordinate2DMake(location.location.latitude, location.location.longitude);
         newPoint.title = location.locationName;
@@ -54,6 +56,14 @@
         
         [self.mapView addAnnotation:newPoint];
         
+        MKPlacemark *placemark = [[MKPlacemark alloc] initWithCoordinate:CLLocationCoordinate2DMake(location.location.latitude, location.location.longitude) addressDictionary:nil];
+        MKMapItem *mapItem = [[MKMapItem alloc] initWithPlacemark:placemark];
+        if (placemarks.count == 0) {
+            placemarks = [NSMutableArray arrayWithObject:mapItem];
+        } else {
+            [placemarks addObject:mapItem];
+        }
+        
         //Create Dictionary..
         if (_locationsWithObjectId) {
             [_locationsWithObjectId setObject:location forKey:location.objectId];
@@ -61,7 +71,46 @@
             _locationsWithObjectId = [NSMutableDictionary dictionaryWithObject:location forKey:location.objectId];
         }
     }
+    
+    directionsRequest.transportType = MKDirectionsTransportTypeWalking;
+    for (int i = 0; i < placemarks.count - 1; i++) {
+        [directionsRequest setSource:placemarks[i]];
+        [directionsRequest setDestination:placemarks[i+1]];
+        MKDirections *directions = [[MKDirections alloc] initWithRequest:directionsRequest];
+        [directions calculateDirectionsWithCompletionHandler:^(MKDirectionsResponse * _Nullable response, NSError * _Nullable error) {
+            if (error) {
+                NSLog(@"%@", error.localizedFailureReason);
+            }
+            if (response) {
+                MKRoute *route = response.routes[0];
+                [self.mapView addOverlay:route.polyline level:MKOverlayLevelAboveRoads];
+            }
+        }];
+    }
 }
+
+
+//var myRoute : MKRoute?
+//var directionsRequest = MKDirectionsRequest()
+//var placemarks = [MKMapItem]()
+//for item in list {
+//    var placemark = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: CLLocationDegrees(item["location"]["coordinate"]["x"].doubleValue), longitude: CLLocationDegrees(item["location"]["coordinate"]["y"].doubleValue)), addressDictionary: nil )
+//    placemarks.append(MKMapItem(placemark: placemark))
+//}
+//directionsRequest.transportType = MKDirectionsTransportType.Automobile
+//for (k, item) in enumerate(placemarks) {
+//    if k < (placemarks.count - 1) {
+//        directionsRequest.setSource(item)
+//        directionsRequest.setDestination(placemarks[k+1])
+//        var directions = MKDirections(request: directionsRequest)
+//        directions.calculateDirectionsWithCompletionHandler { (response:MKDirectionsResponse!, error: NSError!) -> Void in
+//            if error == nil {
+//                self.myRoute = response.routes[0] as? MKRoute
+//                self.mapView.addOverlay(self.myRoute?.polyline)
+//            }
+//        }
+//    }
+//}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -143,8 +192,13 @@
         [self performSegueWithIdentifier:@"TourDetailViewController" sender:selectedLocation];
         
     }
-    
-    
+}
+
+- (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id<MKOverlay>)overlay {
+    MKPolylineRenderer *lineView = [[MKPolylineRenderer alloc] initWithPolyline:overlay];
+    lineView.strokeColor = [UIColor blueColor];
+    lineView.lineWidth = 5.0;
+    return lineView;
 }
 
 #pragma mark - CLLocationManager

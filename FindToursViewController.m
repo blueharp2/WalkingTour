@@ -54,20 +54,20 @@
         [self.mapView addAnnotation:newPoint];
         [self.toursTableView reloadData];
     }
-    [self drawPolylineForLocations:self.mapPoints];
+//    [self drawPolylineForLocations:self.mapPoints];
 }
 
-- (void)drawPolylineForLocations:(NSMutableArray *)locations {
-    CLLocationCoordinate2D *coordinatesArray = malloc(locations.count * sizeof(CLLocationCoordinate2D));
-    for (int i = 0; i < locations.count; i++) {
-        CLLocation *current = locations[i];
-        coordinatesArray[i] = current.coordinate;
-    }
-    MKPolyline *polyLine = [MKPolyline polylineWithCoordinates:coordinatesArray count:locations.count];
-    free(coordinatesArray);
-    [self.mapView addOverlay:polyLine level:MKOverlayLevelAboveRoads];
-    [self.mapView setNeedsDisplay];
-}
+//- (void)drawPolylineForLocations:(NSMutableArray *)locations {
+//    CLLocationCoordinate2D *coordinatesArray = malloc(locations.count * sizeof(CLLocationCoordinate2D));
+//    for (int i = 0; i < locations.count; i++) {
+//        CLLocation *current = locations[i];
+//        coordinatesArray[i] = current.coordinate;
+//    }
+//    MKPolyline *polyLine = [MKPolyline polylineWithCoordinates:coordinatesArray count:locations.count];
+//    free(coordinatesArray);
+//    [self.mapView addOverlay:polyLine level:MKOverlayLevelAboveRoads];
+//    [self.mapView setNeedsDisplay];
+//}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -170,12 +170,12 @@
     
 }
 
-- (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id<MKOverlay>)overlay {
-    MKPolylineRenderer *lineView = [[MKPolylineRenderer alloc] initWithPolyline:overlay];
-    lineView.strokeColor = [UIColor redColor];
-    lineView.lineWidth = 10;
-    return lineView;
-}
+//- (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id<MKOverlay>)overlay {
+//    MKPolylineRenderer *lineView = [[MKPolylineRenderer alloc] initWithPolyline:overlay];
+//    lineView.strokeColor = [UIColor blueColor];
+//    lineView.lineWidth = 5.0;
+//    return lineView;
+//}
 
 #pragma mark - CLLocationManager
 
