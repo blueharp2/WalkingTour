@@ -25,7 +25,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *toursTableView;
 
 @property (strong, nonatomic) CLLocationManager *locationManager;
-
+@property (strong, nonatomic) NSMutableArray <id> *mapPoints;
 @property (strong, nonatomic) NSArray <Tour*> *toursFromParse;
 -(void)setToursFromParse:(NSArray<Tour *> *)toursFromParse;
 
@@ -44,9 +44,30 @@
         newPoint.title = tour.nameOfTour;
         newPoint.tourId = tour.objectId;
         
+        CLLocation *location = [[CLLocation alloc] initWithLatitude:newPoint.coordinate.latitude longitude:newPoint.coordinate.longitude];
+        
+        if (self.mapPoints.count == 0) {
+            self.mapPoints = [NSMutableArray arrayWithObject:location];
+        } else {
+            [self.mapPoints addObject:location];
+        }
+        
         [self.mapView addAnnotation:newPoint];
         [self.toursTableView reloadData];
     }
+    [self drawPolylineForLocations:self.mapPoints];
+}
+
+- (void)drawPolylineForLocations:(NSMutableArray *)locations {
+    CLLocationCoordinate2D *coordinatesArray = malloc(locations.count * sizeof(CLLocationCoordinate2D));
+    for (int i = 0; i < locations.count; i++) {
+        CLLocation *current = locations[i];
+        coordinatesArray[i] = current.coordinate;
+    }
+    MKPolyline *polyLine = [MKPolyline polylineWithCoordinates:coordinatesArray count:locations.count];
+    free(coordinatesArray);
+    [self.mapView addOverlay:polyLine level:MKOverlayLevelAboveRoads];
+    [self.mapView setNeedsDisplay];
 }
 
 - (void)viewDidLoad {
@@ -148,6 +169,13 @@
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
     [self performSegueWithIdentifier:@"TabBarController" sender:view];
     
+}
+
+- (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id<MKOverlay>)overlay {
+    MKPolylineRenderer *lineView = [[MKPolylineRenderer alloc] initWithPolyline:overlay];
+    lineView.strokeColor = [UIColor redColor];
+    lineView.lineWidth = 10;
+    return lineView;
 }
 
 #pragma mark - CLLocationManager
