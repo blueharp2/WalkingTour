@@ -44,25 +44,22 @@
 - (void)setLocationsFromParse:(NSArray<Location *> *)locationsFromParse {
     _locationsFromParse = locationsFromParse;
     
-//    MKRoute *myRoute = [[MKRoute alloc] init];
     MKDirectionsRequest *directionsRequest = [[MKDirectionsRequest alloc] init];
-    NSMutableArray<MKMapItem *> *placemarks;
+    CLLocationCoordinate2D myCoordinates = CLLocationCoordinate2DMake(self.locationManager.location.coordinate.latitude, self.locationManager.location.coordinate.longitude);
+    MKPlacemark *myCurrentLocation = [[MKPlacemark alloc] initWithCoordinate:myCoordinates addressDictionary:nil];
+    MKMapItem *myMapItem = [[MKMapItem alloc] initWithPlacemark:myCurrentLocation];
+    NSMutableArray<MKMapItem *> *placemarks = [NSMutableArray arrayWithObject:myMapItem];
     for (Location *location in locationsFromParse) {
         CustomAnnotation *newPoint = [[CustomAnnotation alloc]init];
         newPoint.coordinate = CLLocationCoordinate2DMake(location.location.latitude, location.location.longitude);
         newPoint.title = location.locationName;
-//        newPoint.subtitle = location.objectId;
         newPoint.tourId = location.objectId;
         
         [self.mapView addAnnotation:newPoint];
         
         MKPlacemark *placemark = [[MKPlacemark alloc] initWithCoordinate:CLLocationCoordinate2DMake(location.location.latitude, location.location.longitude) addressDictionary:nil];
         MKMapItem *mapItem = [[MKMapItem alloc] initWithPlacemark:placemark];
-        if (placemarks.count == 0) {
-            placemarks = [NSMutableArray arrayWithObject:mapItem];
-        } else {
-            [placemarks addObject:mapItem];
-        }
+        [placemarks addObject:mapItem];
         
         //Create Dictionary..
         if (_locationsWithObjectId) {
@@ -88,29 +85,6 @@
         }];
     }
 }
-
-
-//var myRoute : MKRoute?
-//var directionsRequest = MKDirectionsRequest()
-//var placemarks = [MKMapItem]()
-//for item in list {
-//    var placemark = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: CLLocationDegrees(item["location"]["coordinate"]["x"].doubleValue), longitude: CLLocationDegrees(item["location"]["coordinate"]["y"].doubleValue)), addressDictionary: nil )
-//    placemarks.append(MKMapItem(placemark: placemark))
-//}
-//directionsRequest.transportType = MKDirectionsTransportType.Automobile
-//for (k, item) in enumerate(placemarks) {
-//    if k < (placemarks.count - 1) {
-//        directionsRequest.setSource(item)
-//        directionsRequest.setDestination(placemarks[k+1])
-//        var directions = MKDirections(request: directionsRequest)
-//        directions.calculateDirectionsWithCompletionHandler { (response:MKDirectionsResponse!, error: NSError!) -> Void in
-//            if error == nil {
-//                self.myRoute = response.routes[0] as? MKRoute
-//                self.mapView.addOverlay(self.myRoute?.polyline)
-//            }
-//        }
-//    }
-//}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -196,8 +170,8 @@
 
 - (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id<MKOverlay>)overlay {
     MKPolylineRenderer *lineView = [[MKPolylineRenderer alloc] initWithPolyline:overlay];
-    lineView.strokeColor = [UIColor blueColor];
-    lineView.lineWidth = 5.0;
+    lineView.strokeColor = [UIColor colorWithRed:0.278 green:0.510 blue:0.855 alpha:0.800];
+    lineView.lineWidth = 8.0;
     return lineView;
 }
 
