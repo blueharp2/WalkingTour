@@ -55,4 +55,33 @@
     }];
 }
 
++ (void)searchToursNearLocation:(CLLocationCoordinate2D)location withinMiles:(float)miles withSearchTerm:(NSString *)searchTerm completion:(toursFetchCompletion) completion {
+    PFQuery *unfilteredQuery = [PFQuery queryWithClassName:@"Tour"];
+    [unfilteredQuery whereKey:@"startLocation" nearGeoPoint:[PFGeoPoint geoPointWithLatitude:location.latitude longitude:location.longitude] withinMiles:miles];
+    [unfilteredQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+        if (error) {
+            NSLog(@"%@", error.localizedFailureReason);
+            completion(NO, nil);
+        }
+        if (objects) {
+            if (!searchTerm.length > 0) {
+                completion(YES, objects);
+            } else {
+                NSArray *resultsArray = (NSArray<Tour*> *)objects;
+                NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K LIKE *%@* OR %K LIKE *%@*", @"nameOfTour", searchTerm, @"descriptionText", searchTerm];
+                NSArray *filteredResults = [[NSArray alloc] initWithArray:[resultsArray filteredArrayUsingPredicate:predicate]];
+                if (filteredResults.count > 0) {
+                    completion(YES, filteredResults);
+                } else {
+                    completion(NO, nil);
+                }
+            }
+        }
+    }];
+}
+
++ (void)searchToursNearLocation:(CLLocationCoordinate2D)location withinDistance:(float)distance withSearchTerm:(NSString *)searchTerm categories:(NSArray *)categories completion:(toursFetchCompletion) completion {
+    
+}
+
 @end
