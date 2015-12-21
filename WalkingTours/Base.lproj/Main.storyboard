@@ -387,6 +387,21 @@
                                     <action selector="cameraButtonPressed:" destination="ch6-eO-iFm" eventType="touchUpInside" id="Zhd-7Z-GQP"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PoL-8t-wAB">
+                                <rect key="frame" x="138" y="583" width="45" height="45"/>
+                                <color key="backgroundColor" red="0.82842303299999998" green="0.91177850999999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="EEw-Sa-UNW"/>
+                                    <constraint firstAttribute="width" constant="45" id="V4e-gv-Zi4"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
+                                <state key="normal" title="Save">
+                                    <color key="titleColor" red="0.2784313725" green="0.50980392159999999" blue="0.85490196080000003" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="saveButtonPressed:" destination="ch6-eO-iFm" eventType="touchUpInside" id="Rwp-Si-HQM"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -398,12 +413,10 @@
                             <constraint firstAttribute="trailing" secondItem="JOQ-pC-1Ce" secondAttribute="trailing" constant="20" symbolic="YES" id="9Vu-tT-z6b"/>
                             <constraint firstAttribute="trailing" secondItem="SU1-GD-Ons" secondAttribute="trailing" constant="20" symbolic="YES" id="CCX-v4-Fbe"/>
                             <constraint firstAttribute="trailing" secondItem="eTz-S3-rke" secondAttribute="trailing" constant="20" symbolic="YES" id="IcX-vm-dkC"/>
-                            <constraint firstItem="SU1-GD-Ons" firstAttribute="top" secondItem="Gaj-h6-TIr" secondAttribute="bottom" constant="20" id="JRa-A0-KoV"/>
                             <constraint firstItem="Gaj-h6-TIr" firstAttribute="bottom" secondItem="eTz-S3-rke" secondAttribute="bottom" constant="-10" id="MD5-yc-a1c"/>
                             <constraint firstAttribute="trailing" secondItem="yoq-0w-59d" secondAttribute="trailing" constant="20" symbolic="YES" id="OAw-Lr-ZKm"/>
                             <constraint firstItem="ox0-Hi-KYB" firstAttribute="centerY" secondItem="gHZ-FA-2cS" secondAttribute="centerY" id="OlU-pb-ekB"/>
                             <constraint firstItem="JOQ-pC-1Ce" firstAttribute="top" secondItem="SU1-GD-Ons" secondAttribute="bottom" constant="8" id="Rig-f3-QyG"/>
-                            <constraint firstAttribute="trailing" secondItem="Gaj-h6-TIr" secondAttribute="trailing" constant="10" id="a0V-Vd-aRe"/>
                             <constraint firstItem="SU1-GD-Ons" firstAttribute="leading" secondItem="gHZ-FA-2cS" secondAttribute="leading" constant="20" symbolic="YES" id="a2t-KS-l8n"/>
                             <constraint firstItem="ox0-Hi-KYB" firstAttribute="width" secondItem="gHZ-FA-2cS" secondAttribute="width" id="ahB-BT-N3g"/>
                             <constraint firstItem="Gaj-h6-TIr" firstAttribute="trailing" secondItem="eTz-S3-rke" secondAttribute="trailing" constant="-10" id="ciS-vE-qwg"/>
@@ -411,13 +424,9 @@
                             <constraint firstItem="yoq-0w-59d" firstAttribute="top" secondItem="JOQ-pC-1Ce" secondAttribute="bottom" constant="8" id="g7E-W5-wTJ"/>
                             <constraint firstItem="JOQ-pC-1Ce" firstAttribute="leading" secondItem="gHZ-FA-2cS" secondAttribute="leading" constant="20" symbolic="YES" id="hwI-kz-HGa"/>
                             <constraint firstItem="eTz-S3-rke" firstAttribute="top" secondItem="cYn-Hr-gxW" secondAttribute="bottom" id="pz5-B7-waD"/>
+                            <constraint firstItem="PoL-8t-wAB" firstAttribute="centerX" secondItem="ox0-Hi-KYB" secondAttribute="centerX" id="uHx-56-dA1"/>
+                            <constraint firstItem="hOD-qw-MCN" firstAttribute="top" secondItem="PoL-8t-wAB" secondAttribute="bottom" constant="-60" id="zn2-gg-sJL"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="JRa-A0-KoV"/>
-                                <exclude reference="a0V-Vd-aRe"/>
-                            </mask>
-                        </variation>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
@@ -427,6 +436,8 @@
                         <outlet property="mapHeightConstraint" destination="0hW-dQ-fUG" id="537-6P-Yb2"/>
                         <outlet property="mapView" destination="eTz-S3-rke" id="UwY-Qn-ERC"/>
                         <outlet property="pinDropReminderLabel" destination="yoq-0w-59d" id="3zn-uI-z0R"/>
+                        <outlet property="saveButton" destination="PoL-8t-wAB" id="3J4-6W-7Vq"/>
+                        <outlet property="saveButtonBottomConstraint" destination="zn2-gg-sJL" id="t5m-rE-wlc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jT6-HC-cRd" userLabel="First Responder" sceneMemberID="firstResponder"/>

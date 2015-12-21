@@ -12,7 +12,6 @@
 #import "Location.h"
 #import "ParseService.h"
 #import "CustomAnnotation.h"
-
 @import UIKit;
 @import MapKit;
 @import CoreLocation;
@@ -21,12 +20,11 @@
 @interface TourMapViewController () <MKMapViewDelegate, CLLocationManagerDelegate>
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
-- (IBAction)nextStopButtonPressed:(UIButton *)sender;
-
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (strong, nonatomic) NSArray <Location*> *locationsFromParse;
 @property (strong, nonatomic) Location *currentLocation;
 @property (strong, nonatomic) NSMutableDictionary *locationsWithObjectId;
+- (IBAction)nextStopButtonPressed:(UIButton *)sender;
 
 @end
 
@@ -77,7 +75,6 @@
     MKMapItem *myMapItem = [[MKMapItem alloc] initWithPlacemark:myCurrentLocation];
     NSMutableArray<MKMapItem *> *placemarks = [NSMutableArray arrayWithObject:myMapItem];
     for (Location *location in self.locationsFromParse) {
-        NSLog(@"%i",location.orderNumber);
         CustomAnnotation *newPoint = [[CustomAnnotation alloc]init];
         newPoint.coordinate = CLLocationCoordinate2DMake(location.location.latitude, location.location.longitude);
         newPoint.title = location.locationName;
@@ -159,7 +156,7 @@
     //Add a detail disclosure button.
     annotationView.canShowCallout = true;
     annotationView.animatesDrop = true;
-    annotationView.pinTintColor = [UIColor orangeColor];
+    annotationView.pinTintColor = [UIColor colorWithRed:0.278 green:0.510 blue:0.855 alpha:1.000];
     UIButton *rightCalloutButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
     annotationView.rightCalloutAccessoryView = rightCalloutButton;
     

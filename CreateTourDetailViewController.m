@@ -23,8 +23,8 @@ static const NSArray *categories;
 @property (strong, nonatomic) UIImagePickerController *imagePicker;
 @property (strong, nonatomic) UIView *greyOutView;
 @property (strong, nonatomic) UITableView *categoryTableView;
-@property (strong, nonatomic) UIButton *finalSaveButton;
-@property (strong, nonatomic) UIBarButtonItem *saveButton;
+//@property (strong, nonatomic) UIButton *finalSaveButton;
+//@property (strong, nonatomic) UIBarButtonItem *saveButton;
 @property (strong, nonatomic) NSMutableArray *selectedCategories;
 @property (strong, nonatomic) PFFile *videoFile;
 @property (strong, nonatomic) PFFile *photoFile;
@@ -39,7 +39,10 @@ static const NSArray *categories;
 @property (weak, nonatomic) IBOutlet UILabel *pinDropReminderLabel;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *mapHeightConstraint;
 @property (weak, nonatomic) IBOutlet UIButton *cameraButton;
+@property (weak, nonatomic) IBOutlet UIButton *saveButton;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *saveButtonBottomConstraint;
 - (IBAction)cameraButtonPressed:(UIButton *)sender;
+- (IBAction)saveButtonPressed:(UIButton *)sender;
 
 @end
 
@@ -50,9 +53,12 @@ static const NSArray *categories;
     
     self.image = [UIImage imageNamed:@"idaho.jpg"];
     
-    self.saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveLocation:)];
-    self.navigationItem.rightBarButtonItem = self.saveButton;
-    self.saveButton.enabled = NO;
+//    self.saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveLocation:)];
+//    self.navigationItem.rightBarButtonItem = self.saveButton;
+//    self.saveButton.enabled = NO;
+    
+    self.saveButton.layer.cornerRadius = self.saveButton.frame.size.width / 2;
+    
     self.locationNameTextField.hidden = YES;
     self.locationDescriptionTextField.hidden = YES;
     self.cameraButton.hidden = YES;
@@ -99,20 +105,20 @@ static const NSArray *categories;
     self.greyOutView.backgroundColor = [UIColor colorWithWhite:0.737 alpha:0.500];
     [self.greyOutView setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.view addSubview:self.greyOutView];
-    [self setUpFinalSaveButton];
+//    [self setUpFinalSaveButton];
     [self setUpTableView];
 }
 
-- (void)setUpFinalSaveButton {
-    self.finalSaveButton = [[UIButton alloc] initWithFrame:CGRectMake(self.view.center.x, self.view.center.y, 0, 0)];
-    self.finalSaveButton.titleLabel.font = [UIFont fontWithName:@"Futura" size:20];
-    [self.finalSaveButton setTitle:@"Save" forState:UIControlStateNormal];
-    [self.finalSaveButton setTitleColor:[UIColor colorWithRed:0.278 green:0.510 blue:0.855 alpha:1.000] forState:UIControlStateNormal];
-    [self.finalSaveButton setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [self.view addSubview:self.finalSaveButton];
-    [self.finalSaveButton addTarget:self action:@selector(saveLocationWithCategories:) forControlEvents:UIControlEventTouchUpInside];
-    self.finalSaveButton.hidden = YES;
-}
+//- (void)setUpFinalSaveButton {
+//    self.finalSaveButton = [[UIButton alloc] initWithFrame:CGRectMake(self.view.center.x, self.view.center.y, 0, 0)];
+//    self.finalSaveButton.titleLabel.font = [UIFont fontWithName:@"Futura" size:20];
+//    [self.finalSaveButton setTitle:@"Save" forState:UIControlStateNormal];
+//    [self.finalSaveButton setTitleColor:[UIColor colorWithRed:0.278 green:0.510 blue:0.855 alpha:1.000] forState:UIControlStateNormal];
+//    [self.finalSaveButton setTranslatesAutoresizingMaskIntoConstraints:NO];
+//    [self.view addSubview:self.finalSaveButton];
+//    [self.finalSaveButton addTarget:self action:@selector(saveLocationWithCategories:) forControlEvents:UIControlEventTouchUpInside];
+//    self.finalSaveButton.hidden = YES;
+//}
 
 - (void)setUpTableView {
     self.categoryTableView = [[UITableView alloc] initWithFrame:CGRectMake(self.view.center.x, self.view.center.y, 0, 0) style:UITableViewStyleGrouped];
@@ -159,8 +165,9 @@ static const NSArray *categories;
 - (void)displayCategories {
     [self.locationNameTextField resignFirstResponder];
     [self.locationDescriptionTextField resignFirstResponder];
+    [self.view bringSubviewToFront:self.saveButton];
     [self.view layoutIfNeeded];
-    self.finalSaveButton.hidden = NO;
+//    self.finalSaveButton.hidden = NO;
     NSLayoutConstraint *top = [NSLayoutConstraint constraintWithItem:self.greyOutView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTop multiplier:1.0 constant:0];
     NSLayoutConstraint *trailing = [NSLayoutConstraint constraintWithItem:self.greyOutView attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:0];
     NSLayoutConstraint *bottom = [NSLayoutConstraint constraintWithItem:self.greyOutView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0];
@@ -172,7 +179,7 @@ static const NSArray *categories;
     leading.active = YES;
     
     NSLayoutConstraint *tableViewBottom = [NSLayoutConstraint constraintWithItem:self.categoryTableView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeBottom multiplier:1.0 constant:-(self.view.frame.size.height / 2)];
-    NSLayoutConstraint *tableViewHeight = [NSLayoutConstraint constraintWithItem:self.categoryTableView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeHeight multiplier:0.55 constant:-(self.view.frame.size.height * 0.55)];
+    NSLayoutConstraint *tableViewHeight = [NSLayoutConstraint constraintWithItem:self.categoryTableView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeHeight multiplier:0.50 constant:-(self.view.frame.size.height * 0.50)];
     NSLayoutConstraint *tableViewWidth = [NSLayoutConstraint constraintWithItem:self.categoryTableView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeWidth multiplier:0.8 constant:-(self.view.frame.size.width) * 0.8];
     NSLayoutConstraint *tableViewCenterX = [NSLayoutConstraint constraintWithItem:self.categoryTableView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0.0];
     
@@ -180,9 +187,9 @@ static const NSArray *categories;
     tableViewHeight.active = YES;
     tableViewWidth.active = YES;
     tableViewCenterX.active = YES;
-    
-    NSLayoutConstraint *buttonTop = [NSLayoutConstraint constraintWithItem:self.finalSaveButton attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTop multiplier:1.0 constant:20];
-    NSLayoutConstraint *buttonTrailing = [NSLayoutConstraint constraintWithItem:self.finalSaveButton attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:-20];
+
+//    NSLayoutConstraint *buttonTop = [NSLayoutConstraint constraintWithItem:self.finalSaveButton attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTop multiplier:1.0 constant:20];
+//    NSLayoutConstraint *buttonTrailing = [NSLayoutConstraint constraintWithItem:self.finalSaveButton attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:-20];
     
     self.cameraButton.enabled = NO;
     
@@ -194,14 +201,14 @@ static const NSArray *categories;
             
         }];
         
-        tableViewBottom.constant = -30.0;
+        tableViewBottom.constant = -60.0;
         tableViewHeight.constant = 0;
         tableViewWidth.constant = 0;
         [UIView addKeyframeWithRelativeStartTime:0.5 relativeDuration:0.5 animations:^{
             [self.view layoutIfNeeded];
         }];
-        buttonTop.active = YES;
-        buttonTrailing.active = YES;
+//        buttonTop.active = YES;
+//        buttonTrailing.active = YES;
         [UIView addKeyframeWithRelativeStartTime:0.5 relativeDuration:0.5 animations:^{
             [self.view layoutIfNeeded];
         }];
@@ -214,33 +221,65 @@ static const NSArray *categories;
         [self loadImagePicker];
 }
 
-- (void)saveLocation:(UIBarButtonItem *)sender {
-    [self.locationNameTextField resignFirstResponder];
-    [self.locationDescriptionTextField resignFirstResponder];
-    NSString *alertMessage = @"Please fill all fields out.";
-    if (self.locationNameTextField.text.length == 0) {
-        alertMessage = @"Please enter a location name.";
-        [self presentAlertWithMessage:alertMessage];
-        return;
+- (IBAction)saveButtonPressed:(UIButton *)sender {
+    if (self.selectedCategories.count == 0) {
+        [self.locationNameTextField resignFirstResponder];
+        [self.locationDescriptionTextField resignFirstResponder];
+        NSString *alertMessage = @"Please fill all fields out.";
+        if (self.locationNameTextField.text.length == 0) {
+            alertMessage = @"Please enter a location name.";
+            [self presentAlertWithMessage:alertMessage];
+            return;
+        }
+        if (self.locationDescriptionTextField.text.length == 0) {
+            alertMessage = @"Please enter a location description.";
+            [self presentAlertWithMessage:alertMessage];
+            return;
+        }
+        if (self.geoPoint == nil) {
+            alertMessage = @"Please drop a pin for your location.";
+            [self presentAlertWithMessage:alertMessage];
+            return;
+        }
+        if (self.photoFile == nil) {
+            [self presentNoPhotoWarning];
+            return;
+        }
+        Location *locationToSave = [[Location alloc] initWithLocationName:self.locationNameTextField.text locationDescription:self.locationDescriptionTextField.text photo:self.photoFile video:self.videoFile categories:nil location:self.geoPoint orderNumber:0 tour:nil];
+        self.createdLocation = locationToSave;
+        [self displayCategories];
+    } else {
+        [self saveLocationWithCategories:sender];
     }
-    if (self.locationDescriptionTextField.text.length == 0) {
-        alertMessage = @"Please enter a location description.";
-        [self presentAlertWithMessage:alertMessage];
-        return;
-    }
-    if (self.geoPoint == nil) {
-        alertMessage = @"Please drop a pin for your location.";
-        [self presentAlertWithMessage:alertMessage];
-        return;
-    }
-    if (self.photoFile == nil) {
-        [self presentNoPhotoWarning];
-        return;
-    }
-    Location *locationToSave = [[Location alloc] initWithLocationName:self.locationNameTextField.text locationDescription:self.locationDescriptionTextField.text photo:self.photoFile video:self.videoFile categories:nil location:self.geoPoint orderNumber:0 tour:nil];
-    self.createdLocation = locationToSave;
-    [self displayCategories];
 }
+
+//- (void)saveLocation:(UIBarButtonItem *)sender {
+//    [self.locationNameTextField resignFirstResponder];
+//    [self.locationDescriptionTextField resignFirstResponder];
+//    NSString *alertMessage = @"Please fill all fields out.";
+//    if (self.locationNameTextField.text.length == 0) {
+//        alertMessage = @"Please enter a location name.";
+//        [self presentAlertWithMessage:alertMessage];
+//        return;
+//    }
+//    if (self.locationDescriptionTextField.text.length == 0) {
+//        alertMessage = @"Please enter a location description.";
+//        [self presentAlertWithMessage:alertMessage];
+//        return;
+//    }
+//    if (self.geoPoint == nil) {
+//        alertMessage = @"Please drop a pin for your location.";
+//        [self presentAlertWithMessage:alertMessage];
+//        return;
+//    }
+//    if (self.photoFile == nil) {
+//        [self presentNoPhotoWarning];
+//        return;
+//    }
+//    Location *locationToSave = [[Location alloc] initWithLocationName:self.locationNameTextField.text locationDescription:self.locationDescriptionTextField.text photo:self.photoFile video:self.videoFile categories:nil location:self.geoPoint orderNumber:0 tour:nil];
+//    self.createdLocation = locationToSave;
+//    [self displayCategories];
+//}
 
 - (void)presentAlertWithMessage:(NSString *)alertMessage {
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"What!?!" message:alertMessage preferredStyle:UIAlertControllerStyleAlert];
@@ -285,7 +324,7 @@ static const NSArray *categories;
 
 - (void)toggleViewAfterPinDrop {
     [self.view layoutIfNeeded];
-    self.saveButton.enabled = YES;
+//    self.saveButton.enabled = YES;
     if (self.locationNameTextField.alpha == 0.0) {
         self.locationNameTextField.hidden = NO;
         self.locationDescriptionTextField.hidden = NO;
@@ -295,6 +334,7 @@ static const NSArray *categories;
             self.locationDescriptionTextField.alpha = 1.0;
             self.cameraButton.alpha = 1.0;
             self.mapHeightConstraint.constant = -(self.mapView.frame.size.height / 2);
+            self.saveButtonBottomConstraint.constant = 10;
             [self.view layoutIfNeeded];
         } completion:^(BOOL finished) {
             MKCoordinateRegion pinRegion = MKCoordinateRegionMakeWithDistance(CLLocationCoordinate2DMake(self.geoPoint.latitude, self.geoPoint.longitude), 300, 300);

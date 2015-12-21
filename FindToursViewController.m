@@ -141,7 +141,7 @@
     //Add a detail disclosure button.
     annotationView.canShowCallout = true;
     annotationView.animatesDrop = true;
-    annotationView.pinTintColor = [UIColor orangeColor];
+    annotationView.pinTintColor = [UIColor colorWithRed:0.278 green:0.510 blue:0.855 alpha:1.000];
     UIButton *rightCalloutButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
     annotationView.rightCalloutAccessoryView = rightCalloutButton;
     
