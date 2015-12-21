@@ -16,6 +16,7 @@
 @dynamic video;
 @dynamic categories;
 @dynamic location;
+@dynamic orderNumber;
 @dynamic tour;
 
 +(void) load{
@@ -32,6 +33,7 @@
                     video:(PFFile *)video
                categories:(NSArray *)categories
                  location:(PFGeoPoint *)location
+              orderNumber:(int)orderNumber
                      tour:(Tour *)tour{
     
     if ((self = [super init])){
@@ -41,6 +43,7 @@
         self.video = video;
         self.categories = categories;
         self.location = location;
+        self.orderNumber = orderNumber;
         self.tour = tour;
     }
     return self;

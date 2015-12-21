@@ -134,7 +134,7 @@
         [self presentViewController:noTextinFieldAlert animated:YES completion:nil];
         return;
     }
-    if (self.locations.count ==0) {
+    if (self.locations.count == 0) {
         UIAlertController *noLocationAlert = [UIAlertController alertControllerWithTitle:@"Missing Locations" message:@"Please add at least one location." preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){}];
         [noLocationAlert addAction:defaultAction];
@@ -143,8 +143,10 @@
     }
     Tour *tour = [[Tour alloc] initWithNameOfTour:self.nameOfTourTextField.text descriptionText:self.tourDescriptionTextField.text startLocation:self.locations.firstObject.location user:[PFUser currentUser]];
     NSMutableArray *saveArray;
+    int i = 0;
     for (Location *location in self.locations) {
         location.tour = tour;
+        location.orderNumber = i++;
         if (saveArray.count == 0) {
             saveArray = [NSMutableArray arrayWithObject:location];
         } else {
