@@ -570,7 +570,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <tableView clipsSubviews="YES" tag="1" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="u25-ew-tet">
-                                        <rect key="frame" x="16" y="130.5" width="288" height="146.5"/>
+                                        <rect key="frame" x="16" y="130" width="288" height="167"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CategoryTableViewCell" id="c1G-Pg-WB5">
@@ -597,9 +597,10 @@
                                         </connections>
                                     </slider>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kui-vt-qQH">
-                                        <rect key="frame" x="135" y="279" width="50" height="50"/>
+                                        <rect key="frame" x="88" y="305" width="144" height="24"/>
                                         <color key="backgroundColor" red="0.82842303299999998" green="0.91177850999999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
+                                            <constraint firstAttribute="height" constant="24" id="FGC-kA-Npd"/>
                                             <constraint firstAttribute="width" constant="50" id="XwW-1v-e3m"/>
                                             <constraint firstAttribute="height" constant="50" id="t10-5z-6yN"/>
                                         </constraints>
@@ -607,11 +608,21 @@
                                         <state key="normal" title="Search">
                                             <color key="titleColor" red="0.2784313725" green="0.50980392159999999" blue="0.85490196080000003" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="XwW-1v-e3m"/>
+                                                <exclude reference="t10-5z-6yN"/>
+                                            </mask>
+                                        </variation>
+                                        <connections>
+                                            <action selector="finalSearchButtonPressed:" destination="tqM-E3-5K0" eventType="touchUpInside" id="boA-u8-BKW"/>
+                                        </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="0.82842303299999998" green="0.91177850999999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstItem="Kui-vt-qQH" firstAttribute="top" secondItem="u25-ew-tet" secondAttribute="bottom" constant="2" id="AO5-Wp-533"/>
+                                    <constraint firstItem="Kui-vt-qQH" firstAttribute="top" secondItem="u25-ew-tet" secondAttribute="bottom" constant="8" id="AO5-Wp-533"/>
+                                    <constraint firstItem="Kui-vt-qQH" firstAttribute="width" secondItem="u25-ew-tet" secondAttribute="width" multiplier="0.5" id="Dft-Kj-PEE"/>
                                     <constraint firstItem="5aA-UV-5fZ" firstAttribute="leading" secondItem="6il-Co-gxA" secondAttribute="leading" constant="16" id="Ggg-aC-Npy"/>
                                     <constraint firstItem="XFS-d5-A8o" firstAttribute="centerX" secondItem="c7g-0Z-SZB" secondAttribute="centerX" id="JFK-Rv-zqv"/>
                                     <constraint firstAttribute="trailingMargin" secondItem="c7g-0Z-SZB" secondAttribute="trailing" constant="8" id="TIo-ls-jgk"/>
@@ -658,6 +669,7 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
+                        <outlet property="finalSearchButton" destination="Kui-vt-qQH" id="WHP-Vr-Uy5"/>
                         <outlet property="keywordSearchBar" destination="c7g-0Z-SZB" id="Ybc-S5-Amy"/>
                         <outlet property="mapView" destination="GYQ-Tm-WcJ" id="3Kx-Rx-Dr3"/>
                         <outlet property="radiusLabel" destination="5aA-UV-5fZ" id="f4J-TE-7UM"/>

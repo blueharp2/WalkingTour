@@ -33,6 +33,9 @@
 @property (weak, nonatomic) IBOutlet UISlider *radiusSlider;
 @property (weak, nonatomic) IBOutlet UITableView *searchCategoryTableView;
 @property (strong, nonatomic) NSArray *categoryList;
+@property (strong, nonatomic) NSMutableArray *selectedCategories;
+@property (weak, nonatomic) IBOutlet UIButton *finalSearchButton;
+- (IBAction)finalSearchButtonPressed:(UIButton *)sender;
 - (IBAction)radiusSliderChanged:(UISlider *)sender;
 
 @end
@@ -42,8 +45,7 @@
 - (void)setToursFromParse:(NSArray<Tour *> *)toursFromParse {
     _toursFromParse = toursFromParse;
     
-    for (Tour *tour in toursFromParse)
-    {
+    for (Tour *tour in toursFromParse) {
         CustomAnnotation *newPoint = [[CustomAnnotation alloc]init];
         newPoint.coordinate = CLLocationCoordinate2DMake(tour.startLocation.latitude, tour.startLocation.longitude);
         newPoint.title = tour.nameOfTour;
@@ -56,7 +58,6 @@
         } else {
             [self.mapPoints addObject:location];
         }
-        
         [self.mapView addAnnotation:newPoint];
         [self.toursTableView reloadData];
     }
@@ -66,6 +67,12 @@
     [super viewDidLoad];
     self.searchViewTopConstraint.constant = self.view.frame.size.height;
     self.radiusSlider.hidden = YES;
+//    self.finalSearchButton.hidden = YES;
+    self.finalSearchButton.alpha = 0.0;
+    self.finalSearchButton.layer.cornerRadius = 5.0;
+    self.finalSearchButton.layer.borderWidth = 1.0;
+    self.finalSearchButton.layer.borderColor = [UIColor colorWithRed:0.278 green:0.510 blue:0.855 alpha:1.000].CGColor;
+    self.keywordSearchBar.delegate = self;
     //Location Manager setup
     self.locationManager = [[CLLocationManager alloc]init];
     [self.locationManager requestWhenInUseAuthorization];
@@ -129,9 +136,30 @@
         //Handle if the search view is open
     } else {
         self.radiusSlider.hidden = NO;
+//        self.finalSearchButton.hidden = NO;
         [UIView animateWithDuration:0.4 animations:^{
             self.searchViewTopConstraint.constant = -60;
+            self.finalSearchButton.alpha = 1.0;
             [self.view layoutIfNeeded];
+        }];
+    }
+}
+
+- (IBAction)finalSearchButtonPressed:(UIButton *)sender {
+    CLLocationCoordinate2D current = CLLocationCoordinate2DMake(self.locationManager.location.coordinate.latitude, self.locationManager.location.coordinate.longitude);
+    if (self.selectedCategories && self.selectedCategories.count > 0) {
+        [ParseService searchToursNearLocation:current withinMiles:self.radiusLabel.text.floatValue withSearchTerm:self.keywordSearchBar.text categories:self.selectedCategories completion:^(BOOL success, NSArray *results) {
+            if (success) {
+                //do something with results
+                NSLog(@"%@", results);
+            }
+        }];
+    } else {
+        [ParseService searchToursNearLocation:current withinMiles:self.radiusLabel.text.floatValue withSearchTerm:self.keywordSearchBar.text completion:^(BOOL success, NSArray *results) {
+            if (success) {
+                //
+                NSLog(@"%@", results);
+            }
         }];
     }
 }
@@ -153,8 +181,7 @@
 
 #pragma mark - MKMapViewDelegate
 
-- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation
-{
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
     if ([annotation isKindOfClass:[MKUserLocation class]]) {
         return nil;
     }
@@ -163,8 +190,7 @@
     MKPinAnnotationView *annotationView = (MKPinAnnotationView *) [mapView dequeueReusableAnnotationViewWithIdentifier: @"AnnotationView"];
     annotationView.annotation = annotation;
     
-    if (!annotationView)
-    {
+    if (!annotationView) {
         annotationView = [[MKPinAnnotationView alloc]initWithAnnotation:annotation reuseIdentifier:@"AnnotationView"];
     }
     
@@ -325,14 +351,20 @@
         NSString *tourId = self.toursFromParse[indexPath.section].objectId;
         [self performSegueWithIdentifier:@"TabBarController" sender:tourId];
     } else {
-        //what to do?
-    }
-}
-
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (tableView.tag == 0) {
-        cell.layer.cornerRadius = 5;
-        cell.layer.masksToBounds = true;
+        if ([tableView cellForRowAtIndexPath:indexPath].accessoryType == UITableViewCellAccessoryCheckmark) {
+            [tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryNone;
+        } else {
+            [tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryCheckmark;
+        }
+        if (self.selectedCategories.count > 0) {
+            if ([self.selectedCategories containsObject:self.categoryList[indexPath.row]]) {
+            [self.selectedCategories removeObjectAtIndex:[self.selectedCategories indexOfObject:[self.categoryList objectAtIndex:indexPath.row]]];
+            } else {
+                [self.selectedCategories addObject:self.categoryList[indexPath.row]];
+            }
+        } else {
+            self.selectedCategories = [NSMutableArray arrayWithObject:self.categoryList[indexPath.row]];
+        }
     }
 }
 

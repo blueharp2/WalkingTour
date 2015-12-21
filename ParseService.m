@@ -42,7 +42,7 @@
 
 + (void)fetchLocationsWithCategories:(NSArray *)categories nearLocation:(CLLocationCoordinate2D)location withinMiles:(float)miles completion:(locationsFetchCompletion)completion {
     NSString *predicateString = @"";
-    NSMutableArray *predicateArguments;;
+    NSMutableArray *predicateArguments;
     if (categories.count > 0) {
         predicateString = @"%@ IN categories";
         predicateArguments = [NSMutableArray arrayWithObject:categories[0]];
@@ -99,7 +99,7 @@
             completion(NO, nil);
         }
         if (objects) {
-            if (!searchTerm.length > 0) {
+            if (searchTerm.length == 0) {
                 completion(YES, objects);
             } else {
                 NSMutableArray *filteredResults;
@@ -127,7 +127,7 @@
         if (success) {
             NSMutableArray *searchResults;
             for (Location *location in results) {
-                if (!searchResults.count > 0 || ![searchResults indexOfObject:location.tour.objectId]) {
+                if (searchResults.count == 0 || ![searchResults containsObject:location.tour.objectId]) {
                     if (searchResults.count == 0) {
                         searchResults = [NSMutableArray arrayWithObject:location.tour.objectId];
                      } else {
@@ -148,7 +148,7 @@
                     if (objects) {
                         NSMutableArray *filteredResults;
                         for (Tour *tour in objects) {
-                            if ([tour.nameOfTour containsString:searchTerm] || [tour.descriptionText containsString:searchTerm]) {
+                            if ([tour.nameOfTour rangeOfString:searchTerm options:NSCaseInsensitiveSearch].location != NSNotFound || [tour.descriptionText rangeOfString:searchTerm options:NSCaseInsensitiveSearch].location != NSNotFound) {
                                 if (filteredResults.count == 0) {
                                     filteredResults = [NSMutableArray arrayWithObject:tour];
                                 } else {
