@@ -45,9 +45,19 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     if (self.locations.count == 0) {
-        self.addLocationButtonBottomConstraint.constant = self.view.frame.size.height / 2;
+        self.addLocationButtonBottomConstraint.constant = (self.view.frame.size.height / 2) - 10;
     } else {
+        self.addLocationButtonBottomConstraint.constant = 10;
+    }
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    if (self.locations.count > 0) {
         self.addLocationButtonBottomConstraint.constant = 30;
+        [UIView animateWithDuration:0.4 animations:^{
+            [self.view layoutIfNeeded];
+        }];
     }
 }
 
