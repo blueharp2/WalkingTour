@@ -65,7 +65,8 @@
 }
 
 - (IBAction)addLocationsButton:(id)sender {
-    
+    [self.nameOfTourTextField resignFirstResponder];
+    [self.tourDescriptionTextField resignFirstResponder];
 }
 
 #pragma mark set up TbableView

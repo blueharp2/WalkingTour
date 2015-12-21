@@ -591,6 +591,16 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="4ml-uu-TJU">
                                 <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                             </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h9b-4d-R0t">
+                                <rect key="frame" x="230" y="479" width="70" height="32"/>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="15"/>
+                                <state key="normal" title="Next Stop">
+                                    <color key="titleColor" red="0.2784313725" green="0.50980392159999999" blue="0.85490196080000003" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="nextStopButtonPressed:" destination="44c-cJ-4BY" eventType="touchUpInside" id="sTk-6s-EoP"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -598,6 +608,8 @@
                             <constraint firstItem="4ml-uu-TJU" firstAttribute="top" secondItem="kEa-1E-IhN" secondAttribute="bottom" id="4a0-aK-nvi"/>
                             <constraint firstItem="qo6-hW-7Xe" firstAttribute="top" secondItem="4ml-uu-TJU" secondAttribute="bottom" constant="42" id="Af8-Ka-t38"/>
                             <constraint firstItem="qo6-hW-7Xe" firstAttribute="top" secondItem="4ml-uu-TJU" secondAttribute="bottom" id="GgA-eh-uMb"/>
+                            <constraint firstAttribute="trailing" secondItem="h9b-4d-R0t" secondAttribute="trailing" constant="20" id="Q4G-t7-J6m"/>
+                            <constraint firstItem="qo6-hW-7Xe" firstAttribute="top" secondItem="h9b-4d-R0t" secondAttribute="bottom" constant="8" id="YQj-tm-rMa"/>
                             <constraint firstItem="4ml-uu-TJU" firstAttribute="leading" secondItem="rfd-ts-r9L" secondAttribute="leading" id="x5Z-lh-SGP"/>
                         </constraints>
                         <variation key="default">
@@ -900,6 +912,6 @@
         <image name="seattle" width="3264" height="2448"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="PjD-pi-kko"/>
+        <segue reference="K2f-a9-X1C"/>
     </inferredMetricsTieBreakers>
 </document>
