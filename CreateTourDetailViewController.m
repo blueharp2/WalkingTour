@@ -72,7 +72,6 @@ static const NSArray *categories;
     
     UIColor *tintColor = self.navigationController.navigationBar.tintColor;
     self.navBarTintColor = tintColor;
-    NSLog(@"%@", tintColor);
     self.navigationController.navigationBar.tintColor = [UIColor colorWithWhite:0.951 alpha:1.000];
 }
 
@@ -272,7 +271,6 @@ static const NSArray *categories;
         self.createdLocation.categories = self.selectedCategories;
         self.navigationController.navigationBarHidden = NO;
         if (self.createTourDetailDelegate) {
-//            self.navigationController.navigationBar.tintColor = self.navBarTintColor;
             [self.createTourDetailDelegate didFinishSavingLocationWithLocation:self.createdLocation image:self.image];
         }
         [self.navigationController popViewControllerAnimated:YES];
@@ -308,7 +306,6 @@ static const NSArray *categories;
 #pragma mark - UIImagePickerControllerDelegate
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
-    NSLog(@"Why'd you cancel?");
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -414,7 +411,6 @@ static const NSArray *categories;
         [self.mapView setShowsUserLocation:YES];
         MKCoordinateRegion currentRegion = MKCoordinateRegionMakeWithDistance(self.locationManager.location.coordinate, 300, 300);
         [self setRegion:currentRegion];
-//        [self locationControllerDidUpdateLocation:self.locationManager.location];
     }
 }
 

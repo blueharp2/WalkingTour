@@ -21,47 +21,16 @@
 @interface TourMapViewController () <MKMapViewDelegate, CLLocationManagerDelegate>
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
+- (IBAction)nextStopButtonPressed:(UIButton *)sender;
 
 @property (strong, nonatomic) CLLocationManager *locationManager;
-//@property (strong, nonatomic) Tour *currentTour;
 @property (strong, nonatomic) NSArray <Location*> *locationsFromParse;
+@property (strong, nonatomic) Location *currentLocation;
 @property (strong, nonatomic) NSMutableDictionary *locationsWithObjectId;
 
 @end
 
 @implementation TourMapViewController
-
-- (void)setCurrentTour:(NSString*)currentTour {
-    _currentTour = currentTour;
-    
-    [ParseService fetchLocationsWithTourId:currentTour completion:^(BOOL success, NSArray *results) {
-        if (success) {
-            [self setLocationsFromParse:results];
-        }
-    }];
-}
-
-- (void)setLocationsFromParse:(NSArray<Location *> *)locationsFromParse {
-    _locationsFromParse = locationsFromParse;
-    
-    for (Location *location in locationsFromParse)
-    {
-        CustomAnnotation *newPoint = [[CustomAnnotation alloc]init];
-        newPoint.coordinate = CLLocationCoordinate2DMake(location.location.latitude, location.location.longitude);
-        newPoint.title = location.locationName;
-//        newPoint.subtitle = location.objectId;
-        newPoint.tourId = location.objectId;
-        
-        [self.mapView addAnnotation:newPoint];
-        
-        //Create Dictionary..
-        if (_locationsWithObjectId) {
-            [_locationsWithObjectId setObject:location forKey:location.objectId];
-        } else {
-            _locationsWithObjectId = [NSMutableDictionary dictionaryWithObject:location forKey:location.objectId];
-        }
-    }
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -81,14 +50,82 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-    
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
-    
     [self.locationManager stopMonitoringSignificantLocationChanges];
+}
+
+- (void)setCurrentTour:(NSString*)currentTour {
+    _currentTour = currentTour;
+    
+    [ParseService fetchLocationsWithTourId:currentTour completion:^(BOOL success, NSArray *results) {
+        if (success) {
+            [self setLocationsFromParse:results];
+        }
+    }];
+}
+
+- (void)setLocationsFromParse:(NSArray<Location *> *)locationsFromParse {
+    _locationsFromParse = locationsFromParse;
+    
+    MKDirectionsRequest *directionsRequest = [[MKDirectionsRequest alloc] init];
+    CLLocationCoordinate2D myCoordinates = CLLocationCoordinate2DMake(self.locationManager.location.coordinate.latitude, self.locationManager.location.coordinate.longitude);
+    MKPlacemark *myCurrentLocation = [[MKPlacemark alloc] initWithCoordinate:myCoordinates addressDictionary:nil];
+    MKMapItem *myMapItem = [[MKMapItem alloc] initWithPlacemark:myCurrentLocation];
+    NSMutableArray<MKMapItem *> *placemarks = [NSMutableArray arrayWithObject:myMapItem];
+    for (Location *location in locationsFromParse) {
+        CustomAnnotation *newPoint = [[CustomAnnotation alloc]init];
+        newPoint.coordinate = CLLocationCoordinate2DMake(location.location.latitude, location.location.longitude);
+        newPoint.title = location.locationName;
+        newPoint.tourId = location.objectId;
+        
+        [self.mapView addAnnotation:newPoint];
+        
+        MKPlacemark *placemark = [[MKPlacemark alloc] initWithCoordinate:CLLocationCoordinate2DMake(location.location.latitude, location.location.longitude) addressDictionary:nil];
+        MKMapItem *mapItem = [[MKMapItem alloc] initWithPlacemark:placemark];
+        [placemarks addObject:mapItem];
+        
+        //Create Dictionary..
+        if (_locationsWithObjectId) {
+            [_locationsWithObjectId setObject:location forKey:location.objectId];
+        } else {
+            _locationsWithObjectId = [NSMutableDictionary dictionaryWithObject:location forKey:location.objectId];
+        }
+    }
+    
+    directionsRequest.transportType = MKDirectionsTransportTypeWalking;
+    for (int i = 0; i < placemarks.count - 1; i++) {
+        [directionsRequest setSource:placemarks[i]];
+        [directionsRequest setDestination:placemarks[i+1]];
+        MKDirections *directions = [[MKDirections alloc] initWithRequest:directionsRequest];
+        [directions calculateDirectionsWithCompletionHandler:^(MKDirectionsResponse * _Nullable response, NSError * _Nullable error) {
+            if (error) {
+                NSLog(@"%@", error.localizedFailureReason);
+            }
+            if (response) {
+                MKRoute *route = response.routes[0];
+                [self.mapView addOverlay:route.polyline level:MKOverlayLevelAboveRoads];
+            }
+        }];
+    }
+}
+
+- (IBAction)nextStopButtonPressed:(UIButton *)sender {
+    if ([self.currentLocation.locationName isEqual: @"SecretName"]) {
+        self.currentLocation = self.locationsFromParse[0];
+    } else {
+        if ([self.locationsFromParse indexOfObject:self.currentLocation] == self.locationsFromParse.count - 1) {
+            //present alert saying they're on the last stop
+        } else {
+            NSUInteger currentIndex = [self.locationsFromParse indexOfObject:self.currentLocation];
+            self.currentLocation = self.locationsFromParse[currentIndex + 1];
+        }
+    }
+    //center the map on the next item
+    MKCoordinateRegion currentPinRegion = MKCoordinateRegionMakeWithDistance(CLLocationCoordinate2DMake(self.currentLocation.location.latitude, self.currentLocation.location.longitude), 100, 100);
+    [self.mapView setRegion:currentPinRegion animated:YES];
 }
 
 - (void)setRegionForCoordinate:(MKCoordinateRegion)region {
@@ -124,16 +161,11 @@
     UIButton *rightCalloutButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
     annotationView.rightCalloutAccessoryView = rightCalloutButton;
     
-    // Add a custom image to the callout.
-    
-    //    UIImage *myCustomImage = [[UIImage alloc]initWithImage:[UIImage imageNamed:@"MyCustomImage.png"]];
-    
     return annotationView;
 }
 
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
 
-//   Location* selectedLocation = [self.locationsWithObjectId objectForKey:(view.annotation.subtitle)];
     if ([view.annotation isKindOfClass:[CustomAnnotation class]]) {
         
         CustomAnnotation *annotation = (CustomAnnotation *)view.annotation;
@@ -143,8 +175,13 @@
         [self performSegueWithIdentifier:@"TourDetailViewController" sender:selectedLocation];
         
     }
-    
-    
+}
+
+- (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id<MKOverlay>)overlay {
+    MKPolylineRenderer *lineView = [[MKPolylineRenderer alloc] initWithPolyline:overlay];
+    lineView.strokeColor = [UIColor colorWithRed:0.278 green:0.510 blue:0.855 alpha:0.800];
+    lineView.lineWidth = 8.0;
+    return lineView;
 }
 
 #pragma mark - CLLocationManager
@@ -171,7 +208,14 @@
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
-    NSLog(@"%@", locations);
+}
+
+- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
+    if (status == kCLAuthorizationStatusAuthorizedWhenInUse) {
+        PFGeoPoint *currentGeopoint = [PFGeoPoint geoPointWithLatitude:self.locationManager.location.coordinate.latitude longitude:self.locationManager.location.coordinate.longitude];
+        Location *current = [[Location alloc] initWithLocationName:@"SecretName" locationDescription:@"" photo:nil video:nil categories:nil location:currentGeopoint tour:nil];
+        self.currentLocation = current;
+    }
 }
 
 
@@ -185,7 +229,6 @@
             Location *location = (Location *)sender;
             
             Location* selectedLocation = [_locationsWithObjectId objectForKey:(location.objectId)];
-            NSLog(@"%@",selectedLocation);
             [tourDetailViewController setLocation:selectedLocation];
 
         }
