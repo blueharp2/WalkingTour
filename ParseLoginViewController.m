@@ -9,6 +9,8 @@
 @import UIKit;
 @import Parse;
 @import ParseUI;
+@import Fabric;
+@import Crashlytics;
 #import "ParseLoginViewController.h"
 #import "ParseSignUpViewController.h"
 
@@ -36,6 +38,7 @@
     [PFUser logInWithUsernameInBackground:self.userNameField.text password:self.passwordField.text block:^(PFUser * _Nullable user, NSError * _Nullable error) {
         
         if (user && self.completion) {
+            [self logUser];
             self.completion();
             
         } else {
@@ -54,6 +57,10 @@
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     [self.view endEditing:YES];
+}
+
+- (void)logUser {
+    [CrashlyticsKit setUserIdentifier:[PFUser currentUser].objectId];
 }
 
 #pragma TextField Delegate
