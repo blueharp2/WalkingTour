@@ -569,15 +569,15 @@
                                         <color key="textColor" red="0.2784313725" green="0.50980392159999999" blue="0.85490196080000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="u25-ew-tet">
+                                    <tableView clipsSubviews="YES" tag="1" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="u25-ew-tet">
                                         <rect key="frame" x="16" y="130.5" width="288" height="196.5"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="CategoryTableViewCell" id="c1G-Pg-WB5">
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CategoryTableViewCell" id="c1G-Pg-WB5">
                                                 <rect key="frame" x="0.0" y="28" width="288" height="44"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="c1G-Pg-WB5" id="2AI-z2-yf4">
-                                                    <rect key="frame" x="0.0" y="0.0" width="249" height="43.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="288" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </tableViewCellContentView>
                                             </tableViewCell>
@@ -592,6 +592,9 @@
                                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.5" maxValue="10" translatesAutoresizingMaskIntoConstraints="NO" id="B1t-tM-dhf">
                                         <rect key="frame" x="76" y="28.5" width="230" height="31"/>
                                         <color key="tintColor" red="0.2784313725" green="0.50980392159999999" blue="0.85490196080000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <action selector="radiusSliderChanged:" destination="tqM-E3-5K0" eventType="valueChanged" id="7kI-rU-yzQ"/>
+                                        </connections>
                                     </slider>
                                 </subviews>
                                 <color key="backgroundColor" red="0.82842303299999998" green="0.91177850999999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -615,39 +618,32 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="6il-Co-gxA" firstAttribute="height" secondItem="B61-L7-Fg8" secondAttribute="height" multiplier="0.5" id="1er-xN-Wci"/>
                             <constraint firstItem="GYQ-Tm-WcJ" firstAttribute="leading" secondItem="B61-L7-Fg8" secondAttribute="leading" id="1wy-XT-TTL"/>
                             <constraint firstAttribute="trailing" secondItem="6il-Co-gxA" secondAttribute="trailing" id="28c-Tv-JBH"/>
                             <constraint firstItem="GYQ-Tm-WcJ" firstAttribute="top" secondItem="02n-Ua-OER" secondAttribute="bottom" id="8fQ-70-tHV"/>
                             <constraint firstItem="GYQ-Tm-WcJ" firstAttribute="height" secondItem="B61-L7-Fg8" secondAttribute="height" multiplier="0.4" id="8og-eG-LFz"/>
-                            <constraint firstItem="5vw-EB-vwN" firstAttribute="top" secondItem="dEP-ma-FrS" secondAttribute="bottom" constant="20" id="Mhb-Sa-nZe"/>
                             <constraint firstAttribute="trailing" secondItem="GYQ-Tm-WcJ" secondAttribute="trailing" id="NlF-93-XLN"/>
                             <constraint firstItem="5vw-EB-vwN" firstAttribute="top" secondItem="rxn-AU-0sD" secondAttribute="bottom" id="P4J-Ml-Exd"/>
                             <constraint firstItem="dEP-ma-FrS" firstAttribute="leading" secondItem="B61-L7-Fg8" secondAttribute="leading" constant="8" id="VRP-Zr-KG9"/>
                             <constraint firstItem="rxn-AU-0sD" firstAttribute="top" secondItem="B61-L7-Fg8" secondAttribute="top" id="Vgz-3V-kD1"/>
-                            <constraint firstItem="5vw-EB-vwN" firstAttribute="top" secondItem="6il-Co-gxA" secondAttribute="bottom" id="a22-Q2-1eo"/>
                             <constraint firstItem="5vw-EB-vwN" firstAttribute="top" secondItem="dEP-ma-FrS" secondAttribute="bottom" constant="8" id="bDm-6C-083"/>
                             <constraint firstItem="6il-Co-gxA" firstAttribute="top" secondItem="GYQ-Tm-WcJ" secondAttribute="bottom" constant="-60" id="bPa-gy-QyH"/>
                             <constraint firstItem="5vw-EB-vwN" firstAttribute="top" secondItem="6il-Co-gxA" secondAttribute="bottom" id="bda-ei-mC3"/>
                             <constraint firstItem="dEP-ma-FrS" firstAttribute="top" secondItem="GYQ-Tm-WcJ" secondAttribute="bottom" constant="8" id="bi5-Tp-fvy"/>
                             <constraint firstAttribute="trailing" secondItem="rxn-AU-0sD" secondAttribute="trailing" id="fIX-aU-vGC"/>
-                            <constraint firstItem="dEP-ma-FrS" firstAttribute="top" secondItem="GYQ-Tm-WcJ" secondAttribute="bottom" id="i9p-dw-i16"/>
                             <constraint firstItem="6il-Co-gxA" firstAttribute="leading" secondItem="B61-L7-Fg8" secondAttribute="leading" id="mzi-pt-HTN"/>
                             <constraint firstItem="rxn-AU-0sD" firstAttribute="leading" secondItem="B61-L7-Fg8" secondAttribute="leading" id="tgf-x8-aws"/>
                             <constraint firstAttribute="trailing" secondItem="dEP-ma-FrS" secondAttribute="trailing" constant="8" id="uqK-40-0ed"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="1er-xN-Wci"/>
-                                <exclude reference="i9p-dw-i16"/>
-                                <exclude reference="Mhb-Sa-nZe"/>
-                                <exclude reference="a22-Q2-1eo"/>
-                            </mask>
-                        </variation>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
+                        <outlet property="keywordSearchBar" destination="c7g-0Z-SZB" id="Ybc-S5-Amy"/>
                         <outlet property="mapView" destination="GYQ-Tm-WcJ" id="3Kx-Rx-Dr3"/>
+                        <outlet property="radiusLabel" destination="5aA-UV-5fZ" id="f4J-TE-7UM"/>
+                        <outlet property="radiusSlider" destination="B1t-tM-dhf" id="a7p-gZ-Xgr"/>
+                        <outlet property="searchCategoryTableView" destination="u25-ew-tet" id="O8u-OP-rri"/>
+                        <outlet property="searchViewTopConstraint" destination="bPa-gy-QyH" id="Xz2-XK-kWP"/>
                         <outlet property="toursTableView" destination="dEP-ma-FrS" id="0g8-Lf-TO4"/>
                         <segue destination="lAJ-Ob-e5p" kind="show" identifier="TabBarController" id="Ifx-M8-5Zo"/>
                     </connections>
