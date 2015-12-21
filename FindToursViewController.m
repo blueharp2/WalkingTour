@@ -22,7 +22,7 @@
 @interface FindToursViewController () <MKMapViewDelegate, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet UITableView *toursTableView;
-
+@property (strong, nonatomic) UIBarButtonItem *searchButton;
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (strong, nonatomic) NSMutableArray <id> *mapPoints;
 @property (strong, nonatomic) NSArray <Tour*> *toursFromParse;
@@ -63,7 +63,7 @@
     self.locationManager = [[CLLocationManager alloc]init];
     [self.locationManager requestWhenInUseAuthorization];
     [self.locationManager setDelegate:self];
-    
+    [self setUpSearchButton];
     [self setupViewController];
 }
 
@@ -92,8 +92,12 @@
     [self.locationManager stopMonitoringSignificantLocationChanges];
 }
 
-- (void)setupViewController
-{
+- (void)setUpSearchButton {
+    self.searchButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(searchButtonPressed:)];
+    self.navigationItem.rightBarButtonItem = self.searchButton;
+}
+
+- (void)setupViewController {
     //Setup tableView
     [self.toursTableView setDelegate:self];
     [self.toursTableView setDataSource:self];
@@ -107,6 +111,10 @@
     //Setup up MapView
     [self.mapView setDelegate:self];
     [self.mapView setShowsUserLocation: YES];
+    
+}
+
+- (void)searchButtonPressed:(UIBarButtonItem *)sender {
     
 }
 
