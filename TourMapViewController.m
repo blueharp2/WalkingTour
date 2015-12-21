@@ -12,7 +12,6 @@
 #import "Location.h"
 #import "ParseService.h"
 #import "CustomAnnotation.h"
-
 @import UIKit;
 @import MapKit;
 @import CoreLocation;
@@ -21,12 +20,11 @@
 @interface TourMapViewController () <MKMapViewDelegate, CLLocationManagerDelegate>
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
-- (IBAction)nextStopButtonPressed:(UIButton *)sender;
-
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (strong, nonatomic) NSArray <Location*> *locationsFromParse;
 @property (strong, nonatomic) Location *currentLocation;
 @property (strong, nonatomic) NSMutableDictionary *locationsWithObjectId;
+- (IBAction)nextStopButtonPressed:(UIButton *)sender;
 
 @end
 
@@ -68,14 +66,15 @@
 }
 
 - (void)setLocationsFromParse:(NSArray<Location *> *)locationsFromParse {
-    _locationsFromParse = locationsFromParse;
+    NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:@"orderNumber" ascending:YES];
+    _locationsFromParse = [locationsFromParse sortedArrayUsingDescriptors:@[descriptor]];
     
     MKDirectionsRequest *directionsRequest = [[MKDirectionsRequest alloc] init];
     CLLocationCoordinate2D myCoordinates = CLLocationCoordinate2DMake(self.locationManager.location.coordinate.latitude, self.locationManager.location.coordinate.longitude);
     MKPlacemark *myCurrentLocation = [[MKPlacemark alloc] initWithCoordinate:myCoordinates addressDictionary:nil];
     MKMapItem *myMapItem = [[MKMapItem alloc] initWithPlacemark:myCurrentLocation];
     NSMutableArray<MKMapItem *> *placemarks = [NSMutableArray arrayWithObject:myMapItem];
-    for (Location *location in locationsFromParse) {
+    for (Location *location in self.locationsFromParse) {
         CustomAnnotation *newPoint = [[CustomAnnotation alloc]init];
         newPoint.coordinate = CLLocationCoordinate2DMake(location.location.latitude, location.location.longitude);
         newPoint.title = location.locationName;
@@ -157,7 +156,7 @@
     //Add a detail disclosure button.
     annotationView.canShowCallout = true;
     annotationView.animatesDrop = true;
-    annotationView.pinTintColor = [UIColor orangeColor];
+    annotationView.pinTintColor = [UIColor colorWithRed:0.278 green:0.510 blue:0.855 alpha:1.000];
     UIButton *rightCalloutButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
     annotationView.rightCalloutAccessoryView = rightCalloutButton;
     
@@ -213,7 +212,7 @@
 - (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
     if (status == kCLAuthorizationStatusAuthorizedWhenInUse) {
         PFGeoPoint *currentGeopoint = [PFGeoPoint geoPointWithLatitude:self.locationManager.location.coordinate.latitude longitude:self.locationManager.location.coordinate.longitude];
-        Location *current = [[Location alloc] initWithLocationName:@"SecretName" locationDescription:@"" photo:nil video:nil categories:nil location:currentGeopoint tour:nil];
+        Location *current = [[Location alloc] initWithLocationName:@"SecretName" locationDescription:@"" photo:nil video:nil categories:nil location:currentGeopoint orderNumber:0 tour:nil];
         self.currentLocation = current;
     }
 }

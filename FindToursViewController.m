@@ -19,15 +19,21 @@
 @import Parse;
 @import ParseUI;
 
-@interface FindToursViewController () <MKMapViewDelegate, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource>
+@interface FindToursViewController () <MKMapViewDelegate, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet UITableView *toursTableView;
-
+@property (strong, nonatomic) UIBarButtonItem *searchButton;
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (strong, nonatomic) NSMutableArray <id> *mapPoints;
 @property (strong, nonatomic) NSArray <Tour*> *toursFromParse;
 -(void)setToursFromParse:(NSArray<Tour *> *)toursFromParse;
-
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *searchViewTopConstraint;
+@property (weak, nonatomic) IBOutlet UISearchBar *keywordSearchBar;
+@property (weak, nonatomic) IBOutlet UILabel *radiusLabel;
+@property (weak, nonatomic) IBOutlet UISlider *radiusSlider;
+@property (weak, nonatomic) IBOutlet UITableView *searchCategoryTableView;
+@property (strong, nonatomic) NSArray *categoryList;
+- (IBAction)radiusSliderChanged:(UISlider *)sender;
 
 @end
 
@@ -58,12 +64,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.searchViewTopConstraint.constant = self.view.frame.size.height;
+    self.radiusSlider.hidden = YES;
     //Location Manager setup
     self.locationManager = [[CLLocationManager alloc]init];
     [self.locationManager requestWhenInUseAuthorization];
     [self.locationManager setDelegate:self];
-    
+    [self setUpSearchButton];
     [self setupViewController];
 }
 
@@ -92,11 +99,18 @@
     [self.locationManager stopMonitoringSignificantLocationChanges];
 }
 
-- (void)setupViewController
-{
+- (void)setUpSearchButton {
+    self.searchButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(searchButtonPressed:)];
+    self.navigationItem.rightBarButtonItem = self.searchButton;
+}
+
+- (void)setupViewController {
     //Setup tableView
     [self.toursTableView setDelegate:self];
     [self.toursTableView setDataSource:self];
+    self.searchCategoryTableView.delegate = self;
+    self.searchCategoryTableView.dataSource = self;
+    self.categoryList = @[@"Restaurant", @"Cafe", @"Art", @"Museum", @"History", @"Shopping", @"Nightlife", @"Film", @"Education"];
     
     UIImageView *tempImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"TableViewBackground.png"]];
     [tempImageView setFrame:self.toursTableView.frame];
@@ -108,6 +122,22 @@
     [self.mapView setDelegate:self];
     [self.mapView setShowsUserLocation: YES];
     
+}
+
+- (void)searchButtonPressed:(UIBarButtonItem *)sender {
+    if (self.searchViewTopConstraint.constant == -60) {
+        //Handle if the search view is open
+    } else {
+        self.radiusSlider.hidden = NO;
+        [UIView animateWithDuration:0.4 animations:^{
+            self.searchViewTopConstraint.constant = -60;
+            [self.view layoutIfNeeded];
+        }];
+    }
+}
+
+- (IBAction)radiusSliderChanged:(UISlider *)sender {
+    self.radiusLabel.text = [NSString stringWithFormat:@"%.1f", sender.value];
 }
 
 - (void)setRegionForCoordinate:(MKCoordinateRegion)region {
@@ -141,7 +171,7 @@
     //Add a detail disclosure button.
     annotationView.canShowCallout = true;
     annotationView.animatesDrop = true;
-    annotationView.pinTintColor = [UIColor orangeColor];
+    annotationView.pinTintColor = [UIColor colorWithRed:0.278 green:0.510 blue:0.855 alpha:1.000];
     UIButton *rightCalloutButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
     annotationView.rightCalloutAccessoryView = rightCalloutButton;
     
@@ -188,36 +218,98 @@
         MKCoordinateRegion currentRegion = MKCoordinateRegionMakeWithDistance(self.locationManager.location.coordinate, 300, 300);
         [self.mapView setRegion:currentRegion];
         [self fetchToursNearUser];
+//        [self testQuery];
     }
 }
 
+//- (void)testQuery {
+//    CLLocationCoordinate2D location = CLLocationCoordinate2DMake(47.561137, -122.386794);
+    //Generic search (without categories or search term) working.
+//    [ParseService searchToursNearLocation:location withinMiles:1.0 withSearchTerm:nil completion:^(BOOL success, NSArray *results) {
+//        if (success) {
+//            for (Tour *tour in results) {
+//                NSLog(@"%@", tour.objectId);
+//            }
+//        }
+//    }];
+    
+    //Full search (with one category and no search term) working
+//    [ParseService searchToursNearLocation:location withinMiles:1.0 withSearchTerm:nil categories:@[@"Cafe"] completion:^(BOOL success, NSArray *results) {
+//        if (success) {
+//            for (Tour *tour in results) {
+//                NSLog(@"%@", tour.objectId);
+//            }
+//        }
+//    }];
+    
+//    Generic search (without categories, with search term) working.
+//    [ParseService searchToursNearLocation:location withinMiles:1.0 withSearchTerm:@"Sushi" completion:^(BOOL success, NSArray *results) {
+//        if (success) {
+//            for (Tour *tour in results) {
+//                NSLog(@"%@", tour.objectId);
+//            }
+//        }
+//    }];
+    
+    //Full search (with two categories and a search term)working
+//        [ParseService searchToursNearLocation:location withinMiles:1.0 withSearchTerm:@"West" categories:@[@"Cafe", @"Restaurant"] completion:^(BOOL success, NSArray *results) {
+//            if (success) {
+//                for (Tour *tour in results) {
+//                    NSLog(@"%@", tour.objectId);
+//                }
+//            }
+//        }];
+//}
 
 #pragma mark - UITableView protocol functions.
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return self.toursFromParse.count;
+    if (tableView.tag == 0) {
+        return self.toursFromParse.count;
+    } else {
+        return 1;
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
+    if (tableView.tag == 0) {
+        return 1;
+    } else {
+        return self.categoryList.count;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 5.0;
+    if (tableView.tag == 0) {
+        return 5.0;
+    } else {
+        return 0;
+    }
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     UIView *headerView = [UIView new];
-    [headerView setBackgroundColor:[UIColor clearColor]];
-    
-    return headerView;
+    if (tableView.tag == 0) {
+        [headerView setBackgroundColor:[UIColor clearColor]];
+        return headerView;
+    } else {
+        return nil;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    POIDetailTableViewCell *cell = (POIDetailTableViewCell*) [self.toursTableView dequeueReusableCellWithIdentifier:@"POIDetailTableViewCell"];
-    [cell setTour:[self.toursFromParse objectAtIndex:indexPath.section]];
-    
-    return cell;
+    if (tableView.tag == 0) {
+        POIDetailTableViewCell *cell = (POIDetailTableViewCell*) [self.toursTableView dequeueReusableCellWithIdentifier:@"POIDetailTableViewCell"];
+        [cell setTour:[self.toursFromParse objectAtIndex:indexPath.section]];
+        
+        return cell;
+    } else {
+        UITableViewCell *cell = [self.searchCategoryTableView dequeueReusableCellWithIdentifier:@"CategoryTableViewCell" forIndexPath:indexPath];
+        cell.textLabel.font = [UIFont fontWithName:@"Futura" size:17.0];
+        cell.textLabel.textColor = [UIColor colorWithRed:0.278 green:0.510 blue:0.855 alpha:1.000];
+        cell.textLabel.text = self.categoryList[indexPath.row];
+        return cell;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -229,13 +321,19 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *tourId = self.toursFromParse[indexPath.section].objectId;
-    [self performSegueWithIdentifier:@"TabBarController" sender:tourId];
+    if (tableView.tag == 0) {
+        NSString *tourId = self.toursFromParse[indexPath.section].objectId;
+        [self performSegueWithIdentifier:@"TabBarController" sender:tourId];
+    } else {
+        //what to do?
+    }
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    cell.layer.cornerRadius = 5;
-    cell.layer.masksToBounds = true;
+    if (tableView.tag == 0) {
+        cell.layer.cornerRadius = 5;
+        cell.layer.masksToBounds = true;
+    }
 }
 
 #pragma mark - Navigation
@@ -273,7 +371,15 @@
     }
 }
 
+#pragma mark - UISearchBarDelegate
 
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    [searchBar resignFirstResponder];
+}
+
+- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
+    [searchBar resignFirstResponder];
+}
 
 @end
 
