@@ -127,7 +127,6 @@
         if (success) {
             NSMutableArray *searchResults;
             for (Location *location in results) {
-                NSLog(@"%li", [searchResults indexOfObject:location.tour.objectId]);
                 if (!searchResults.count > 0 || ![searchResults indexOfObject:location.tour.objectId]) {
                     if (searchResults.count == 0) {
                         searchResults = [NSMutableArray arrayWithObject:location.tour.objectId];

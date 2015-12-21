@@ -68,14 +68,16 @@
 }
 
 - (void)setLocationsFromParse:(NSArray<Location *> *)locationsFromParse {
-    _locationsFromParse = locationsFromParse;
+    NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:@"orderNumber" ascending:YES];
+    _locationsFromParse = [locationsFromParse sortedArrayUsingDescriptors:@[descriptor]];
     
     MKDirectionsRequest *directionsRequest = [[MKDirectionsRequest alloc] init];
     CLLocationCoordinate2D myCoordinates = CLLocationCoordinate2DMake(self.locationManager.location.coordinate.latitude, self.locationManager.location.coordinate.longitude);
     MKPlacemark *myCurrentLocation = [[MKPlacemark alloc] initWithCoordinate:myCoordinates addressDictionary:nil];
     MKMapItem *myMapItem = [[MKMapItem alloc] initWithPlacemark:myCurrentLocation];
     NSMutableArray<MKMapItem *> *placemarks = [NSMutableArray arrayWithObject:myMapItem];
-    for (Location *location in locationsFromParse) {
+    for (Location *location in self.locationsFromParse) {
+        NSLog(@"%i",location.orderNumber);
         CustomAnnotation *newPoint = [[CustomAnnotation alloc]init];
         newPoint.coordinate = CLLocationCoordinate2DMake(location.location.latitude, location.location.longitude);
         newPoint.title = location.locationName;
