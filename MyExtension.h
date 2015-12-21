@@ -11,10 +11,10 @@
 
 @interface MyExtension : NSObject <MKAnnotation> {
     NSString *tourId;
-    NSString *title;
+//    NSString *title;
 }
 
-@property(retain, readwrite, nonatomic) NSString *tourId;
-@property NSString *title;
+@property (retain, readwrite, nonatomic) NSString *tourId;
+//@property NSString *title;
 
 @end

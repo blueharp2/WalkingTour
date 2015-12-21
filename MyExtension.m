@@ -12,14 +12,14 @@
 
 @synthesize tourId;
 @synthesize coordinate;
-@synthesize title;
+//@synthesize title;
 
 - (void)setTourId:(NSString *)theTourId {
     self.tourId = theTourId;
 }
 
-- (void)setTitle:(NSString *)myTitle {
-    self.title = myTitle;
-}
+//- (void)setTitle:(NSString *)myTitle {
+//    self.title = myTitle;
+//}
 
 @end

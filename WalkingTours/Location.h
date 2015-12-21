@@ -17,6 +17,7 @@
 @property (strong, nonatomic) PFFile *video;
 @property (strong, nonatomic) NSArray *categories;
 @property (strong, nonatomic) PFGeoPoint *location;
+@property (nonatomic) int orderNumber;
 @property (strong, nonatomic) Tour *tour;
 
 
@@ -26,6 +27,7 @@
                  video:(PFFile *)video
             categories:(NSArray *)categories
               location:(PFGeoPoint *)location
+           orderNumber:(int)orderNumber
                   tour:(Tour *)tour;
 
 @end
