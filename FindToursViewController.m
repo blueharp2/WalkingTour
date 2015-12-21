@@ -122,7 +122,7 @@
 }
 
 - (IBAction)finalSearchButtonPressed:(UIButton *)sender {
-    CLLocationCoordinate2D current = CLLocationCoordinate2DMake(self.locationManager.location.coordinate.latitude, self.locationManager.location.coordinate.longitude);
+    CLLocationCoordinate2D current = self.mapView.centerCoordinate;
     if (self.selectedCategories && self.selectedCategories.count > 0) {
         [ParseService searchToursNearLocation:current withinMiles:self.radiusLabel.text.floatValue withSearchTerm:self.keywordSearchBar.text categories:self.selectedCategories completion:^(BOOL success, NSArray *results) {
             [UIView animateWithDuration:0.4 animations:^{
