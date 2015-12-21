@@ -194,7 +194,7 @@
 
 - (void)testQuery {
     CLLocationCoordinate2D location = CLLocationCoordinate2DMake(47.561137, -122.386794);
-    //Generic search (without categories) seems to be working.
+    //Generic search (without categories or search term) working.
 //    [ParseService searchToursNearLocation:location withinMiles:1.0 withSearchTerm:nil completion:^(BOOL success, NSArray *results) {
 //        if (success) {
 //            for (Tour *tour in results) {
@@ -203,8 +203,17 @@
 //        }
 //    }];
     
-    //Full search (with categories)
-    [ParseService searchToursNearLocation:location withinMiles:1.0 withSearchTerm:nil categories:@[@"Cafe"] completion:^(BOOL success, NSArray *results) {
+    //Full search (with one category) and no search term working
+//    [ParseService searchToursNearLocation:location withinMiles:1.0 withSearchTerm:nil categories:@[@"Cafe"] completion:^(BOOL success, NSArray *results) {
+//        if (success) {
+//            for (Tour *tour in results) {
+//                NSLog(@"%@", tour.objectId);
+//            }
+//        }
+//    }];
+    
+//    Generic search (without categories or search term) working.
+    [ParseService searchToursNearLocation:location withinMiles:1.0 withSearchTerm:@"Sushi" completion:^(BOOL success, NSArray *results) {
         if (success) {
             for (Tour *tour in results) {
                 NSLog(@"%@", tour.objectId);

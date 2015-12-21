@@ -102,9 +102,16 @@
             if (!searchTerm.length > 0) {
                 completion(YES, objects);
             } else {
-                NSArray *resultsArray = (NSArray<Tour*> *)objects;
-                NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K LIKE *%@* OR %K LIKE *%@*", @"nameOfTour", searchTerm, @"descriptionText", searchTerm];
-                NSArray *filteredResults = [[NSArray alloc] initWithArray:[resultsArray filteredArrayUsingPredicate:predicate]];
+                NSMutableArray *filteredResults;
+                for (Tour *tour in objects) {
+                    if ([tour.nameOfTour containsString:searchTerm] || [tour.descriptionText containsString:searchTerm]) {
+                        if (filteredResults.count == 0) {
+                            filteredResults = [NSMutableArray arrayWithObject:tour];
+                        } else {
+                            [filteredResults addObject:tour];
+                        }
+                    }
+                }
                 if (filteredResults.count > 0) {
                     completion(YES, filteredResults);
                 } else {
@@ -140,7 +147,21 @@
                         completion(NO, nil);
                     }
                     if (objects) {
-                        completion(YES, objects);
+                        NSMutableArray *filteredResults;
+                        for (Tour *tour in objects) {
+                            if ([tour.nameOfTour containsString:searchTerm] || [tour.descriptionText containsString:searchTerm]) {
+                                if (filteredResults.count == 0) {
+                                    filteredResults = [NSMutableArray arrayWithObject:tour];
+                                } else {
+                                    [filteredResults addObject:tour];
+                                }
+                            }
+                        }
+                        if (filteredResults.count > 0) {
+                            completion(YES, objects);
+                        } else {
+                            completion(NO, nil);
+                        }
                     }
                 }];
             }
