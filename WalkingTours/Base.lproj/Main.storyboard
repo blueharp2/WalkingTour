@@ -570,7 +570,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <tableView clipsSubviews="YES" tag="1" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="u25-ew-tet">
-                                        <rect key="frame" x="16" y="130.5" width="288" height="196.5"/>
+                                        <rect key="frame" x="16" y="130.5" width="288" height="146.5"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CategoryTableViewCell" id="c1G-Pg-WB5">
@@ -596,15 +596,29 @@
                                             <action selector="radiusSliderChanged:" destination="tqM-E3-5K0" eventType="valueChanged" id="7kI-rU-yzQ"/>
                                         </connections>
                                     </slider>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kui-vt-qQH">
+                                        <rect key="frame" x="135" y="279" width="50" height="50"/>
+                                        <color key="backgroundColor" red="0.82842303299999998" green="0.91177850999999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="XwW-1v-e3m"/>
+                                            <constraint firstAttribute="height" constant="50" id="t10-5z-6yN"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="15"/>
+                                        <state key="normal" title="Search">
+                                            <color key="titleColor" red="0.2784313725" green="0.50980392159999999" blue="0.85490196080000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.82842303299999998" green="0.91177850999999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstItem="Kui-vt-qQH" firstAttribute="top" secondItem="u25-ew-tet" secondAttribute="bottom" constant="2" id="AO5-Wp-533"/>
                                     <constraint firstItem="5aA-UV-5fZ" firstAttribute="leading" secondItem="6il-Co-gxA" secondAttribute="leading" constant="16" id="Ggg-aC-Npy"/>
                                     <constraint firstItem="XFS-d5-A8o" firstAttribute="centerX" secondItem="c7g-0Z-SZB" secondAttribute="centerX" id="JFK-Rv-zqv"/>
                                     <constraint firstAttribute="trailingMargin" secondItem="c7g-0Z-SZB" secondAttribute="trailing" constant="8" id="TIo-ls-jgk"/>
                                     <constraint firstAttribute="bottom" secondItem="u25-ew-tet" secondAttribute="bottom" constant="10" id="XTx-6S-SUV"/>
                                     <constraint firstAttribute="trailingMargin" secondItem="u25-ew-tet" secondAttribute="trailing" constant="8" id="Xhk-4V-tdh"/>
                                     <constraint firstItem="u25-ew-tet" firstAttribute="top" secondItem="c7g-0Z-SZB" secondAttribute="bottom" constant="20" id="ZlQ-gd-ZpS"/>
+                                    <constraint firstItem="Kui-vt-qQH" firstAttribute="centerX" secondItem="6il-Co-gxA" secondAttribute="centerX" id="cYb-Dg-097"/>
                                     <constraint firstItem="B1t-tM-dhf" firstAttribute="top" secondItem="XFS-d5-A8o" secondAttribute="bottom" constant="2" id="cZW-fJ-rWq"/>
                                     <constraint firstItem="c7g-0Z-SZB" firstAttribute="leading" secondItem="6il-Co-gxA" secondAttribute="leadingMargin" constant="8" id="dNA-Bw-uJ2"/>
                                     <constraint firstItem="B1t-tM-dhf" firstAttribute="leading" secondItem="5aA-UV-5fZ" secondAttribute="trailing" constant="8" id="fgL-2O-fzB"/>
@@ -613,7 +627,13 @@
                                     <constraint firstItem="c7g-0Z-SZB" firstAttribute="top" secondItem="B1t-tM-dhf" secondAttribute="bottom" constant="8" id="lTW-gg-1wd"/>
                                     <constraint firstItem="B1t-tM-dhf" firstAttribute="centerY" secondItem="5aA-UV-5fZ" secondAttribute="centerY" id="r2s-8g-avv"/>
                                     <constraint firstItem="XFS-d5-A8o" firstAttribute="top" secondItem="6il-Co-gxA" secondAttribute="top" constant="8" id="tb5-Kd-L2M"/>
+                                    <constraint firstAttribute="bottom" secondItem="Kui-vt-qQH" secondAttribute="bottom" constant="8" id="xxy-pH-a0B"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="XTx-6S-SUV"/>
+                                    </mask>
+                                </variation>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
