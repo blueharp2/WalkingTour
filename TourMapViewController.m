@@ -213,7 +213,7 @@
 - (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
     if (status == kCLAuthorizationStatusAuthorizedWhenInUse) {
         PFGeoPoint *currentGeopoint = [PFGeoPoint geoPointWithLatitude:self.locationManager.location.coordinate.latitude longitude:self.locationManager.location.coordinate.longitude];
-        Location *current = [[Location alloc] initWithLocationName:@"SecretName" locationDescription:@"" photo:nil video:nil categories:nil location:currentGeopoint tour:nil];
+        Location *current = [[Location alloc] initWithLocationName:@"SecretName" locationDescription:@"" photo:nil video:nil categories:nil location:currentGeopoint orderNumber:0 tour:nil];
         self.currentLocation = current;
     }
 }

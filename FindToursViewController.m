@@ -188,7 +188,29 @@
         MKCoordinateRegion currentRegion = MKCoordinateRegionMakeWithDistance(self.locationManager.location.coordinate, 300, 300);
         [self.mapView setRegion:currentRegion];
         [self fetchToursNearUser];
+        [self testQuery];
     }
+}
+
+- (void)testQuery {
+    CLLocationCoordinate2D location = CLLocationCoordinate2DMake(47.561137, -122.386794);
+    //Generic search (without categories) seems to be working.
+//    [ParseService searchToursNearLocation:location withinMiles:1.0 withSearchTerm:nil completion:^(BOOL success, NSArray *results) {
+//        if (success) {
+//            for (Tour *tour in results) {
+//                NSLog(@"%@", tour.objectId);
+//            }
+//        }
+//    }];
+    
+    //Full search (with categories)
+    [ParseService searchToursNearLocation:location withinMiles:1.0 withSearchTerm:nil categories:@[@"Cafe"] completion:^(BOOL success, NSArray *results) {
+        if (success) {
+            for (Tour *tour in results) {
+                NSLog(@"%@", tour.objectId);
+            }
+        }
+    }];
 }
 
 

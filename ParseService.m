@@ -42,18 +42,21 @@
 
 + (void)fetchLocationsWithCategories:(NSArray *)categories nearLocation:(CLLocationCoordinate2D)location withinMiles:(float)miles completion:(locationsFetchCompletion)completion {
     NSString *predicateString = @"";
+    NSMutableArray *predicateArguments;;
     if (categories.count > 0) {
-        predicateString = [NSString stringWithFormat:@"%@ IN categories", categories[0]];
+        predicateString = @"%@ IN categories";
+        predicateArguments = [NSMutableArray arrayWithObject:categories[0]];
         if (categories.count > 1) {
             for (int i = 1; i < categories.count; i++) {
-                predicateString = [predicateString stringByAppendingString:[NSString stringWithFormat:@" OR %@ IN categories", categories[i]]];
+                predicateString = [predicateString stringByAppendingString:@" OR %@ IN categories"];
+                [predicateArguments addObject:categories[i]];
             }
         }
     }
     NSPredicate *predicate;
     PFQuery *query;
     if (predicateString.length > 0) {
-        predicate = [NSPredicate predicateWithFormat:predicateString];
+        predicate = [NSPredicate predicateWithFormat:predicateString argumentArray:predicateArguments];
     }
     if (predicate) {
         query = [PFQuery queryWithClassName:@"Location" predicate:predicate];
@@ -117,8 +120,8 @@
         if (success) {
             NSMutableArray *searchResults;
             for (Location *location in results) {
-                NSUInteger tourIndex = [searchResults indexOfObject:location.tour.objectId];
-                if (![[searchResults objectAtIndex:tourIndex] isEqual:location.tour.objectId]) {
+                NSLog(@"%li", [searchResults indexOfObject:location.tour.objectId]);
+                if (!searchResults.count > 0 || ![searchResults indexOfObject:location.tour.objectId]) {
                     if (searchResults.count == 0) {
                         searchResults = [NSMutableArray arrayWithObject:location.tour.objectId];
                      } else {
