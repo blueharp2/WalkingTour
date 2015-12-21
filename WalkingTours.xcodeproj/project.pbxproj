@@ -55,6 +55,8 @@
 		9050ECD91C1F78E80092CF86 /* VideoPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9050ECD81C1F78E80092CF86 /* VideoPlayerView.m */; };
 		9050ECDC1C1F7B920092CF86 /* TourDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9050ECDB1C1F7B920092CF86 /* TourDetailViewController.m */; };
 		9050ECDF1C1F82F20092CF86 /* CreateTourDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9050ECDE1C1F82F20092CF86 /* CreateTourDetailViewController.m */; };
+		906734611C28AAF700DF76B1 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9067345F1C28AAF700DF76B1 /* Fabric.framework */; };
+		906734621C28AAF700DF76B1 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 906734601C28AAF700DF76B1 /* Crashlytics.framework */; };
 		908AA8C11C20972B00A7DF57 /* ParseService.m in Sources */ = {isa = PBXBuildFile; fileRef = 908AA8C01C20972B00A7DF57 /* ParseService.m */; };
 		90AE88D11C209290005536B4 /* CategoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 90AE88CF1C209290005536B4 /* CategoryTableViewCell.m */; };
 		90AE88D21C209290005536B4 /* CategoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 90AE88D01C209290005536B4 /* CategoryTableViewCell.xib */; };
@@ -158,6 +160,8 @@
 		9050ECDB1C1F7B920092CF86 /* TourDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TourDetailViewController.m; sourceTree = "<group>"; };
 		9050ECDD1C1F82F20092CF86 /* CreateTourDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateTourDetailViewController.h; sourceTree = "<group>"; };
 		9050ECDE1C1F82F20092CF86 /* CreateTourDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateTourDetailViewController.m; sourceTree = "<group>"; };
+		9067345F1C28AAF700DF76B1 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
+		906734601C28AAF700DF76B1 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		908AA8BF1C20972B00A7DF57 /* ParseService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParseService.h; sourceTree = "<group>"; };
 		908AA8C01C20972B00A7DF57 /* ParseService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParseService.m; sourceTree = "<group>"; };
 		90AE88CE1C209290005536B4 /* CategoryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryTableViewCell.h; sourceTree = "<group>"; };
@@ -190,9 +194,11 @@
 			files = (
 				3D43CF101C1F41AB00118998 /* ParseFacebookUtils.framework in Frameworks */,
 				3D43CF071C1F418E00118998 /* libsqlite3.0.tbd in Frameworks */,
+				906734621C28AAF700DF76B1 /* Crashlytics.framework in Frameworks */,
 				3D43CF051C1F418400118998 /* libz.1.1.3.tbd in Frameworks */,
 				3D43CF031C1F417B00118998 /* SystemConfiguration.framework in Frameworks */,
 				3D43CF0E1C1F41AB00118998 /* Bolts.framework in Frameworks */,
+				906734611C28AAF700DF76B1 /* Fabric.framework in Frameworks */,
 				3D43CF011C1F417100118998 /* StoreKit.framework in Frameworks */,
 				3D43CF121C1F41AB00118998 /* ParseTwitterUtils.framework in Frameworks */,
 				3D43CEFF1C1F416900118998 /* Security.framework in Frameworks */,
@@ -236,6 +242,8 @@
 				3D43CF0D1C1F41AB00118998 /* ParseUI.framework */,
 				3D43CF061C1F418E00118998 /* libsqlite3.0.tbd */,
 				3D43CF041C1F418400118998 /* libz.1.1.3.tbd */,
+				9067345F1C28AAF700DF76B1 /* Fabric.framework */,
+				906734601C28AAF700DF76B1 /* Crashlytics.framework */,
 				3D43CF021C1F417B00118998 /* SystemConfiguration.framework */,
 				3D43CF001C1F417100118998 /* StoreKit.framework */,
 				3D43CEFE1C1F416900118998 /* Security.framework */,
@@ -441,6 +449,7 @@
 				903177C21C1F3A9E001C8DF9 /* Sources */,
 				903177C31C1F3A9E001C8DF9 /* Frameworks */,
 				903177C41C1F3A9E001C8DF9 /* Resources */,
+				9067345E1C28AAD500DF76B1 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -572,6 +581,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		9067345E1C28AAD500DF76B1 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Fabric.framework/run d2670f4cba4ee6201633340ca53ec0ea2488d3b5 54ee1ec56bbcd4d9f0cc28b0d615c86f8b9a3f6f15a6e8be64d51b2850a70aa9";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		903177C21C1F3A9E001C8DF9 /* Sources */ = {
