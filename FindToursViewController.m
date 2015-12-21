@@ -188,12 +188,12 @@
         MKCoordinateRegion currentRegion = MKCoordinateRegionMakeWithDistance(self.locationManager.location.coordinate, 300, 300);
         [self.mapView setRegion:currentRegion];
         [self fetchToursNearUser];
-        [self testQuery];
+//        [self testQuery];
     }
 }
 
-- (void)testQuery {
-    CLLocationCoordinate2D location = CLLocationCoordinate2DMake(47.561137, -122.386794);
+//- (void)testQuery {
+//    CLLocationCoordinate2D location = CLLocationCoordinate2DMake(47.561137, -122.386794);
     //Generic search (without categories or search term) working.
 //    [ParseService searchToursNearLocation:location withinMiles:1.0 withSearchTerm:nil completion:^(BOOL success, NSArray *results) {
 //        if (success) {
@@ -203,7 +203,7 @@
 //        }
 //    }];
     
-    //Full search (with one category) and no search term working
+    //Full search (with one category and no search term) working
 //    [ParseService searchToursNearLocation:location withinMiles:1.0 withSearchTerm:nil categories:@[@"Cafe"] completion:^(BOOL success, NSArray *results) {
 //        if (success) {
 //            for (Tour *tour in results) {
@@ -212,16 +212,24 @@
 //        }
 //    }];
     
-//    Generic search (without categories or search term) working.
-    [ParseService searchToursNearLocation:location withinMiles:1.0 withSearchTerm:@"Sushi" completion:^(BOOL success, NSArray *results) {
-        if (success) {
-            for (Tour *tour in results) {
-                NSLog(@"%@", tour.objectId);
-            }
-        }
-    }];
-}
-
+//    Generic search (without categories, with search term) working.
+//    [ParseService searchToursNearLocation:location withinMiles:1.0 withSearchTerm:@"Sushi" completion:^(BOOL success, NSArray *results) {
+//        if (success) {
+//            for (Tour *tour in results) {
+//                NSLog(@"%@", tour.objectId);
+//            }
+//        }
+//    }];
+    
+    //Full search (with two categories and a search term)working
+//        [ParseService searchToursNearLocation:location withinMiles:1.0 withSearchTerm:@"West" categories:@[@"Cafe", @"Restaurant"] completion:^(BOOL success, NSArray *results) {
+//            if (success) {
+//                for (Tour *tour in results) {
+//                    NSLog(@"%@", tour.objectId);
+//                }
+//            }
+//        }];
+//}
 
 #pragma mark - UITableView protocol functions.
 
