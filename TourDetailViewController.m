@@ -6,13 +6,15 @@
 //  Copyright © 2015 Lindsey Boggio. All rights reserved.
 //
 #import "TourDetailViewController.h"
+#import "TourListViewController.h"
+#import "TourMapViewController.h"
 #import "VideoPlayerView.h"
 #import "Location.h"
 @import Parse;
 
 static const NSString *ItemStatusContext;
 
-@interface TourDetailViewController ()
+@interface TourDetailViewController () <UINavigationControllerDelegate>
 
 @property (nonatomic) AVPlayer *player;
 @property (nonatomic) AVPlayerItem *playerItem;
@@ -21,6 +23,7 @@ static const NSString *ItemStatusContext;
 @property (weak, nonatomic) IBOutlet UILabel *locationNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *locationDescriptionLabel;
 @property (nonatomic, strong) NSString *locationData;
+@property (strong, nonatomic) UIColor *navBarTintColor;
 - (IBAction)playButtonPressed:(UIButton *)sender;
 
 @end
@@ -30,6 +33,10 @@ static const NSString *ItemStatusContext;
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setButtonStatus];
+    self.navigationController.delegate = self;
+    UIColor *tintColor = self.navigationController.navigationBar.tintColor;
+    self.navBarTintColor = tintColor;
+    self.navigationController.navigationBar.tintColor = [UIColor colorWithWhite:0.951 alpha:1.000];
     if (self.location) {
         self.locationNameLabel.text = self.location.locationName;
         self.locationDescriptionLabel.text = self.location.locationDescription;
@@ -87,6 +94,8 @@ static const NSString *ItemStatusContext;
         }
     }
 }
+
+#pragma mark - Video player functions
 
 - (void)loadVideoAsset:(NSURL *)url {
     
@@ -153,6 +162,14 @@ static const NSString *ItemStatusContext;
             [self.player play];
         }
     }];
+}
+
+#pragma mark - UINavigationControllerDelegate
+
+- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
+    if (![viewController isKindOfClass:[TourDetailViewController class]]) {
+        self.navigationController.navigationBar.tintColor = self.navBarTintColor;
+    }
 }
 
 @end

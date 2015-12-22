@@ -277,6 +277,7 @@ static const NSArray *categories;
         self.locationNameTextField.hidden = NO;
         self.locationDescriptionTextField.hidden = NO;
         self.cameraButton.hidden = NO;
+        self.saveButton.layer.cornerRadius = self.saveButton.frame.size.width / 2;
         [UIView animateWithDuration:0.4 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^{
             self.locationNameTextField.alpha = 1.0;
             self.locationDescriptionTextField.alpha = 1.0;
@@ -362,6 +363,10 @@ static const NSArray *categories;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     CategoryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     [cell setCategory:categories[indexPath.row]];
+    cell.accessoryType = UITableViewCellAccessoryNone;
+    if ([self.selectedCategories containsObject:categories[indexPath.row]]) {
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    }
     return cell;
 }
 
