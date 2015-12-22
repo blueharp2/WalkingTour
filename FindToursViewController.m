@@ -29,6 +29,8 @@
 @property (strong, nonatomic) NSArray <Tour*> *toursFromParse;
 -(void)setToursFromParse:(NSArray<Tour *> *)toursFromParse;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *searchViewTopConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *searchViewBottomConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *searchBarBottomConstraint;
 @property (weak, nonatomic) IBOutlet UISearchBar *keywordSearchBar;
 @property (weak, nonatomic) IBOutlet UILabel *radiusLabel;
 @property (weak, nonatomic) IBOutlet UISlider *radiusSlider;
@@ -37,6 +39,7 @@
 @property (strong, nonatomic) NSMutableArray *selectedCategories;
 @property (weak, nonatomic) IBOutlet UIView *searchView;
 @property (weak, nonatomic) IBOutlet UIButton *finalSearchButton;
+@property (nonatomic) CGRect searchCategoryTableViewFrame;
 - (IBAction)finalSearchButtonPressed:(UIButton *)sender;
 - (IBAction)radiusSliderChanged:(UISlider *)sender;
 
@@ -99,6 +102,7 @@
     [self.toursTableView setDataSource:self];
     self.searchCategoryTableView.delegate = self;
     self.searchCategoryTableView.dataSource = self;
+//    self.searchCategoryTableView
     self.categoryList = @[@"Restaurant", @"Cafe", @"Art", @"Museum", @"History", @"Shopping", @"Nightlife", @"Film", @"Education"];
     
     UIImageView *tempImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"TableViewBackground.png"]];
@@ -399,10 +403,30 @@
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     [searchBar resignFirstResponder];
+    [self finalSearchButtonPressed:nil];
+    [UIView animateWithDuration:0.3 animations:^{
+        self.searchBarBottomConstraint.active = YES;
+        [self.searchCategoryTableView setFrame:self.searchCategoryTableViewFrame];
+        [self.view layoutIfNeeded];
+    }];
 }
 
 - (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
     [searchBar resignFirstResponder];
+    [UIView animateWithDuration:0.3 animations:^{
+        self.searchBarBottomConstraint.active = YES;
+        [self.searchCategoryTableView setFrame:self.searchCategoryTableViewFrame];
+        [self.view layoutIfNeeded];
+    }];
+}
+
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+    self.searchCategoryTableViewFrame = self.searchCategoryTableView.frame;
+    [UIView animateWithDuration:0.3 animations:^{
+        self.searchBarBottomConstraint.active = NO;
+        [self.searchCategoryTableView setFrame:CGRectMake(self.searchCategoryTableViewFrame.origin.x, self.searchCategoryTableViewFrame.origin.y, self.searchCategoryTableViewFrame.size.width, 0)];
+        [self.view layoutIfNeeded];
+    }];
 }
 
 @end
