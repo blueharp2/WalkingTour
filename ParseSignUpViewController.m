@@ -10,6 +10,8 @@
 #import "ParseLoginViewController.h"
 #import "Parse/Parse.h"
 #import <ParseUI/ParseUI.h>
+@import Fabric;
+@import Crashlytics;
 
 
 @interface ParseSignUpViewController () <UITextFieldDelegate>
@@ -70,6 +72,7 @@
                     if ([self.navigationController.viewControllers[0] isKindOfClass:[ParseLoginViewController class]]) {
                         ParseLoginViewController *loginVC = (ParseLoginViewController *)self.navigationController.viewControllers[0];
                         if (loginVC.completion) {
+                            [self logUser];
                             loginVC.completion();
                         }
                     }
@@ -90,6 +93,10 @@
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     [self.view endEditing:YES];
+}
+
+- (void)logUser {
+    [CrashlyticsKit setUserIdentifier:[PFUser currentUser].objectId];
 }
 
 #pragma TextField Delegate
