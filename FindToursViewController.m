@@ -99,7 +99,10 @@
     [self.toursTableView setDataSource:self];
     self.searchCategoryTableView.delegate = self;
     self.searchCategoryTableView.dataSource = self;
-    self.categoryList = @[@"Restaurant", @"Cafe", @"Art", @"Museum", @"History", @"Shopping", @"Nightlife", @"Film", @"Education"];
+
+    self.categoryList = @[NSLocalizedString(@"Restaurant", comment:@"This is a tour category"), NSLocalizedString(@"Cafe", comment:@"This is a tour category"), NSLocalizedString(@"Art", comment:@"This is a tour category"), NSLocalizedString(@"Museum", comment:@"This is a tour category"), NSLocalizedString(@"History", comment:@"This is a tour category"), NSLocalizedString(@"Shopping", comment:@"This is a tour category"), NSLocalizedString(@"Nightlife", comment:@"This is a tour category"), NSLocalizedString(@"Film", comment:@"This is a tour category"), NSLocalizedString(@"Education", comment:@"This is a tour category"), NSLocalizedString(@"Nature", comment:@"This is a tour category")];
+    
+    
     
     UIImageView *tempImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"TableViewBackground.png"]];
     [tempImageView setFrame:self.toursTableView.frame];
@@ -131,7 +134,7 @@
             if (success) {
                 [self setToursFromParse:results];
             } else {
-                Tour *noTours = [[Tour alloc] initWithNameOfTour:@"No tours found." descriptionText:@"" startLocation:nil user:nil];
+                Tour *noTours = [[Tour alloc] initWithNameOfTour:NSLocalizedString(@"No tours found.", comment: nil) descriptionText:@"" startLocation:nil user:nil];
                 [self setToursFromParse:@[noTours]];
             }
         }];
@@ -143,7 +146,7 @@
             if (success) {
                 [self setToursFromParse:results];
             } else {
-                Tour *noTours = [[Tour alloc] initWithNameOfTour:@"No tours found." descriptionText:@"" startLocation:nil user:nil];
+                Tour *noTours = [[Tour alloc] initWithNameOfTour:NSLocalizedString(@"No tours found.", comment: nil) descriptionText:@"" startLocation:nil user:nil];
                 [self setToursFromParse:@[noTours]];
             }
         }];

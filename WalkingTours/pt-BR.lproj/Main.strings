@@ -1,0 +1,108 @@
+/* Class = "UILabel"; text = "An email will be sent to you to reset your password"; ObjectID = "1AW-Xu-uqu"; */
+"1AW-Xu-uqu.text" = "Um e-mail será enviado a você para redefinir sua contra-senha";
+
+/* Class = "UITextField"; placeholder = "Name of Tour"; ObjectID = "1L6-cQ-RUl"; */
+"1L6-cQ-RUl.placeholder" = "Nome da Passeio";
+
+/* Class = "UITextField"; placeholder = "Username"; ObjectID = "1i5-x6-BXp"; */
+"1i5-x6-BXp.placeholder" = "Nome de Usuário";
+
+/* Class = "UILabel"; text = "1.0"; ObjectID = "5aA-UV-5fZ"; */
+"5aA-UV-5fZ.text" = "1.0";
+
+/* Class = "UIButton"; normalTitle = "Save"; ObjectID = "D2X-tG-JB7"; */
+"D2X-tG-JB7.normalTitle" = "Guardar";
+
+/* Class = "UIButton"; normalTitle = "Send"; ObjectID = "DAU-0r-x6W"; */
+"DAU-0r-x6W.normalTitle" = "Mandar";
+
+/* Class = "UITextField"; placeholder = "Location Description"; ObjectID = "JOQ-pC-1Ce"; */
+"JOQ-pC-1Ce.placeholder" = "Descrição do Local";
+
+/* Class = "UITextField"; placeholder = "Password"; ObjectID = "JQd-1t-nHf"; */
+"JQd-1t-nHf.placeholder" = "Contra-senha";
+
+/* Class = "UITextField"; placeholder = "Email"; ObjectID = "KIn-UW-axy"; */
+"KIn-UW-axy.placeholder" = "O email";
+
+/* Class = "UIButton"; normalTitle = "Search"; ObjectID = "Kui-vt-qQH"; */
+"Kui-vt-qQH.normalTitle" = "Pesquisa";
+
+/* Class = "UIButton"; normalTitle = "Create a tour"; ObjectID = "P06-Ev-jeT"; */
+"P06-Ev-jeT.normalTitle" = "Criar um Passeio";
+
+/* Class = "UIButton"; normalTitle = "Save"; ObjectID = "PoL-8t-wAB"; */
+"PoL-8t-wAB.normalTitle" = "Guardar";
+
+/* Class = "UIButton"; normalTitle = "▶︎"; ObjectID = "Q8D-Ok-M3Z"; */
+"Q8D-Ok-M3Z.normalTitle" = "▶︎";
+
+/* Class = "UILabel"; text = "Create your tour"; ObjectID = "Qal-q6-3hA"; */
+"Qal-q6-3hA.text" = "Crie o seu passeio";
+
+/* Class = "UILabel"; text = "Sign Up Walking Tours"; ObjectID = "Qdl-4U-pMt"; */
+"Qdl-4U-pMt.text" = "Inscrever-se para Walking Tours";
+
+/* Class = "UIButton"; normalTitle = "Log Out"; ObjectID = "R1I-8O-bYr"; */
+"R1I-8O-bYr.normalTitle" = "Sair";
+
+/* Class = "UIButton"; normalTitle = "Forgot Password"; ObjectID = "RC8-SS-wum"; */
+"RC8-SS-wum.normalTitle" = "Esqueceu a contra-senha";
+
+/* Class = "UITabBarItem"; title = "Tour Map"; ObjectID = "SCN-L8-RGR"; */
+"SCN-L8-RGR.title" = "Mapa da Passeio";
+
+/* Class = "UITextField"; placeholder = "Location Name"; ObjectID = "SU1-GD-Ons"; */
+"SU1-GD-Ons.placeholder" = "Nome do local";
+
+/* Class = "UILabel"; text = "Reset Password"; ObjectID = "Wl7-Kt-izE"; */
+"Wl7-Kt-izE.text" = "Trocar a contra-senha";
+
+/* Class = "UITextField"; placeholder = "Tour Description"; ObjectID = "Wq2-4m-Ca4"; */
+"Wq2-4m-Ca4.placeholder" = "Descrição de Passeio";
+
+/* Class = "UITextField"; placeholder = "Email Address"; ObjectID = "Wq9-Sh-x70"; */
+"Wq9-Sh-x70.placeholder" = "Endereço de e-mail";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "X4c-dm-N9G"; */
+"X4c-dm-N9G.text" = "Label";
+
+/* Class = "UILabel"; text = "Search Radius"; ObjectID = "XFS-d5-A8o"; */
+"XFS-d5-A8o.text" = "Raio de Pesquisa";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "ab4-nZ-Lpj"; */
+"ab4-nZ-Lpj.text" = "Label";
+
+/* Class = "UISearchBar"; placeholder = "Keyword"; ObjectID = "c7g-0Z-SZB"; */
+"c7g-0Z-SZB.placeholder" = "palavra chave";
+
+/* Class = "UITextField"; placeholder = "Username"; ObjectID = "ee5-Nu-KTa"; */
+"ee5-Nu-KTa.placeholder" = "Nome de Usuário";
+
+/* Class = "UITabBarItem"; title = "Tour List"; ObjectID = "el2-b4-kYB"; */
+"el2-b4-kYB.title" = "Lista de Passeios";
+
+/* Class = "UIButton"; normalTitle = "Next Stop"; ObjectID = "h9b-4d-R0t"; */
+"h9b-4d-R0t.normalTitle" = "Próxima parada";
+
+/* Class = "UIButton"; normalTitle = "Sign Up"; ObjectID = "hrs-cf-THY"; */
+"hrs-cf-THY.normalTitle" = "Inscrever-se";
+
+/* Class = "UIButton"; normalTitle = "Select a tour"; ObjectID = "iZU-Lr-KvV"; */
+"iZU-Lr-KvV.normalTitle" = "Selecione um Passeio";
+
+/* Class = "UITextField"; placeholder = "Password"; ObjectID = "kes-x4-yde"; */
+"kes-x4-yde.placeholder" = "contra-senha";
+
+/* Class = "UIButton"; normalTitle = "＋"; ObjectID = "mFF-Dj-GkE"; */
+"mFF-Dj-GkE.normalTitle" = "＋";
+
+/* Class = "UIButton"; normalTitle = "Login"; ObjectID = "oNw-SI-dSs"; */
+"oNw-SI-dSs.normalTitle" = "Entrar";
+
+/* Class = "UILabel"; text = "Walking Tours Login"; ObjectID = "u05-jZ-lBp"; */
+"u05-jZ-lBp.text" = "Entrada Walking Tours";
+
+/* Class = "UILabel"; text = "Drop a pin to create a location for your tour."; ObjectID = "yoq-0w-59d"; */
+"yoq-0w-59d.text" = "Largue um pino para criar um local para o seu passeio.";
+
