@@ -12,6 +12,24 @@
 
 @implementation TourSelectionViewController
 
+- (IBAction)logoutPressed:(UIButton *)sender {
+    
+    [PFUser logOut];
+    PFUser *currentUser = [PFUser currentUser];
+        NSLog(@"User is Logged Out");
+    if (!currentUser) {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        UINavigationController *navController = [storyboard instantiateViewControllerWithIdentifier:@"LoginNavigationController"];
+        if ([navController.viewControllers.firstObject isKindOfClass:[ParseLoginViewController class]]) {
+            ParseLoginViewController *loginVC = (ParseLoginViewController *)navController.viewControllers.firstObject;
+            loginVC.completion = ^ {
+                [self dismissViewControllerAnimated:YES completion:nil];
+            };
+            [self presentViewController:navController animated:YES completion:nil];
+        }
+    }
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
