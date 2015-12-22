@@ -1,4 +1,3 @@
-
 /* Class = "UILabel"; text = "An email will be sent to you to reset your password"; ObjectID = "1AW-Xu-uqu"; */
 "1AW-Xu-uqu.text" = "Um e-mail será enviado a você para redefinir sua contra-senha";
 
@@ -90,7 +89,7 @@
 "hrs-cf-THY.normalTitle" = "Inscrever-se";
 
 /* Class = "UIButton"; normalTitle = "Select a tour"; ObjectID = "iZU-Lr-KvV"; */
-"iZU-Lr-KvV.normalTitle" = "Selecione um passeio";
+"iZU-Lr-KvV.normalTitle" = "Selecione um Passeio";
 
 /* Class = "UITextField"; placeholder = "Password"; ObjectID = "kes-x4-yde"; */
 "kes-x4-yde.placeholder" = "contra-senha";
@@ -106,3 +105,4 @@
 
 /* Class = "UILabel"; text = "Drop a pin to create a location for your tour."; ObjectID = "yoq-0w-59d"; */
 "yoq-0w-59d.text" = "Largue um pino para criar um local para o seu passeio.";
+

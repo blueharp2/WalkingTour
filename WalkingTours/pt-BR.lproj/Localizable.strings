@@ -1,0 +1,84 @@
+/* This is a tour category */
+"Art" = "Arte";
+
+/* This is a tour category */
+"Cafe" = "Café";
+
+/* No comment provided by engineer. */
+"Cancel" = "Cancelar";
+
+/* No comment provided by engineer. */
+"Categories" = "Categorias";
+
+/* No comment provided by engineer. */
+"Did you want to add a photo or video?" = "Você deseja adicionar uma foto ou vídeo?";
+
+/* This is a tour category */
+"Education" = "Educação";
+
+/* This is a tour category */
+"Film" = "Filme";
+
+/* This is a tour category */
+"History" = "História";
+
+/* No comment provided by engineer. */
+"Missing Locations" = "faltando Locais";
+
+/* No comment provided by engineer. */
+"Missing Text" = "Texto está ausente";
+
+/* This is a tour category */
+"Museum" = "Museu";
+
+/* This is a tour category */
+"Nature" = "Natureza";
+
+/* This is a tour category */
+"Nightlife" = "Vida noturna";
+
+/* No comment provided by engineer. */
+"No" = "Não";
+
+/* No comment provided by engineer. */
+"No Photo/Video" = "Foto ou vídeo está faltando.";
+
+/* No comment provided by engineer. */
+"No tours found." = "Não passeios encontrados.";
+
+/* No comment provided by engineer. */
+"OK" = "OK";
+
+/* No comment provided by engineer. */
+"Please add at least one location." = "Por favor, adicione pelo menos um local.";
+
+/* No comment provided by engineer. */
+"Please drop a pin for your location." = "Por favor, mande um pino para a sua localização.";
+
+/* No comment provided by engineer. */
+"Please enter a location description." = "Por favor, digite uma descrição de localização.";
+
+/* No comment provided by engineer. */
+"Please enter a location name." = "Por favor, indique um nome local.";
+
+/* No comment provided by engineer. */
+"Please enter the name and description for your tour" = "Digite o nome e uma descrição para o seu passeio";
+
+/* No comment provided by engineer. */
+"Please fill all fields out." = "Por favor, completar todos os campos.";
+
+/* This is a tour category */
+"Restaurant" = "Restaurante";
+
+/* This is a tour category */
+"Shopping" = "Compras";
+
+/* No comment provided by engineer. */
+"What!?!" = "O que???";
+
+/* No comment provided by engineer. */
+"Why don't you pick a normal photo/video!?!" = "Por que você não pega uma foto ou vídeo normal?";
+
+/* No comment provided by engineer. */
+"Yes" = "Sim";
+
