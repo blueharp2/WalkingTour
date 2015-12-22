@@ -18,6 +18,7 @@
 #import "CustomAnnotation.h"
 @import Parse;
 @import ParseUI;
+#import <Crashlytics/Answers.h>
 
 @interface FindToursViewController () <MKMapViewDelegate, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
@@ -29,6 +30,8 @@
 @property (strong, nonatomic) NSArray <Tour*> *toursFromParse;
 -(void)setToursFromParse:(NSArray<Tour *> *)toursFromParse;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *searchViewTopConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *searchViewBottomConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *searchBarBottomConstraint;
 @property (weak, nonatomic) IBOutlet UISearchBar *keywordSearchBar;
 @property (weak, nonatomic) IBOutlet UILabel *radiusLabel;
 @property (weak, nonatomic) IBOutlet UISlider *radiusSlider;
@@ -37,6 +40,7 @@
 @property (strong, nonatomic) NSMutableArray *selectedCategories;
 @property (weak, nonatomic) IBOutlet UIView *searchView;
 @property (weak, nonatomic) IBOutlet UIButton *finalSearchButton;
+@property (nonatomic) CGRect searchCategoryTableViewFrame;
 - (IBAction)finalSearchButtonPressed:(UIButton *)sender;
 - (IBAction)radiusSliderChanged:(UISlider *)sender;
 
@@ -99,7 +103,10 @@
     [self.toursTableView setDataSource:self];
     self.searchCategoryTableView.delegate = self;
     self.searchCategoryTableView.dataSource = self;
-    self.categoryList = @[@"Restaurant", @"Cafe", @"Art", @"Museum", @"History", @"Shopping", @"Nightlife", @"Film", @"Education"];
+
+    self.categoryList = @[NSLocalizedString(@"Restaurant", comment:@"This is a tour category"), NSLocalizedString(@"Cafe", comment:@"This is a tour category"), NSLocalizedString(@"Art", comment:@"This is a tour category"), NSLocalizedString(@"Museum", comment:@"This is a tour category"), NSLocalizedString(@"History", comment:@"This is a tour category"), NSLocalizedString(@"Shopping", comment:@"This is a tour category"), NSLocalizedString(@"Nightlife", comment:@"This is a tour category"), NSLocalizedString(@"Film", comment:@"This is a tour category"), NSLocalizedString(@"Education", comment:@"This is a tour category"), NSLocalizedString(@"Nature", comment:@"This is a tour category")];
+    
+    
     
     UIImageView *tempImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"TableViewBackground.png"]];
     [tempImageView setFrame:self.toursTableView.frame];
@@ -123,6 +130,7 @@
 
 - (IBAction)finalSearchButtonPressed:(UIButton *)sender {
     CLLocationCoordinate2D current = self.mapView.centerCoordinate;
+    [Answers logSearchWithQuery:self.keywordSearchBar.text customAttributes:@{@"categories" : self.selectedCategories, @"location" : [NSString stringWithFormat:@"%f, %f", current.latitude, current.longitude], @"milesRadius" : self.radiusLabel.text}];
     if (self.selectedCategories && self.selectedCategories.count > 0) {
         [ParseService searchToursNearLocation:current withinMiles:self.radiusLabel.text.floatValue withSearchTerm:self.keywordSearchBar.text categories:self.selectedCategories completion:^(BOOL success, NSArray *results) {
             [UIView animateWithDuration:0.4 animations:^{
@@ -131,7 +139,7 @@
             if (success) {
                 [self setToursFromParse:results];
             } else {
-                Tour *noTours = [[Tour alloc] initWithNameOfTour:@"No tours found." descriptionText:@"" startLocation:nil user:nil];
+                Tour *noTours = [[Tour alloc] initWithNameOfTour:NSLocalizedString(@"No tours found.", comment: nil) descriptionText:@"" startLocation:nil user:nil];
                 [self setToursFromParse:@[noTours]];
             }
         }];
@@ -143,7 +151,7 @@
             if (success) {
                 [self setToursFromParse:results];
             } else {
-                Tour *noTours = [[Tour alloc] initWithNameOfTour:@"No tours found." descriptionText:@"" startLocation:nil user:nil];
+                Tour *noTours = [[Tour alloc] initWithNameOfTour:NSLocalizedString(@"No tours found.", comment: nil) descriptionText:@"" startLocation:nil user:nil];
                 [self setToursFromParse:@[noTours]];
             }
         }];
@@ -316,13 +324,16 @@
     if (tableView.tag == 0) {
         POIDetailTableViewCell *cell = (POIDetailTableViewCell*) [self.toursTableView dequeueReusableCellWithIdentifier:@"POIDetailTableViewCell"];
         [cell setTour:[self.toursFromParse objectAtIndex:indexPath.section]];
-        
         return cell;
     } else {
         UITableViewCell *cell = [self.searchCategoryTableView dequeueReusableCellWithIdentifier:@"CategoryTableViewCell" forIndexPath:indexPath];
         cell.textLabel.font = [UIFont fontWithName:@"Futura" size:17.0];
         cell.textLabel.textColor = [UIColor colorWithRed:0.278 green:0.510 blue:0.855 alpha:1.000];
         cell.textLabel.text = self.categoryList[indexPath.row];
+        cell.accessoryType = UITableViewCellAccessoryNone;
+        if ([self.selectedCategories containsObject:self.categoryList[indexPath.row]]) {
+            cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        }
         return cell;
     }
 }
@@ -396,10 +407,49 @@
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     [searchBar resignFirstResponder];
+    [self finalSearchButtonPressed:nil];
+    [UIView animateWithDuration:0.3 animations:^{
+        self.searchBarBottomConstraint.active = YES;
+        if (self.view.frame.size.height < 600.0) {
+            self.searchViewTopConstraint.constant += 40;
+        }
+        if (self.view.frame.size.height < 500.0) {
+            self.searchViewTopConstraint.constant += 40;
+        }
+        [self.searchCategoryTableView setFrame:self.searchCategoryTableViewFrame];
+        [self.view layoutIfNeeded];
+    }];
 }
 
 - (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
     [searchBar resignFirstResponder];
+    [UIView animateWithDuration:0.3 animations:^{
+        self.searchBarBottomConstraint.active = YES;
+        if (self.view.frame.size.height < 600.0) {
+            self.searchViewTopConstraint.constant += 40;
+        }
+        if (self.view.frame.size.height < 500.0) {
+            self.searchViewTopConstraint.constant += 40;
+        }
+        [self.searchCategoryTableView setFrame:self.searchCategoryTableViewFrame];
+        [self.view layoutIfNeeded];
+    }];
+}
+
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+    self.searchCategoryTableViewFrame = self.searchCategoryTableView.frame;
+    NSLog(@"%f", self.view.frame.size.height);
+    [UIView animateWithDuration:0.3 animations:^{
+        self.searchBarBottomConstraint.active = NO;
+        if (self.view.frame.size.height < 600.0) {
+            self.searchViewTopConstraint.constant -= 40;
+        }
+        if (self.view.frame.size.height < 500.0) {
+            self.searchViewTopConstraint.constant -= 40;
+        }
+        [self.searchCategoryTableView setFrame:CGRectMake(self.searchCategoryTableViewFrame.origin.x, self.searchCategoryTableViewFrame.origin.y, self.searchCategoryTableViewFrame.size.width, 0)];
+        [self.view layoutIfNeeded];
+    }];
 }
 
 @end

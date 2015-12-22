@@ -138,15 +138,15 @@
 
 -(void)saveButtonSelected:(UIBarButtonItem *)sender{
     if (self.nameOfTourTextField.text.length == 0 || self.tourDescriptionTextField.text.length == 0) {
-        UIAlertController *noTextinFieldAlert = [UIAlertController alertControllerWithTitle:@"Missing Text" message:@"Please enter the name and description for your tour" preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){}];
+        UIAlertController *noTextinFieldAlert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Missing Text", comment: nil) message:NSLocalizedString(@"Please enter the name and description for your tour", comment nil) preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"OK", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){}];
         [noTextinFieldAlert addAction:defaultAction];
         [self presentViewController:noTextinFieldAlert animated:YES completion:nil];
         return;
     }
     if (self.locations.count == 0) {
-        UIAlertController *noLocationAlert = [UIAlertController alertControllerWithTitle:@"Missing Locations" message:@"Please add at least one location." preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){}];
+        UIAlertController *noLocationAlert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Missing Locations", comment: nil) message:NSLocalizedString(@"Please add at least one location.", comment: nil) preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"OK", comment: nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){}];
         [noLocationAlert addAction:defaultAction];
         [self presentViewController:noLocationAlert animated:YES completion:nil];
         return;

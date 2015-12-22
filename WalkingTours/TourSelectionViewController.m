@@ -10,6 +10,12 @@
 #import "ParseSignUpViewController.h"
 #import "TourSelectionViewController.h"
 
+@interface TourSelectionViewController ()
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *selectButtonTopConstraint;
+
+@end
+
 @implementation TourSelectionViewController
 
 - (IBAction)logoutPressed:(UIButton *)sender {
@@ -36,6 +42,14 @@
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     self.navigationController.navigationBar.translucent = YES;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    if (self.view.frame.size.height < 500.0) {
+        self.selectButtonTopConstraint.constant -= 40;
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {

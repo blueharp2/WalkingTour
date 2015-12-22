@@ -20,6 +20,7 @@
     [Parse enableLocalDatastore];
     [Parse setApplicationId:@"gTNFHvvUfoDGWmSRmn4OkYyRLwsQFbxXaQlzs5hI" clientKey:@"MSGmInhjhYcK8SQ1XMnXpewwiLBHqEiul1py2x8i"];
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
+    [[Fabric sharedSDK] setDebug: YES];
     [Fabric with:@[[Crashlytics class]]];
 
     return YES;
