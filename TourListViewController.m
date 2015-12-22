@@ -36,11 +36,12 @@
 }
 
 - (void)setCurrentTour:(NSString*)currentTour {
-    currentTour = currentTour;
+    _currentTour = currentTour;
     
     [ParseService fetchLocationsWithTourId:currentTour completion:^(BOOL success, NSArray *results) {
         if (success) {
-            self.locationsFromParse = results;
+            NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:@"orderNumber" ascending:YES];
+            self.locationsFromParse = [results sortedArrayUsingDescriptors:@[descriptor]];
             [self.tourListTableView reloadData];
         }
     }];
