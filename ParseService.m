@@ -90,38 +90,38 @@
     }];
 }
 
-+ (void)searchToursNearLocation:(CLLocationCoordinate2D)location withinMiles:(float)miles withSearchTerm:(NSString *)searchTerm completion:(toursFetchCompletion) completion {
-//    NSMutableArray *filteredLocationTours = [NSMutableArray new];
-    PFQuery *unfilteredQuery = [PFQuery queryWithClassName:@"Tour"];
-    [unfilteredQuery whereKey:@"startLocation" nearGeoPoint:[PFGeoPoint geoPointWithLatitude:location.latitude longitude:location.longitude] withinMiles:miles];
-    [unfilteredQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
-        if (error) {
-            NSLog(@"%@", error.localizedFailureReason);
-            completion(NO, nil);
-        }
-        if (objects) {
-            if (searchTerm.length == 0) {
-                completion(YES, objects);
-            } else {
-                NSMutableArray *filteredResults;
-                for (Tour *tour in objects) {
-                    if ([tour.nameOfTour containsString:searchTerm] || [tour.descriptionText containsString:searchTerm]) {
-                        if (filteredResults.count == 0) {
-                            filteredResults = [NSMutableArray arrayWithObject:tour];
-                        } else {
-                            [filteredResults addObject:tour];
-                        }
-                    }
-                }
-                if (filteredResults.count > 0) {
-                    completion(YES, filteredResults);
-                } else {
-                    completion(NO, nil);
-                }
-            }
-        }
-    }];
-}
+//+ (void)searchToursNearLocation:(CLLocationCoordinate2D)location withinMiles:(float)miles withSearchTerm:(NSString *)searchTerm completion:(toursFetchCompletion) completion {
+////    NSMutableArray *filteredLocationTours = [NSMutableArray new];
+//    PFQuery *unfilteredQuery = [PFQuery queryWithClassName:@"Tour"];
+//    [unfilteredQuery whereKey:@"startLocation" nearGeoPoint:[PFGeoPoint geoPointWithLatitude:location.latitude longitude:location.longitude] withinMiles:miles];
+//    [unfilteredQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+//        if (error) {
+//            NSLog(@"%@", error.localizedFailureReason);
+//            completion(NO, nil);
+//        }
+//        if (objects) {
+//            if (searchTerm.length == 0) {
+//                completion(YES, objects);
+//            } else {
+//                NSMutableArray *filteredResults;
+//                for (Tour *tour in objects) {
+//                    if ([tour.nameOfTour containsString:searchTerm] || [tour.descriptionText containsString:searchTerm]) {
+//                        if (filteredResults.count == 0) {
+//                            filteredResults = [NSMutableArray arrayWithObject:tour];
+//                        } else {
+//                            [filteredResults addObject:tour];
+//                        }
+//                    }
+//                }
+//                if (filteredResults.count > 0) {
+//                    completion(YES, filteredResults);
+//                } else {
+//                    completion(NO, nil);
+//                }
+//            }
+//        }
+//    }];
+//}
 
 + (void)searchToursNearLocation:(CLLocationCoordinate2D)location withinMiles:(float)miles withSearchTerm:(NSString *)searchTerm categories:(NSArray *)categories completion:(toursFetchCompletion) completion {
     NSMutableArray *filteredLocationTours = [NSMutableArray new];
@@ -162,7 +162,7 @@
                             }
                         }
                         if (filteredResults.count > 0) {
-                            completion(YES, objects);
+                            completion(YES, filteredResults);
                         } else {
                             completion(NO, nil);
                         }
