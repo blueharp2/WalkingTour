@@ -406,6 +406,12 @@
     [self finalSearchButtonPressed:nil];
     [UIView animateWithDuration:0.3 animations:^{
         self.searchBarBottomConstraint.active = YES;
+        if (self.view.frame.size.height < 600.0) {
+            self.searchViewTopConstraint.constant += 40;
+        }
+        if (self.view.frame.size.height < 500.0) {
+            self.searchViewTopConstraint.constant += 40;
+        }
         [self.searchCategoryTableView setFrame:self.searchCategoryTableViewFrame];
         [self.view layoutIfNeeded];
     }];
@@ -415,6 +421,12 @@
     [searchBar resignFirstResponder];
     [UIView animateWithDuration:0.3 animations:^{
         self.searchBarBottomConstraint.active = YES;
+        if (self.view.frame.size.height < 600.0) {
+            self.searchViewTopConstraint.constant += 40;
+        }
+        if (self.view.frame.size.height < 500.0) {
+            self.searchViewTopConstraint.constant += 40;
+        }
         [self.searchCategoryTableView setFrame:self.searchCategoryTableViewFrame];
         [self.view layoutIfNeeded];
     }];
@@ -422,8 +434,15 @@
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
     self.searchCategoryTableViewFrame = self.searchCategoryTableView.frame;
+    NSLog(@"%f", self.view.frame.size.height);
     [UIView animateWithDuration:0.3 animations:^{
         self.searchBarBottomConstraint.active = NO;
+        if (self.view.frame.size.height < 600.0) {
+            self.searchViewTopConstraint.constant -= 40;
+        }
+        if (self.view.frame.size.height < 500.0) {
+            self.searchViewTopConstraint.constant -= 40;
+        }
         [self.searchCategoryTableView setFrame:CGRectMake(self.searchCategoryTableViewFrame.origin.x, self.searchCategoryTableViewFrame.origin.y, self.searchCategoryTableViewFrame.size.width, 0)];
         [self.view layoutIfNeeded];
     }];
