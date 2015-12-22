@@ -18,6 +18,7 @@
 #import "CustomAnnotation.h"
 @import Parse;
 @import ParseUI;
+#import <Crashlytics/Answers.h>
 
 @interface FindToursViewController () <MKMapViewDelegate, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
@@ -127,6 +128,7 @@
 
 - (IBAction)finalSearchButtonPressed:(UIButton *)sender {
     CLLocationCoordinate2D current = self.mapView.centerCoordinate;
+    [Answers logSearchWithQuery:self.keywordSearchBar.text customAttributes:@{@"categories" : self.selectedCategories, @"location" : [NSString stringWithFormat:@"%f, %f", current.latitude, current.longitude], @"milesRadius" : self.radiusLabel.text}];
     if (self.selectedCategories && self.selectedCategories.count > 0) {
         [ParseService searchToursNearLocation:current withinMiles:self.radiusLabel.text.floatValue withSearchTerm:self.keywordSearchBar.text categories:self.selectedCategories completion:^(BOOL success, NSArray *results) {
             [UIView animateWithDuration:0.4 animations:^{
