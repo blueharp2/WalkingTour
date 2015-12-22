@@ -136,7 +136,7 @@
             }
         }];
     } else {
-        [ParseService searchToursNearLocation:current withinMiles:self.radiusLabel.text.floatValue withSearchTerm:self.keywordSearchBar.text completion:^(BOOL success, NSArray *results) {
+        [ParseService searchToursNearLocation:current withinMiles:self.radiusLabel.text.floatValue withSearchTerm:self.keywordSearchBar.text categories:nil completion:^(BOOL success, NSArray *results) {
             [UIView animateWithDuration:0.4 animations:^{
                 self.searchView.alpha = 0.0;
             }];
@@ -148,6 +148,19 @@
             }
         }];
     }
+//    } else {
+//        [ParseService searchToursNearLocation:current withinMiles:self.radiusLabel.text.floatValue withSearchTerm:self.keywordSearchBar.text completion:^(BOOL success, NSArray *results) {
+//            [UIView animateWithDuration:0.4 animations:^{
+//                self.searchView.alpha = 0.0;
+//            }];
+//            if (success) {
+//                [self setToursFromParse:results];
+//            } else {
+//                Tour *noTours = [[Tour alloc] initWithNameOfTour:@"No tours found." descriptionText:@"" startLocation:nil user:nil];
+//                [self setToursFromParse:@[noTours]];
+//            }
+//        }];
+//    }
 }
 
 - (IBAction)radiusSliderChanged:(UISlider *)sender {

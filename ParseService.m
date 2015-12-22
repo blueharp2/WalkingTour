@@ -91,6 +91,7 @@
 }
 
 + (void)searchToursNearLocation:(CLLocationCoordinate2D)location withinMiles:(float)miles withSearchTerm:(NSString *)searchTerm completion:(toursFetchCompletion) completion {
+//    NSMutableArray *filteredLocationTours = [NSMutableArray new];
     PFQuery *unfilteredQuery = [PFQuery queryWithClassName:@"Tour"];
     [unfilteredQuery whereKey:@"startLocation" nearGeoPoint:[PFGeoPoint geoPointWithLatitude:location.latitude longitude:location.longitude] withinMiles:miles];
     [unfilteredQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
