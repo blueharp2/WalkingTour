@@ -91,7 +91,8 @@ static const NSArray *categories;
 #pragma mark - Setup Functions
 
 - (void)setCategoryOptions {
-    categories = @[@"Restaurant", @"Cafe", @"Art", @"Museum", @"History", @"Shopping", @"Nightlife", @"Film", @"Education"];
+//    categories = @[@"Restaurant", @"Cafe", @"Art", @"Museum", @"History", @"Shopping", @"Nightlife", @"Film", @"Education"];
+        categories = @[NSLocalizedString(@"Restaurant", comment:@"This is a tour category"), NSLocalizedString(@"Cafe", comment:@"This is a tour category"), NSLocalizedString(@"Art", comment:@"This is a tour category"), NSLocalizedString(@"Museum", comment:@"This is a tour category"), NSLocalizedString(@"History", comment:@"This is a tour category"), NSLocalizedString(@"Shopping", comment:@"This is a tour category"), NSLocalizedString(@"Nightlife", comment:@"This is a tour category"), NSLocalizedString(@"Film", comment:@"This is a tour category"), NSLocalizedString(@"Education", comment:@"This is a tour category"), NSLocalizedString(@"Nature", comment:@"This is a tour category")];
 }
 
 - (void)setUpGreyOutView {
@@ -105,7 +106,7 @@ static const NSArray *categories;
 - (void)setUpTableView {
     self.categoryTableView = [[UITableView alloc] initWithFrame:CGRectMake(self.view.center.x, self.view.center.y, 0, 0) style:UITableViewStyleGrouped];
     UILabel *headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.categoryTableView.frame.origin.x -40, self.categoryTableView.frame.origin.y, self.categoryTableView.frame.size.width, 40)];
-    [headerLabel setText:@"Categories"];
+    [headerLabel setText:NSLocalizedString(@"Categories", comment:nil)];
     headerLabel.font = [UIFont fontWithName:@"Futura" size:20];
     headerLabel.textColor = [UIColor colorWithRed:0.278 green:0.510 blue:0.855 alpha:1.000];
     [headerLabel setTextAlignment:NSTextAlignmentCenter];
@@ -201,19 +202,19 @@ static const NSArray *categories;
     if (self.selectedCategories.count == 0) {
         [self.locationNameTextField resignFirstResponder];
         [self.locationDescriptionTextField resignFirstResponder];
-        NSString *alertMessage = @"Please fill all fields out.";
+        NSString *alertMessage = NSLocalizedString(@"Please fill all fields out.", comment:nil);
         if (self.locationNameTextField.text.length == 0) {
-            alertMessage = @"Please enter a location name.";
+            alertMessage = NSLocalizedString(@"Please enter a location name.", comment: nil);
             [self presentAlertWithMessage:alertMessage];
             return;
         }
         if (self.locationDescriptionTextField.text.length == 0) {
-            alertMessage = @"Please enter a location description.";
+            alertMessage = NSLocalizedString(@"Please enter a location description.", comment:nil);
             [self presentAlertWithMessage:alertMessage];
             return;
         }
         if (self.geoPoint == nil) {
-            alertMessage = @"Please drop a pin for your location.";
+            alertMessage = NSLocalizedString(@"Please drop a pin for your location.",comment:nil);
             [self presentAlertWithMessage:alertMessage];
             return;
         }
@@ -230,23 +231,23 @@ static const NSArray *categories;
 }
 
 - (void)presentAlertWithMessage:(NSString *)alertMessage {
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"What!?!" message:alertMessage preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"What!?!",comment:nil) message:alertMessage preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"OK",comment:nil) style:UIAlertActionStyleDefault handler:nil];
     [alertController addAction:okAction];
     [self presentViewController:alertController animated:YES completion:nil];
 }
 
 - (void)presentNoPhotoWarning {
-    UIAlertController *photoAlert = [UIAlertController alertControllerWithTitle:@"No Photo/Video" message:@"Did you want to add a photo or video?" preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *yesAction = [UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertController *photoAlert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"No Photo/Video",comment:nil) message:NSLocalizedString(@"Did you want to add a photo or video?",comment:nil) preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *yesAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Yes",comment:nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [self loadImagePicker];
     }];
-    UIAlertAction *noAction = [UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *noAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"No",comment:nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
         Location *locationToSave = [[Location alloc] initWithLocationName:self.locationNameTextField.text locationDescription:self.locationDescriptionTextField.text photo:self.photoFile video:self.videoFile categories:nil location:self.geoPoint orderNumber:0 tour:nil];
         self.createdLocation = locationToSave;
         [self displayCategories];
     }];
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", comment:nil) style:UIAlertActionStyleCancel handler:nil];
     [photoAlert addAction:yesAction];
     [photoAlert addAction:noAction];
     [photoAlert addAction:cancelAction];
@@ -320,8 +321,8 @@ static const NSArray *categories;
         photoFile = [PFFile fileWithName:[NSString stringWithFormat:@"%i.jpg",rand() / 2] data:photoData];
         self.image = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
     } else {
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"What!?!" message:@"Why don't you pick a normal photo/video!?!" preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"What!?!",comment:nil) message:NSLocalizedString(@"Why don't you pick a normal photo/video!?!", comment:nil) preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"OK",comment:nil) style:UIAlertActionStyleDefault handler:nil];
         [alertController addAction:okAction];
         [self presentViewController:alertController animated:YES completion:nil];
         return;
