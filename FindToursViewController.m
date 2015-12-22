@@ -316,13 +316,16 @@
     if (tableView.tag == 0) {
         POIDetailTableViewCell *cell = (POIDetailTableViewCell*) [self.toursTableView dequeueReusableCellWithIdentifier:@"POIDetailTableViewCell"];
         [cell setTour:[self.toursFromParse objectAtIndex:indexPath.section]];
-        
         return cell;
     } else {
         UITableViewCell *cell = [self.searchCategoryTableView dequeueReusableCellWithIdentifier:@"CategoryTableViewCell" forIndexPath:indexPath];
         cell.textLabel.font = [UIFont fontWithName:@"Futura" size:17.0];
         cell.textLabel.textColor = [UIColor colorWithRed:0.278 green:0.510 blue:0.855 alpha:1.000];
         cell.textLabel.text = self.categoryList[indexPath.row];
+        cell.accessoryType = UITableViewCellAccessoryNone;
+        if ([self.selectedCategories containsObject:self.categoryList[indexPath.row]]) {
+            cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        }
         return cell;
     }
 }

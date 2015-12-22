@@ -361,6 +361,10 @@ static const NSArray *categories;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     CategoryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     [cell setCategory:categories[indexPath.row]];
+    cell.accessoryType = UITableViewCellAccessoryNone;
+    if ([self.selectedCategories containsObject:categories[indexPath.row]]) {
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    }
     return cell;
 }
 

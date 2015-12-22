@@ -129,7 +129,7 @@
         if (success) {
             NSMutableArray *searchResults;
             for (Location *location in results) {
-                if ([location.locationName.lowercaseString containsString:searchTerm.lowercaseString] || [location.locationDescription.lowercaseString containsString:searchTerm.lowercaseString]) {
+                if (searchTerm.length == 0 || [location.locationName.lowercaseString containsString:searchTerm.lowercaseString] || [location.locationDescription.lowercaseString containsString:searchTerm.lowercaseString]) {
                     [filteredLocationTours addObject:location.tour];
                 }
                 if (searchResults.count == 0 || ![searchResults containsObject:location.tour.objectId]) {
