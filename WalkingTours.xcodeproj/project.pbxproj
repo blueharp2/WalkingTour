@@ -179,6 +179,10 @@
 		BF844F131C238F640025E651 /* MyExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyExtension.m; sourceTree = "<group>"; };
 		BF844F181C239B5B0025E651 /* CustomAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomAnnotation.h; sourceTree = "<group>"; };
 		BF844F191C239B5B0025E651 /* CustomAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomAnnotation.m; sourceTree = "<group>"; };
+		BF85AE501C29CA19004292E6 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/Main.strings"; sourceTree = "<group>"; };
+		BF85AE511C29CA19004292E6 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		BF85AE521C29CA27004292E6 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Main.strings"; sourceTree = "<group>"; };
+		BF85AE531C29CA27004292E6 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		BFAD24CF1C20ECED009557DF /* TourListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TourListViewController.h; sourceTree = "<group>"; };
 		BFAD24D01C20ECED009557DF /* TourListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TourListViewController.m; sourceTree = "<group>"; };
 		BFD441871C1F6574004F8CDE /* FindToursViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindToursViewController.h; sourceTree = "<group>"; };
@@ -664,6 +668,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				903177D31C1F3A9E001C8DF9 /* Base */,
+				BF85AE501C29CA19004292E6 /* es-MX */,
+				BF85AE521C29CA27004292E6 /* pt-BR */,
 			);
 			name = Main.storyboard;
 			path = WalkingTours;
@@ -673,6 +679,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				903177D81C1F3A9E001C8DF9 /* Base */,
+				BF85AE511C29CA19004292E6 /* es-MX */,
+				BF85AE531C29CA27004292E6 /* pt-BR */,
 			);
 			name = LaunchScreen.storyboard;
 			path = WalkingTours;

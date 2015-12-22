@@ -99,7 +99,7 @@
     [self.toursTableView setDataSource:self];
     self.searchCategoryTableView.delegate = self;
     self.searchCategoryTableView.dataSource = self;
-    self.categoryList = @[@"Restaurant", @"Cafe", @"Art", @"Museum", @"History", @"Shopping", @"Nightlife", @"Film", @"Education"];
+    self.categoryList = @[NSlocalizedString(@"Restaurant", comment:@"), @"Cafe", @"Art", @"Museum", @"History", @"Shopping", @"Nightlife", @"Film", @"Education"];
     
     UIImageView *tempImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"TableViewBackground.png"]];
     [tempImageView setFrame:self.toursTableView.frame];
