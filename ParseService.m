@@ -129,7 +129,7 @@
         if (success) {
             NSMutableArray *searchResults;
             for (Location *location in results) {
-                if ([location.locationName containsString:searchTerm] || [location.locationDescription containsString:searchTerm]) {
+                if ([location.locationName.lowercaseString containsString:searchTerm.lowercaseString] || [location.locationDescription.lowercaseString containsString:searchTerm.lowercaseString]) {
                     [filteredLocationTours addObject:location.tour];
                 }
                 if (searchResults.count == 0 || ![searchResults containsObject:location.tour.objectId]) {
@@ -153,7 +153,7 @@
                     if (objects) {
                         NSMutableArray *filteredResults;
                         for (Tour *tour in objects) {
-                            if ([tour.nameOfTour containsString:searchTerm] || [tour.descriptionText containsString:searchTerm] || [filteredLocationTours containsObject:tour]) {
+                            if ([tour.nameOfTour.lowercaseString containsString:searchTerm.lowercaseString] || [tour.descriptionText.lowercaseString containsString:searchTerm.lowercaseString] || [filteredLocationTours containsObject:tour]) {
                                 if (filteredResults.count == 0) {
                                     filteredResults = [NSMutableArray arrayWithObject:tour];
                                 } else {
