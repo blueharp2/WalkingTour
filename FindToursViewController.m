@@ -21,6 +21,7 @@
 
 @interface FindToursViewController () <MKMapViewDelegate, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
+@property (strong, nonatomic) NSMutableArray<CustomAnnotation *> *mapAnnotations;
 @property (weak, nonatomic) IBOutlet UITableView *toursTableView;
 @property (strong, nonatomic) UIBarButtonItem *searchButton;
 @property (strong, nonatomic) CLLocationManager *locationManager;
@@ -33,6 +34,10 @@
 @property (weak, nonatomic) IBOutlet UISlider *radiusSlider;
 @property (weak, nonatomic) IBOutlet UITableView *searchCategoryTableView;
 @property (strong, nonatomic) NSArray *categoryList;
+@property (strong, nonatomic) NSMutableArray *selectedCategories;
+@property (weak, nonatomic) IBOutlet UIView *searchView;
+@property (weak, nonatomic) IBOutlet UIButton *finalSearchButton;
+- (IBAction)finalSearchButtonPressed:(UIButton *)sender;
 - (IBAction)radiusSliderChanged:(UISlider *)sender;
 
 @end
@@ -41,31 +46,16 @@
 
 - (void)setToursFromParse:(NSArray<Tour *> *)toursFromParse {
     _toursFromParse = toursFromParse;
-    
-    for (Tour *tour in toursFromParse)
-    {
-        CustomAnnotation *newPoint = [[CustomAnnotation alloc]init];
-        newPoint.coordinate = CLLocationCoordinate2DMake(tour.startLocation.latitude, tour.startLocation.longitude);
-        newPoint.title = tour.nameOfTour;
-        newPoint.tourId = tour.objectId;
-        
-        CLLocation *location = [[CLLocation alloc] initWithLatitude:newPoint.coordinate.latitude longitude:newPoint.coordinate.longitude];
-        
-        if (self.mapPoints.count == 0) {
-            self.mapPoints = [NSMutableArray arrayWithObject:location];
-        } else {
-            [self.mapPoints addObject:location];
-        }
-        
-        [self.mapView addAnnotation:newPoint];
-        [self.toursTableView reloadData];
-    }
+    [self updateAnnotationsAfterSearch:toursFromParse];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.searchViewTopConstraint.constant = self.view.frame.size.height;
-    self.radiusSlider.hidden = YES;
+    self.searchView.alpha = 0.0;
+    self.finalSearchButton.layer.cornerRadius = 5.0;
+    self.finalSearchButton.layer.borderWidth = 1.0;
+    self.finalSearchButton.layer.borderColor = [UIColor colorWithRed:0.278 green:0.510 blue:0.855 alpha:1.000].CGColor;
+    self.keywordSearchBar.delegate = self;
     //Location Manager setup
     self.locationManager = [[CLLocationManager alloc]init];
     [self.locationManager requestWhenInUseAuthorization];
@@ -90,7 +80,6 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -125,19 +114,87 @@
 }
 
 - (void)searchButtonPressed:(UIBarButtonItem *)sender {
-    if (self.searchViewTopConstraint.constant == -60) {
-        //Handle if the search view is open
-    } else {
-        self.radiusSlider.hidden = NO;
+    if (self.searchView.alpha == 0.0) {
         [UIView animateWithDuration:0.4 animations:^{
-            self.searchViewTopConstraint.constant = -60;
-            [self.view layoutIfNeeded];
+            self.searchView.alpha = 1.0;
         }];
     }
 }
 
+- (IBAction)finalSearchButtonPressed:(UIButton *)sender {
+    CLLocationCoordinate2D current = self.mapView.centerCoordinate;
+    if (self.selectedCategories && self.selectedCategories.count > 0) {
+        [ParseService searchToursNearLocation:current withinMiles:self.radiusLabel.text.floatValue withSearchTerm:self.keywordSearchBar.text categories:self.selectedCategories completion:^(BOOL success, NSArray *results) {
+            [UIView animateWithDuration:0.4 animations:^{
+                self.searchView.alpha = 0.0;
+            }];
+            if (success) {
+                [self setToursFromParse:results];
+            } else {
+                Tour *noTours = [[Tour alloc] initWithNameOfTour:@"No tours found." descriptionText:@"" startLocation:nil user:nil];
+                [self setToursFromParse:@[noTours]];
+            }
+        }];
+    } else {
+        [ParseService searchToursNearLocation:current withinMiles:self.radiusLabel.text.floatValue withSearchTerm:self.keywordSearchBar.text categories:nil completion:^(BOOL success, NSArray *results) {
+            [UIView animateWithDuration:0.4 animations:^{
+                self.searchView.alpha = 0.0;
+            }];
+            if (success) {
+                [self setToursFromParse:results];
+            } else {
+                Tour *noTours = [[Tour alloc] initWithNameOfTour:@"No tours found." descriptionText:@"" startLocation:nil user:nil];
+                [self setToursFromParse:@[noTours]];
+            }
+        }];
+    }
+//    } else {
+//        [ParseService searchToursNearLocation:current withinMiles:self.radiusLabel.text.floatValue withSearchTerm:self.keywordSearchBar.text completion:^(BOOL success, NSArray *results) {
+//            [UIView animateWithDuration:0.4 animations:^{
+//                self.searchView.alpha = 0.0;
+//            }];
+//            if (success) {
+//                [self setToursFromParse:results];
+//            } else {
+//                Tour *noTours = [[Tour alloc] initWithNameOfTour:@"No tours found." descriptionText:@"" startLocation:nil user:nil];
+//                [self setToursFromParse:@[noTours]];
+//            }
+//        }];
+//    }
+}
+
 - (IBAction)radiusSliderChanged:(UISlider *)sender {
     self.radiusLabel.text = [NSString stringWithFormat:@"%.1f", sender.value];
+}
+
+- (void)updateAnnotationsAfterSearch:(NSArray *)newTours {
+    if (self.mapAnnotations.count > 0) {
+        [self.mapView removeAnnotations:self.mapAnnotations];
+    }
+    if (self.mapPoints.count > 0) {
+        self.mapPoints = [NSMutableArray new];
+    }
+    for (Tour *tour in newTours) {
+        CustomAnnotation *newPoint = [[CustomAnnotation alloc]init];
+        newPoint.coordinate = CLLocationCoordinate2DMake(tour.startLocation.latitude, tour.startLocation.longitude);
+        newPoint.title = tour.nameOfTour;
+        newPoint.tourId = tour.objectId;
+        if (self.mapAnnotations.count == 0) {
+            self.mapAnnotations = [NSMutableArray arrayWithObject:newPoint];
+        } else {
+            [self.mapAnnotations addObject:newPoint];
+        }
+        CLLocation *location = [[CLLocation alloc] initWithLatitude:newPoint.coordinate.latitude longitude:newPoint.coordinate.longitude];
+        
+        if (self.mapPoints.count == 0) {
+            self.mapPoints = [NSMutableArray arrayWithObject:location];
+        } else {
+            [self.mapPoints addObject:location];
+        }
+        [self.mapView addAnnotation:newPoint];
+        [self.toursTableView reloadData];
+    }
+    
 }
 
 - (void)setRegionForCoordinate:(MKCoordinateRegion)region {
@@ -153,8 +210,7 @@
 
 #pragma mark - MKMapViewDelegate
 
-- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation
-{
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
     if ([annotation isKindOfClass:[MKUserLocation class]]) {
         return nil;
     }
@@ -163,8 +219,7 @@
     MKPinAnnotationView *annotationView = (MKPinAnnotationView *) [mapView dequeueReusableAnnotationViewWithIdentifier: @"AnnotationView"];
     annotationView.annotation = annotation;
     
-    if (!annotationView)
-    {
+    if (!annotationView) {
         annotationView = [[MKPinAnnotationView alloc]initWithAnnotation:annotation reuseIdentifier:@"AnnotationView"];
     }
     
@@ -218,48 +273,8 @@
         MKCoordinateRegion currentRegion = MKCoordinateRegionMakeWithDistance(self.locationManager.location.coordinate, 300, 300);
         [self.mapView setRegion:currentRegion];
         [self fetchToursNearUser];
-//        [self testQuery];
     }
 }
-
-//- (void)testQuery {
-//    CLLocationCoordinate2D location = CLLocationCoordinate2DMake(47.561137, -122.386794);
-    //Generic search (without categories or search term) working.
-//    [ParseService searchToursNearLocation:location withinMiles:1.0 withSearchTerm:nil completion:^(BOOL success, NSArray *results) {
-//        if (success) {
-//            for (Tour *tour in results) {
-//                NSLog(@"%@", tour.objectId);
-//            }
-//        }
-//    }];
-    
-    //Full search (with one category and no search term) working
-//    [ParseService searchToursNearLocation:location withinMiles:1.0 withSearchTerm:nil categories:@[@"Cafe"] completion:^(BOOL success, NSArray *results) {
-//        if (success) {
-//            for (Tour *tour in results) {
-//                NSLog(@"%@", tour.objectId);
-//            }
-//        }
-//    }];
-    
-//    Generic search (without categories, with search term) working.
-//    [ParseService searchToursNearLocation:location withinMiles:1.0 withSearchTerm:@"Sushi" completion:^(BOOL success, NSArray *results) {
-//        if (success) {
-//            for (Tour *tour in results) {
-//                NSLog(@"%@", tour.objectId);
-//            }
-//        }
-//    }];
-    
-    //Full search (with two categories and a search term)working
-//        [ParseService searchToursNearLocation:location withinMiles:1.0 withSearchTerm:@"West" categories:@[@"Cafe", @"Restaurant"] completion:^(BOOL success, NSArray *results) {
-//            if (success) {
-//                for (Tour *tour in results) {
-//                    NSLog(@"%@", tour.objectId);
-//                }
-//            }
-//        }];
-//}
 
 #pragma mark - UITableView protocol functions.
 
@@ -325,14 +340,20 @@
         NSString *tourId = self.toursFromParse[indexPath.section].objectId;
         [self performSegueWithIdentifier:@"TabBarController" sender:tourId];
     } else {
-        //what to do?
-    }
-}
-
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (tableView.tag == 0) {
-        cell.layer.cornerRadius = 5;
-        cell.layer.masksToBounds = true;
+        if ([tableView cellForRowAtIndexPath:indexPath].accessoryType == UITableViewCellAccessoryCheckmark) {
+            [tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryNone;
+        } else {
+            [tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryCheckmark;
+        }
+        if (self.selectedCategories.count > 0) {
+            if ([self.selectedCategories containsObject:self.categoryList[indexPath.row]]) {
+            [self.selectedCategories removeObjectAtIndex:[self.selectedCategories indexOfObject:[self.categoryList objectAtIndex:indexPath.row]]];
+            } else {
+                [self.selectedCategories addObject:self.categoryList[indexPath.row]];
+            }
+        } else {
+            self.selectedCategories = [NSMutableArray arrayWithObject:self.categoryList[indexPath.row]];
+        }
     }
 }
 
