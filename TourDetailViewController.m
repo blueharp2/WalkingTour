@@ -81,7 +81,7 @@ static const NSString *ItemStatusContext;
                 }
             }];
         } else {
-            UIImage *image = [UIImage imageNamed:@"idaho.jpg"];
+            UIImage *image = [UIImage imageNamed:@"placeholder"];
             [[NSOperationQueue mainQueue] addOperationWithBlock:^{
                 UIImageView *imageView = [[UIImageView alloc] initWithFrame:self.playerView.bounds];
                 [imageView setClipsToBounds:YES];
