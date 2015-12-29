@@ -519,6 +519,7 @@
 				TargetAttributes = {
 					903177C51C1F3A9E001C8DF9 = {
 						CreatedOnToolsVersion = 7.1.1;
+						DevelopmentTeam = C49MT2F2AS;
 					};
 					903177DE1C1F3A9E001C8DF9 = {
 						CreatedOnToolsVersion = 7.1.1;
@@ -830,7 +831,7 @@
 				INFOPLIST_FILE = WalkingTours/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "Lindsey-Boggio.WalkingTours";
+				PRODUCT_BUNDLE_IDENTIFIER = C49MT2F2AS.com.creeperspeak.WalkingTours;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -847,7 +848,7 @@
 				INFOPLIST_FILE = WalkingTours/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "Lindsey-Boggio.WalkingTours";
+				PRODUCT_BUNDLE_IDENTIFIER = C49MT2F2AS.com.creeperspeak.WalkingTours;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
