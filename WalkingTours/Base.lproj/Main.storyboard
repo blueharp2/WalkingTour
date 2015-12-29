@@ -499,7 +499,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R1I-8O-bYr">
-                                <rect key="frame" x="117" y="479" width="87" height="40"/>
+                                <rect key="frame" x="123.5" y="479" width="74" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="87" id="3Hp-mH-n5I"/>
                                     <constraint firstAttribute="height" constant="40" id="AKI-jT-2FS"/>
@@ -508,6 +508,11 @@
                                 <state key="normal" title="Log Out">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="3Hp-mH-n5I"/>
+                                    </mask>
+                                </variation>
                                 <connections>
                                     <action selector="logoutPressed:" destination="GeJ-TF-SYQ" eventType="touchUpInside" id="HUA-9O-HQE"/>
                                 </connections>
