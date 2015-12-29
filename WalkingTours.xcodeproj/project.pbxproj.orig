@@ -24,36 +24,30 @@
 		3D43CF111C1F41AB00118998 /* ParseFacebookUtilsV4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D43CF0B1C1F41AB00118998 /* ParseFacebookUtilsV4.framework */; };
 		3D43CF121C1F41AB00118998 /* ParseTwitterUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D43CF0C1C1F41AB00118998 /* ParseTwitterUtils.framework */; };
 		3D43CF131C1F41AB00118998 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D43CF0D1C1F41AB00118998 /* ParseUI.framework */; };
-		3D43CF161C1F43B400118998 /* ParseKeys.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D43CF151C1F43B400118998 /* ParseKeys.m */; };
 		3D43CF231C1F478D00118998 /* WalkingTours58.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D43CF1F1C1F478D00118998 /* WalkingTours58.png */; };
 		3D43CF241C1F478D00118998 /* WalkingTours60.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D43CF201C1F478D00118998 /* WalkingTours60.png */; };
 		3D43CF251C1F478D00118998 /* WalkingTours80.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D43CF211C1F478D00118998 /* WalkingTours80.png */; };
 		3D43CF261C1F478D00118998 /* WalkingTours120.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D43CF221C1F478D00118998 /* WalkingTours120.png */; };
 		3D43CF2D1C1F4E4D00118998 /* ParseSignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D43CF2C1C1F4E4D00118998 /* ParseSignUpViewController.m */; };
 		3D43CF301C1F4E5B00118998 /* ParseResetPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D43CF2F1C1F4E5B00118998 /* ParseResetPasswordViewController.m */; };
-		3D7264021C1F687D00ABEEFD /* WalkingTour.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D7264011C1F687D00ABEEFD /* WalkingTour.png */; };
 		3D7264051C1F6BCC00ABEEFD /* TourSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D7264041C1F6BCC00ABEEFD /* TourSelectionViewController.m */; };
 		3D7264071C1F716E00ABEEFD /* ParseLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D7264061C1F716E00ABEEFD /* ParseLoginViewController.m */; };
 		3D9A58701C2329F90056A624 /* sandfootprints 700h.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3D9A586F1C2329F90056A624 /* sandfootprints 700h.jpg */; };
 		3D9A58721C232C180056A624 /* newyorkpin copy700h.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3D9A58711C232C180056A624 /* newyorkpin copy700h.jpg */; };
-		90090C991C2339630040EE94 /* Rectangle 1.png in Resources */ = {isa = PBXBuildFile; fileRef = 90090C901C2339630040EE94 /* Rectangle 1.png */; };
-		90090C9A1C2339630040EE94 /* Rectangle 1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 90090C911C2339630040EE94 /* Rectangle 1@2x.png */; };
-		90090C9B1C2339630040EE94 /* Rectangle 1@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 90090C921C2339630040EE94 /* Rectangle 1@3x.png */; };
-		90090C9C1C2339630040EE94 /* Rectangle 2 Copy 2.png in Resources */ = {isa = PBXBuildFile; fileRef = 90090C931C2339630040EE94 /* Rectangle 2 Copy 2.png */; };
-		90090C9D1C2339630040EE94 /* Rectangle 2 Copy 2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 90090C941C2339630040EE94 /* Rectangle 2 Copy 2@2x.png */; };
-		90090C9E1C2339630040EE94 /* Rectangle 2 Copy 2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 90090C951C2339630040EE94 /* Rectangle 2 Copy 2@3x.png */; };
-		90090C9F1C2339630040EE94 /* Rectangle 3 Copy.png in Resources */ = {isa = PBXBuildFile; fileRef = 90090C961C2339630040EE94 /* Rectangle 3 Copy.png */; };
-		90090CA01C2339630040EE94 /* Rectangle 3 Copy@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 90090C971C2339630040EE94 /* Rectangle 3 Copy@2x.png */; };
-		90090CA11C2339630040EE94 /* Rectangle 3 Copy@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 90090C981C2339630040EE94 /* Rectangle 3 Copy@3x.png */; };
-<<<<<<< HEAD
-=======
-		3D9A58701C2329F90056A624 /* sandfootprints 700h.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3D9A586F1C2329F90056A624 /* sandfootprints 700h.jpg */; };
-		3D9A58721C232C180056A624 /* newyorkpin copy700h.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3D9A58711C232C180056A624 /* newyorkpin copy700h.jpg */; };
 		3D9A58741C234BEB0056A624 /* seattlesunset copy700.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3D9A58731C234BEB0056A624 /* seattlesunset copy700.jpg */; };
 		3D9A58781C234E6D0056A624 /* goldengatebridge copy700.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3D9A58771C234E6D0056A624 /* goldengatebridge copy700.jpg */; };
-		902868C61C22804D005224A4 /* photo.png in Resources */ = {isa = PBXBuildFile; fileRef = 902868C51C22804D005224A4 /* photo.png */; };
->>>>>>> master
-		902868C81C228BD3005224A4 /* idaho.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 902868C71C228BD3005224A4 /* idaho.jpg */; };
+		3DC42F6B1C330D9A00037970 /* Walkabout-Tours29.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DC42F631C330D9A00037970 /* Walkabout-Tours29.png */; };
+		3DC42F6D1C330D9A00037970 /* Walkabout-Tours40.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DC42F651C330D9A00037970 /* Walkabout-Tours40.png */; };
+		3DC42F6E1C330D9A00037970 /* Walkabout-Tours58.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DC42F661C330D9A00037970 /* Walkabout-Tours58.png */; };
+		3DC42F6F1C330D9A00037970 /* Walkabout-Tours60.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DC42F671C330D9A00037970 /* Walkabout-Tours60.png */; };
+		3DC42F701C330D9A00037970 /* Walkabout-Tours76.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DC42F681C330D9A00037970 /* Walkabout-Tours76.png */; };
+		3DC42F711C330D9A00037970 /* Walkabout-Tours80.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DC42F691C330D9A00037970 /* Walkabout-Tours80.png */; };
+		3DC42F741C330DCB00037970 /* Walkabout-Tours87.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DC42F731C330DCB00037970 /* Walkabout-Tours87.png */; };
+		3DC42F761C330E1F00037970 /* Walkabout-Tours152.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DC42F751C330E1F00037970 /* Walkabout-Tours152.png */; };
+		90090C9A1C2339630040EE94 /* Rectangle 1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 90090C911C2339630040EE94 /* Rectangle 1@2x.png */; };
+		90090C9B1C2339630040EE94 /* Rectangle 1@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 90090C921C2339630040EE94 /* Rectangle 1@3x.png */; };
+		90090C9D1C2339630040EE94 /* Rectangle 2 Copy 2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 90090C941C2339630040EE94 /* Rectangle 2 Copy 2@2x.png */; };
+		90090C9F1C2339630040EE94 /* Rectangle 3 Copy.png in Resources */ = {isa = PBXBuildFile; fileRef = 90090C961C2339630040EE94 /* Rectangle 3 Copy.png */; };
 		903177CB1C1F3A9E001C8DF9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 903177CA1C1F3A9E001C8DF9 /* main.m */; };
 		903177CE1C1F3A9E001C8DF9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 903177CD1C1F3A9E001C8DF9 /* AppDelegate.m */; };
 		903177D41C1F3A9E001C8DF9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 903177D21C1F3A9E001C8DF9 /* Main.storyboard */; };
@@ -66,15 +60,22 @@
 		9050ECD91C1F78E80092CF86 /* VideoPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9050ECD81C1F78E80092CF86 /* VideoPlayerView.m */; };
 		9050ECDC1C1F7B920092CF86 /* TourDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9050ECDB1C1F7B920092CF86 /* TourDetailViewController.m */; };
 		9050ECDF1C1F82F20092CF86 /* CreateTourDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9050ECDE1C1F82F20092CF86 /* CreateTourDetailViewController.m */; };
+		906734611C28AAF700DF76B1 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9067345F1C28AAF700DF76B1 /* Fabric.framework */; };
+		906734621C28AAF700DF76B1 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 906734601C28AAF700DF76B1 /* Crashlytics.framework */; };
 		908AA8C11C20972B00A7DF57 /* ParseService.m in Sources */ = {isa = PBXBuildFile; fileRef = 908AA8C01C20972B00A7DF57 /* ParseService.m */; };
 		90AE88D11C209290005536B4 /* CategoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 90AE88CF1C209290005536B4 /* CategoryTableViewCell.m */; };
 		90AE88D21C209290005536B4 /* CategoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 90AE88D01C209290005536B4 /* CategoryTableViewCell.xib */; };
 		90F4E22B1C1FA7B3002A75B2 /* CreateTourViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90F4E22A1C1FA7B3002A75B2 /* CreateTourViewController.m */; };
 		90FD33551C210AAA002FFD1A /* LocationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 90FD33531C210AAA002FFD1A /* LocationTableViewCell.m */; };
 		90FD33561C210AAA002FFD1A /* LocationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 90FD33541C210AAA002FFD1A /* LocationTableViewCell.xib */; };
-		BF5FECB61C22909D00E7A16D /* Gradient.m in Sources */ = {isa = PBXBuildFile; fileRef = BF5FECB51C22909D00E7A16D /* Gradient.m */; };
 		BF7EAC391C207FC40076E432 /* POIDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF7EAC381C207FC40076E432 /* POIDetailTableViewCell.xib */; };
 		BF7EAC3C1C2080160076E432 /* POIDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BF7EAC3B1C2080160076E432 /* POIDetailTableViewCell.m */; };
+		BF844F141C238F650025E651 /* MyExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = BF844F131C238F640025E651 /* MyExtension.m */; };
+		BF844F1A1C239B5B0025E651 /* CustomAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = BF844F191C239B5B0025E651 /* CustomAnnotation.m */; };
+		BF85AE561C29F3DE004292E6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BF85AE581C29F3DE004292E6 /* InfoPlist.strings */; };
+		BF85AE5B1C29F3DE004292E6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BF85AE5D1C29F3DE004292E6 /* InfoPlist.strings */; };
+		BF85AE601C29F3DF004292E6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = BF85AE621C29F3DF004292E6 /* Localizable.strings */; };
+		BF85AE651C29F3E0004292E6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BF85AE671C29F3E0004292E6 /* InfoPlist.strings */; };
 		BFAD24D11C20ECED009557DF /* TourListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFAD24D01C20ECED009557DF /* TourListViewController.m */; };
 		BFD441891C1F6574004F8CDE /* FindToursViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFD441881C1F6574004F8CDE /* FindToursViewController.m */; };
 		BFD4418C1C1F6C21004F8CDE /* TourMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFD4418B1C1F6C21004F8CDE /* TourMapViewController.m */; };
@@ -115,8 +116,6 @@
 		3D43CF0B1C1F41AB00118998 /* ParseFacebookUtilsV4.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtilsV4.framework; sourceTree = "<group>"; };
 		3D43CF0C1C1F41AB00118998 /* ParseTwitterUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseTwitterUtils.framework; sourceTree = "<group>"; };
 		3D43CF0D1C1F41AB00118998 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
-		3D43CF141C1F43B400118998 /* ParseKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ParseKeys.h; path = WalkingTours/ParseKeys.h; sourceTree = "<group>"; };
-		3D43CF151C1F43B400118998 /* ParseKeys.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ParseKeys.m; path = WalkingTours/ParseKeys.m; sourceTree = "<group>"; };
 		3D43CF1F1C1F478D00118998 /* WalkingTours58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WalkingTours58.png; sourceTree = SOURCE_ROOT; };
 		3D43CF201C1F478D00118998 /* WalkingTours60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WalkingTours60.png; sourceTree = SOURCE_ROOT; };
 		3D43CF211C1F478D00118998 /* WalkingTours80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WalkingTours80.png; sourceTree = SOURCE_ROOT; };
@@ -126,12 +125,21 @@
 		3D43CF2C1C1F4E4D00118998 /* ParseSignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParseSignUpViewController.m; sourceTree = "<group>"; };
 		3D43CF2E1C1F4E5B00118998 /* ParseResetPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParseResetPasswordViewController.h; sourceTree = "<group>"; };
 		3D43CF2F1C1F4E5B00118998 /* ParseResetPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParseResetPasswordViewController.m; sourceTree = "<group>"; };
-		3D7264011C1F687D00ABEEFD /* WalkingTour.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WalkingTour.png; sourceTree = "<group>"; };
 		3D7264031C1F6BCC00ABEEFD /* TourSelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TourSelectionViewController.h; path = WalkingTours/TourSelectionViewController.h; sourceTree = "<group>"; };
 		3D7264041C1F6BCC00ABEEFD /* TourSelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TourSelectionViewController.m; path = WalkingTours/TourSelectionViewController.m; sourceTree = "<group>"; };
 		3D7264061C1F716E00ABEEFD /* ParseLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParseLoginViewController.m; sourceTree = "<group>"; };
 		3D9A586F1C2329F90056A624 /* sandfootprints 700h.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "sandfootprints 700h.jpg"; sourceTree = "<group>"; };
 		3D9A58711C232C180056A624 /* newyorkpin copy700h.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "newyorkpin copy700h.jpg"; sourceTree = "<group>"; };
+		3D9A58731C234BEB0056A624 /* seattlesunset copy700.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "seattlesunset copy700.jpg"; sourceTree = "<group>"; };
+		3D9A58771C234E6D0056A624 /* goldengatebridge copy700.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "goldengatebridge copy700.jpg"; sourceTree = "<group>"; };
+		3DC42F631C330D9A00037970 /* Walkabout-Tours29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Walkabout-Tours29.png"; sourceTree = "<group>"; };
+		3DC42F651C330D9A00037970 /* Walkabout-Tours40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Walkabout-Tours40.png"; sourceTree = "<group>"; };
+		3DC42F661C330D9A00037970 /* Walkabout-Tours58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Walkabout-Tours58.png"; sourceTree = "<group>"; };
+		3DC42F671C330D9A00037970 /* Walkabout-Tours60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Walkabout-Tours60.png"; sourceTree = "<group>"; };
+		3DC42F681C330D9A00037970 /* Walkabout-Tours76.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Walkabout-Tours76.png"; sourceTree = "<group>"; };
+		3DC42F691C330D9A00037970 /* Walkabout-Tours80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Walkabout-Tours80.png"; sourceTree = "<group>"; };
+		3DC42F731C330DCB00037970 /* Walkabout-Tours87.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Walkabout-Tours87.png"; sourceTree = "<group>"; };
+		3DC42F751C330E1F00037970 /* Walkabout-Tours152.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Walkabout-Tours152.png"; sourceTree = "<group>"; };
 		90090C901C2339630040EE94 /* Rectangle 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Rectangle 1.png"; sourceTree = "<group>"; };
 		90090C911C2339630040EE94 /* Rectangle 1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Rectangle 1@2x.png"; sourceTree = "<group>"; };
 		90090C921C2339630040EE94 /* Rectangle 1@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Rectangle 1@3x.png"; sourceTree = "<group>"; };
@@ -141,15 +149,6 @@
 		90090C961C2339630040EE94 /* Rectangle 3 Copy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Rectangle 3 Copy.png"; sourceTree = "<group>"; };
 		90090C971C2339630040EE94 /* Rectangle 3 Copy@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Rectangle 3 Copy@2x.png"; sourceTree = "<group>"; };
 		90090C981C2339630040EE94 /* Rectangle 3 Copy@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Rectangle 3 Copy@3x.png"; sourceTree = "<group>"; };
-<<<<<<< HEAD
-=======
-		3D9A586F1C2329F90056A624 /* sandfootprints 700h.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "sandfootprints 700h.jpg"; sourceTree = "<group>"; };
-		3D9A58711C232C180056A624 /* newyorkpin copy700h.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "newyorkpin copy700h.jpg"; sourceTree = "<group>"; };
-		3D9A58731C234BEB0056A624 /* seattlesunset copy700.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "seattlesunset copy700.jpg"; sourceTree = "<group>"; };
-		3D9A58771C234E6D0056A624 /* goldengatebridge copy700.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "goldengatebridge copy700.jpg"; sourceTree = "<group>"; };
-		902868C51C22804D005224A4 /* photo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = photo.png; sourceTree = "<group>"; };
->>>>>>> master
-		902868C71C228BD3005224A4 /* idaho.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = idaho.jpg; sourceTree = "<group>"; };
 		903177C61C1F3A9E001C8DF9 /* WalkingTours.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WalkingTours.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		903177CA1C1F3A9E001C8DF9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		903177CC1C1F3A9E001C8DF9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -174,6 +173,8 @@
 		9050ECDB1C1F7B920092CF86 /* TourDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TourDetailViewController.m; sourceTree = "<group>"; };
 		9050ECDD1C1F82F20092CF86 /* CreateTourDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateTourDetailViewController.h; sourceTree = "<group>"; };
 		9050ECDE1C1F82F20092CF86 /* CreateTourDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateTourDetailViewController.m; sourceTree = "<group>"; };
+		9067345F1C28AAF700DF76B1 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
+		906734601C28AAF700DF76B1 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		908AA8BF1C20972B00A7DF57 /* ParseService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParseService.h; sourceTree = "<group>"; };
 		908AA8C01C20972B00A7DF57 /* ParseService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParseService.m; sourceTree = "<group>"; };
 		90AE88CE1C209290005536B4 /* CategoryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryTableViewCell.h; sourceTree = "<group>"; };
@@ -184,11 +185,25 @@
 		90FD33521C210AAA002FFD1A /* LocationTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationTableViewCell.h; sourceTree = "<group>"; };
 		90FD33531C210AAA002FFD1A /* LocationTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationTableViewCell.m; sourceTree = "<group>"; };
 		90FD33541C210AAA002FFD1A /* LocationTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LocationTableViewCell.xib; sourceTree = "<group>"; };
-		BF5FECB41C22909D00E7A16D /* Gradient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Gradient.h; sourceTree = "<group>"; };
-		BF5FECB51C22909D00E7A16D /* Gradient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Gradient.m; sourceTree = "<group>"; };
 		BF7EAC381C207FC40076E432 /* POIDetailTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = POIDetailTableViewCell.xib; sourceTree = "<group>"; };
 		BF7EAC3A1C2080160076E432 /* POIDetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = POIDetailTableViewCell.h; sourceTree = "<group>"; };
 		BF7EAC3B1C2080160076E432 /* POIDetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = POIDetailTableViewCell.m; sourceTree = "<group>"; };
+		BF844F121C238F640025E651 /* MyExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyExtension.h; sourceTree = "<group>"; };
+		BF844F131C238F640025E651 /* MyExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyExtension.m; sourceTree = "<group>"; };
+		BF844F181C239B5B0025E651 /* CustomAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomAnnotation.h; sourceTree = "<group>"; };
+		BF844F191C239B5B0025E651 /* CustomAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomAnnotation.m; sourceTree = "<group>"; };
+		BF85AE501C29CA19004292E6 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/Main.strings"; sourceTree = "<group>"; };
+		BF85AE511C29CA19004292E6 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		BF85AE521C29CA27004292E6 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Main.strings"; sourceTree = "<group>"; };
+		BF85AE531C29CA27004292E6 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		BF85AE571C29F3DE004292E6 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		BF85AE5C1C29F3DE004292E6 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		BF85AE611C29F3DF004292E6 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		BF85AE661C29F3E0004292E6 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		BF85AE681C29F409004292E6 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		BF85AE691C29F409004292E6 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		BF85AE6A1C29F409004292E6 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		BF85AE6B1C29F409004292E6 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		BFAD24CF1C20ECED009557DF /* TourListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TourListViewController.h; sourceTree = "<group>"; };
 		BFAD24D01C20ECED009557DF /* TourListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TourListViewController.m; sourceTree = "<group>"; };
 		BFD441871C1F6574004F8CDE /* FindToursViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindToursViewController.h; sourceTree = "<group>"; };
@@ -204,9 +219,11 @@
 			files = (
 				3D43CF101C1F41AB00118998 /* ParseFacebookUtils.framework in Frameworks */,
 				3D43CF071C1F418E00118998 /* libsqlite3.0.tbd in Frameworks */,
+				906734621C28AAF700DF76B1 /* Crashlytics.framework in Frameworks */,
 				3D43CF051C1F418400118998 /* libz.1.1.3.tbd in Frameworks */,
 				3D43CF031C1F417B00118998 /* SystemConfiguration.framework in Frameworks */,
 				3D43CF0E1C1F41AB00118998 /* Bolts.framework in Frameworks */,
+				906734611C28AAF700DF76B1 /* Fabric.framework in Frameworks */,
 				3D43CF011C1F417100118998 /* StoreKit.framework in Frameworks */,
 				3D43CF121C1F41AB00118998 /* ParseTwitterUtils.framework in Frameworks */,
 				3D43CEFF1C1F416900118998 /* Security.framework in Frameworks */,
@@ -250,6 +267,8 @@
 				3D43CF0D1C1F41AB00118998 /* ParseUI.framework */,
 				3D43CF061C1F418E00118998 /* libsqlite3.0.tbd */,
 				3D43CF041C1F418400118998 /* libz.1.1.3.tbd */,
+				9067345F1C28AAF700DF76B1 /* Fabric.framework */,
+				906734601C28AAF700DF76B1 /* Crashlytics.framework */,
 				3D43CF021C1F417B00118998 /* SystemConfiguration.framework */,
 				3D43CF001C1F417100118998 /* StoreKit.framework */,
 				3D43CEFE1C1F416900118998 /* Security.framework */,
@@ -268,8 +287,6 @@
 			children = (
 				908AA8BF1C20972B00A7DF57 /* ParseService.h */,
 				908AA8C01C20972B00A7DF57 /* ParseService.m */,
-				3D43CF141C1F43B400118998 /* ParseKeys.h */,
-				3D43CF151C1F43B400118998 /* ParseKeys.m */,
 				3D43CF281C1F47F400118998 /* ParseLoginViewController.h */,
 				3D7264061C1F716E00ABEEFD /* ParseLoginViewController.m */,
 				3D43CF2B1C1F4E4D00118998 /* ParseSignUpViewController.h */,
@@ -278,6 +295,8 @@
 				3D43CF2F1C1F4E5B00118998 /* ParseResetPasswordViewController.m */,
 				3D7264031C1F6BCC00ABEEFD /* TourSelectionViewController.h */,
 				3D7264041C1F6BCC00ABEEFD /* TourSelectionViewController.m */,
+				BF844F181C239B5B0025E651 /* CustomAnnotation.h */,
+				BF844F191C239B5B0025E651 /* CustomAnnotation.m */,
 			);
 			name = PARSE;
 			sourceTree = "<group>";
@@ -309,6 +328,8 @@
 		903177C81C1F3A9E001C8DF9 /* WalkingTours */ = {
 			isa = PBXGroup;
 			children = (
+				BF85AE671C29F3E0004292E6 /* InfoPlist.strings */,
+				BF85AE621C29F3DF004292E6 /* Localizable.strings */,
 				BF7EAC3D1C2085B20076E432 /* Controllers */,
 				BF7EAC411C20863D0076E432 /* CustomCell */,
 				BF7EAC401C2086020076E432 /* Views */,
@@ -325,18 +346,20 @@
 				90090C961C2339630040EE94 /* Rectangle 3 Copy.png */,
 				90090C971C2339630040EE94 /* Rectangle 3 Copy@2x.png */,
 				90090C981C2339630040EE94 /* Rectangle 3 Copy@3x.png */,
-				902868C71C228BD3005224A4 /* idaho.jpg */,
 				903177DA1C1F3A9E001C8DF9 /* Info.plist */,
 				903177C91C1F3A9E001C8DF9 /* Supporting Files */,
-				3D43CF1F1C1F478D00118998 /* WalkingTours58.png */,
 				3D9A58731C234BEB0056A624 /* seattlesunset copy700.jpg */,
-				3D7264011C1F687D00ABEEFD /* WalkingTour.png */,
+				3DC42F631C330D9A00037970 /* Walkabout-Tours29.png */,
+				3DC42F651C330D9A00037970 /* Walkabout-Tours40.png */,
+				3DC42F661C330D9A00037970 /* Walkabout-Tours58.png */,
+				3DC42F671C330D9A00037970 /* Walkabout-Tours60.png */,
+				3DC42F681C330D9A00037970 /* Walkabout-Tours76.png */,
+				3DC42F691C330D9A00037970 /* Walkabout-Tours80.png */,
+				3DC42F731C330DCB00037970 /* Walkabout-Tours87.png */,
+				3DC42F751C330E1F00037970 /* Walkabout-Tours152.png */,
 				3D9A58771C234E6D0056A624 /* goldengatebridge copy700.jpg */,
 				3D9A586F1C2329F90056A624 /* sandfootprints 700h.jpg */,
 				3D9A58711C232C180056A624 /* newyorkpin copy700h.jpg */,
-				3D43CF201C1F478D00118998 /* WalkingTours60.png */,
-				3D43CF211C1F478D00118998 /* WalkingTours80.png */,
-				3D43CF221C1F478D00118998 /* WalkingTours120.png */,
 			);
 			path = WalkingTours;
 			sourceTree = "<group>";
@@ -352,6 +375,7 @@
 		903177E21C1F3A9E001C8DF9 /* WalkingToursTests */ = {
 			isa = PBXGroup;
 			children = (
+				BF85AE581C29F3DE004292E6 /* InfoPlist.strings */,
 				903177E31C1F3A9E001C8DF9 /* WalkingToursTests.m */,
 				903177E51C1F3A9E001C8DF9 /* Info.plist */,
 			);
@@ -361,6 +385,7 @@
 		903177ED1C1F3A9E001C8DF9 /* WalkingToursUITests */ = {
 			isa = PBXGroup;
 			children = (
+				BF85AE5D1C29F3DE004292E6 /* InfoPlist.strings */,
 				903177EE1C1F3A9E001C8DF9 /* WalkingToursUITests.m */,
 				903177F01C1F3A9E001C8DF9 /* Info.plist */,
 			);
@@ -393,12 +418,12 @@
 			children = (
 				BFD441871C1F6574004F8CDE /* FindToursViewController.h */,
 				BFD441881C1F6574004F8CDE /* FindToursViewController.m */,
+				BF844F121C238F640025E651 /* MyExtension.h */,
+				BF844F131C238F640025E651 /* MyExtension.m */,
 				BFD4418A1C1F6C21004F8CDE /* TourMapViewController.h */,
 				BFD4418B1C1F6C21004F8CDE /* TourMapViewController.m */,
 				BFAD24CF1C20ECED009557DF /* TourListViewController.h */,
 				BFAD24D01C20ECED009557DF /* TourListViewController.m */,
-				BF5FECB41C22909D00E7A16D /* Gradient.h */,
-				BF5FECB51C22909D00E7A16D /* Gradient.m */,
 				9050ECDA1C1F7B920092CF86 /* TourDetailViewController.h */,
 				9050ECDB1C1F7B920092CF86 /* TourDetailViewController.m */,
 			);
@@ -453,6 +478,7 @@
 				903177C21C1F3A9E001C8DF9 /* Sources */,
 				903177C31C1F3A9E001C8DF9 /* Frameworks */,
 				903177C41C1F3A9E001C8DF9 /* Resources */,
+				9067345E1C28AAD500DF76B1 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -510,6 +536,7 @@
 				TargetAttributes = {
 					903177C51C1F3A9E001C8DF9 = {
 						CreatedOnToolsVersion = 7.1.1;
+						DevelopmentTeam = C49MT2F2AS;
 					};
 					903177DE1C1F3A9E001C8DF9 = {
 						CreatedOnToolsVersion = 7.1.1;
@@ -546,26 +573,30 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3DC42F6D1C330D9A00037970 /* Walkabout-Tours40.png in Resources */,
 				90090C9D1C2339630040EE94 /* Rectangle 2 Copy 2@2x.png in Resources */,
-				3D43CF261C1F478D00118998 /* WalkingTours120.png in Resources */,
 				90AE88D21C209290005536B4 /* CategoryTableViewCell.xib in Resources */,
 				3D9A58701C2329F90056A624 /* sandfootprints 700h.jpg in Resources */,
+				3DC42F711C330D9A00037970 /* Walkabout-Tours80.png in Resources */,
 				3D9A58781C234E6D0056A624 /* goldengatebridge copy700.jpg in Resources */,
 				90FD33561C210AAA002FFD1A /* LocationTableViewCell.xib in Resources */,
-				3D7264021C1F687D00ABEEFD /* WalkingTour.png in Resources */,
 				90090C9F1C2339630040EE94 /* Rectangle 3 Copy.png in Resources */,
-				3D43CF231C1F478D00118998 /* WalkingTours58.png in Resources */,
+				BF85AE651C29F3E0004292E6 /* InfoPlist.strings in Resources */,
+				3DC42F6F1C330D9A00037970 /* Walkabout-Tours60.png in Resources */,
+				3DC42F6B1C330D9A00037970 /* Walkabout-Tours29.png in Resources */,
 				90090C9B1C2339630040EE94 /* Rectangle 1@3x.png in Resources */,
+				BF85AE601C29F3DF004292E6 /* Localizable.strings in Resources */,
 				903177D91C1F3A9E001C8DF9 /* LaunchScreen.storyboard in Resources */,
+				3DC42F761C330E1F00037970 /* Walkabout-Tours152.png in Resources */,
 				BF7EAC391C207FC40076E432 /* POIDetailTableViewCell.xib in Resources */,
 				903177D61C1F3A9E001C8DF9 /* Assets.xcassets in Resources */,
-				3D43CF241C1F478D00118998 /* WalkingTours60.png in Resources */,
 				903177D41C1F3A9E001C8DF9 /* Main.storyboard in Resources */,
+				3DC42F6E1C330D9A00037970 /* Walkabout-Tours58.png in Resources */,
+				3DC42F701C330D9A00037970 /* Walkabout-Tours76.png in Resources */,
 				90090C9A1C2339630040EE94 /* Rectangle 1@2x.png in Resources */,
-				3D43CF251C1F478D00118998 /* WalkingTours80.png in Resources */,
 				3D9A58721C232C180056A624 /* newyorkpin copy700h.jpg in Resources */,
+				3DC42F741C330DCB00037970 /* Walkabout-Tours87.png in Resources */,
 				3D9A58741C234BEB0056A624 /* seattlesunset copy700.jpg in Resources */,
-				902868C81C228BD3005224A4 /* idaho.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -573,6 +604,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF85AE561C29F3DE004292E6 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -580,10 +612,27 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF85AE5B1C29F3DE004292E6 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		9067345E1C28AAD500DF76B1 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Fabric.framework/run d2670f4cba4ee6201633340ca53ec0ea2488d3b5 54ee1ec56bbcd4d9f0cc28b0d615c86f8b9a3f6f15a6e8be64d51b2850a70aa9";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		903177C21C1F3A9E001C8DF9 /* Sources */ = {
@@ -595,21 +644,21 @@
 				90FD33551C210AAA002FFD1A /* LocationTableViewCell.m in Sources */,
 				3D43CF2D1C1F4E4D00118998 /* ParseSignUpViewController.m in Sources */,
 				90F4E22B1C1FA7B3002A75B2 /* CreateTourViewController.m in Sources */,
+				BF844F141C238F650025E651 /* MyExtension.m in Sources */,
 				BFD441891C1F6574004F8CDE /* FindToursViewController.m in Sources */,
 				9050ECDF1C1F82F20092CF86 /* CreateTourDetailViewController.m in Sources */,
 				90380EF81C1F4C590085DD66 /* Location.m in Sources */,
 				3D43CF301C1F4E5B00118998 /* ParseResetPasswordViewController.m in Sources */,
 				BFD4418C1C1F6C21004F8CDE /* TourMapViewController.m in Sources */,
 				9050ECD91C1F78E80092CF86 /* VideoPlayerView.m in Sources */,
-				3D43CF161C1F43B400118998 /* ParseKeys.m in Sources */,
 				903177CE1C1F3A9E001C8DF9 /* AppDelegate.m in Sources */,
 				90AE88D11C209290005536B4 /* CategoryTableViewCell.m in Sources */,
 				908AA8C11C20972B00A7DF57 /* ParseService.m in Sources */,
 				9050ECDC1C1F7B920092CF86 /* TourDetailViewController.m in Sources */,
 				BFAD24D11C20ECED009557DF /* TourListViewController.m in Sources */,
+				BF844F1A1C239B5B0025E651 /* CustomAnnotation.m in Sources */,
 				903177CB1C1F3A9E001C8DF9 /* main.m in Sources */,
 				90380EF51C1F49160085DD66 /* Tour.m in Sources */,
-				BF5FECB61C22909D00E7A16D /* Gradient.m in Sources */,
 				3D7264051C1F6BCC00ABEEFD /* TourSelectionViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -650,6 +699,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				903177D31C1F3A9E001C8DF9 /* Base */,
+				BF85AE501C29CA19004292E6 /* es-MX */,
+				BF85AE521C29CA27004292E6 /* pt-BR */,
 			);
 			name = Main.storyboard;
 			path = WalkingTours;
@@ -659,9 +710,47 @@
 			isa = PBXVariantGroup;
 			children = (
 				903177D81C1F3A9E001C8DF9 /* Base */,
+				BF85AE511C29CA19004292E6 /* es-MX */,
+				BF85AE531C29CA27004292E6 /* pt-BR */,
 			);
 			name = LaunchScreen.storyboard;
 			path = WalkingTours;
+			sourceTree = "<group>";
+		};
+		BF85AE581C29F3DE004292E6 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BF85AE571C29F3DE004292E6 /* es-MX */,
+				BF85AE681C29F409004292E6 /* pt-BR */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		BF85AE5D1C29F3DE004292E6 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BF85AE5C1C29F3DE004292E6 /* es-MX */,
+				BF85AE691C29F409004292E6 /* pt-BR */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		BF85AE621C29F3DF004292E6 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BF85AE611C29F3DF004292E6 /* es-MX */,
+				BF85AE6A1C29F409004292E6 /* pt-BR */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		BF85AE671C29F3E0004292E6 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BF85AE661C29F3E0004292E6 /* es-MX */,
+				BF85AE6B1C29F409004292E6 /* pt-BR */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -753,13 +842,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = WalkingTours/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "Lindsey-Boggio.WalkingTours";
+				PRODUCT_BUNDLE_IDENTIFIER = C49MT2F2AS.com.creeperspeak.WalkingTours;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -768,13 +860,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = WalkingTours/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "Lindsey-Boggio.WalkingTours";
+				PRODUCT_BUNDLE_IDENTIFIER = C49MT2F2AS.com.creeperspeak.WalkingTours;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
