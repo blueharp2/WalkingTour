@@ -49,7 +49,7 @@ static const NSArray *categories;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.image = [UIImage imageNamed:@"idaho.jpg"];
+    self.image = [UIImage imageNamed:@"placeholder"];
     
     self.saveButton.layer.cornerRadius = self.saveButton.frame.size.width / 2;
     
