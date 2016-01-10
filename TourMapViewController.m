@@ -112,14 +112,16 @@
 }
 
 - (IBAction)nextStopButtonPressed:(UIButton *)sender {
-    if ([self.currentLocation.locationName isEqual: @"SecretName"]) {
+    if ([self.currentLocation.locationName isEqual: @"SecretName"] && self.locationsFromParse.count > 0) {
         self.currentLocation = self.locationsFromParse[0];
     } else {
-        if ([self.locationsFromParse indexOfObject:self.currentLocation] == self.locationsFromParse.count - 1) {
-            //present alert saying they're on the last stop
-        } else {
-            NSUInteger currentIndex = [self.locationsFromParse indexOfObject:self.currentLocation];
-            self.currentLocation = self.locationsFromParse[currentIndex + 1];
+        if (self.locationsFromParse.count > 0) {
+            if ([self.locationsFromParse indexOfObject:self.currentLocation] == self.locationsFromParse.count - 1) {
+                //present alert saying they're on the last stop
+            } else {
+                NSUInteger currentIndex = [self.locationsFromParse indexOfObject:self.currentLocation];
+                self.currentLocation = self.locationsFromParse[currentIndex + 1];
+            }
         }
     }
     //center the map on the next item
