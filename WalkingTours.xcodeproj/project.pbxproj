@@ -59,7 +59,6 @@
 		906734611C28AAF700DF76B1 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9067345F1C28AAF700DF76B1 /* Fabric.framework */; };
 		906734621C28AAF700DF76B1 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 906734601C28AAF700DF76B1 /* Crashlytics.framework */; };
 		908AA8C11C20972B00A7DF57 /* ParseService.m in Sources */ = {isa = PBXBuildFile; fileRef = 908AA8C01C20972B00A7DF57 /* ParseService.m */; };
-		90A6710D1C332E8600B24353 /* north-america.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 90A6710C1C332E8600B24353 /* north-america.geojson */; };
 		90AE88D11C209290005536B4 /* CategoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 90AE88CF1C209290005536B4 /* CategoryTableViewCell.m */; };
 		90AE88D21C209290005536B4 /* CategoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 90AE88D01C209290005536B4 /* CategoryTableViewCell.xib */; };
 		90F4E22B1C1FA7B3002A75B2 /* CreateTourViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90F4E22A1C1FA7B3002A75B2 /* CreateTourViewController.m */; };
@@ -171,7 +170,6 @@
 		906734601C28AAF700DF76B1 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		908AA8BF1C20972B00A7DF57 /* ParseService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParseService.h; sourceTree = "<group>"; };
 		908AA8C01C20972B00A7DF57 /* ParseService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParseService.m; sourceTree = "<group>"; };
-		90A6710C1C332E8600B24353 /* north-america.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "north-america.geojson"; sourceTree = "<group>"; };
 		90AE88CE1C209290005536B4 /* CategoryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryTableViewCell.h; sourceTree = "<group>"; };
 		90AE88CF1C209290005536B4 /* CategoryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryTableViewCell.m; sourceTree = "<group>"; };
 		90AE88D01C209290005536B4 /* CategoryTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CategoryTableViewCell.xib; sourceTree = "<group>"; };
@@ -299,7 +297,6 @@
 		903177BD1C1F3A9E001C8DF9 = {
 			isa = PBXGroup;
 			children = (
-				90A6710C1C332E8600B24353 /* north-america.geojson */,
 				9050ECD71C1F78E80092CF86 /* VideoPlayerView.h */,
 				9050ECD81C1F78E80092CF86 /* VideoPlayerView.m */,
 				3D43CF271C1F47D600118998 /* PARSE */,
@@ -585,7 +582,6 @@
 				BF85AE601C29F3DF004292E6 /* Localizable.strings in Resources */,
 				903177D91C1F3A9E001C8DF9 /* LaunchScreen.storyboard in Resources */,
 				3DC42F761C330E1F00037970 /* Walkabout-Tours152.png in Resources */,
-				90A6710D1C332E8600B24353 /* north-america.geojson in Resources */,
 				BF7EAC391C207FC40076E432 /* POIDetailTableViewCell.xib in Resources */,
 				903177D61C1F3A9E001C8DF9 /* Assets.xcassets in Resources */,
 				903177D41C1F3A9E001C8DF9 /* Main.storyboard in Resources */,
