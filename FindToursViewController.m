@@ -323,6 +323,10 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (tableView.tag == 0) {
         POIDetailTableViewCell *cell = (POIDetailTableViewCell*) [self.toursTableView dequeueReusableCellWithIdentifier:@"POIDetailTableViewCell"];
+        cell.backgroundColor = [UIColor whiteColor];
+        if (self.toursFromParse[indexPath.section].user == [PFUser currentUser]) {
+            cell.backgroundColor = [UIColor colorWithRed:0.965 green:0.800 blue:0.643 alpha:1.000];
+        }
         [cell setTour:[self.toursFromParse objectAtIndex:indexPath.section]];
         return cell;
     } else {
@@ -365,6 +369,46 @@
         } else {
             self.selectedCategories = [NSMutableArray arrayWithObject:self.categoryList[indexPath.row]];
         }
+    }
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (tableView.tag == 0 && self.toursFromParse[indexPath.section].user == [PFUser currentUser]) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        Tour *tourToDelete = self.toursFromParse[indexPath.section];
+        PFQuery *locationQuery = [PFQuery queryWithClassName:@"Location"];
+        [locationQuery whereKey:@"Tour" equalTo:tourToDelete];
+        [locationQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+            if (error) {
+                NSLog(@"Unable to find locations: %@", error.localizedFailureReason);
+            }
+            if (objects) {
+                NSArray *objectsToDelete = [NSArray arrayWithObject:tourToDelete];
+                objectsToDelete = [objectsToDelete arrayByAddingObjectsFromArray:objects];
+                [PFObject deleteAllInBackground:objectsToDelete block:^(BOOL succeeded, NSError * _Nullable error) {
+                    if (error) {
+                        NSLog(@"Unable to delete objects: %@", error.localizedFailureReason);
+                    }
+                    if (succeeded) {
+                        NSMutableArray *tempArray = [NSMutableArray arrayWithArray:self.toursFromParse];
+                        [tempArray removeObjectAtIndex:indexPath.section];
+                        NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+                        [queue addOperationWithBlock:^{
+                            self.toursFromParse = [NSArray arrayWithArray:tempArray];
+                            NSIndexSet *sectionSet = [[NSIndexSet alloc] initWithIndex:indexPath.section];
+                            [tableView deleteSections:sectionSet withRowAnimation:UITableViewRowAnimationFade];
+                        }];
+                    }
+                }];
+            }
+        }];
     }
 }
 
