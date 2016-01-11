@@ -113,6 +113,39 @@
     cell.layer.masksToBounds = true;
 }
 
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        Location *locationToDelete = [self.locationsFromParse objectAtIndex:indexPath.section];
+        NSArray *arrayToDelete = [NSArray arrayWithObject:locationToDelete];
+        NSMutableArray *tempArray = [NSMutableArray arrayWithArray:self.locationsFromParse];
+        [tempArray removeObjectAtIndex:indexPath.section];
+        self.locationsFromParse = [NSArray arrayWithArray:tempArray];
+        if (self.locationsFromParse.count == 0) {
+            Tour *tourToDelete = locationToDelete.tour;
+            arrayToDelete = [arrayToDelete arrayByAddingObject:tourToDelete];
+        }
+        [PFObject deleteAllInBackground:arrayToDelete block:^(BOOL succeeded, NSError * _Nullable error) {
+            if (error) {
+                NSLog(@"Unable to delete location: %@", error.localizedFailureReason);
+            }
+            if (succeeded) {
+                if (self.locationsFromParse.count > 0) {
+                    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                        [tableView reloadData];
+                    }];
+                } else {
+                    //Need to deal with letting user deleting tour from "find tours VC".
+                    [self.navigationController popViewControllerAnimated:YES];
+                }
+            }
+        }];
+    }
+}
+
 @end
 
 
