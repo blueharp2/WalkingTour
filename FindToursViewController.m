@@ -399,11 +399,9 @@
                     if (succeeded) {
                         NSMutableArray *tempArray = [NSMutableArray arrayWithArray:self.toursFromParse];
                         [tempArray removeObjectAtIndex:indexPath.section];
-                        NSOperationQueue *queue = [[NSOperationQueue alloc] init];
-                        [queue addOperationWithBlock:^{
-                            self.toursFromParse = [NSArray arrayWithArray:tempArray];
-                            NSIndexSet *sectionSet = [[NSIndexSet alloc] initWithIndex:indexPath.section];
-                            [tableView deleteSections:sectionSet withRowAnimation:UITableViewRowAnimationFade];
+                        self.toursFromParse = [NSArray arrayWithArray:tempArray];
+                        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                            [tableView reloadData];
                         }];
                     }
                 }];
