@@ -57,7 +57,7 @@
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier  isEqual: @"TourDetailViewController"]) {
+    if ([segue.identifier isEqual:@"TourDetailViewController"]) {
         if ([segue.destinationViewController isKindOfClass:[TourDetailViewController class]]) {
             TourDetailViewController *tourDetailVC = (TourDetailViewController *)segue.destinationViewController;
             if ([sender isKindOfClass:[Location class]]) {
@@ -138,7 +138,9 @@
                         [tableView reloadData];
                     }];
                 } else {
-                    //Need to deal with letting user deleting tour from "find tours VC".
+                    if (self.delegate) {
+                        [self.delegate deletedTourWithTour:locationToDelete.tour];
+                    }
                     [self.navigationController popViewControllerAnimated:YES];
                 }
             }

@@ -20,7 +20,8 @@
 @import ParseUI;
 #import <Crashlytics/Answers.h>
 
-@interface FindToursViewController () <MKMapViewDelegate, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
+@interface FindToursViewController () <MKMapViewDelegate, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, TourListViewControllerDelegate>
+
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (strong, nonatomic) NSMutableArray<CustomAnnotation *> *mapAnnotations;
 @property (weak, nonatomic) IBOutlet UITableView *toursTableView;
@@ -428,6 +429,7 @@
                 // ...
                 [tourMapViewController setCurrentTour:annotation.tourId];
                 [tourListViewController setCurrentTour:annotation.tourId];
+                tourListViewController.delegate = self;
             }
             
         } else {
@@ -440,6 +442,7 @@
             if ([sender isKindOfClass:[NSString class]]) {
                 [tourMapViewController setCurrentTour:sender];
                 [tourListViewController setCurrentTour:sender];
+                tourListViewController.delegate = self;
             }
         }
     }
@@ -492,6 +495,16 @@
         [self.searchCategoryTableView setFrame:CGRectMake(self.searchCategoryTableViewFrame.origin.x, self.searchCategoryTableViewFrame.origin.y, self.searchCategoryTableViewFrame.size.width, 0)];
         [self.view layoutIfNeeded];
     }];
+}
+
+#pragma mark - TourListViewControllerDelegate
+
+- (void)deletedTourWithTour:(Tour *)tour {
+    NSMutableArray *tempArray = [NSMutableArray arrayWithArray:self.toursFromParse];
+    NSUInteger index = [tempArray indexOfObject:tour];
+    [tempArray removeObjectAtIndex:index];
+    self.toursFromParse = [NSArray arrayWithArray:tempArray];
+    [self.toursTableView reloadData];
 }
 
 @end
