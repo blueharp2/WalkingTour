@@ -94,8 +94,13 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
     LocationTableViewCell *cell = (LocationTableViewCell*) [tableView dequeueReusableCellWithIdentifier:@"LocationTableViewCell"];
+    if (self.locationsFromParse[indexPath.section].tour.user == [PFUser currentUser]) {
+        UIButton *editButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
+        [editButton setImage:[UIImage imageNamed:@"edit.png"] forState:UIControlStateNormal];
+        [editButton addTarget:self action:@selector(editButtonTapped:event:) forControlEvents:UIControlEventTouchUpInside];
+        cell.accessoryView = editButton;
+    }
     [cell setLocation:[self.locationsFromParse objectAtIndex:indexPath.section]];
     
     return cell;
@@ -145,6 +150,20 @@
                 }
             }
         }];
+    }
+}
+
+- (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"%@", self.locationsFromParse[indexPath.section].locationName);
+}
+
+- (void)editButtonTapped:(UIButton *)sender event:(UIEvent *)event {
+    NSSet *touches = event.allTouches;
+    UITouch *touch = touches.anyObject;
+    CGPoint currentTouchPosition = [touch locationInView:self.tourListTableView];
+    NSIndexPath *indexPath = [self.tourListTableView indexPathForRowAtPoint:currentTouchPosition];
+    if (indexPath != nil) {
+        [self tableView:self.tourListTableView accessoryButtonTappedForRowWithIndexPath:indexPath];
     }
 }
 
