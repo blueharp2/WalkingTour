@@ -436,10 +436,7 @@
                 return NSOrderedSame;
             }];
             UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:createVC];
-            UIBarButtonItem *undoButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemUndo target:self action:@selector(undoButtonPressed:)];
-            navController.navigationItem.leftBarButtonItem = undoButton;
-            createVC.tourName = selectedTour.nameOfTour;
-            createVC.tourDescription = selectedTour.descriptionText;
+            createVC.tour = selectedTour;
             createVC.locations = [NSMutableArray arrayWithArray:sortedResults];
             createVC.editToursCompletion = ^{
                 [self dismissViewControllerAnimated:YES completion:nil];
@@ -452,9 +449,9 @@
     NSLog(@"%@", self.toursFromParse[indexPath.section].nameOfTour);
 }
 
-- (void)undoButtonPressed:(UIBarButtonItem *)sender {
-    //
-}
+//- (void)undoButtonPressed:(UIBarButtonItem *)sender {
+//    //
+//}
 
 - (void)editButtonTapped:(UIButton *)sender event:(UIEvent *)event {
     NSSet *touches = event.allTouches;

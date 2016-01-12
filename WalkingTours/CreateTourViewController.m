@@ -40,9 +40,9 @@
     } else {
         self.addLocationButtonBottomConstraint.constant = 10;
     }
-    if (self.tourName != nil && self.tourDescription != nil) {
-        self.nameOfTourTextField.text = self.tourName;
-        self.tourDescriptionTextField.text = self.tourDescription;
+    if (self.tour != nil) {
+        self.nameOfTourTextField.text = self.tour.nameOfTour;
+        self.tourDescriptionTextField.text = self.tour.descriptionText;
     }
 }
 
@@ -141,26 +141,46 @@
         [self presentViewController:noLocationAlert animated:YES completion:nil];
         return;
     }
-    Tour *tour = [[Tour alloc] initWithNameOfTour:self.nameOfTourTextField.text descriptionText:self.tourDescriptionTextField.text startLocation:self.locations.firstObject.location user:[PFUser currentUser]];
-    NSMutableArray *saveArray;
-    int i = 0;
-    for (Location *location in self.locations) {
-        location.tour = tour;
-        location.orderNumber = i++;
-        if (saveArray.count == 0) {
-            saveArray = [NSMutableArray arrayWithObject:location];
-        } else {
+    if ([self.navigationController.viewControllers[0] isKindOfClass:[CreateTourViewController class]]) {
+        NSMutableArray *saveArray = [NSMutableArray arrayWithObject:self.tour];
+        int i = 0;
+        for (Location *location in self.locations) {
+            location.tour = self.tour;
+            location.orderNumber = i++;
             [saveArray addObject:location];
         }
-    }
-    
-    [ParseService saveToParse:tour locations:saveArray completion:^(BOOL success, NSError *error) {
-        if (success) {
-            [self.navigationController popToRootViewControllerAnimated:YES];
-        } else {
-            NSLog(@"Error saving: %@", error.localizedFailureReason);
+        [PFObject saveAllInBackground:saveArray block:^(BOOL succeeded, NSError * _Nullable error) {
+            if (error) {
+                NSLog(@"Unable to save objects: %@", error.localizedFailureReason);
+            }
+            if (succeeded) {
+                if (self.editToursCompletion != nil) {
+                    self.editToursCompletion();
+                }
+            }
+        }];
+    } else {
+        Tour *tour = [[Tour alloc] initWithNameOfTour:self.nameOfTourTextField.text descriptionText:self.tourDescriptionTextField.text startLocation:self.locations.firstObject.location user:[PFUser currentUser]];
+        NSMutableArray *saveArray;
+        int i = 0;
+        for (Location *location in self.locations) {
+            location.tour = tour;
+            location.orderNumber = i++;
+            if (saveArray.count == 0) {
+                saveArray = [NSMutableArray arrayWithObject:location];
+            } else {
+                [saveArray addObject:location];
+            }
         }
-    }];
+        
+        [ParseService saveToParse:tour locations:saveArray completion:^(BOOL success, NSError *error) {
+            if (success) {
+                [self.navigationController popToRootViewControllerAnimated:YES];
+            } else {
+                NSLog(@"Error saving: %@", error.localizedFailureReason);
+            }
+        }];
+    }
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
