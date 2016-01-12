@@ -9,6 +9,7 @@
 #import "FindToursViewController.h"
 #import "TourMapViewController.h"
 #import "TourListViewController.h"
+#import "CreateTourViewController.h"
 #import "Location.h"
 #import "Tour.h"
 #import "Location.h"
@@ -415,7 +416,44 @@
 }
 
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
+    Tour *selectedTour = self.toursFromParse[indexPath.section];
+    CreateTourViewController *createVC = [self.storyboard instantiateViewControllerWithIdentifier:@"CreateTourViewController"];
+    PFQuery *locationQuery = [PFQuery queryWithClassName:@"Location" predicate:[NSPredicate predicateWithFormat:@"tour == %@", selectedTour]];
+    [locationQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+        if (error) {
+            NSLog(@"Unable to fetch locations: %@", error.localizedFailureReason);
+        }
+        if (objects) {
+            NSArray *sortedResults = [objects sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+                Location *locationOne = (Location *)obj1;
+                Location *locationTwo = (Location *)obj2;
+                if (locationOne.orderNumber > locationTwo.orderNumber) {
+                    return NSOrderedDescending;
+                }
+                if (locationOne.orderNumber < locationTwo.orderNumber) {
+                    return NSOrderedAscending;
+                }
+                return NSOrderedSame;
+            }];
+            UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:createVC];
+            UIBarButtonItem *undoButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemUndo target:self action:@selector(undoButtonPressed:)];
+            navController.navigationItem.leftBarButtonItem = undoButton;
+            createVC.tourName = selectedTour.nameOfTour;
+            createVC.tourDescription = selectedTour.descriptionText;
+            createVC.locations = [NSMutableArray arrayWithArray:sortedResults];
+            createVC.editToursCompletion = ^{
+                [self dismissViewControllerAnimated:YES completion:nil];
+            };
+            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                [self presentViewController:navController animated:YES completion:nil];
+            }];
+        }
+    }];
     NSLog(@"%@", self.toursFromParse[indexPath.section].nameOfTour);
+}
+
+- (void)undoButtonPressed:(UIBarButtonItem *)sender {
+    //
 }
 
 - (void)editButtonTapped:(UIButton *)sender event:(UIEvent *)event {

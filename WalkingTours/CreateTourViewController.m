@@ -14,23 +14,14 @@
 #import "ParseService.h"
 #import "Tour.h"
 
-
-
-
-@interface CreateTourViewController() <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, CreateTourDetailViewControllerDelegate>
+@interface CreateTourViewController() <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, CreateTourDetailViewControllerDelegate, UINavigationControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *nameOfTourTextField;
 @property (weak, nonatomic) IBOutlet UITextField *tourDescriptionTextField;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *addLocationButtonBottomConstraint;
-
 @property (weak, nonatomic) IBOutlet UIButton *addLocationButton;
 - (IBAction)addLocationsButton:(id)sender;
-
 @property (weak, nonatomic) IBOutlet UITableView *locationTableView;
-@property (strong, nonatomic) NSMutableArray<Location *> *locations;
-@property (strong, nonatomic) NSMutableArray<UIImage *> *images;
-
-
 
 @end
 
@@ -49,6 +40,10 @@
     } else {
         self.addLocationButtonBottomConstraint.constant = 10;
     }
+    if (self.tourName != nil && self.tourDescription != nil) {
+        self.nameOfTourTextField.text = self.tourName;
+        self.tourDescriptionTextField.text = self.tourDescription;
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -65,6 +60,7 @@
     
     self.locationTableView.delegate = self;
     self.locationTableView.dataSource = self;
+    self.navigationController.delegate = self;
     [self.nameOfTourTextField setDelegate:self];
     [self.tourDescriptionTextField setDelegate:self];
     [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveButtonSelected:)]];
@@ -83,32 +79,27 @@
 
 #pragma mark - UITableView protocol functions.
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return self.locations.count;
 }
 
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
     return 1;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     return 5.0;
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     UIView *headerView = [UIView new];
     [headerView setBackgroundColor:[UIColor clearColor]];
     
     return headerView;
 }
 
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
    LocationTableViewCell *cell = (LocationTableViewCell *)[self.locationTableView dequeueReusableCellWithIdentifier:@"LocationTableViewCell" forIndexPath:indexPath];
     [cell setLocation:self.locations[indexPath.section]];
@@ -116,8 +107,7 @@
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     cell.layer.cornerRadius = 5;
     cell.layer.masksToBounds = true;
 }
@@ -191,6 +181,19 @@
         self.images = [NSMutableArray arrayWithObject:image];
     }
     [self.locationTableView reloadData];
+}
+
+- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
+    if ([navigationController.viewControllers[0] isKindOfClass:[CreateTourViewController class]]) {
+        UIBarButtonItem *undoButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemUndo target:self action:@selector(undoButtonPressed)];
+        self.navigationItem.leftBarButtonItem = undoButton;
+    }
+}
+
+- (void)undoButtonPressed {
+    if (self.editToursCompletion) {
+        self.editToursCompletion();
+    }
 }
 
 @end

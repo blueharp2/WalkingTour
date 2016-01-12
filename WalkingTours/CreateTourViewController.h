@@ -9,6 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "Location.h"
 
+typedef void(^EditToursCompletion)(void);
+
 @interface CreateTourViewController : UIViewController
+
+@property (strong, nonatomic) NSString *tourName;
+@property (strong, nonatomic) NSString *tourDescription;
+@property (strong, nonatomic) NSMutableArray<Location *> *locations;
+@property (strong, nonatomic) NSMutableArray<UIImage *> *images;
+@property (strong) EditToursCompletion editToursCompletion;
 
 @end
