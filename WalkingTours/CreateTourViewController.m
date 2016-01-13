@@ -224,15 +224,27 @@
     }
 }
 
-- (void)didFinishSavingLocationWithLocation:(Location *)location image:(UIImage *)image {
-    if (self.locations.count > 0) {
-        [self.locations addObject:location];
-        [self.images addObject:image];
+- (void)didFinishSavingLocationWithLocation:(Location *)location image:(UIImage *)image newLocation:(BOOL)newLocation {
+    if (!newLocation) {
+        if (self.locations.count > 0) {
+            [self.locations addObject:location];
+            [self.images addObject:image];
+        } else {
+            self.locations = [NSMutableArray arrayWithObject:location];
+            self.images = [NSMutableArray arrayWithObject:image];
+        }
+        [self.locationTableView reloadData];
     } else {
-        self.locations = [NSMutableArray arrayWithObject:location];
-        self.images = [NSMutableArray arrayWithObject:image];
+        NSUInteger uneditedLocationIndex = [self.locations indexOfObjectPassingTest:^BOOL(Location * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            if (obj.objectId == location.objectId) {
+                return idx;
+            }
+            return -1;
+        }];
+        if (uneditedLocationIndex > 0) {
+            self.locations[uneditedLocationIndex] = location;
+        }
     }
-    [self.locationTableView reloadData];
 }
 
 #pragma mark - UINavigationControllerDelegate

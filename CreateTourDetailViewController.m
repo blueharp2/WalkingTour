@@ -90,6 +90,7 @@ static const NSArray *categories;
 
 - (void)setLocationToEdit:(Location *)locationToEdit {
     _locationToEdit = locationToEdit;
+    _createdLocation = locationToEdit;
     CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(locationToEdit.location.latitude, locationToEdit.location.longitude);
     [self dropPinAtLocationCoordinate:coordinate];
     self.locationNameTextField.text = locationToEdit.locationName;
@@ -99,7 +100,6 @@ static const NSArray *categories;
 #pragma mark - Setup Functions
 
 - (void)setCategoryOptions {
-//    categories = @[@"Restaurant", @"Cafe", @"Art", @"Museum", @"History", @"Shopping", @"Nightlife", @"Film", @"Education"];
         categories = @[NSLocalizedString(@"Restaurant", comment:@"This is a tour category"), NSLocalizedString(@"Cafe", comment:@"This is a tour category"), NSLocalizedString(@"Art", comment:@"This is a tour category"), NSLocalizedString(@"Museum", comment:@"This is a tour category"), NSLocalizedString(@"History", comment:@"This is a tour category"), NSLocalizedString(@"Shopping", comment:@"This is a tour category"), NSLocalizedString(@"Nightlife", comment:@"This is a tour category"), NSLocalizedString(@"Film", comment:@"This is a tour category"), NSLocalizedString(@"Education", comment:@"This is a tour category"), NSLocalizedString(@"Nature", comment:@"This is a tour category")];
 }
 
@@ -230,9 +230,17 @@ static const NSArray *categories;
             [self presentNoPhotoWarning];
             return;
         }
-        Location *locationToSave = [[Location alloc] initWithLocationName:self.locationNameTextField.text locationDescription:self.locationDescriptionTextField.text photo:self.photoFile video:self.videoFile categories:nil location:self.geoPoint orderNumber:0 tour:nil];
-        self.createdLocation = locationToSave;
-        [self displayCategories];
+        if (self.createdLocation != nil) {
+            if (self.createdLocation.categories.count > 0) {
+                [self saveLocationWithCategories:sender];
+            } else {
+                [self displayCategories];
+            }
+        } else {
+            Location *locationToSave = [[Location alloc] initWithLocationName:self.locationNameTextField.text locationDescription:self.locationDescriptionTextField.text photo:self.photoFile video:self.videoFile categories:nil location:self.geoPoint orderNumber:0 tour:nil];
+            self.createdLocation = locationToSave;
+            [self displayCategories];
+        }
     } else {
         [self saveLocationWithCategories:sender];
     }
@@ -267,7 +275,7 @@ static const NSArray *categories;
         self.createdLocation.categories = self.selectedCategories;
         self.navigationController.navigationBarHidden = NO;
         if (self.createTourDetailDelegate) {
-            [self.createTourDetailDelegate didFinishSavingLocationWithLocation:self.createdLocation image:self.image];
+            [self.createTourDetailDelegate didFinishSavingLocationWithLocation:self.createdLocation image:self.image newLocation:(self.locationToEdit == nil ? YES : NO)];
         }
         [self.navigationController popViewControllerAnimated:YES];
     }
