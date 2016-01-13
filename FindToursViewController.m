@@ -389,7 +389,7 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         Tour *tourToDelete = self.toursFromParse[indexPath.section];
         PFQuery *locationQuery = [PFQuery queryWithClassName:@"Location"];
-        [locationQuery whereKey:@"Tour" equalTo:tourToDelete];
+        [locationQuery whereKey:@"tour" equalTo:tourToDelete];
         [locationQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
             if (error) {
                 NSLog(@"Unable to find locations: %@", error.localizedFailureReason);

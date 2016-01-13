@@ -336,7 +336,7 @@
         <!--Create Tour Detail View Controller-->
         <scene sceneID="Qhg-dh-nYD">
             <objects>
-                <viewController id="ch6-eO-iFm" customClass="CreateTourDetailViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CreateTourDetailViewController" id="ch6-eO-iFm" customClass="CreateTourDetailViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="cYn-Hr-gxW"/>
                         <viewControllerLayoutGuide type="bottom" id="hOD-qw-MCN"/>

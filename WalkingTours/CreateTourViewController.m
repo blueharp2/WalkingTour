@@ -104,6 +104,10 @@
    LocationTableViewCell *cell = (LocationTableViewCell *)[self.locationTableView dequeueReusableCellWithIdentifier:@"LocationTableViewCell" forIndexPath:indexPath];
     [cell setLocation:self.locations[indexPath.section]];
     [cell setImage:self.images[indexPath.section]];
+    UIButton *editButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
+    [editButton setImage:[UIImage imageNamed:@"edit.png"] forState:UIControlStateNormal];
+    [editButton addTarget:self action:@selector(editButtonTapped:event:) forControlEvents:UIControlEventTouchUpInside];
+    cell.accessoryView = editButton;
     return cell;
 }
 
@@ -120,6 +124,23 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         [self.locations removeObjectAtIndex:indexPath.section];
         [tableView deleteSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationFade];
+    }
+}
+
+- (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
+    CreateTourDetailViewController *detailVC = [self.storyboard instantiateViewControllerWithIdentifier:@"CreateTourDetailViewController"];
+//    [detailVC setLocationToEdit:self.locations[indexPath.section]];
+    detailVC.locationToEdit = self.locations[indexPath.section];
+    [self.navigationController pushViewController:detailVC animated:YES];
+}
+
+- (void)editButtonTapped:(UIButton *)sender event:(UIEvent *)event {
+    NSSet *touches = event.allTouches;
+    UITouch *touch = touches.anyObject;
+    CGPoint currentTouchPosition = [touch locationInView:self.locationTableView];
+    NSIndexPath *indexPath = [self.locationTableView indexPathForRowAtPoint:currentTouchPosition];
+    if (indexPath != nil) {
+        [self tableView:self.locationTableView accessoryButtonTappedForRowWithIndexPath:indexPath];
     }
 }
 
