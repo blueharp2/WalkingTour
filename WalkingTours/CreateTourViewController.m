@@ -75,7 +75,7 @@
     [self.tourDescriptionTextField resignFirstResponder];
 }
 
-#pragma mark set up TbableView
+#pragma mark - Set up TableView
 
 #pragma mark - UITableView protocol functions.
 
@@ -112,9 +112,20 @@
     cell.layer.masksToBounds = true;
 }
 
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        [self.locations removeObjectAtIndex:indexPath.section];
+        [tableView deleteSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationFade];
+    }
+}
+
 //custom setter on location Array it reloads data
 
-#pragma mark -UITextFieldDelegate
+#pragma mark - UITextFieldDelegate
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
@@ -124,7 +135,7 @@
     return YES;
 }
 
-#pragma mark Save to Parse
+#pragma mark - Save to Parse
 
 -(void)saveButtonSelected:(UIBarButtonItem *)sender{
     if (self.nameOfTourTextField.text.length == 0 || self.tourDescriptionTextField.text.length == 0) {
@@ -202,6 +213,8 @@
     }
     [self.locationTableView reloadData];
 }
+
+#pragma mark - UINavigationControllerDelegate
 
 - (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
     if ([navigationController.viewControllers[0] isKindOfClass:[CreateTourViewController class]]) {

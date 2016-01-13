@@ -29,8 +29,8 @@
 @property (strong, nonatomic) UIBarButtonItem *searchButton;
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (strong, nonatomic) NSMutableArray <id> *mapPoints;
-@property (strong, nonatomic) NSArray <Tour*> *toursFromParse;
--(void)setToursFromParse:(NSArray<Tour *> *)toursFromParse;
+@property (strong, nonatomic) NSMutableArray <Tour *> *toursFromParse;
+-(void)setToursFromParse:(NSMutableArray<Tour *> *)toursFromParse;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *searchViewTopConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *searchViewBottomConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *searchBarBottomConstraint;
@@ -51,7 +51,7 @@
 @implementation FindToursViewController
 
 - (void)setToursFromParse:(NSArray<Tour *> *)toursFromParse {
-    _toursFromParse = toursFromParse;
+    _toursFromParse = [NSMutableArray arrayWithArray:toursFromParse];
     [self updateAnnotationsAfterSearch:toursFromParse];
 }
 
@@ -78,7 +78,7 @@
     
     [ParseService fetchToursNearLocation:coordinate completion:^(BOOL success, NSArray *results) {
         if (success) {
-            [self setToursFromParse:results];
+            [self setToursFromParse:[NSMutableArray arrayWithArray:results]];
             [self.toursTableView reloadData];
         }
     }];
@@ -139,10 +139,10 @@
                 self.searchView.alpha = 0.0;
             }];
             if (success) {
-                [self setToursFromParse:results];
+                [self setToursFromParse:[NSMutableArray arrayWithArray:results]];
             } else {
                 Tour *noTours = [[Tour alloc] initWithNameOfTour:NSLocalizedString(@"No tours found.", comment: nil) descriptionText:@"" startLocation:nil user:nil];
-                [self setToursFromParse:@[noTours]];
+                [self setToursFromParse:[NSMutableArray arrayWithObject:noTours]];
             }
         }];
     } else {
@@ -151,10 +151,10 @@
                 self.searchView.alpha = 0.0;
             }];
             if (success) {
-                [self setToursFromParse:results];
+                [self setToursFromParse:[NSMutableArray arrayWithArray:results]];
             } else {
                 Tour *noTours = [[Tour alloc] initWithNameOfTour:NSLocalizedString(@"No tours found.", comment: nil) descriptionText:@"" startLocation:nil user:nil];
-                [self setToursFromParse:@[noTours]];
+                [self setToursFromParse:[NSMutableArray arrayWithObject:noTours]];
             }
         }];
     }
@@ -402,11 +402,9 @@
                         NSLog(@"Unable to delete objects: %@", error.localizedFailureReason);
                     }
                     if (succeeded) {
-                        NSMutableArray *tempArray = [NSMutableArray arrayWithArray:self.toursFromParse];
-                        [tempArray removeObjectAtIndex:indexPath.section];
-                        self.toursFromParse = [NSArray arrayWithArray:tempArray];
                         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                            [tableView reloadData];
+                            [self.toursFromParse removeObjectAtIndex:indexPath.section];
+                            [tableView deleteSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationFade];
                         }];
                     }
                 }];
@@ -552,11 +550,9 @@
 #pragma mark - TourListViewControllerDelegate
 
 - (void)deletedTourWithTour:(Tour *)tour {
-    NSMutableArray *tempArray = [NSMutableArray arrayWithArray:self.toursFromParse];
-    NSUInteger index = [tempArray indexOfObject:tour];
-    [tempArray removeObjectAtIndex:index];
-    self.toursFromParse = [NSArray arrayWithArray:tempArray];
-    [self.toursTableView reloadData];
+    NSUInteger index = [self.toursFromParse indexOfObject:tour];
+    [self.toursFromParse removeObjectAtIndex:index];
+    [self.toursTableView deleteSections:[NSIndexSet indexSetWithIndex:index] withRowAnimation:UITableViewRowAnimationFade];
 }
 
 @end
