@@ -64,6 +64,7 @@
 		90F4E22B1C1FA7B3002A75B2 /* CreateTourViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90F4E22A1C1FA7B3002A75B2 /* CreateTourViewController.m */; };
 		90FD33551C210AAA002FFD1A /* LocationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 90FD33531C210AAA002FFD1A /* LocationTableViewCell.m */; };
 		90FD33561C210AAA002FFD1A /* LocationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 90FD33541C210AAA002FFD1A /* LocationTableViewCell.xib */; };
+		BF5E37661C443C6100CD4B50 /* FourSquareService.m in Sources */ = {isa = PBXBuildFile; fileRef = BF5E37651C443C6100CD4B50 /* FourSquareService.m */; };
 		BF7EAC391C207FC40076E432 /* POIDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF7EAC381C207FC40076E432 /* POIDetailTableViewCell.xib */; };
 		BF7EAC3C1C2080160076E432 /* POIDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BF7EAC3B1C2080160076E432 /* POIDetailTableViewCell.m */; };
 		BF844F141C238F650025E651 /* MyExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = BF844F131C238F640025E651 /* MyExtension.m */; };
@@ -178,6 +179,8 @@
 		90FD33521C210AAA002FFD1A /* LocationTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationTableViewCell.h; sourceTree = "<group>"; };
 		90FD33531C210AAA002FFD1A /* LocationTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationTableViewCell.m; sourceTree = "<group>"; };
 		90FD33541C210AAA002FFD1A /* LocationTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LocationTableViewCell.xib; sourceTree = "<group>"; };
+		BF5E37641C443C6100CD4B50 /* FourSquareService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FourSquareService.h; sourceTree = "<group>"; };
+		BF5E37651C443C6100CD4B50 /* FourSquareService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FourSquareService.m; sourceTree = "<group>"; };
 		BF7EAC381C207FC40076E432 /* POIDetailTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = POIDetailTableViewCell.xib; sourceTree = "<group>"; };
 		BF7EAC3A1C2080160076E432 /* POIDetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = POIDetailTableViewCell.h; sourceTree = "<group>"; };
 		BF7EAC3B1C2080160076E432 /* POIDetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = POIDetailTableViewCell.m; sourceTree = "<group>"; };
@@ -389,6 +392,8 @@
 		90380EF21C1F48730085DD66 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				BF5E37641C443C6100CD4B50 /* FourSquareService.h */,
+				BF5E37651C443C6100CD4B50 /* FourSquareService.m */,
 				90380EF31C1F49160085DD66 /* Tour.h */,
 				90380EF41C1F49160085DD66 /* Tour.m */,
 				90380EF61C1F4C590085DD66 /* Location.h */,
@@ -647,6 +652,7 @@
 				9050ECD91C1F78E80092CF86 /* VideoPlayerView.m in Sources */,
 				903177CE1C1F3A9E001C8DF9 /* AppDelegate.m in Sources */,
 				90AE88D11C209290005536B4 /* CategoryTableViewCell.m in Sources */,
+				BF5E37661C443C6100CD4B50 /* FourSquareService.m in Sources */,
 				908AA8C11C20972B00A7DF57 /* ParseService.m in Sources */,
 				9050ECDC1C1F7B920092CF86 /* TourDetailViewController.m in Sources */,
 				BFAD24D11C20ECED009557DF /* TourListViewController.m in Sources */,

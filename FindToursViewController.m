@@ -16,6 +16,7 @@
 #import "ParseService.h"
 #import "MyExtension.h"
 #import "CustomAnnotation.h"
+#import "FourSquareService.h"
 @import Parse;
 @import ParseUI;
 #import <Crashlytics/Answers.h>
@@ -66,6 +67,14 @@
     [self.locationManager setDelegate:self];
     [self setUpSearchButton];
     [self setupViewController];
+    
+    [FourSquareService searchVenueAddress:@"restaurant" latitude:47.6861009 longitude:-122.3791101 completion:^(BOOL success, NSData * _Nullable data) {
+        [FourSquareService parseVenueResponse:data completion:^(BOOL success, NSMutableArray * _Nullable addressFromFoursquare) {
+            NSLog(@"%@", addressFromFoursquare);
+        }];
+    }];
+    
+    
 }
 
 - (void)fetchToursNearUser {
