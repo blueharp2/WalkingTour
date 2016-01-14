@@ -14,7 +14,7 @@
 
 +(void)searchVenues:(NSString * _Nullable)queryString completion:(nonnull void (^)(BOOL success ,  NSData *_Nullable data))completionHandler;
 
-+ (void)parseVenueResponse:(NSData * _Nullable)data completion:(nonnull void (^) (BOOL success, NSMutableArray *_Nullable addressFromFoursquare))completionHandler;
++ (void)parseVenueResponse:(NSData * _Nullable)data completion:(nonnull void (^) (BOOL success, NSMutableArray *_Nullable addressesFromFoursquare))completionHandler;
 
 
 

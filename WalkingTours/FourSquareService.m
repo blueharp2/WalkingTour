@@ -102,36 +102,43 @@ int const radius = 250;
 +(void)parseVenueResponse:(NSData *)data completion:(void (^)(BOOL, NSMutableArray * _Nullable))completionHandler
 {
     NSError *error = nil;
-//    NSLog(data, nil);
-    
-    if (data) {
+    if (data)
+    {
     NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:(NSJSONReadingMutableContainers) error:&error];
         NSLog(@"%@",json);
     
     if (json != nil && [json isKindOfClass:[NSDictionary class]])
     {
-//        NSLog(json, nil);
-        NSMutableArray *addressFromFoursquare = [NSMutableArray new];
-        
+        NSMutableArray *addressesFromFoursquare = [NSMutableArray new];
         NSDictionary *response = [(NSDictionary*)json objectForKey:@"response"];
         NSArray *venues = response[@"venues"];
         
-        if ([venues count] > 0) {
-            for (int i=0; i<[venues count]; i++) {
-//                NSString *venueID = [[venues objectAtIndex:i] objectForKey:@"id"];
+        if ([venues count] > 0)
+        {
+            for (int i=0; i<[venues count]; i++)
+            {
                 NSString *name = [[venues objectAtIndex:i] objectForKey:@"name"];
                 NSDictionary *location = [[venues objectAtIndex:i] objectForKey:@"location"];
                 NSString *address = location[@"address"];
-                NSLog(@"%@", address);
-                [addressFromFoursquare addObject:address];
+                NSString *city = location[@"city"];
+                
+                NSLog(@"The name : %@", name);
+                NSLog(@"The address : %@", address);
+                
+                NSMutableDictionary *result = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"name", name, @"address", address, @"city", city,  nil];
+                [addressesFromFoursquare addObject:result];
             }
-            completionHandler(true, addressFromFoursquare);
+//            completionHandler(true, addressesFromFoursquare);
+        } else {
+            NSLog(@"Venues from foursquare contains less than 0 items");
         }
-        
-        
+        completionHandler(true, addressesFromFoursquare);
+
     }
-}
-}
+//        completionHandler(true, addressesFromFoursquare);
 
+}
+//    completionHandler(true, addressesFromFoursquare);
 
+}
 @end

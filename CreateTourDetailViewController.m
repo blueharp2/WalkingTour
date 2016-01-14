@@ -9,6 +9,7 @@
 #import "CreateTourDetailViewController.h"
 #import "CategoryTableViewCell.h"
 #import "CreateTourViewController.h"
+#import "FourSquareService.h"
 @import MobileCoreServices;
 @import CoreLocation;
 @import CoreMedia;
@@ -31,6 +32,7 @@ static const NSArray *categories;
 @property (strong, nonatomic) Location *createdLocation;
 @property (strong, nonatomic) MKPointAnnotation *mapPinAnnotation;
 @property (strong, nonatomic) UIColor *navBarTintColor;
+@property (strong, nonatomic) NSMutableArray *suggestedAddresses;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet UITextField *locationNameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *locationDescriptionTextField;
@@ -456,8 +458,28 @@ static const NSArray *categories;
         CGPoint touchPoint = [sender locationInView:self.mapView];
         CLLocationCoordinate2D coordinate = [self.mapView convertPoint:touchPoint toCoordinateFromView:self.mapView];
         
+        
+       
+        
         MKPointAnnotation *newPoint = [[MKPointAnnotation alloc]init];
         newPoint.coordinate = coordinate;
+        
+        [FourSquareService searchVenueAddress:@"restaurant" latitude:newPoint.coordinate.latitude longitude:newPoint.coordinate.longitude completion:^(BOOL success, NSData * _Nullable data) {
+            
+            [FourSquareService parseVenueResponse:data completion:^(BOOL success, NSMutableArray * _Nullable addressesFromFoursquare) {
+//                addressesFromFoursquare = self.suggestedAddresses;
+                NSLog(@"%@", addressesFromFoursquare);
+                [self.suggestedAddresses addObjectsFromArray:addressesFromFoursquare];
+                NSLog(@"%@", addressesFromFoursquare);
+                
+            }];
+//            [FourSquareService parseVenueResponse:data completion:^(BOOL success, NSMutableArray * _Nullable addressesFromFoursquare) {
+//                addressesFromFoursquare = self.suggestedAddresses;
+//                [self.suggestedAddresses addObjectsFromArray:addressesFromFoursquare];
+//                NSLog(@"%@", addressesFromFoursquare);
+//
+//            }];
+        }];
         
         self.geoPoint = [PFGeoPoint geoPointWithLatitude:newPoint.coordinate.latitude longitude:newPoint.coordinate.longitude];
         [self.mapView removeAnnotation:self.mapPinAnnotation];
