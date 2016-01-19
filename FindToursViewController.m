@@ -9,6 +9,7 @@
 #import "FindToursViewController.h"
 #import "TourMapViewController.h"
 #import "TourListViewController.h"
+#import "CreateTourViewController.h"
 #import "Location.h"
 #import "Tour.h"
 #import "Location.h"
@@ -21,15 +22,16 @@
 @import ParseUI;
 #import <Crashlytics/Answers.h>
 
-@interface FindToursViewController () <MKMapViewDelegate, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
+@interface FindToursViewController () <MKMapViewDelegate, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, TourListViewControllerDelegate>
+
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (strong, nonatomic) NSMutableArray<CustomAnnotation *> *mapAnnotations;
 @property (weak, nonatomic) IBOutlet UITableView *toursTableView;
 @property (strong, nonatomic) UIBarButtonItem *searchButton;
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (strong, nonatomic) NSMutableArray <id> *mapPoints;
-@property (strong, nonatomic) NSArray <Tour*> *toursFromParse;
--(void)setToursFromParse:(NSArray<Tour *> *)toursFromParse;
+@property (strong, nonatomic) NSMutableArray <Tour *> *toursFromParse;
+-(void)setToursFromParse:(NSMutableArray<Tour *> *)toursFromParse;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *searchViewTopConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *searchViewBottomConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *searchBarBottomConstraint;
@@ -50,7 +52,7 @@
 @implementation FindToursViewController
 
 - (void)setToursFromParse:(NSArray<Tour *> *)toursFromParse {
-    _toursFromParse = toursFromParse;
+    _toursFromParse = [NSMutableArray arrayWithArray:toursFromParse];
     [self updateAnnotationsAfterSearch:toursFromParse];
 }
 
@@ -78,7 +80,7 @@
     
     [ParseService fetchToursNearLocation:coordinate completion:^(BOOL success, NSArray *results) {
         if (success) {
-            [self setToursFromParse:results];
+            [self setToursFromParse:[NSMutableArray arrayWithArray:results]];
             [self.toursTableView reloadData];
         }
     }];
@@ -139,10 +141,10 @@
                 self.searchView.alpha = 0.0;
             }];
             if (success) {
-                [self setToursFromParse:results];
+                [self setToursFromParse:[NSMutableArray arrayWithArray:results]];
             } else {
                 Tour *noTours = [[Tour alloc] initWithNameOfTour:NSLocalizedString(@"No tours found.", comment: nil) descriptionText:@"" startLocation:nil user:nil];
-                [self setToursFromParse:@[noTours]];
+                [self setToursFromParse:[NSMutableArray arrayWithObject:noTours]];
             }
         }];
     } else {
@@ -151,10 +153,10 @@
                 self.searchView.alpha = 0.0;
             }];
             if (success) {
-                [self setToursFromParse:results];
+                [self setToursFromParse:[NSMutableArray arrayWithArray:results]];
             } else {
                 Tour *noTours = [[Tour alloc] initWithNameOfTour:NSLocalizedString(@"No tours found.", comment: nil) descriptionText:@"" startLocation:nil user:nil];
-                [self setToursFromParse:@[noTours]];
+                [self setToursFromParse:[NSMutableArray arrayWithObject:noTours]];
             }
         }];
     }
@@ -325,6 +327,13 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (tableView.tag == 0) {
         POIDetailTableViewCell *cell = (POIDetailTableViewCell*) [self.toursTableView dequeueReusableCellWithIdentifier:@"POIDetailTableViewCell"];
+        cell.accessoryView = nil;
+        if (self.toursFromParse[indexPath.section].user == [PFUser currentUser]) {
+            UIButton *editButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
+            [editButton setImage:[UIImage imageNamed:@"edit.png"] forState:UIControlStateNormal];
+            [editButton addTarget:self action:@selector(editButtonTapped:event:) forControlEvents:UIControlEventTouchUpInside];
+            cell.accessoryView = editButton;
+        }
         [cell setTour:[self.toursFromParse objectAtIndex:indexPath.section]];
         return cell;
     } else {
@@ -370,6 +379,90 @@
     }
 }
 
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (tableView.tag == 0 && self.toursFromParse[indexPath.section].user == [PFUser currentUser]) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        Tour *tourToDelete = self.toursFromParse[indexPath.section];
+        PFQuery *locationQuery = [PFQuery queryWithClassName:@"Location"];
+        [locationQuery whereKey:@"tour" equalTo:tourToDelete];
+        [locationQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+            if (error) {
+                NSLog(@"Unable to find locations: %@", error.localizedFailureReason);
+            }
+            if (objects) {
+                NSArray *objectsToDelete = [NSArray arrayWithObject:tourToDelete];
+                objectsToDelete = [objectsToDelete arrayByAddingObjectsFromArray:objects];
+                [PFObject deleteAllInBackground:objectsToDelete block:^(BOOL succeeded, NSError * _Nullable error) {
+                    if (error) {
+                        NSLog(@"Unable to delete objects: %@", error.localizedFailureReason);
+                    }
+                    if (succeeded) {
+                        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                            [self.toursFromParse removeObjectAtIndex:indexPath.section];
+                            [tableView deleteSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationFade];
+                        }];
+                    }
+                }];
+            }
+        }];
+    }
+}
+
+- (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
+    Tour *selectedTour = self.toursFromParse[indexPath.section];
+    CreateTourViewController *createVC = [self.storyboard instantiateViewControllerWithIdentifier:@"CreateTourViewController"];
+    PFQuery *locationQuery = [PFQuery queryWithClassName:@"Location" predicate:[NSPredicate predicateWithFormat:@"tour == %@", selectedTour]];
+    [locationQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+        if (error) {
+            NSLog(@"Unable to fetch locations: %@", error.localizedFailureReason);
+        }
+        if (objects) {
+            NSArray *sortedResults = [objects sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+                Location *locationOne = (Location *)obj1;
+                Location *locationTwo = (Location *)obj2;
+                if (locationOne.orderNumber > locationTwo.orderNumber) {
+                    return NSOrderedDescending;
+                }
+                if (locationOne.orderNumber < locationTwo.orderNumber) {
+                    return NSOrderedAscending;
+                }
+                return NSOrderedSame;
+            }];
+            UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:createVC];
+            createVC.tour = selectedTour;
+            createVC.locations = [NSMutableArray arrayWithArray:sortedResults];
+            createVC.editToursCompletion = ^{
+                [self dismissViewControllerAnimated:YES completion:nil];
+            };
+            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                [self presentViewController:navController animated:YES completion:nil];
+            }];
+        }
+    }];
+    NSLog(@"%@", self.toursFromParse[indexPath.section].nameOfTour);
+}
+
+//- (void)undoButtonPressed:(UIBarButtonItem *)sender {
+//    //
+//}
+
+- (void)editButtonTapped:(UIButton *)sender event:(UIEvent *)event {
+    NSSet *touches = event.allTouches;
+    UITouch *touch = touches.anyObject;
+    CGPoint currentTouchPosition = [touch locationInView:self.toursTableView];
+    NSIndexPath *indexPath = [self.toursTableView indexPathForRowAtPoint:currentTouchPosition];
+    if (indexPath != nil) {
+        [self tableView:self.toursTableView accessoryButtonTappedForRowWithIndexPath:indexPath];
+    }
+}
+
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -388,6 +481,7 @@
                 // ...
                 [tourMapViewController setCurrentTour:annotation.tourId];
                 [tourListViewController setCurrentTour:annotation.tourId];
+                tourListViewController.delegate = self;
             }
             
         } else {
@@ -400,6 +494,7 @@
             if ([sender isKindOfClass:[NSString class]]) {
                 [tourMapViewController setCurrentTour:sender];
                 [tourListViewController setCurrentTour:sender];
+                tourListViewController.delegate = self;
             }
         }
     }
@@ -452,6 +547,14 @@
         [self.searchCategoryTableView setFrame:CGRectMake(self.searchCategoryTableViewFrame.origin.x, self.searchCategoryTableViewFrame.origin.y, self.searchCategoryTableViewFrame.size.width, 0)];
         [self.view layoutIfNeeded];
     }];
+}
+
+#pragma mark - TourListViewControllerDelegate
+
+- (void)deletedTourWithTour:(Tour *)tour {
+    NSUInteger index = [self.toursFromParse indexOfObject:tour];
+    [self.toursFromParse removeObjectAtIndex:index];
+    [self.toursTableView deleteSections:[NSIndexSet indexSetWithIndex:index] withRowAnimation:UITableViewRowAnimationFade];
 }
 
 @end
