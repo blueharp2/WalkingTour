@@ -12,7 +12,7 @@
 
 @protocol CreateTourDetailViewControllerDelegate <NSObject>
 
-- (void)didFinishSavingLocationWithLocation:(Location *)location image:(UIImage *)image;
+- (void)didFinishSavingLocationWithLocation:(Location *)location image:(UIImage *)image newLocation:(BOOL)newLocation;
 
 @end
 
@@ -28,6 +28,6 @@
 @property (strong,nonatomic) CLLocationManager *locationManager;
 @property (strong,nonatomic) CLLocation *location;
 @property (weak, nonatomic) id<LocationControllerDelegate> delegate;
-
+@property (strong, nonatomic) Location *locationToEdit;
 
 @end

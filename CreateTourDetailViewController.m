@@ -88,10 +88,18 @@ static const NSArray *categories;
     [self.locationManager stopMonitoringSignificantLocationChanges];
 }
 
+- (void)setLocationToEdit:(Location *)locationToEdit {
+    _locationToEdit = locationToEdit;
+    _createdLocation = locationToEdit;
+    CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(locationToEdit.location.latitude, locationToEdit.location.longitude);
+    [self dropPinAtLocationCoordinate:coordinate];
+    self.locationNameTextField.text = locationToEdit.locationName;
+    self.locationDescriptionTextField.text = locationToEdit.locationDescription;
+}
+
 #pragma mark - Setup Functions
 
 - (void)setCategoryOptions {
-//    categories = @[@"Restaurant", @"Cafe", @"Art", @"Museum", @"History", @"Shopping", @"Nightlife", @"Film", @"Education"];
         categories = @[NSLocalizedString(@"Restaurant", comment:@"This is a tour category"), NSLocalizedString(@"Cafe", comment:@"This is a tour category"), NSLocalizedString(@"Art", comment:@"This is a tour category"), NSLocalizedString(@"Museum", comment:@"This is a tour category"), NSLocalizedString(@"History", comment:@"This is a tour category"), NSLocalizedString(@"Shopping", comment:@"This is a tour category"), NSLocalizedString(@"Nightlife", comment:@"This is a tour category"), NSLocalizedString(@"Film", comment:@"This is a tour category"), NSLocalizedString(@"Education", comment:@"This is a tour category"), NSLocalizedString(@"Nature", comment:@"This is a tour category")];
 }
 
@@ -222,9 +230,17 @@ static const NSArray *categories;
             [self presentNoPhotoWarning];
             return;
         }
-        Location *locationToSave = [[Location alloc] initWithLocationName:self.locationNameTextField.text locationDescription:self.locationDescriptionTextField.text photo:self.photoFile video:self.videoFile categories:nil location:self.geoPoint orderNumber:0 tour:nil];
-        self.createdLocation = locationToSave;
-        [self displayCategories];
+        if (self.createdLocation != nil) {
+            if (self.createdLocation.categories.count > 0) {
+                [self saveLocationWithCategories:sender];
+            } else {
+                [self displayCategories];
+            }
+        } else {
+            Location *locationToSave = [[Location alloc] initWithLocationName:self.locationNameTextField.text locationDescription:self.locationDescriptionTextField.text photo:self.photoFile video:self.videoFile categories:nil location:self.geoPoint orderNumber:0 tour:nil];
+            self.createdLocation = locationToSave;
+            [self displayCategories];
+        }
     } else {
         [self saveLocationWithCategories:sender];
     }
@@ -259,7 +275,7 @@ static const NSArray *categories;
         self.createdLocation.categories = self.selectedCategories;
         self.navigationController.navigationBarHidden = NO;
         if (self.createTourDetailDelegate) {
-            [self.createTourDetailDelegate didFinishSavingLocationWithLocation:self.createdLocation image:self.image];
+            [self.createTourDetailDelegate didFinishSavingLocationWithLocation:self.createdLocation image:self.image newLocation:(self.locationToEdit == nil ? YES : NO)];
         }
         [self.navigationController popViewControllerAnimated:YES];
     }
@@ -429,6 +445,9 @@ static const NSArray *categories;
 -(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation{
     
     if ([annotation isKindOfClass:[MKUserLocation class]]) {
+        if (self.locationToEdit) {
+            [self setLocationToEdit:self.locationToEdit];
+        }
         return nil;
     }
     
@@ -456,14 +475,25 @@ static const NSArray *categories;
         CGPoint touchPoint = [sender locationInView:self.mapView];
         CLLocationCoordinate2D coordinate = [self.mapView convertPoint:touchPoint toCoordinateFromView:self.mapView];
         
-        MKPointAnnotation *newPoint = [[MKPointAnnotation alloc]init];
-        newPoint.coordinate = coordinate;
-        
-        self.geoPoint = [PFGeoPoint geoPointWithLatitude:newPoint.coordinate.latitude longitude:newPoint.coordinate.longitude];
-        [self.mapView removeAnnotation:self.mapPinAnnotation];
-        self.mapPinAnnotation = newPoint;
-        [self.mapView addAnnotation:newPoint];
+//        MKPointAnnotation *newPoint = [[MKPointAnnotation alloc]init];
+//        newPoint.coordinate = coordinate;
+//        
+//        self.geoPoint = [PFGeoPoint geoPointWithLatitude:newPoint.coordinate.latitude longitude:newPoint.coordinate.longitude];
+//        [self.mapView removeAnnotation:self.mapPinAnnotation];
+//        self.mapPinAnnotation = newPoint;
+//        [self.mapView addAnnotation:newPoint];
+        [self dropPinAtLocationCoordinate:coordinate];
     }
+}
+
+- (void)dropPinAtLocationCoordinate:(CLLocationCoordinate2D)coordinate {
+    MKPointAnnotation *newPoint = [[MKPointAnnotation alloc]init];
+    newPoint.coordinate = coordinate;
+    
+    self.geoPoint = [PFGeoPoint geoPointWithLatitude:newPoint.coordinate.latitude longitude:newPoint.coordinate.longitude];
+    [self.mapView removeAnnotation:self.mapPinAnnotation];
+    self.mapPinAnnotation = newPoint;
+    [self.mapView addAnnotation:newPoint];
 }
 
 #pragma mark - UITextFieldDelegate

@@ -9,6 +9,13 @@
 @import UIKit;
 @import MapKit;
 @import CoreLocation;
+#import "Tour.h"
+
+@protocol TourListViewControllerDelegate <NSObject>
+
+- (void)deletedTourWithTour:(Tour *)tour;
+
+@end
 
 @interface FindToursViewController : UIViewController
 
