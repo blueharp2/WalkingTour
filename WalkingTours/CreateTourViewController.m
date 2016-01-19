@@ -225,7 +225,7 @@
 }
 
 - (void)didFinishSavingLocationWithLocation:(Location *)location image:(UIImage *)image newLocation:(BOOL)newLocation {
-    if (!newLocation) {
+    if (newLocation) {
         if (self.locations.count > 0) {
             [self.locations addObject:location];
             [self.images addObject:image];
@@ -235,6 +235,7 @@
         }
         [self.locationTableView reloadData];
     } else {
+        //BOOKMARK - this is where I left off.  It doesn't seem to get called when editing.
         NSUInteger uneditedLocationIndex = [self.locations indexOfObjectPassingTest:^BOOL(Location * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             if (obj.objectId == location.objectId) {
                 return idx;
