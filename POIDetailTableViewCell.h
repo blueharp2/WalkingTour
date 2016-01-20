@@ -15,4 +15,6 @@
 @property (strong, nonatomic) PFObject *object;
 @property (strong, nonatomic) Tour *tour;
 
+
+
 @end
