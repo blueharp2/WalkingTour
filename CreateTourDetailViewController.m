@@ -92,6 +92,10 @@ static const NSArray *categories;
     _locationToEdit = locationToEdit;
     _createdLocation = locationToEdit;
     CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(locationToEdit.location.latitude, locationToEdit.location.longitude);
+    MKPointAnnotation *newPoint = [[MKPointAnnotation alloc]init];
+    newPoint.coordinate = coordinate;
+    self.geoPoint = [PFGeoPoint geoPointWithLatitude:newPoint.coordinate.latitude longitude:newPoint.coordinate.longitude];
+    self.mapPinAnnotation = newPoint;
     [self dropPinAtLocationCoordinate:coordinate];
     self.locationNameTextField.text = locationToEdit.locationName;
     self.locationDescriptionTextField.text = locationToEdit.locationDescription;
@@ -278,6 +282,13 @@ static const NSArray *categories;
             [self.createTourDetailDelegate didFinishSavingLocationWithLocation:self.createdLocation image:self.image newLocation:(self.locationToEdit == nil ? YES : NO)];
         }
         [self.navigationController popViewControllerAnimated:YES];
+    } else {
+        if (self.locationToEdit) {
+            if (self.createTourDetailDelegate) {
+                [self.createTourDetailDelegate didFinishSavingLocationWithLocation:self.locationToEdit image:self.image newLocation:NO];
+            }
+            [self.navigationController popViewControllerAnimated:YES];
+        }
     }
 }
 

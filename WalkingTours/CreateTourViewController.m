@@ -131,6 +131,7 @@
     CreateTourDetailViewController *detailVC = [self.storyboard instantiateViewControllerWithIdentifier:@"CreateTourDetailViewController"];
 //    [detailVC setLocationToEdit:self.locations[indexPath.section]];
     detailVC.locationToEdit = self.locations[indexPath.section];
+    detailVC.createTourDetailDelegate = self;
     [self.navigationController pushViewController:detailVC animated:YES];
 }
 
@@ -236,14 +237,23 @@
         [self.locationTableView reloadData];
     } else {
         //BOOKMARK - this is where I left off.  It doesn't seem to get called when editing.
-        NSUInteger uneditedLocationIndex = [self.locations indexOfObjectPassingTest:^BOOL(Location * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        __block int index;
+        NSLog(@"%i", index);
+        [self.locations indexOfObjectPassingTest:^BOOL(Location * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             if (obj.objectId == location.objectId) {
-                return idx;
+                NSLog(@"%lu", (unsigned long)idx);
+                index = (int)idx;
+                *stop = YES;
+            } else {
+                index = -1;
             }
-            return -1;
+            return 0;
         }];
-        if (uneditedLocationIndex > 0) {
-            self.locations[uneditedLocationIndex] = location;
+        NSLog(@"%i", index);
+        if (index >= 0) {
+            self.locations[index] = location;
+            self.images[index] = image;
+            [self.locationTableView reloadSections:[NSIndexSet indexSetWithIndex:index] withRowAnimation:UITableViewRowAnimationAutomatic];
         }
     }
 }
