@@ -337,7 +337,7 @@
         <!--Create Tour Detail View Controller-->
         <scene sceneID="Qhg-dh-nYD">
             <objects>
-                <viewController id="ch6-eO-iFm" customClass="CreateTourDetailViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CreateTourDetailViewController" id="ch6-eO-iFm" customClass="CreateTourDetailViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="cYn-Hr-gxW"/>
                         <viewControllerLayoutGuide type="bottom" id="hOD-qw-MCN"/>
@@ -781,7 +781,7 @@
         <!--Create Tour View Controller-->
         <scene sceneID="PvD-xR-3JL">
             <objects>
-                <viewController id="vsA-st-EdL" customClass="CreateTourViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CreateTourViewController" id="vsA-st-EdL" customClass="CreateTourViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="lnd-bp-pY4"/>
                         <viewControllerLayoutGuide type="bottom" id="aDh-or-b7o"/>

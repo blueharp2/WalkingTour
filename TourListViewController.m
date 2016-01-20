@@ -57,7 +57,7 @@
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier  isEqual: @"TourDetailViewController"]) {
+    if ([segue.identifier isEqual:@"TourDetailViewController"]) {
         if ([segue.destinationViewController isKindOfClass:[TourDetailViewController class]]) {
             TourDetailViewController *tourDetailVC = (TourDetailViewController *)segue.destinationViewController;
             if ([sender isKindOfClass:[Location class]]) {
@@ -94,8 +94,13 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
     LocationTableViewCell *cell = (LocationTableViewCell*) [tableView dequeueReusableCellWithIdentifier:@"LocationTableViewCell"];
+    if (self.locationsFromParse[indexPath.section].tour.user == [PFUser currentUser]) {
+        UIButton *editButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
+        [editButton setImage:[UIImage imageNamed:@"edit.png"] forState:UIControlStateNormal];
+        [editButton addTarget:self action:@selector(editButtonTapped:event:) forControlEvents:UIControlEventTouchUpInside];
+        cell.accessoryView = editButton;
+    }
     [cell setLocation:[self.locationsFromParse objectAtIndex:indexPath.section]];
     
     return cell;
@@ -111,6 +116,55 @@
 {
     cell.layer.cornerRadius = 5;
     cell.layer.masksToBounds = true;
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        Location *locationToDelete = [self.locationsFromParse objectAtIndex:indexPath.section];
+        NSArray *arrayToDelete = [NSArray arrayWithObject:locationToDelete];
+        NSMutableArray *tempArray = [NSMutableArray arrayWithArray:self.locationsFromParse];
+        [tempArray removeObjectAtIndex:indexPath.section];
+        self.locationsFromParse = [NSArray arrayWithArray:tempArray];
+        if (self.locationsFromParse.count == 0) {
+            Tour *tourToDelete = locationToDelete.tour;
+            arrayToDelete = [arrayToDelete arrayByAddingObject:tourToDelete];
+        }
+        [PFObject deleteAllInBackground:arrayToDelete block:^(BOOL succeeded, NSError * _Nullable error) {
+            if (error) {
+                NSLog(@"Unable to delete location: %@", error.localizedFailureReason);
+            }
+            if (succeeded) {
+                if (self.locationsFromParse.count > 0) {
+                    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                        [tableView reloadData];
+                    }];
+                } else {
+                    if (self.delegate) {
+                        [self.delegate deletedTourWithTour:locationToDelete.tour];
+                    }
+                    [self.navigationController popViewControllerAnimated:YES];
+                }
+            }
+        }];
+    }
+}
+
+- (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"%@", self.locationsFromParse[indexPath.section].locationName);
+}
+
+- (void)editButtonTapped:(UIButton *)sender event:(UIEvent *)event {
+    NSSet *touches = event.allTouches;
+    UITouch *touch = touches.anyObject;
+    CGPoint currentTouchPosition = [touch locationInView:self.tourListTableView];
+    NSIndexPath *indexPath = [self.tourListTableView indexPathForRowAtPoint:currentTouchPosition];
+    if (indexPath != nil) {
+        [self tableView:self.tourListTableView accessoryButtonTappedForRowWithIndexPath:indexPath];
+    }
 }
 
 @end

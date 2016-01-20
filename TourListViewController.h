@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "LocationTableViewCell.h"
+#import "FindToursViewController.h"
 @import Parse;
 @import ParseUI;
 
@@ -15,9 +16,7 @@
 @interface TourListViewController : UIViewController
 
 @property (strong, nonatomic) NSString *currentTour;
-
+@property (weak) id <TourListViewControllerDelegate> delegate;
 - (void)setCurrentTour:(NSString*)currentTour;
-
-
 
 @end
