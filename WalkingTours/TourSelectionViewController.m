@@ -68,4 +68,24 @@
     }
 }
 
+- (IBAction)shareButton:(UIBarButtonItem *)sender {
+    
+    NSString *text = @"Checkout this Tour on Walkabout Tours in the App Store";
+
+    UIActivityViewController *controller = [[UIActivityViewController alloc] initWithActivityItems:@[text]
+                                                                             applicationActivities:nil];
+    
+    controller.excludedActivityTypes = @[UIActivityTypePostToWeibo,
+                                         UIActivityTypeCopyToPasteboard,
+                                         UIActivityTypeAssignToContact,
+                                         UIActivityTypeSaveToCameraRoll,
+                                         UIActivityTypeAddToReadingList,
+                                         UIActivityTypePostToFlickr,
+                                         UIActivityTypePostToVimeo,
+                                         UIActivityTypePostToTencentWeibo,
+                                         UIActivityTypeAirDrop,
+                                         ];
+    [self presentViewController:controller animated:YES completion:nil];
+}
+
 @end

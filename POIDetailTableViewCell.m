@@ -9,7 +9,7 @@
 #import "POIDetailTableViewCell.h"
 #import "Location.h"
 
-@interface POIDetailTableViewCell ()
+@interface POIDetailTableViewCell () <UIActionSheetDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *tourImageView;
 @property (weak, nonatomic) IBOutlet UILabel *tourNameLabel;
@@ -22,12 +22,12 @@
     self.tourNameLabel.text = tour.nameOfTour;
 }
 
-
 - (void)awakeFromNib {
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 }
+
 
 @end
