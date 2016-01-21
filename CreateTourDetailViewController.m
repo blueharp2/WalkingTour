@@ -143,6 +143,7 @@ static const NSArray *categories;
     if (!self.imagePicker) {
         self.imagePicker = [[UIImagePickerController alloc] init];
         self.imagePicker.delegate = self;
+        self.imagePicker.allowsEditing = YES;
         
         if ([UIImagePickerController isSourceTypeAvailable:(UIImagePickerControllerSourceTypeCamera)] && [UIImagePickerController isCameraDeviceAvailable:UIImagePickerControllerCameraDeviceRear]) {
             NSArray *availableMediaTypes = [UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypeCamera];
@@ -151,7 +152,6 @@ static const NSArray *categories;
                 self.imagePicker.mediaTypes = [[NSArray alloc] initWithObjects:(NSString *)kUTTypeImage, (NSString *)kUTTypeMovie, nil];
             }
             self.imagePicker.showsCameraControls = YES;
-            self.imagePicker.allowsEditing = YES;
         }
     }
     [self presentViewController:self.imagePicker animated:YES completion:nil];
