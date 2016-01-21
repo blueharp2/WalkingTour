@@ -325,9 +325,9 @@ static const NSArray *categories;
         self.createdLocation.categories = self.selectedCategories;
         self.navigationController.navigationBarHidden = NO;
         if (self.createTourDetailDelegate) {
-            NSLog(@"LocationToEdit = nil? Answer: %d", self.locationToEdit == nil);
-            NSLog(@"Does created = toEdit? %d", self.createdLocation == self.locationToEdit);
-            NSLog(@"created == %@", self.createdLocation);
+//            NSLog(@"LocationToEdit = nil? Answer: %d", self.locationToEdit == nil);
+//            NSLog(@"Does created = toEdit? %d", self.createdLocation == self.locationToEdit);
+//            NSLog(@"created == %@", self.createdLocation);
             [self.createTourDetailDelegate didFinishSavingLocationWithLocation:self.createdLocation image:self.image newLocation:(self.locationToEdit == nil ? YES : NO)];
         }
         [self.navigationController popViewControllerAnimated:YES];

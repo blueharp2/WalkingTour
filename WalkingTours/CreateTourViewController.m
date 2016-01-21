@@ -131,7 +131,7 @@
     CreateTourDetailViewController *detailVC = [self.storyboard instantiateViewControllerWithIdentifier:@"CreateTourDetailViewController"];
 //    [detailVC setLocationToEdit:self.locations[indexPath.section]];
     detailVC.locationToEdit = self.locations[indexPath.section];
-    NSLog(@"locationToEdit's objectid == %@", self.locations[indexPath.section].objectId);
+//    NSLog(@"locationToEdit's objectid == %@", self.locations[indexPath.section].objectId);
     detailVC.image = self.images[indexPath.section];
     detailVC.createTourDetailDelegate = self;
     [self.navigationController pushViewController:detailVC animated:YES];
@@ -240,7 +240,7 @@
     } else {
         __block int index;
         [self.locations indexOfObjectPassingTest:^BOOL(Location * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            NSLog(@"obj.objectid == %@, location.objectId == %@", obj.objectId, location.objectId);
+//            NSLog(@"obj.objectid == %@, location.objectId == %@", obj.objectId, location.objectId);
             if (obj.objectId == location.objectId) {
                 index = (int)idx;
                 *stop = YES;

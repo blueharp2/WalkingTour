@@ -155,7 +155,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"%@", self.locationsFromParse[indexPath.section].locationName);
+//    NSLog(@"%@", self.locationsFromParse[indexPath.section].locationName);
 }
 
 - (void)editButtonTapped:(UIButton *)sender event:(UIEvent *)event {
