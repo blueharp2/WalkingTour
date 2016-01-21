@@ -441,10 +441,10 @@
             };
             [[NSOperationQueue mainQueue] addOperationWithBlock:^{
                 [self presentViewController:navController animated:YES completion:nil];
+                self.navigationController.navigationBarHidden = YES;
             }];
         }
     }];
-    NSLog(@"%@", self.toursFromParse[indexPath.section].nameOfTour);
 }
 
 //- (void)undoButtonPressed:(UIBarButtonItem *)sender {
@@ -533,7 +533,6 @@
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
     self.searchCategoryTableViewFrame = self.searchCategoryTableView.frame;
-    NSLog(@"%f", self.view.frame.size.height);
     [UIView animateWithDuration:0.3 animations:^{
         self.searchBarBottomConstraint.active = NO;
         if (self.view.frame.size.height < 600.0) {

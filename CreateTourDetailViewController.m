@@ -240,7 +240,16 @@ static const NSArray *categories;
                 if (!self.locationToEdit) {
                     [self saveLocationWithCategories:sender];
                 } else {
-                    Location *locationToEdit = [[Location alloc] initWithLocationName:self.locationNameTextField.text locationDescription:self.locationDescriptionTextField.text photo:self.photoFile video:self.videoFile categories:self.selectedCategories location:self.geoPoint orderNumber:0 tour:nil];
+                    Location *currentState = self.locationToEdit;
+                    if (currentState) {
+                        currentState.locationName = self.locationNameTextField.text;
+                        currentState.locationDescription = self.locationDescriptionTextField.text;
+                        currentState.photo = self.photoFile;
+                        currentState.video = self.videoFile;
+                        currentState.location = self.geoPoint;
+                        currentState.categories = self.selectedCategories;
+                    }
+                    Location *locationToEdit = (self.locationToEdit == nil ? [[Location alloc] initWithLocationName:self.locationNameTextField.text locationDescription:self.locationDescriptionTextField.text photo:self.photoFile video:self.videoFile categories:self.selectedCategories location:self.geoPoint orderNumber:0 tour:nil] : currentState);
                     self.createdLocation = locationToEdit;
                 }
             } else {
@@ -315,6 +324,9 @@ static const NSArray *categories;
         self.createdLocation.categories = self.selectedCategories;
         self.navigationController.navigationBarHidden = NO;
         if (self.createTourDetailDelegate) {
+            NSLog(@"LocationToEdit = nil? Answer: %d", self.locationToEdit == nil);
+            NSLog(@"Does created = toEdit? %d", self.createdLocation == self.locationToEdit);
+            NSLog(@"created == %@", self.createdLocation);
             [self.createTourDetailDelegate didFinishSavingLocationWithLocation:self.createdLocation image:self.image newLocation:(self.locationToEdit == nil ? YES : NO)];
         }
         [self.navigationController popViewControllerAnimated:YES];
