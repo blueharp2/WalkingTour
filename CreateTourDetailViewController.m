@@ -31,6 +31,7 @@ static const NSArray *categories;
 @property (strong, nonatomic) MKPointAnnotation *mapPinAnnotation;
 @property (strong, nonatomic) UIColor *navBarTintColor;
 @property BOOL categoriesEdited;
+@property BOOL locationSet;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet UITextField *locationNameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *locationDescriptionTextField;
@@ -492,7 +493,8 @@ static const NSArray *categories;
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation{
     
     if ([annotation isKindOfClass:[MKUserLocation class]]) {
-        if (self.locationToEdit) {
+        if (self.locationToEdit && !self.locationSet) {
+            self.locationSet = YES;
             [self setLocationToEdit:self.locationToEdit];
         }
         return nil;
