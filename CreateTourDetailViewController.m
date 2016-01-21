@@ -349,6 +349,9 @@ static const NSArray *categories;
             MKCoordinateRegion pinRegion = MKCoordinateRegionMakeWithDistance(CLLocationCoordinate2DMake(self.geoPoint.latitude, self.geoPoint.longitude), 300, 300);
             [self.mapView setRegion:pinRegion animated:YES];
         }];
+    } else {
+        MKCoordinateRegion pinRegion = MKCoordinateRegionMakeWithDistance(CLLocationCoordinate2DMake(self.geoPoint.latitude, self.geoPoint.longitude), 300, 300);
+        [self.mapView setRegion:pinRegion animated:YES];
     }
 }
 
@@ -486,7 +489,7 @@ static const NSArray *categories;
 }
 
 #pragma mark MKMapViewDelegate
--(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation{
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation{
     
     if ([annotation isKindOfClass:[MKUserLocation class]]) {
         if (self.locationToEdit) {
@@ -511,7 +514,6 @@ static const NSArray *categories;
     [self toggleViewAfterPinDrop];
 
     return annotationView;
-    
 }
 
 -(IBAction)handleLongPressGestured:(UILongPressGestureRecognizer *)sender{
@@ -535,9 +537,14 @@ static const NSArray *categories;
     newPoint.coordinate = coordinate;
     
     self.geoPoint = [PFGeoPoint geoPointWithLatitude:newPoint.coordinate.latitude longitude:newPoint.coordinate.longitude];
-    [self.mapView removeAnnotation:self.mapPinAnnotation];
+    MKUserLocation *userLocation = [self.mapView userLocation];
+    NSMutableArray *annotations = [NSMutableArray arrayWithArray:[self.mapView annotations]];
+    if (userLocation) {
+        [annotations removeObject:userLocation];
+    }
     self.mapPinAnnotation = newPoint;
     [self.mapView addAnnotation:newPoint];
+    [self.mapView removeAnnotations:annotations];
 }
 
 #pragma mark - UITextFieldDelegate
