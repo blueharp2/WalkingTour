@@ -281,6 +281,7 @@ static const NSArray *categories;
         } else {
             self.photoFile = self.locationToEdit.photo;
             self.videoFile = self.locationToEdit.video;
+            [self saveButtonPressed:self.saveButton];
         }
     }];
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", comment:nil) style:UIAlertActionStyleCancel handler:nil];
