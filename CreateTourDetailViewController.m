@@ -26,11 +26,11 @@ static const NSArray *categories;
 @property (strong, nonatomic) NSMutableArray *selectedCategories;
 @property (strong, nonatomic) PFFile *videoFile;
 @property (strong, nonatomic) PFFile *photoFile;
-@property (strong, nonatomic) UIImage *image;
 @property (strong, nonatomic) PFGeoPoint *geoPoint;
 @property (strong, nonatomic) Location *createdLocation;
 @property (strong, nonatomic) MKPointAnnotation *mapPinAnnotation;
 @property (strong, nonatomic) UIColor *navBarTintColor;
+@property BOOL categoriesEdited;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet UITextField *locationNameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *locationDescriptionTextField;
@@ -49,7 +49,7 @@ static const NSArray *categories;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.image = [UIImage imageNamed:@"placeholder"];
+    self.image = (self.image == nil ? [UIImage imageNamed:@"placeholder"] : self.image);
     
     self.saveButton.layer.cornerRadius = self.saveButton.frame.size.width / 2;
     
@@ -236,7 +236,12 @@ static const NSArray *categories;
         }
         if (self.createdLocation != nil) {
             if (self.createdLocation.categories.count > 0) {
-                [self saveLocationWithCategories:sender];
+                if (!self.locationToEdit) {
+                    [self saveLocationWithCategories:sender];
+                } else {
+                    Location *locationToEdit = [[Location alloc] initWithLocationName:self.locationNameTextField.text locationDescription:self.locationDescriptionTextField.text photo:self.photoFile video:self.videoFile categories:self.selectedCategories location:self.geoPoint orderNumber:0 tour:nil];
+                    self.createdLocation = locationToEdit;
+                }
             } else {
                 [self displayCategories];
             }
@@ -244,6 +249,12 @@ static const NSArray *categories;
             Location *locationToSave = [[Location alloc] initWithLocationName:self.locationNameTextField.text locationDescription:self.locationDescriptionTextField.text photo:self.photoFile video:self.videoFile categories:nil location:self.geoPoint orderNumber:0 tour:nil];
             self.createdLocation = locationToSave;
             [self displayCategories];
+        }
+        if (self.locationToEdit && !self.categoriesEdited) {
+            self.selectedCategories = [NSMutableArray arrayWithArray:self.locationToEdit.categories];
+            [self presentEditCategoriesAlert];
+        } else {
+            [self saveLocationWithCategories:sender];
         }
     } else {
         [self saveLocationWithCategories:sender];
@@ -263,15 +274,36 @@ static const NSArray *categories;
         [self loadImagePicker];
     }];
     UIAlertAction *noAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"No",comment:nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-        Location *locationToSave = [[Location alloc] initWithLocationName:self.locationNameTextField.text locationDescription:self.locationDescriptionTextField.text photo:self.photoFile video:self.videoFile categories:nil location:self.geoPoint orderNumber:0 tour:nil];
-        self.createdLocation = locationToSave;
-        [self displayCategories];
+        if (!self.locationToEdit) {
+            Location *locationToSave = [[Location alloc] initWithLocationName:self.locationNameTextField.text locationDescription:self.locationDescriptionTextField.text photo:self.photoFile video:self.videoFile categories:nil location:self.geoPoint orderNumber:0 tour:nil];
+            self.createdLocation = locationToSave;
+            [self displayCategories];
+        } else {
+            self.photoFile = self.locationToEdit.photo;
+            self.videoFile = self.locationToEdit.video;
+        }
     }];
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", comment:nil) style:UIAlertActionStyleCancel handler:nil];
     [photoAlert addAction:yesAction];
     [photoAlert addAction:noAction];
     [photoAlert addAction:cancelAction];
     [self presentViewController:photoAlert animated:YES completion:nil];
+}
+
+- (void)presentEditCategoriesAlert {
+    UIAlertController *changeCategoriesAlertController = [UIAlertController alertControllerWithTitle:@"Update Categories?" message:@"Would you like to update the categories for this location?" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *yesAction = [UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        self.categoriesEdited = YES;
+        [self displayCategories];
+    }];
+    UIAlertAction *noAction = [UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self saveLocationWithCategories:nil];
+    }];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+    [changeCategoriesAlertController addAction:yesAction];
+    [changeCategoriesAlertController addAction:noAction];
+    [changeCategoriesAlertController addAction:cancelAction];
+    [self presentViewController:changeCategoriesAlertController animated:YES completion:nil];
 }
 
 - (void)saveLocationWithCategories:(UIButton *)sender {

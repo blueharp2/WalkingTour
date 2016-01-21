@@ -131,6 +131,7 @@
     CreateTourDetailViewController *detailVC = [self.storyboard instantiateViewControllerWithIdentifier:@"CreateTourDetailViewController"];
 //    [detailVC setLocationToEdit:self.locations[indexPath.section]];
     detailVC.locationToEdit = self.locations[indexPath.section];
+    detailVC.image = self.images[indexPath.section];
     detailVC.createTourDetailDelegate = self;
     [self.navigationController pushViewController:detailVC animated:YES];
 }
