@@ -480,20 +480,30 @@ static const NSArray *categories;
         
        
         
-        MKPointAnnotation *newPoint = [[MKPointAnnotation alloc]init];
-        newPoint.coordinate = coordinate;
+//        MKPointAnnotation *newPoint = [[MKPointAnnotation alloc]init];
+//        newPoint.coordinate = coordinate;
         
-        [FourSquareService searchVenueAddress:@"restaurant" latitude:newPoint.coordinate.latitude longitude:newPoint.coordinate.longitude completion:^(BOOL success, NSData * _Nullable data) {
-            
-            [FourSquareService parseVenueResponse:data completion:^(BOOL success, NSMutableArray * _Nullable addressesFromFoursquare) {
+        [FourSquareService searchVenueAddress:@"restaurant" latitude:coordinate.latitude longitude:coordinate.latitude completion:^(BOOL success, NSData * _Nullable data) {
+            [FourSquareService parseVenueResponse: data completion:^(BOOL success, NSMutableArray * _Nullable addressesFromFoursquare) {
                 [self.suggestedAddresses addObjectsFromArray:addressesFromFoursquare];
             }];
         }];
         
-        self.geoPoint = [PFGeoPoint geoPointWithLatitude:newPoint.coordinate.latitude longitude:newPoint.coordinate.longitude];
-        [self.mapView removeAnnotation:self.mapPinAnnotation];
-        self.mapPinAnnotation = newPoint;
-        [self.mapView addAnnotation:newPoint];
+//        [FourSquareService searchVenueAddress:@"restaurant" latitude:newPoint.coordinate.latitude longitude:newPoint.coordinate.longitude completion:^(BOOL success, NSData * _Nullable data) {
+//            
+//            [FourSquareService parseVenueResponse:data completion:^(BOOL success, NSMutableArray * _Nullable addressesFromFoursquare) {
+//                [self.suggestedAddresses addObjectsFromArray:addressesFromFoursquare];
+//            }];
+//        }];
+        
+        
+//
+//        self.geoPoint = [PFGeoPoint geoPointWithLatitude:newPoint.coordinate.latitude longitude:newPoint.coordinate.longitude];
+//        [self.mapView removeAnnotation:self.mapPinAnnotation];
+//        self.mapPinAnnotation = newPoint;
+//        [self.mapView addAnnotation:newPoint];
+        
+        
 //        MKPointAnnotation *newPoint = [[MKPointAnnotation alloc]init];
 //        newPoint.coordinate = coordinate;
 //        
