@@ -280,7 +280,9 @@ static const NSArray *categories;
             self.createdLocation = locationToSave;
             [self displayCategories];
         } else {
-            self.photoFile = self.locationToEdit.photo;
+            UIImage *placeholderImage = [UIImage imageNamed:@"placeholder"];
+            PFFile *placeholderFile = [PFFile fileWithData:UIImageJPEGRepresentation(placeholderImage, 1.0)];
+            self.photoFile = (self.locationToEdit.photo == nil ? placeholderFile : self.locationToEdit.photo);
             self.videoFile = self.locationToEdit.video;
             [self saveButtonPressed:self.saveButton];
         }

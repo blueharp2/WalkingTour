@@ -237,12 +237,9 @@
         }
         [self.locationTableView reloadData];
     } else {
-        //BOOKMARK - this is where I left off.  It doesn't seem to get called when editing.
         __block int index;
-        NSLog(@"%i", index);
         [self.locations indexOfObjectPassingTest:^BOOL(Location * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             if (obj.objectId == location.objectId) {
-                NSLog(@"%lu", (unsigned long)idx);
                 index = (int)idx;
                 *stop = YES;
             } else {
@@ -250,7 +247,6 @@
             }
             return 0;
         }];
-        NSLog(@"%i", index);
         if (index >= 0) {
             self.locations[index] = location;
             self.images[index] = image;
