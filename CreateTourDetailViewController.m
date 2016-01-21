@@ -235,13 +235,14 @@ static const NSArray *categories;
             [self presentNoPhotoWarning];
             return;
         }
-        if (self.createdLocation != nil) {
-            if (self.createdLocation.categories.count > 0) {
+        if (self.createdLocation != nil || self.locationToEdit != nil) {
+            if (self.createdLocation.categories.count > 0 || self.selectedCategories > 0) {
                 if (!self.locationToEdit) {
                     [self saveLocationWithCategories:sender];
                 } else {
                     Location *currentState = self.locationToEdit;
                     if (currentState) {
+                        self.selectedCategories = [NSMutableArray arrayWithArray:self.locationToEdit.categories];
                         currentState.locationName = self.locationNameTextField.text;
                         currentState.locationDescription = self.locationDescriptionTextField.text;
                         currentState.photo = self.photoFile;

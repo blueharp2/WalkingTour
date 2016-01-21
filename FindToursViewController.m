@@ -438,10 +438,11 @@
             createVC.locations = [NSMutableArray arrayWithArray:sortedResults];
             createVC.editToursCompletion = ^{
                 [self dismissViewControllerAnimated:YES completion:nil];
+//                navController.navigationBarHidden = NO;
             };
             [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+//                navController.navigationBarHidden = YES;
                 [self presentViewController:navController animated:YES completion:nil];
-                self.navigationController.navigationBarHidden = YES;
             }];
         }
     }];
