@@ -326,6 +326,10 @@
     if (tableView.tag == 0) {
         POIDetailTableViewCell *cell = (POIDetailTableViewCell*) [self.toursTableView dequeueReusableCellWithIdentifier:@"POIDetailTableViewCell"];
         cell.accessoryView = nil;
+        
+        UIButton *favoriteStarButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 20, 20)];
+        [favoriteStarButton setTitle:@"☆" forState:UIControlStateNormal];
+        
         if (self.toursFromParse[indexPath.section].user == [PFUser currentUser]) {
             UIButton *editButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
             [editButton setImage:[UIImage imageNamed:@"edit.png"] forState:UIControlStateNormal];
