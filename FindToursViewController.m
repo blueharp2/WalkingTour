@@ -327,8 +327,16 @@
         POIDetailTableViewCell *cell = (POIDetailTableViewCell*) [self.toursTableView dequeueReusableCellWithIdentifier:@"POIDetailTableViewCell"];
         cell.accessoryView = nil;
         
-        UIButton *favoriteStarButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 20, 20)];
+//Start of favorite button
+        UIButton *favoriteStarButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        favoriteStarButton.frame = CGRectMake(50, 50, 35.0, 35.0);
         [favoriteStarButton setTitle:@"☆" forState:UIControlStateNormal];
+        favoriteStarButton.titleLabel.font = [UIFont fontWithName:@"Futura" size:35];
+        favoriteStarButton.titleLabel.font = [UIFont boldSystemFontOfSize:35];
+        favoriteStarButton.titleLabel.textColor = [UIColor colorWithRed:0.278 green:0.510 blue:0.855 alpha:1.000];
+        [favoriteStarButton setShowsTouchWhenHighlighted:YES];
+        [self.view addSubview:favoriteStarButton];
+
         
         if (self.toursFromParse[indexPath.section].user == [PFUser currentUser]) {
             UIButton *editButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
