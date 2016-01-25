@@ -104,7 +104,8 @@
    LocationTableViewCell *cell = (LocationTableViewCell *)[self.locationTableView dequeueReusableCellWithIdentifier:@"LocationTableViewCell" forIndexPath:indexPath];
     [cell setLocation:self.locations[indexPath.section]];
     [cell setImage:self.images[indexPath.section]];
-    UIButton *editButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
+    float cellHeight = cell.frame.size.height;
+    UIButton *editButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, cellHeight, cellHeight)];
     [editButton setImage:[UIImage imageNamed:@"edit.png"] forState:UIControlStateNormal];
     [editButton addTarget:self action:@selector(editButtonTapped:event:) forControlEvents:UIControlEventTouchUpInside];
     cell.accessoryView = editButton;

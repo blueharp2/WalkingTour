@@ -327,7 +327,8 @@
         POIDetailTableViewCell *cell = (POIDetailTableViewCell*) [self.toursTableView dequeueReusableCellWithIdentifier:@"POIDetailTableViewCell"];
         cell.accessoryView = nil;
         if (self.toursFromParse[indexPath.section].user == [PFUser currentUser]) {
-            UIButton *editButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
+            float cellHeight = cell.frame.size.height;
+            UIButton *editButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, cellHeight, cellHeight)];
             [editButton setImage:[UIImage imageNamed:@"edit.png"] forState:UIControlStateNormal];
             [editButton addTarget:self action:@selector(editButtonTapped:event:) forControlEvents:UIControlEventTouchUpInside];
             cell.accessoryView = editButton;
