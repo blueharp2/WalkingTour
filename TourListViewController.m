@@ -96,7 +96,8 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     LocationTableViewCell *cell = (LocationTableViewCell*) [tableView dequeueReusableCellWithIdentifier:@"LocationTableViewCell"];
     if (self.locationsFromParse[indexPath.section].tour.user == [PFUser currentUser]) {
-        UIButton *editButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
+        float cellHeight = cell.frame.size.height;
+        UIButton *editButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, cellHeight, cellHeight)];
         [editButton setImage:[UIImage imageNamed:@"edit.png"] forState:UIControlStateNormal];
         [editButton addTarget:self action:@selector(editButtonTapped:event:) forControlEvents:UIControlEventTouchUpInside];
         cell.accessoryView = editButton;
@@ -154,7 +155,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"%@", self.locationsFromParse[indexPath.section].locationName);
+//    NSLog(@"%@", self.locationsFromParse[indexPath.section].locationName);
 }
 
 - (void)editButtonTapped:(UIButton *)sender event:(UIEvent *)event {

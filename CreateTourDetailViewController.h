@@ -28,6 +28,7 @@
 @property (strong,nonatomic) CLLocationManager *locationManager;
 @property (strong,nonatomic) CLLocation *location;
 @property (weak, nonatomic) id<LocationControllerDelegate> delegate;
+@property (strong, nonatomic) UIImage *image;
 @property (strong, nonatomic) Location *locationToEdit;
 
 @end

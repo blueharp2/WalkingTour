@@ -329,7 +329,8 @@
         POIDetailTableViewCell *cell = (POIDetailTableViewCell*) [self.toursTableView dequeueReusableCellWithIdentifier:@"POIDetailTableViewCell"];
         cell.accessoryView = nil;
         if (self.toursFromParse[indexPath.section].user == [PFUser currentUser]) {
-            UIButton *editButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
+            float cellHeight = cell.frame.size.height;
+            UIButton *editButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, cellHeight, cellHeight)];
             [editButton setImage:[UIImage imageNamed:@"edit.png"] forState:UIControlStateNormal];
             [editButton addTarget:self action:@selector(editButtonTapped:event:) forControlEvents:UIControlEventTouchUpInside];
             cell.accessoryView = editButton;
@@ -440,13 +441,14 @@
             createVC.locations = [NSMutableArray arrayWithArray:sortedResults];
             createVC.editToursCompletion = ^{
                 [self dismissViewControllerAnimated:YES completion:nil];
+//                navController.navigationBarHidden = NO;
             };
             [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+//                navController.navigationBarHidden = YES;
                 [self presentViewController:navController animated:YES completion:nil];
             }];
         }
     }];
-    NSLog(@"%@", self.toursFromParse[indexPath.section].nameOfTour);
 }
 
 //- (void)undoButtonPressed:(UIBarButtonItem *)sender {
@@ -535,7 +537,6 @@
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
     self.searchCategoryTableViewFrame = self.searchCategoryTableView.frame;
-    NSLog(@"%f", self.view.frame.size.height);
     [UIView animateWithDuration:0.3 animations:^{
         self.searchBarBottomConstraint.active = NO;
         if (self.view.frame.size.height < 600.0) {

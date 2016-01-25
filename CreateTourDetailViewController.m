@@ -27,12 +27,13 @@ static const NSArray *categories;
 @property (strong, nonatomic) NSMutableArray *selectedCategories;
 @property (strong, nonatomic) PFFile *videoFile;
 @property (strong, nonatomic) PFFile *photoFile;
-@property (strong, nonatomic) UIImage *image;
 @property (strong, nonatomic) PFGeoPoint *geoPoint;
 @property (strong, nonatomic) Location *createdLocation;
 @property (strong, nonatomic) MKPointAnnotation *mapPinAnnotation;
 @property (strong, nonatomic) UIColor *navBarTintColor;
 @property (strong, nonatomic) NSMutableArray *suggestedAddresses;
+@property BOOL categoriesEdited;
+@property BOOL locationSet;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet UITextField *locationNameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *locationDescriptionTextField;
@@ -51,7 +52,7 @@ static const NSArray *categories;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.image = [UIImage imageNamed:@"placeholder"];
+    self.image = (self.image == nil ? [UIImage imageNamed:@"placeholder"] : self.image);
     
     self.saveButton.layer.cornerRadius = self.saveButton.frame.size.width / 2;
     
@@ -94,6 +95,10 @@ static const NSArray *categories;
     _locationToEdit = locationToEdit;
     _createdLocation = locationToEdit;
     CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(locationToEdit.location.latitude, locationToEdit.location.longitude);
+    MKPointAnnotation *newPoint = [[MKPointAnnotation alloc]init];
+    newPoint.coordinate = coordinate;
+    self.geoPoint = [PFGeoPoint geoPointWithLatitude:newPoint.coordinate.latitude longitude:newPoint.coordinate.longitude];
+    self.mapPinAnnotation = newPoint;
     [self dropPinAtLocationCoordinate:coordinate];
     self.locationNameTextField.text = locationToEdit.locationName;
     self.locationDescriptionTextField.text = locationToEdit.locationDescription;
@@ -141,6 +146,7 @@ static const NSArray *categories;
     if (!self.imagePicker) {
         self.imagePicker = [[UIImagePickerController alloc] init];
         self.imagePicker.delegate = self;
+        self.imagePicker.allowsEditing = YES;
         
         if ([UIImagePickerController isSourceTypeAvailable:(UIImagePickerControllerSourceTypeCamera)] && [UIImagePickerController isCameraDeviceAvailable:UIImagePickerControllerCameraDeviceRear]) {
             NSArray *availableMediaTypes = [UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypeCamera];
@@ -149,7 +155,6 @@ static const NSArray *categories;
                 self.imagePicker.mediaTypes = [[NSArray alloc] initWithObjects:(NSString *)kUTTypeImage, (NSString *)kUTTypeMovie, nil];
             }
             self.imagePicker.showsCameraControls = YES;
-            self.imagePicker.allowsEditing = YES;
         }
     }
     [self presentViewController:self.imagePicker animated:YES completion:nil];
@@ -232,9 +237,24 @@ static const NSArray *categories;
             [self presentNoPhotoWarning];
             return;
         }
-        if (self.createdLocation != nil) {
-            if (self.createdLocation.categories.count > 0) {
-                [self saveLocationWithCategories:sender];
+        if (self.createdLocation != nil || self.locationToEdit != nil) {
+            if (self.createdLocation.categories.count > 0 || self.selectedCategories > 0) {
+                if (!self.locationToEdit) {
+                    [self saveLocationWithCategories:sender];
+                } else {
+                    Location *currentState = self.locationToEdit;
+                    if (currentState) {
+                        self.selectedCategories = [NSMutableArray arrayWithArray:self.locationToEdit.categories];
+                        currentState.locationName = self.locationNameTextField.text;
+                        currentState.locationDescription = self.locationDescriptionTextField.text;
+                        currentState.photo = self.photoFile;
+                        currentState.video = self.videoFile;
+                        currentState.location = self.geoPoint;
+                        currentState.categories = self.selectedCategories;
+                    }
+                    Location *locationToEdit = (self.locationToEdit == nil ? [[Location alloc] initWithLocationName:self.locationNameTextField.text locationDescription:self.locationDescriptionTextField.text photo:self.photoFile video:self.videoFile categories:self.selectedCategories location:self.geoPoint orderNumber:0 tour:nil] : currentState);
+                    self.createdLocation = locationToEdit;
+                }
             } else {
                 [self displayCategories];
             }
@@ -242,6 +262,12 @@ static const NSArray *categories;
             Location *locationToSave = [[Location alloc] initWithLocationName:self.locationNameTextField.text locationDescription:self.locationDescriptionTextField.text photo:self.photoFile video:self.videoFile categories:nil location:self.geoPoint orderNumber:0 tour:nil];
             self.createdLocation = locationToSave;
             [self displayCategories];
+        }
+        if (self.locationToEdit && !self.categoriesEdited) {
+            self.selectedCategories = [NSMutableArray arrayWithArray:self.locationToEdit.categories];
+            [self presentEditCategoriesAlert];
+        } else {
+            [self saveLocationWithCategories:sender];
         }
     } else {
         [self saveLocationWithCategories:sender];
@@ -261,9 +287,17 @@ static const NSArray *categories;
         [self loadImagePicker];
     }];
     UIAlertAction *noAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"No",comment:nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-        Location *locationToSave = [[Location alloc] initWithLocationName:self.locationNameTextField.text locationDescription:self.locationDescriptionTextField.text photo:self.photoFile video:self.videoFile categories:nil location:self.geoPoint orderNumber:0 tour:nil];
-        self.createdLocation = locationToSave;
-        [self displayCategories];
+        if (!self.locationToEdit) {
+            Location *locationToSave = [[Location alloc] initWithLocationName:self.locationNameTextField.text locationDescription:self.locationDescriptionTextField.text photo:self.photoFile video:self.videoFile categories:nil location:self.geoPoint orderNumber:0 tour:nil];
+            self.createdLocation = locationToSave;
+            [self displayCategories];
+        } else {
+            UIImage *placeholderImage = [UIImage imageNamed:@"placeholder"];
+            PFFile *placeholderFile = [PFFile fileWithData:UIImageJPEGRepresentation(placeholderImage, 1.0)];
+            self.photoFile = (self.locationToEdit.photo == nil ? placeholderFile : self.locationToEdit.photo);
+            self.videoFile = self.locationToEdit.video;
+            [self saveButtonPressed:self.saveButton];
+        }
     }];
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", comment:nil) style:UIAlertActionStyleCancel handler:nil];
     [photoAlert addAction:yesAction];
@@ -272,14 +306,40 @@ static const NSArray *categories;
     [self presentViewController:photoAlert animated:YES completion:nil];
 }
 
+- (void)presentEditCategoriesAlert {
+    UIAlertController *changeCategoriesAlertController = [UIAlertController alertControllerWithTitle:@"Update Categories?" message:@"Would you like to update the categories for this location?" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *yesAction = [UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        self.categoriesEdited = YES;
+        [self displayCategories];
+    }];
+    UIAlertAction *noAction = [UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self saveLocationWithCategories:nil];
+    }];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+    [changeCategoriesAlertController addAction:yesAction];
+    [changeCategoriesAlertController addAction:noAction];
+    [changeCategoriesAlertController addAction:cancelAction];
+    [self presentViewController:changeCategoriesAlertController animated:YES completion:nil];
+}
+
 - (void)saveLocationWithCategories:(UIButton *)sender {
     if (self.createdLocation != nil && self.selectedCategories.count > 0) {
         self.createdLocation.categories = self.selectedCategories;
         self.navigationController.navigationBarHidden = NO;
         if (self.createTourDetailDelegate) {
+//            NSLog(@"LocationToEdit = nil? Answer: %d", self.locationToEdit == nil);
+//            NSLog(@"Does created = toEdit? %d", self.createdLocation == self.locationToEdit);
+//            NSLog(@"created == %@", self.createdLocation);
             [self.createTourDetailDelegate didFinishSavingLocationWithLocation:self.createdLocation image:self.image newLocation:(self.locationToEdit == nil ? YES : NO)];
         }
         [self.navigationController popViewControllerAnimated:YES];
+    } else {
+        if (self.locationToEdit) {
+            if (self.createTourDetailDelegate) {
+                [self.createTourDetailDelegate didFinishSavingLocationWithLocation:self.locationToEdit image:self.image newLocation:NO];
+            }
+            [self.navigationController popViewControllerAnimated:YES];
+        }
     }
 }
 
@@ -307,6 +367,9 @@ static const NSArray *categories;
             MKCoordinateRegion pinRegion = MKCoordinateRegionMakeWithDistance(CLLocationCoordinate2DMake(self.geoPoint.latitude, self.geoPoint.longitude), 300, 300);
             [self.mapView setRegion:pinRegion animated:YES];
         }];
+    } else {
+        MKCoordinateRegion pinRegion = MKCoordinateRegionMakeWithDistance(CLLocationCoordinate2DMake(self.geoPoint.latitude, self.geoPoint.longitude), 300, 300);
+        [self.mapView setRegion:pinRegion animated:YES];
     }
 }
 
@@ -444,10 +507,11 @@ static const NSArray *categories;
 }
 
 #pragma mark MKMapViewDelegate
--(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation{
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation{
     
     if ([annotation isKindOfClass:[MKUserLocation class]]) {
-        if (self.locationToEdit) {
+        if (self.locationToEdit && !self.locationSet) {
+            self.locationSet = YES;
             [self setLocationToEdit:self.locationToEdit];
         }
         return nil;
@@ -469,7 +533,6 @@ static const NSArray *categories;
     [self toggleViewAfterPinDrop];
 
     return annotationView;
-    
 }
 
 -(IBAction)handleLongPressGestured:(UILongPressGestureRecognizer *)sender{
@@ -520,9 +583,14 @@ static const NSArray *categories;
     newPoint.coordinate = coordinate;
     
     self.geoPoint = [PFGeoPoint geoPointWithLatitude:newPoint.coordinate.latitude longitude:newPoint.coordinate.longitude];
-    [self.mapView removeAnnotation:self.mapPinAnnotation];
+    MKUserLocation *userLocation = [self.mapView userLocation];
+    NSMutableArray *annotations = [NSMutableArray arrayWithArray:[self.mapView annotations]];
+    if (userLocation) {
+        [annotations removeObject:userLocation];
+    }
     self.mapPinAnnotation = newPoint;
     [self.mapView addAnnotation:newPoint];
+    [self.mapView removeAnnotations:annotations];
 }
 
 #pragma mark - UITextFieldDelegate
