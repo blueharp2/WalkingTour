@@ -22,7 +22,6 @@
     
     [PFUser logOut];
     PFUser *currentUser = [PFUser currentUser];
-        NSLog(@"User is Logged Out");
     if (!currentUser) {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         UINavigationController *navController = [storyboard instantiateViewControllerWithIdentifier:@"LoginNavigationController"];

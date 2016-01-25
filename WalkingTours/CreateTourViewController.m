@@ -104,7 +104,8 @@
    LocationTableViewCell *cell = (LocationTableViewCell *)[self.locationTableView dequeueReusableCellWithIdentifier:@"LocationTableViewCell" forIndexPath:indexPath];
     [cell setLocation:self.locations[indexPath.section]];
     [cell setImage:self.images[indexPath.section]];
-    UIButton *editButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
+    float cellHeight = cell.frame.size.height;
+    UIButton *editButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, cellHeight, cellHeight)];
     [editButton setImage:[UIImage imageNamed:@"edit.png"] forState:UIControlStateNormal];
     [editButton addTarget:self action:@selector(editButtonTapped:event:) forControlEvents:UIControlEventTouchUpInside];
     cell.accessoryView = editButton;
@@ -131,6 +132,9 @@
     CreateTourDetailViewController *detailVC = [self.storyboard instantiateViewControllerWithIdentifier:@"CreateTourDetailViewController"];
 //    [detailVC setLocationToEdit:self.locations[indexPath.section]];
     detailVC.locationToEdit = self.locations[indexPath.section];
+//    NSLog(@"locationToEdit's objectid == %@", self.locations[indexPath.section].objectId);
+    detailVC.image = self.images[indexPath.section];
+    detailVC.createTourDetailDelegate = self;
     [self.navigationController pushViewController:detailVC animated:YES];
 }
 
@@ -235,15 +239,21 @@
         }
         [self.locationTableView reloadData];
     } else {
-        //BOOKMARK - this is where I left off.  It doesn't seem to get called when editing.
-        NSUInteger uneditedLocationIndex = [self.locations indexOfObjectPassingTest:^BOOL(Location * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        __block int index;
+        [self.locations indexOfObjectPassingTest:^BOOL(Location * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//            NSLog(@"obj.objectid == %@, location.objectId == %@", obj.objectId, location.objectId);
             if (obj.objectId == location.objectId) {
-                return idx;
+                index = (int)idx;
+                *stop = YES;
+            } else {
+                index = -1;
             }
-            return -1;
+            return 0;
         }];
-        if (uneditedLocationIndex > 0) {
-            self.locations[uneditedLocationIndex] = location;
+        if (index >= 0) {
+            self.locations[index] = location;
+            self.images[index] = image;
+            [self.locationTableView reloadSections:[NSIndexSet indexSetWithIndex:index] withRowAnimation:UITableViewRowAnimationAutomatic];
         }
     }
 }
