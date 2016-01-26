@@ -337,7 +337,8 @@
         [favoriteStarButton setShowsTouchWhenHighlighted:YES];
         [cell addSubview:favoriteStarButton];
         //This only works because I left the image view on the xib.  I just removed the image name.  When you delete the image view on the xib it messes up the whole cell.
-        [favoriteStarButton addTarget:self action:@selector(favoriteStarButtonTapped:event:) forControlEvents:UIControlEventTouchUpInside];
+       // [favoriteStarButton addTarget:self action:@selector(favoriteStarButtonTapped:event:) forControlEvents:UIControlEventTouchUpInside];
+        [favoriteStarButton setTitle:@"★" forState:UIControlStateSelected];
         
 
         
@@ -478,18 +479,25 @@
     }
 }
 
--(void)favoriteStarButtonTapped:(UIButton *)sender event:(UIEvent *)event{
-    NSSet *touches = event.allTouches;
-    UITouch *touch = touches.anyObject;
-    CGPoint currentTouchPosition = [touch locationInView:self.toursTableView];
-    NSIndexPath *indexPath = [self.toursTableView indexPathForRowAtPoint:currentTouchPosition];
-    if (indexPath != nil) {
-        //[self tableView:self.toursTableView accessoryButtonTappedForRowWithIndexPath:indexPath];
-        //oops! this takes me to the edit screen.  I think it has to do with the accessory Button Callout.
-        
-        
-    }
-}
+//-(void)favoriteStarButtonTapped:(UIButton *)sender event:(UIEvent *)event{
+//    NSSet *touches = event.allTouches;
+//    UITouch *touch = touches.anyObject;
+//    CGPoint currentTouchPosition = [touch locationInView:self.toursTableView];
+//    NSIndexPath *indexPath = [self.toursTableView indexPathForRowAtPoint:currentTouchPosition];
+//    if (indexPath != nil) {
+//        //[self tableView:self.toursTableView accessoryButtonTappedForRowWithIndexPath:indexPath];
+//        //oops! this takes me to the edit screen.  I think it has to do with the accessory Button Callout.
+//       // [self tableView:self.toursTableView didSelectRowAtIndexPath:indexPath];
+//        //oops! this takes me to the next view controller.
+//        //[self tableView:self.toursTableView didHighlightRowAtIndexPath:indexPath];
+//        //oops! this crashes the app [FindToursViewController tableView:didHighlightRowAtIndexPath:]: unrecognized selector sent to instance 0x79647cb0'*** First throw call stack:
+//        
+//    }
+//}
+
+//-(void)tableView:(UITableView *)tableView didHighlightRowAtIndexPath:(NSIndexPath *)indexPath{
+// I don't think this will work....
+//}
 
 #pragma mark - Navigation
 
