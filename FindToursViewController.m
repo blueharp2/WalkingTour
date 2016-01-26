@@ -335,9 +335,9 @@
         favoriteStarButton.titleLabel.font = [UIFont boldSystemFontOfSize:30];
         favoriteStarButton.titleLabel.textColor = [UIColor colorWithRed:0.278 green:0.510 blue:0.855 alpha:1.000];
         [favoriteStarButton setShowsTouchWhenHighlighted:YES];
-        //[self.view addSubview:favoriteStarButton];
         [cell addSubview:favoriteStarButton];
-        //This only works because I left the image view on the xib.  I just removed the image name.  When you delete the image view it messes up the whole cell.
+        //This only works because I left the image view on the xib.  I just removed the image name.  When you delete the image view on the xib it messes up the whole cell.
+        [favoriteStarButton addTarget:self action:@selector(favoriteStarButtonTapped:event:) forControlEvents:UIControlEventTouchUpInside];
         
 
         
@@ -475,6 +475,19 @@
     NSIndexPath *indexPath = [self.toursTableView indexPathForRowAtPoint:currentTouchPosition];
     if (indexPath != nil) {
         [self tableView:self.toursTableView accessoryButtonTappedForRowWithIndexPath:indexPath];
+    }
+}
+
+-(void)favoriteStarButtonTapped:(UIButton *)sender event:(UIEvent *)event{
+    NSSet *touches = event.allTouches;
+    UITouch *touch = touches.anyObject;
+    CGPoint currentTouchPosition = [touch locationInView:self.toursTableView];
+    NSIndexPath *indexPath = [self.toursTableView indexPathForRowAtPoint:currentTouchPosition];
+    if (indexPath != nil) {
+        //[self tableView:self.toursTableView accessoryButtonTappedForRowWithIndexPath:indexPath];
+        //oops! this takes me to the edit screen.  I think it has to do with the accessory Button Callout.
+        
+        
     }
 }
 
