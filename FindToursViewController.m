@@ -31,6 +31,7 @@
 @property (strong, nonatomic) NSMutableArray <id> *mapPoints;
 @property (strong, nonatomic) NSMutableArray <Tour *> *toursFromParse;
 -(void)setToursFromParse:(NSMutableArray<Tour *> *)toursFromParse;
+//@property (weak, nonatomic) IBOutlet UIButton *favoriteStarButton;
 @property (strong, nonatomic) NSMutableArray <Tour *> *favoriteToursFromParse;
 -(void)setFavoriteToursFromParse:(NSMutableArray<Tour *> *)favoriteToursFromParse;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *searchViewTopConstraint;
@@ -47,6 +48,7 @@
 @property (nonatomic) CGRect searchCategoryTableViewFrame;
 - (IBAction)finalSearchButtonPressed:(UIButton *)sender;
 - (IBAction)radiusSliderChanged:(UISlider *)sender;
+
 
 @end
 
@@ -339,12 +341,19 @@
         [favoriteStarButton setShowsTouchWhenHighlighted:YES];
         [cell addSubview:favoriteStarButton];
         //This only works because I left the image view on the xib.  I just removed the image name.  When you delete the image view on the xib it messes up the whole cell.
-        [favoriteStarButton addTarget:self action:@selector(favoriteStarButtonTapped:event:) forControlEvents:UIControlEventTouchUpInside];
+
+         [favoriteStarButton addTarget:self action:@selector(favoriteStarButtonTapped:event:) forControlEvents:UIControlEventTouchUpInside];
+        
+        //        NSString *currentTitle = [favoriteStarButton titleForState:UIControlStateNormal];
+        //        NSString *newTitle = [currentTitle isEqual:@"☆"]? @"★" : @"☆";
+        //        [favoriteStarButton setTitle:newTitle forState:UIControlStateNormal];
+        //[favoriteStarButton setTitle:@"★" forState:UIControlStateSelected];
+        //[favoriteStarButton setTitle:@"☆" forState:UIControlStateNormal];
+        
+       
         
 //        if (self.favoriteToursFromParse[indexPath.section].user ==[PFUser currentUser]) {
-//
 //            favoriteStarButton.selected = YES;
-//             [favoriteStarButton setTitle:@"★" forState:UIControlStateSelected];
 //        }
         
         
@@ -486,11 +495,17 @@
     }
 }
 
--(void)favoriteStarButtonTapped:(UIButton *)sender event:(UIEvent *)event{
+-(void)favoriteStarButtonTapped:(UIButton *)favoriteStarButton event:(UIEvent *)event{
+    NSString *currentTitle = [favoriteStarButton titleForState:UIControlStateNormal];
+    NSString *newTitle = [currentTitle isEqual:@"☆"]? @"★" : @"☆";
+    [favoriteStarButton setTitle:newTitle forState:UIControlStateNormal];
+    
     NSSet *touches = event.allTouches;
     UITouch *touch = touches.anyObject;
     CGPoint currentTouchPosition = [touch locationInView:self.toursTableView];
     NSIndexPath *indexPath = [self.toursTableView indexPathForRowAtPoint:currentTouchPosition];
+    
+
     if (indexPath != nil) {
         //[self tableView:self.toursTableView accessoryButtonTappedForRowWithIndexPath:indexPath];
         //oops! this takes me to the edit screen.  I think it has to do with the accessory Button Callout.
@@ -502,7 +517,6 @@
         
     }
 }
-
 
 #pragma mark - Navigation
 
