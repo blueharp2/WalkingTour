@@ -32,8 +32,8 @@
 @property (strong, nonatomic) NSMutableArray <Tour *> *toursFromParse;
 -(void)setToursFromParse:(NSMutableArray<Tour *> *)toursFromParse;
 //@property (weak, nonatomic) IBOutlet UIButton *favoriteStarButton;
-@property (strong, nonatomic) NSMutableArray <Tour *> *favoriteToursFromParse;
--(void)setFavoriteToursFromParse:(NSMutableArray<Tour *> *)favoriteToursFromParse;
+@property (strong, nonatomic) NSMutableArray <NSString *> *favoriteToursFromParse;
+-(void)setFavoriteToursFromParse:(NSMutableArray<NSString *> *)favoriteToursFromParse;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *searchViewTopConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *searchViewBottomConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *searchBarBottomConstraint;
