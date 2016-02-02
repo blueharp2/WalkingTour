@@ -344,18 +344,6 @@
 
          [favoriteStarButton addTarget:self action:@selector(favoriteStarButtonTapped:event:) forControlEvents:UIControlEventTouchUpInside];
         
-        //        NSString *currentTitle = [favoriteStarButton titleForState:UIControlStateNormal];
-        //        NSString *newTitle = [currentTitle isEqual:@"☆"]? @"★" : @"☆";
-        //        [favoriteStarButton setTitle:newTitle forState:UIControlStateNormal];
-        //[favoriteStarButton setTitle:@"★" forState:UIControlStateSelected];
-        //[favoriteStarButton setTitle:@"☆" forState:UIControlStateNormal];
-        
-       
-        
-//        if (self.favoriteToursFromParse[indexPath.section].user ==[PFUser currentUser]) {
-//            favoriteStarButton.selected = YES;
-//        }
-        
         
         
         if (self.toursFromParse[indexPath.section].user == [PFUser currentUser]) {
@@ -505,16 +493,13 @@
     CGPoint currentTouchPosition = [touch locationInView:self.toursTableView];
     NSIndexPath *indexPath = [self.toursTableView indexPathForRowAtPoint:currentTouchPosition];
     
-
     if (indexPath != nil) {
-        //[self tableView:self.toursTableView accessoryButtonTappedForRowWithIndexPath:indexPath];
-        //oops! this takes me to the edit screen.  I think it has to do with the accessory Button Callout.
-       // [self tableView:self.toursTableView didSelectRowAtIndexPath:indexPath];
-        //oops! this takes me to the next view controller.
-        //[self tableView:self.toursTableView didHighlightRowAtIndexPath:indexPath];
-        //oops! this crashes the app [FindToursViewController tableView:didHighlightRowAtIndexPath:]: unrecognized selector sent to instance 0x79647cb0'*** First throw call stack:
-       
-        
+        NSMutableArray *favoriteToursFromParse = [[NSMutableArray alloc]init];
+        [favoriteToursFromParse addObject: @"objectId"];
+      //  [favoriteToursFromParse valueForKeyPath:@"objectId"];
+//        [favoriteToursFromParse addObject:indexPath];
+        NSString *test = [favoriteToursFromParse objectAtIndex:0];
+        NSLog(test);
     }
 }
 
