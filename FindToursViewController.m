@@ -493,17 +493,16 @@
     CGPoint currentTouchPosition = [touch locationInView:self.toursTableView];
     NSIndexPath *indexPath = [self.toursTableView indexPathForRowAtPoint:currentTouchPosition];
     
+    NSMutableArray *favoriteToursFromParse = [[NSMutableArray alloc]init];
+    Tour *tour = self.toursFromParse[indexPath.section];
+    NSString *tourObjectId = tour.objectId;
+    
     if (indexPath != nil) {
-        NSMutableArray *favoriteToursFromParse = [[NSMutableArray alloc]init];
-        Tour *tour = self.toursFromParse[indexPath.section];
-        NSString *tourObjectId = tour.objectId;
         [favoriteToursFromParse addObject:tour.objectId];
-        
-        //[favoriteToursFromParse addObject:self.toursFromParse[indexPath.section]];//crashes
-        //[favoriteToursFromParse addObject:tour.objectId];//can't find tour
-        //[favoriteToursFromParse addObject: @"objectId"];//logs the string "objectId"
-      //  [favoriteToursFromParse valueForKeyPath:@"objectId"];//doesn't add anything to the array
-//        [favoriteToursFromParse addObject:indexPath];//crashes
+        NSString *test = [favoriteToursFromParse objectAtIndex:0];
+        NSLog(test);
+    }else{
+        [favoriteToursFromParse removeObject:tour.objectId];
         NSString *test = [favoriteToursFromParse objectAtIndex:0];
         NSLog(test);
     }
