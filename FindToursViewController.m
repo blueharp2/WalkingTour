@@ -504,7 +504,7 @@
 //        NSString *test1 = [favoriteToursFromParse objectAtIndex:0];
 //        NSLog(test1);
     }else if (isAlreadyAFavoriteTour ==YES){
-        //never reaches this point..I think I need to check the array's contents before I deal with the indexPath
+        //never reaches this point.
         [favoriteToursFromParse removeObject:tour.objectId];
         NSString *test = [favoriteToursFromParse objectAtIndex:0];
         NSLog(test);
