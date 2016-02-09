@@ -45,7 +45,7 @@ int const radius = 250;
         NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
             
             //            NSLog(data, nil);
-            
+     // according to Stanford course is cleaner to check for nil like if (data) { ... }
             if (data != nil) {
                 completionHandler(true, data);
                 //                NSLog(data, nil);
