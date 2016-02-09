@@ -12,6 +12,7 @@
 #import "LocationTableViewCell.h"
 #import "POIDetailTableViewCell.h"
 #import "FindToursViewController.h"
+#import "CreateTourViewController.h"
 #import "Tour.h"
 #import "ParseService.h"
 @import UIKit;
@@ -155,7 +156,35 @@
 }
 
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
-//    NSLog(@"%@", self.locationsFromParse[indexPath.section].locationName);
+    [ParseService fetchTourWithTourId:self.currentTour completion:^(BOOL success, Tour *result) {
+        if (success) {
+            if (result) {
+                [ParseService fetchLocationsWithTourId:result.objectId completion:^(BOOL success, NSArray *results) {
+                    if (success) {
+                        if (results) {
+                            [self editTour:result withLocations:results];
+                        }
+                    } else {
+                        NSLog(@"Unable to fetch locations.");
+                    }
+                }];
+            }
+        } else {
+            NSLog(@"Unable to fetch current tour.");
+        }
+    }];
+}
+
+- (void)editTour:(Tour *)tour withLocations:(NSArray *)locations {
+    CreateTourViewController *createVC = [self.storyboard instantiateViewControllerWithIdentifier:@"CreateTourViewController"];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:createVC];
+    createVC.tour = tour;
+    createVC.locations = [NSMutableArray arrayWithArray:locations];
+    createVC.editToursCompletion = ^{
+        [self dismissViewControllerAnimated:YES completion:nil];
+        [self.tourListTableView reloadData];
+    };
+    [self presentViewController:navController animated:YES completion:nil];
 }
 
 - (void)editButtonTapped:(UIButton *)sender event:(UIEvent *)event {
@@ -169,14 +198,3 @@
 }
 
 @end
-
-
-
-
-
-
-
-
-
-
-
