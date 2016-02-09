@@ -415,6 +415,10 @@
 }
 
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
+    [self editTourAtIndexPath:indexPath];
+}
+
+- (void)editTourAtIndexPath:(NSIndexPath *)indexPath {
     Tour *selectedTour = self.toursFromParse[indexPath.section];
     CreateTourViewController *createVC = [self.storyboard instantiateViewControllerWithIdentifier:@"CreateTourViewController"];
     PFQuery *locationQuery = [PFQuery queryWithClassName:@"Location" predicate:[NSPredicate predicateWithFormat:@"tour == %@", selectedTour]];
@@ -439,10 +443,10 @@
             createVC.locations = [NSMutableArray arrayWithArray:sortedResults];
             createVC.editToursCompletion = ^{
                 [self dismissViewControllerAnimated:YES completion:nil];
-//                navController.navigationBarHidden = NO;
+                //                navController.navigationBarHidden = NO;
             };
             [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-//                navController.navigationBarHidden = YES;
+                //                navController.navigationBarHidden = YES;
                 [self presentViewController:navController animated:YES completion:nil];
             }];
         }
