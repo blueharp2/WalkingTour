@@ -156,7 +156,6 @@
 }
 
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"%@", self.currentTour);
     [ParseService fetchTourWithTourId:self.currentTour completion:^(BOOL success, Tour *result) {
         if (success) {
             if (result) {
@@ -183,7 +182,7 @@
     createVC.locations = [NSMutableArray arrayWithArray:locations];
     createVC.editToursCompletion = ^{
         [self dismissViewControllerAnimated:YES completion:nil];
-        //                navController.navigationBarHidden = NO;
+        [self.tourListTableView reloadData];
     };
     [self presentViewController:navController animated:YES completion:nil];
 }

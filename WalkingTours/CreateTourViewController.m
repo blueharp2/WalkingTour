@@ -11,6 +11,7 @@
 #import <Parse/Parse.h>
 #import "LocationTableViewCell.h"
 #import "CreateTourDetailViewController.h"
+#import "TourListViewController.h"
 #import "ParseService.h"
 #import "Tour.h"
 
@@ -261,7 +262,7 @@
 #pragma mark - UINavigationControllerDelegate
 
 - (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
-    if ([navigationController.viewControllers[0] isKindOfClass:[CreateTourViewController class]]) {
+    if ([navigationController.viewControllers[0] isKindOfClass:[CreateTourViewController class]] || [navigationController.viewControllers[0] isKindOfClass:[TourListViewController class]]) {
         UIBarButtonItem *undoButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemUndo target:self action:@selector(undoButtonPressed)];
         self.navigationItem.leftBarButtonItem = undoButton;
     }
