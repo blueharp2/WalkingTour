@@ -24,6 +24,22 @@
     }];
 }
 
++ (void)fetchTourWithTourId:(NSString *)tourId completion:(tourFetchCompletion)completion {
+    PFQuery *query = [PFQuery queryWithClassName:@"Tour"];
+    [query whereKey:@"objectId" equalTo:tourId];
+    [query getFirstObjectInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+        if (error) {
+            NSLog(@"%@", error.localizedFailureReason);
+        }
+        if (object != nil && [object isKindOfClass:[Tour class]]) {
+            Tour *tour = (Tour *)object;
+            completion(YES, tour);
+        } else {
+            completion(NO, nil);
+        }
+    }];
+}
+
 + (void)fetchLocationsWithTourId:(NSString *)tourId completion:(locationsFetchCompletion)completion {
     
     PFQuery *query = [PFQuery queryWithClassName:@"Location"];
@@ -35,7 +51,16 @@
             completion(NO, nil);
         }
         if (objects) {
-            completion(YES, objects);
+            NSArray *sortedLocations = [objects sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+                Location *loc1 = (Location *)obj1;
+                Location *loc2 = (Location *)obj2;
+                if (loc1.orderNumber < loc2.orderNumber) {
+                    return NSOrderedAscending;
+                } else {
+                    return NSOrderedDescending;
+                }
+            }];
+            completion(YES, sortedLocations);
         }
     }];
 }

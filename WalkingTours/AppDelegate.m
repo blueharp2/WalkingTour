@@ -26,4 +26,12 @@
     return YES;
 }
 
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+    NSString *stringUrl = [NSString stringWithFormat:@"%@", url];
+    if ([stringUrl containsString:@"walkabouttours://"]) {
+        //Do something with the url
+    }
+    return NO;
+}
+
 @end
