@@ -498,18 +498,29 @@
     NSString *tourObjectId = tour.objectId;
     
     if (indexPath != nil) {
-        BOOL isAlreadyAFavoriteTour = [favoriteToursFromParse containsObject:tour.objectId];
-        if (isAlreadyAFavoriteTour == NO) {
-        [favoriteToursFromParse addObject:tour.objectId];
-//        NSString *test1 = [favoriteToursFromParse objectAtIndex:0];
-//        NSLog(test1);
-    }else if (isAlreadyAFavoriteTour ==YES){
-        //never reaches this point.
-        [favoriteToursFromParse removeObject:tour.objectId];
-        NSString *test = [favoriteToursFromParse objectAtIndex:0];
-        NSLog(test);
-    }
+        BOOL isAlreadyAFavoriteTour = [favoriteToursFromParse containsObject:tourObjectId];
+        //The check of the array is not working correctly.  It only defaults to the else statement
+        if (isAlreadyAFavoriteTour == YES){
+            [favoriteToursFromParse removeObject:tourObjectId];
+            //NSLog(@"Favorite Tours From Parse Array: %@", favoriteToursFromParse);
+        
+        }else{
+            [favoriteToursFromParse addObject:tourObjectId];
+            //NSLog(@"Favorite Tours From Parse Array: %@", favoriteToursFromParse);
+        }
+        
+        //The code below doesn't work correctly.  It can add to the array but not remove from the array.
+//        BOOL isAlreadyAFavoriteTour = [favoriteToursFromParse containsObject:tour.objectId];
+//        if (isAlreadyAFavoriteTour == NO) {
+//        [favoriteToursFromParse addObject:tour.objectId];
+////        NSString *test1 = [favoriteToursFromParse objectAtIndex:0];
+////        NSLog(test1);
+//    }else if (isAlreadyAFavoriteTour ==YES){
+//        //never reaches this point.
+//        [favoriteToursFromParse removeObject:tour.objectId];
+//    }
  }
+     NSLog(@"Favorite Tours From Parse Array: %@", favoriteToursFromParse);
 }
 
 #pragma mark - Navigation
