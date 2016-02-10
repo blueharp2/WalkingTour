@@ -75,7 +75,7 @@ static const NSArray *categories;
     
     UIColor *tintColor = self.navigationController.navigationBar.tintColor;
     self.navBarTintColor = tintColor;
-    self.navigationController.navigationBar.tintColor = [UIColor colorWithWhite:0.951 alpha:1.000];
+//    self.navigationController.navigationBar.tintColor = [UIColor colorWithWhite:0.951 alpha:1.000];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -102,6 +102,7 @@ static const NSArray *categories;
     [self dropPinAtLocationCoordinate:coordinate];
     self.locationNameTextField.text = locationToEdit.locationName;
     self.locationDescriptionTextField.text = locationToEdit.locationDescription;
+    [self.mapView setRegion:MKCoordinateRegionMakeWithDistance(coordinate, 300, 300) animated:YES];
 }
 
 #pragma mark - Setup Functions
