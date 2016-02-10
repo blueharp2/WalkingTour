@@ -540,9 +540,6 @@ static const NSArray *categories;
         CGPoint touchPoint = [sender locationInView:self.mapView];
         CLLocationCoordinate2D coordinate = [self.mapView convertPoint:touchPoint toCoordinateFromView:self.mapView];
         
-        
-       
-        
 //        MKPointAnnotation *newPoint = [[MKPointAnnotation alloc]init];
 //        newPoint.coordinate = coordinate;
         
