@@ -331,6 +331,7 @@
 				90380EF21C1F48730085DD66 /* Models */,
 				903177CC1C1F3A9E001C8DF9 /* AppDelegate.h */,
 				903177CD1C1F3A9E001C8DF9 /* AppDelegate.m */,
+				903177DA1C1F3A9E001C8DF9 /* Info.plist */,
 				903177D51C1F3A9E001C8DF9 /* Assets.xcassets */,
 				3D33EFEB1C4433F3003BA45A /* share.png */,
 				90090C901C2339630040EE94 /* Rectangle 1.png */,
@@ -342,7 +343,6 @@
 				90090C961C2339630040EE94 /* Rectangle 3 Copy.png */,
 				90090C971C2339630040EE94 /* Rectangle 3 Copy@2x.png */,
 				90090C981C2339630040EE94 /* Rectangle 3 Copy@3x.png */,
-				903177DA1C1F3A9E001C8DF9 /* Info.plist */,
 				9060186B1C3339A300B2E7A8 /* Polygon.geojson */,
 				903177C91C1F3A9E001C8DF9 /* Supporting Files */,
 				3D9A58731C234BEB0056A624 /* seattlesunset copy700.jpg */,
@@ -533,7 +533,7 @@
 				TargetAttributes = {
 					903177C51C1F3A9E001C8DF9 = {
 						CreatedOnToolsVersion = 7.1.1;
-						DevelopmentTeam = C49MT2F2AS;
+						DevelopmentTeam = LK662Y5U4K;
 					};
 					903177DE1C1F3A9E001C8DF9 = {
 						CreatedOnToolsVersion = 7.1.1;

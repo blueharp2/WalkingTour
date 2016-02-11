@@ -32,6 +32,8 @@
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
+			<key>CFBundleURLName</key>
+			<string>com.creeperspeak.WalkingTours</string>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
@@ -79,6 +81,10 @@
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
+	</array>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>walkabouttours</string>
 	</array>
 </dict>
 </plist>
