@@ -28,30 +28,37 @@
 
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
     NSString *stringUrl = [NSString stringWithFormat:@"%@", url];
+    NSLog(@"This is the url: %@", url);
+    
     if ([stringUrl containsString:@"walkabouttours://"]) {
-        //Do something with the url
         
+            //Do something with the url
         
-//        if (!url) {  return NO; }
-//        
-//        NSString *URLString = [url absoluteString];
-//        [[NSUserDefaults standardUserDefaults] setObject:URLString forKey:@"url"];
-//        [[NSUserDefaults standardUserDefaults] synchronize];
-//        return YES;
-//    }
+        NSURLComponents *urlComponents = [NSURLComponents componentsWithURL:url resolvingAgainstBaseURL:NO];
+        NSArray *queryItems = urlComponents.queryItems;
+        NSString *param1 = [self valueForKey:@"param1" fromQueryItems:queryItems];
+        
+        NSLog(@"%@", param1);
         NSLog(@"url recieved: %@", url);
         NSLog(@"query string: %@", [url query]);
         NSLog(@"host: %@", [url host]);
         NSLog(@"url path: %@", [url path]);
         NSDictionary *dict = [self parseQueryString:[url query]];
         NSLog(@"query dict: %@", dict);
-        return YES;
-        
-    }
-    return NO;
-}
+        }
+    
+    return YES;
 
-//method for parsing the query string from the url
+    }
+
+- (NSString *)valueForKey:(NSString *)key fromQueryItems:(NSArray *)queryItems {
+            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name=%@", key];
+            NSURLQueryItem *queryItem = [[queryItems
+                                          filteredArrayUsingPredicate:predicate]
+                                         firstObject];
+            return queryItem.value;
+        }
+        
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
 
@@ -59,7 +66,7 @@
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
     
-    if ([[url scheme] isEqualToString:@"id="]) {
+    if ([[url scheme] isEqualToString:@"walkabouttours"]) {
         NSString *query = [url query];
         if (query.length > 0) {
             NSArray *components = [query componentsSeparatedByString:@"&"];
