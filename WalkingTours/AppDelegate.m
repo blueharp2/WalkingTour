@@ -26,18 +26,28 @@
     return YES;
 }
 
+
+- (void)applicationDidBecomeActive:(UIApplication *)application {
+    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+}
+
+- (void)applicationWillEnterForeground:(UIApplication *)application {
+    
+}
+
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
     NSString *stringUrl = [NSString stringWithFormat:@"%@", url];
     NSLog(@"This is the url: %@", url);
-    
     if ([stringUrl containsString:@"walkabouttours://"]) {
         
             //Do something with the url
-        
+
+        }
         NSURLComponents *urlComponents = [NSURLComponents componentsWithURL:url resolvingAgainstBaseURL:NO];
         NSArray *queryItems = urlComponents.queryItems;
         NSString *param1 = [self valueForKey:@"param1" fromQueryItems:queryItems];
         
+        NSLog(@"Full URL \(url.absoluteString)");
         NSLog(@"%@", param1);
         NSLog(@"url recieved: %@", url);
         NSLog(@"query string: %@", [url query]);
@@ -45,11 +55,9 @@
         NSLog(@"url path: %@", [url path]);
         NSDictionary *dict = [self parseQueryString:[url query]];
         NSLog(@"query dict: %@", dict);
-        }
     
     return YES;
-
-    }
+}
 
 - (NSString *)valueForKey:(NSString *)key fromQueryItems:(NSArray *)queryItems {
             NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name=%@", key];
@@ -58,33 +66,7 @@
                                          firstObject];
             return queryItem.value;
         }
-        
 
-- (void)applicationWillEnterForeground:(UIApplication *)application {
-
-}
-
-- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
-    
-    if ([[url scheme] isEqualToString:@"walkabouttours"]) {
-        NSString *query = [url query];
-        if (query.length > 0) {
-            NSArray *components = [query componentsSeparatedByString:@"&"];
-            NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
-            for (NSString *component in components) {
-                NSArray *subcomponents = [component componentsSeparatedByString:@"="];
-                [parameters setObject:[[subcomponents objectAtIndex:1] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]
-                               forKey:[[subcomponents objectAtIndex:0] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-            }
-            return YES;
-        }
-    }
-    return NO;
-}
-
-- (void)applicationDidBecomeActive:(UIApplication *)application {
-    
-}
 
 - (NSDictionary *)parseQueryString:(NSString *)query {
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithCapacity:6];
