@@ -8,6 +8,9 @@
 
 #import "AppDelegate.h"
 #import "Parse/Parse.h"
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+
 
 @interface AppDelegate ()
 
@@ -36,26 +39,53 @@
 }
 
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
-    NSString *stringUrl = [NSString stringWithFormat:@"%@", url];
-    NSLog(@"This is the url: %@", url);
+        NSString *stringUrl = [NSString stringWithFormat:@"%@", url];
+        NSLog(@"This is the url: %@", url);
     if ([stringUrl containsString:@"walkabouttours://"]) {
         
-            //Do something with the url
-
-        }
-        NSURLComponents *urlComponents = [NSURLComponents componentsWithURL:url resolvingAgainstBaseURL:NO];
-        NSArray *queryItems = urlComponents.queryItems;
-        NSString *param1 = [self valueForKey:@"param1" fromQueryItems:queryItems];
+            NSLog(@"Full URL: %@", [url absoluteString]);
+            NSLog(@"Scheme: %@", [url scheme]);
+            NSLog(@"Query String: %@", [url query]);
+            NSLog(@"host: %@", [url host]);
+            NSLog(@"url path: %@", [url path]);
+            NSDictionary *dict = [self parseQueryString:[url query]];
+            NSLog(@"query dict: %@", dict);
         
-        NSLog(@"Full URL \(url.absoluteString)");
-        NSLog(@"%@", param1);
-        NSLog(@"url recieved: %@", url);
-        NSLog(@"query string: %@", [url query]);
+        }
+    return YES;
+}
+
+- (BOOL)schemeAvailable:(NSString *)scheme {
+    UIApplication *application = [UIApplication sharedApplication];
+    NSURL *url = [NSURL URLWithString:scheme];
+
+        NSLog(@"Full URL: %@", [url absoluteString]);
+        NSLog(@"Scheme: %@", [url scheme]);
+        NSLog(@"Query String: %@", [url query]);
         NSLog(@"host: %@", [url host]);
         NSLog(@"url path: %@", [url path]);
         NSDictionary *dict = [self parseQueryString:[url query]];
         NSLog(@"query dict: %@", dict);
     
+    return [application canOpenURL:url];
+}
+
+-(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+//    NSString *sourceApplication = [NSString stringWithFormat:@"%@", url];
+//    NSLog("Called By: %@", [url sourceApplication]);
+    NSLog(@"Scheme: %@", [url scheme]);
+    NSLog(@"Query String: %@", [url query]);
+    
+    if (!url) {  return NO; }
+    
+    NSString *URLString = [url absoluteString];
+    UIAlertView *alert = [[UIAlertView alloc]
+                          initWithTitle:NSLocalizedString(@"There's no URL", nil)
+                          message:URLString
+                          delegate:self
+                          cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+    [alert show];
+
     return YES;
 }
 
