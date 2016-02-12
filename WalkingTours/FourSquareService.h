@@ -10,6 +10,9 @@
 
 @interface FourSquareService : NSObject
 
++(void)searchVenueWithLatitude:(double)latitude longitude:(double)longitude completion:(nonnull void (^)(BOOL success, NSData * _Nullable data))completionHandler;
+
+
 +(void)searchVenueAddress:(NSString * _Nullable)queryString latitude: (double)latitude longitude:(double)longitude completion:(nonnull void (^)(BOOL success, NSData * _Nullable data))completionHandler;
 
 +(void)searchVenues:(NSString * _Nullable)queryString completion:(nonnull void (^)(BOOL success ,  NSData *_Nullable data))completionHandler;

@@ -65,6 +65,7 @@
 		90F4E22B1C1FA7B3002A75B2 /* CreateTourViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90F4E22A1C1FA7B3002A75B2 /* CreateTourViewController.m */; };
 		90FD33551C210AAA002FFD1A /* LocationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 90FD33531C210AAA002FFD1A /* LocationTableViewCell.m */; };
 		90FD33561C210AAA002FFD1A /* LocationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 90FD33541C210AAA002FFD1A /* LocationTableViewCell.xib */; };
+		BF1B4CA61C6DB20900B55663 /* SearchService.m in Sources */ = {isa = PBXBuildFile; fileRef = BF1B4CA51C6DB20900B55663 /* SearchService.m */; };
 		BF5E37661C443C6100CD4B50 /* FourSquareService.m in Sources */ = {isa = PBXBuildFile; fileRef = BF5E37651C443C6100CD4B50 /* FourSquareService.m */; };
 		BF7EAC391C207FC40076E432 /* POIDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF7EAC381C207FC40076E432 /* POIDetailTableViewCell.xib */; };
 		BF7EAC3C1C2080160076E432 /* POIDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BF7EAC3B1C2080160076E432 /* POIDetailTableViewCell.m */; };
@@ -181,6 +182,8 @@
 		90FD33521C210AAA002FFD1A /* LocationTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationTableViewCell.h; sourceTree = "<group>"; };
 		90FD33531C210AAA002FFD1A /* LocationTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationTableViewCell.m; sourceTree = "<group>"; };
 		90FD33541C210AAA002FFD1A /* LocationTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LocationTableViewCell.xib; sourceTree = "<group>"; };
+		BF1B4CA41C6DB20900B55663 /* SearchService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchService.h; sourceTree = "<group>"; };
+		BF1B4CA51C6DB20900B55663 /* SearchService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchService.m; sourceTree = "<group>"; };
 		BF5E37641C443C6100CD4B50 /* FourSquareService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FourSquareService.h; sourceTree = "<group>"; };
 		BF5E37651C443C6100CD4B50 /* FourSquareService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FourSquareService.m; sourceTree = "<group>"; };
 		BF7EAC381C207FC40076E432 /* POIDetailTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = POIDetailTableViewCell.xib; sourceTree = "<group>"; };
@@ -395,6 +398,8 @@
 		90380EF21C1F48730085DD66 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				BF1B4CA41C6DB20900B55663 /* SearchService.h */,
+				BF1B4CA51C6DB20900B55663 /* SearchService.m */,
 				BF5E37641C443C6100CD4B50 /* FourSquareService.h */,
 				BF5E37651C443C6100CD4B50 /* FourSquareService.m */,
 				90380EF31C1F49160085DD66 /* Tour.h */,
@@ -538,7 +543,7 @@
 				TargetAttributes = {
 					903177C51C1F3A9E001C8DF9 = {
 						CreatedOnToolsVersion = 7.1.1;
-						DevelopmentTeam = C49MT2F2AS;
+						DevelopmentTeam = H53W5ARJ67;
 					};
 					903177DE1C1F3A9E001C8DF9 = {
 						CreatedOnToolsVersion = 7.1.1;
@@ -660,6 +665,7 @@
 				908AA8C11C20972B00A7DF57 /* ParseService.m in Sources */,
 				9050ECDC1C1F7B920092CF86 /* TourDetailViewController.m in Sources */,
 				BFAD24D11C20ECED009557DF /* TourListViewController.m in Sources */,
+				BF1B4CA61C6DB20900B55663 /* SearchService.m in Sources */,
 				BF844F1A1C239B5B0025E651 /* CustomAnnotation.m in Sources */,
 				903177CB1C1F3A9E001C8DF9 /* main.m in Sources */,
 				90380EF51C1F49160085DD66 /* Tour.m in Sources */,
