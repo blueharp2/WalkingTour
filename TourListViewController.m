@@ -100,6 +100,11 @@
         float cellHeight = cell.frame.size.height;
         UIButton *editButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, cellHeight, cellHeight)];
         [editButton setImage:[UIImage imageNamed:@"edit.png"] forState:UIControlStateNormal];
+//        NSLog(@"%f %f %f %f", editButton.imageView.frame.origin.x, editButton.imageView.frame.origin.y, editButton.imageView.frame.size.width, editButton.imageView.frame.size.height);
+//        if (indexPath.section == 0) {
+//            editButton.imageView.frame = CGRectMake(editButton.imageView.frame.origin.x + cellHeight - [UIImage imageNamed:@"edit.png"].size.width, editButton.imageView.frame.origin.y, editButton.imageView.frame.size.width, editButton.imageView.frame.size.width);
+//        }
+//        NSLog(@"%f %f %f %f", editButton.imageView.frame.origin.x, editButton.imageView.frame.origin.y, editButton.imageView.frame.size.width, editButton.imageView.frame.size.height);
         [editButton addTarget:self action:@selector(editButtonTapped:event:) forControlEvents:UIControlEventTouchUpInside];
         cell.accessoryView = editButton;
     }

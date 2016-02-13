@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "Parse/Parse.h"
+#import "TourSelectionViewController.h"
 
 @interface AppDelegate ()
 
@@ -26,12 +27,20 @@
     return YES;
 }
 
-- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
     NSString *stringUrl = [NSString stringWithFormat:@"%@", url];
-    if ([stringUrl containsString:@"walkabouttours://"]) {
-        //Do something with the url
+//            The url for the cafe tour I created would
+//            look like this: walkabouttours://id=hacwySWrn7
+    if ([stringUrl containsString:@"walkabouttours://id="]) {
+        NSString *tourId = [stringUrl stringByReplacingOccurrencesOfString:@"walkabouttours://id=" withString:@""];
+        //Set id to be the loadedId on the homeVC
+        if ([self.window.rootViewController isKindOfClass:[TourSelectionViewController class]]) {
+            TourSelectionViewController *selectionVC = (TourSelectionViewController *)self.window.rootViewController;
+            selectionVC.linkedTour = tourId;
+        }
+        
     }
-    return NO;
+    return YES;
 }
 
 @end

@@ -32,7 +32,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    NSLog(@"%@", self.currentTour);
     [self.mapView setDelegate:self];
     [self.mapView setShowsUserLocation: YES];
     

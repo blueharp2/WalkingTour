@@ -60,9 +60,16 @@
         if ([navController.viewControllers.firstObject isKindOfClass:[ParseLoginViewController class]]) {
             ParseLoginViewController *loginVC = (ParseLoginViewController *)navController.viewControllers.firstObject;
             loginVC.completion = ^ {
+                if (self.linkedTour) {
+                    [[PFUser currentUser] addObject:self.linkedTour forKey:@"favorites"];
+                }
                 [self dismissViewControllerAnimated:YES completion:nil];
             };
             [self presentViewController:navController animated:YES completion:nil];
+        }
+    } else {
+        if (self.linkedTour) {
+            [currentUser addObject:self.linkedTour forKey:@"favorites"];
         }
     }
 }
@@ -71,8 +78,7 @@
     
     NSString *text = @"Checkout this Tour on Walkabout Tours in the App Store";
 
-    UIActivityViewController *controller = [[UIActivityViewController alloc] initWithActivityItems:@[text]
-                                                                             applicationActivities:nil];
+    UIActivityViewController *controller = [[UIActivityViewController alloc] initWithActivityItems:@[text] applicationActivities:nil];
     
     controller.excludedActivityTypes = @[UIActivityTypePostToWeibo,
                                          UIActivityTypeCopyToPasteboard,
