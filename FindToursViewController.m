@@ -337,7 +337,7 @@
         [favoriteStarButton setTitle:@"☆" forState:UIControlStateNormal];
         favoriteStarButton.titleLabel.font = [UIFont fontWithName:@"Futura" size:30];
         favoriteStarButton.titleLabel.font = [UIFont boldSystemFontOfSize:30];
-        favoriteStarButton.titleLabel.textColor = [UIColor colorWithRed:0.278 green:0.510 blue:0.855 alpha:1.000];
+        [favoriteStarButton setTintColor:[UIColor colorWithRed:0.278 green:0.510 blue:0.855 alpha:1.000]];
         [favoriteStarButton setShowsTouchWhenHighlighted:YES];
         [cell addSubview:favoriteStarButton];
         //This only works because I left the image view on the xib.  I just removed the image name.  When you delete the image view on the xib it messes up the whole cell.
@@ -493,17 +493,17 @@
 }
 
 -(void)favoriteStarButtonTapped:(UIButton *)favoriteStarButton event:(UIEvent *)event{
+   // [favoriteStarButton setTintColor:[UIColor colorWithRed:0.278 green:0.510 blue:0.855 alpha:1.000]];
     NSString *currentTitle = [favoriteStarButton titleForState:UIControlStateNormal];
     NSString *newTitle = [currentTitle isEqual:@"☆"]? @"★" : @"☆";
     [favoriteStarButton setTitle:newTitle forState:UIControlStateNormal];
-    //color annotationView.pinTintColor = [UIColor colorWithRed:0.278 green:0.510 blue:0.855 alpha:1.000];
+    
     
     NSSet *touches = event.allTouches;
     UITouch *touch = touches.anyObject;
     CGPoint currentTouchPosition = [touch locationInView:self.toursTableView];
     NSIndexPath *indexPath = [self.toursTableView indexPathForRowAtPoint:currentTouchPosition];
     
-   // NSMutableArray *favoriteToursFromParse = [[NSMutableArray alloc]init];
     Tour *tour = self.toursFromParse[indexPath.section];
     NSString *tourObjectId = tour.objectId;
     
