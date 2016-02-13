@@ -376,6 +376,11 @@
     return 100;
 }
 
+-(void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+    cell.layer.cornerRadius = 5;
+    cell.layer.masksToBounds = true;
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (tableView.tag == 0) {
         NSString *tourId = self.toursFromParse[indexPath.section].objectId;
@@ -491,40 +496,34 @@
     NSString *currentTitle = [favoriteStarButton titleForState:UIControlStateNormal];
     NSString *newTitle = [currentTitle isEqual:@"☆"]? @"★" : @"☆";
     [favoriteStarButton setTitle:newTitle forState:UIControlStateNormal];
+    //color annotationView.pinTintColor = [UIColor colorWithRed:0.278 green:0.510 blue:0.855 alpha:1.000];
     
     NSSet *touches = event.allTouches;
     UITouch *touch = touches.anyObject;
     CGPoint currentTouchPosition = [touch locationInView:self.toursTableView];
     NSIndexPath *indexPath = [self.toursTableView indexPathForRowAtPoint:currentTouchPosition];
     
-    NSMutableArray *favoriteToursFromParse = [[NSMutableArray alloc]init];
+   // NSMutableArray *favoriteToursFromParse = [[NSMutableArray alloc]init];
     Tour *tour = self.toursFromParse[indexPath.section];
     NSString *tourObjectId = tour.objectId;
     
     if (indexPath != nil) {
-        BOOL isAlreadyAFavoriteTour = [favoriteToursFromParse containsObject:tourObjectId];
-        //The check of the array is not working correctly.  It only defaults to the else statement
+        
+        BOOL isAlreadyAFavoriteTour = [self.favoriteToursFromParse containsObject:tourObjectId];
+       
         if (isAlreadyAFavoriteTour == YES){
-            [favoriteToursFromParse removeObject:tourObjectId];
-            //NSLog(@"Favorite Tours From Parse Array: %@", favoriteToursFromParse);
+            [self.favoriteToursFromParse removeObject:tourObjectId];
         
-        }else{
-            [favoriteToursFromParse addObject:tourObjectId];
-            //NSLog(@"Favorite Tours From Parse Array: %@", favoriteToursFromParse);
+        }else if (isAlreadyAFavoriteTour == NO){
+            if (self.favoriteToursFromParse){
+            [self.favoriteToursFromParse addObject:tourObjectId];
+            
+            }else{
+                self.favoriteToursFromParse = [NSMutableArray arrayWithObject:tourObjectId];
+            }
         }
-        
-        //The code below doesn't work correctly.  It can add to the array but not remove from the array.
-//        BOOL isAlreadyAFavoriteTour = [favoriteToursFromParse containsObject:tour.objectId];
-//        if (isAlreadyAFavoriteTour == NO) {
-//        [favoriteToursFromParse addObject:tour.objectId];
-////        NSString *test1 = [favoriteToursFromParse objectAtIndex:0];
-////        NSLog(test1);
-//    }else if (isAlreadyAFavoriteTour ==YES){
-//        //never reaches this point.
-//        [favoriteToursFromParse removeObject:tour.objectId];
-//    }
  }
-     NSLog(@"Favorite Tours From Parse Array: %@", favoriteToursFromParse);
+     NSLog(@"Favorite Tours From Parse Array: %@", self.favoriteToursFromParse);
 }
 
 #pragma mark - Navigation

@@ -13,6 +13,7 @@
 @interface TourSelectionViewController ()
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *selectButtonTopConstraint;
+@property BOOL constraintAdjusted;
 
 @end
 
@@ -41,13 +42,15 @@
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     self.navigationController.navigationBar.translucent = YES;
+    self.constraintAdjusted = NO;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    if (self.view.frame.size.height < 500.0) {
+    if (self.view.frame.size.height < 500.0 && self.constraintAdjusted == NO) {
         self.selectButtonTopConstraint.constant -= 40;
+        self.constraintAdjusted = YES;
     }
 }
 
