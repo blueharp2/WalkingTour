@@ -81,7 +81,7 @@ static const NSArray *categories;
     
     self.navigationController.delegate = self;
     
-//    [self setUpGreyOutView];
+    [self setUpGreyOutView];
     self.mapView.delegate = self;
     [self requestPermissions];
     [self.locationManager setDelegate:self];
@@ -283,19 +283,22 @@ static const NSArray *categories;
                         currentState.location = self.geoPoint;
                         currentState.categories = self.selectedCategories;
                     }
-                    Location *locationToEdit = (self.locationToEdit == nil ? [[Location alloc] initWithLocationName:self.locationNameTextField.text locationDescription:self.locationDescriptionTextField.text photo:self.photoFile video:self.videoFile categories:self.selectedCategories location:self.geoPoint orderNumber:0 tour:nil] : currentState);
+                    Location *locationToEdit = (self.locationToEdit == nil ? [[Location alloc] initWithLocationName:self.locationNameTextField.text locationAddress: self.locationAddressTextField.text locationDescription:self.locationDescriptionTextField.text photo:self.photoFile video:self.videoFile categories:self.selectedCategories location:self.geoPoint orderNumber:0 tour:nil] : currentState);
                     self.createdLocation = locationToEdit;
                 }
             } else {
                 [self displayCategories];
             }
         } else {
-            Location *locationToSave = [[Location alloc] initWithLocationName:self.locationNameTextField.text locationDescription:self.locationDescriptionTextField.text photo:self.photoFile video:self.videoFile categories:nil location:self.geoPoint orderNumber:0 tour:nil];
+            Location *locationToSave = [[Location alloc] initWithLocationName:self.locationNameTextField.text locationAddress: self.locationAddressTextField.text locationDescription:self.locationDescriptionTextField.text photo:self.photoFile video:self.videoFile categories:nil location:self.geoPoint orderNumber:0 tour:nil];
             self.createdLocation = locationToSave;
             [self displayCategories];
         }
         if (self.locationToEdit && !self.categoriesEdited) {
             self.selectedCategories = [NSMutableArray arrayWithArray:self.locationToEdit.categories];
+            
+//                [self setUpGreyOutView];
+
             [self presentEditCategoriesAlert];
         } else {
             [self saveLocationWithCategories:sender];
@@ -319,7 +322,7 @@ static const NSArray *categories;
     }];
     UIAlertAction *noAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"No",comment:nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
         if (!self.locationToEdit) {
-            Location *locationToSave = [[Location alloc] initWithLocationName:self.locationNameTextField.text locationDescription:self.locationDescriptionTextField.text photo:self.photoFile video:self.videoFile categories:nil location:self.geoPoint orderNumber:0 tour:nil];
+            Location *locationToSave = [[Location alloc] initWithLocationName:self.locationNameTextField.text locationAddress: self.locationAddressTextField.text locationDescription:self.locationDescriptionTextField.text photo:self.photoFile video:self.videoFile categories:nil location:self.geoPoint orderNumber:0 tour:nil];
             self.createdLocation = locationToSave;
             [self displayCategories];
         } else {
