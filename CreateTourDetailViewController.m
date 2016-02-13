@@ -708,13 +708,15 @@ static const NSArray *categories;
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-    
+    if (textField.tag == 0) {
+
     NSString *latestString = [textField.text stringByReplacingCharactersInRange:range withString:string];
     
     NSMutableArray *foundVenues = [SearchService findMatchesWithTerm:latestString arrayToSearch: self.suggestedAddresses];
     self.suggestedVenuesWithAddress = [NSMutableArray arrayWithArray:foundVenues];
     NSLog(@"%@", self.suggestedVenuesWithAddress);
     [self.suggestedLocationTableView reloadData];
+    }
     
     return YES;
 }
