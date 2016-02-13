@@ -54,11 +54,6 @@ static const NSArray *categories;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    NSMutableDictionary *result = [NSMutableDictionary dictionaryWithObjectsAndKeys: @"Library", @"name",  @"Foo Address", @"address", nil];
-    
-    self.suggestedVenuesWithAddress = [NSMutableArray arrayWithObject:result];
-    
     [self setUpVenuesTableView];
     
 //        [self.suggestedVenuesWithAddress addObject:result];
@@ -396,6 +391,8 @@ static const NSArray *categories;
     }
 }
 
+
+
 #pragma mark - UIImagePickerControllerDelegate
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
@@ -492,6 +489,10 @@ static const NSArray *categories;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    // Checking which tableView is sending the message.
+    
+    if ([tableView isEqual: self.categoryTableView]) {
+
     if ([tableView cellForRowAtIndexPath:indexPath].accessoryType == UITableViewCellAccessoryCheckmark) {
         [tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryNone;
     } else {
@@ -505,6 +506,15 @@ static const NSArray *categories;
         }
     } else {
         self.selectedCategories = [NSMutableArray arrayWithObject:categories[indexPath.row]];
+    }
+    } else { // tableView == suggestedLocationTableView
+        self.locationNameTextField.text = [[self.suggestedVenuesWithAddress objectAtIndex:indexPath.row] objectForKey:@"name"];
+        
+        [self.locationNameTextField resignFirstResponder];
+        [self.locationDescriptionTextField becomeFirstResponder];
+        [self.suggestedVenuesWithAddress removeAllObjects];
+        [self.suggestedLocationTableView reloadData];
+
     }
 }
 
@@ -643,19 +653,48 @@ static const NSArray *categories;
     [self.mapView removeAnnotations:annotations];
 }
 
+- (void)toggleMapViewForTextLabels {
+    [UIView animateWithDuration:0.4 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^{
+        
+        self.mapHeightConstraint.constant = -((self.mapView.frame.size.height / 0.60));
+        self.cameraButton.hidden = YES;
+        
+        [self.mapView updateConstraintsIfNeeded];
+        [self.view layoutIfNeeded];
+        
+    } completion:^(BOOL finished) {
+        MKCoordinateRegion pinRegion = MKCoordinateRegionMakeWithDistance(CLLocationCoordinate2DMake(self.geoPoint.latitude, self.geoPoint.longitude), 300, 300);
+        [self.mapView setRegion:pinRegion animated:YES];
+    }];
+}
+
 #pragma mark - UITextFieldDelegate
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    
+    NSString *latestString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    
+    NSMutableArray *foundVenues = [SearchService findMatchesWithTerm:latestString arrayToSearch: self.suggestedAddresses];
+    self.suggestedVenuesWithAddress = [NSMutableArray arrayWithArray:foundVenues];
+    NSLog(@"%@", self.suggestedVenuesWithAddress);
+    [self.suggestedLocationTableView reloadData];
+    
+    return YES;
+}
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     
-    NSMutableArray *foundVenues = [SearchService findMatchesWithTerm:self.locationNameTextField.text arrayToSearch:_suggestedAddresses];
-    self.suggestedVenuesWithAddress = [NSMutableArray arrayWithArray:foundVenues];
-    NSLog(@"%@", self.suggestedVenuesWithAddress);
-
     [textField resignFirstResponder];
+    [self.suggestedVenuesWithAddress removeAllObjects];
+    [self.suggestedLocationTableView reloadData];
     
     if (textField.tag == 0 && self.locationDescriptionTextField.text.length == 0) {
         [self.locationDescriptionTextField becomeFirstResponder];
-        [self.suggestedLocationTableView reloadData];
+        [self toggleMapViewForTextLabels];
 
     }
     return YES;
