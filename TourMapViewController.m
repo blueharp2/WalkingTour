@@ -245,26 +245,11 @@
 }
 
 - (void)shareButtonPressed {
-    NSLog(@"Map");
+    if (self.currentTour) {
+        NSString *shareText = [NSString stringWithFormat:@"Check out this tour on Walkabout Tours: walkabouttours://id=%@. Download Walkabout Tours from the App Store: %@", self.currentTour, @"https://appsto.re/i6YJ4GS"];
+        UIActivityViewController *shareController = [[UIActivityViewController alloc] initWithActivityItems:@[shareText] applicationActivities:nil];
+        [self presentViewController:shareController animated:YES completion:nil];
+    }
 }
-
-//- (IBAction)shareButton:(UIBarButtonItem *)sender {
-//    
-//    NSString *text = @"Checkout this Tour on Walkabout Tours in the App Store";
-//    
-//    UIActivityViewController *controller = [[UIActivityViewController alloc] initWithActivityItems:@[text] applicationActivities:nil];
-//    
-//    controller.excludedActivityTypes = @[UIActivityTypePostToWeibo,
-//                                         UIActivityTypeCopyToPasteboard,
-//                                         UIActivityTypeAssignToContact,
-//                                         UIActivityTypeSaveToCameraRoll,
-//                                         UIActivityTypeAddToReadingList,
-//                                         UIActivityTypePostToFlickr,
-//                                         UIActivityTypePostToVimeo,
-//                                         UIActivityTypePostToTencentWeibo,
-//                                         UIActivityTypeAirDrop,
-//                                         ];
-//    [self presentViewController:controller animated:YES completion:nil];
-//}
 
 @end
