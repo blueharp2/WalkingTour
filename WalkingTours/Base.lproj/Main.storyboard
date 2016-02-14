@@ -1003,44 +1003,56 @@
                                     </mask>
                                 </variation>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="754" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ab4-nZ-Lpj">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="754" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ab4-nZ-Lpj">
                                 <rect key="frame" x="12" y="415" width="296" height="26"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="20"/>
                                 <color key="textColor" red="0.2784313725" green="0.50980392159999999" blue="0.85490196080000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="755" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X4c-dm-N9G">
-                                <rect key="frame" x="12" y="448" width="296" height="23"/>
+                                <rect key="frame" x="8" y="476" width="304" height="23"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
+                                <color key="textColor" red="0.2784313725" green="0.50980392159999999" blue="0.85490196080000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="755" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rfv-oW-XnO">
+                                <rect key="frame" x="12" y="449" width="296" height="19"/>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="14"/>
                                 <color key="textColor" red="0.2784313725" green="0.50980392159999999" blue="0.85490196080000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="STd-o3-vpi" firstAttribute="top" secondItem="X4c-dm-N9G" secondAttribute="bottom" constant="48" id="3J5-Wl-HFL"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="rfv-oW-XnO" secondAttribute="trailing" constant="-4" id="2LO-43-Lbw"/>
+                            <constraint firstItem="STd-o3-vpi" firstAttribute="top" secondItem="X4c-dm-N9G" secondAttribute="bottom" constant="20" id="3J5-Wl-HFL"/>
                             <constraint firstAttribute="trailing" secondItem="ygk-ha-HeB" secondAttribute="trailing" id="5Tf-xj-FjE"/>
+                            <constraint firstItem="X4c-dm-N9G" firstAttribute="top" secondItem="rfv-oW-XnO" secondAttribute="bottom" constant="8" id="5i7-1R-XN3"/>
                             <constraint firstItem="MeJ-Tg-42J" firstAttribute="top" secondItem="WgN-IX-MKI" secondAttribute="bottom" constant="40" id="9mu-Ue-X9R"/>
                             <constraint firstItem="X4c-dm-N9G" firstAttribute="top" secondItem="ab4-nZ-Lpj" secondAttribute="bottom" constant="8" id="A1e-La-nzJ"/>
-                            <constraint firstItem="X4c-dm-N9G" firstAttribute="leading" secondItem="xyJ-0v-rmR" secondAttribute="leadingMargin" constant="-4" id="QeI-hL-qIC"/>
+                            <constraint firstItem="rfv-oW-XnO" firstAttribute="leading" secondItem="xyJ-0v-rmR" secondAttribute="leadingMargin" constant="-4" id="PfK-41-v9a"/>
+                            <constraint firstItem="X4c-dm-N9G" firstAttribute="leading" secondItem="xyJ-0v-rmR" secondAttribute="leadingMargin" constant="-8" id="QeI-hL-qIC"/>
                             <constraint firstItem="ab4-nZ-Lpj" firstAttribute="top" secondItem="MeJ-Tg-42J" secondAttribute="bottom" constant="114" id="SA8-8Q-9ef"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ab4-nZ-Lpj" secondAttribute="trailing" constant="-4" id="SfJ-QL-Y4F"/>
+                            <constraint firstItem="rfv-oW-XnO" firstAttribute="top" secondItem="ab4-nZ-Lpj" secondAttribute="bottom" constant="8" id="TCK-fb-UJP"/>
                             <constraint firstItem="ab4-nZ-Lpj" firstAttribute="leading" secondItem="xyJ-0v-rmR" secondAttribute="leadingMargin" constant="-4" id="VUI-6b-U1E"/>
                             <constraint firstItem="MeJ-Tg-42J" firstAttribute="leading" secondItem="xyJ-0v-rmR" secondAttribute="leading" constant="20" id="Wrq-P2-FU6"/>
                             <constraint firstAttribute="trailing" secondItem="MeJ-Tg-42J" secondAttribute="trailing" constant="20" id="YZa-ZW-xeX"/>
                             <constraint firstItem="ygk-ha-HeB" firstAttribute="top" secondItem="xyJ-0v-rmR" secondAttribute="top" id="Zlx-Wa-gyP"/>
                             <constraint firstAttribute="bottom" secondItem="ygk-ha-HeB" secondAttribute="bottom" id="cGB-5H-9X5"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="X4c-dm-N9G" secondAttribute="trailing" constant="-4" id="ixJ-OR-hM6"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="X4c-dm-N9G" secondAttribute="trailing" constant="-8" id="ixJ-OR-hM6"/>
                             <constraint firstItem="ygk-ha-HeB" firstAttribute="leading" secondItem="xyJ-0v-rmR" secondAttribute="leading" id="mzy-th-F9w"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="SA8-8Q-9ef"/>
+                                <exclude reference="A1e-La-nzJ"/>
                             </mask>
                         </variation>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
+                        <outlet property="locationAddressLabel" destination="rfv-oW-XnO" id="P6Y-pl-niv"/>
                         <outlet property="locationDescriptionLabel" destination="X4c-dm-N9G" id="dCK-sd-592"/>
                         <outlet property="locationNameLabel" destination="ab4-nZ-Lpj" id="frR-v1-ngk"/>
                         <outlet property="playButton" destination="Q8D-Ok-M3Z" id="A3a-wl-0as"/>
