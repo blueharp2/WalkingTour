@@ -9,6 +9,7 @@
 #import "ParseLoginViewController.h"
 #import "ParseSignUpViewController.h"
 #import "TourSelectionViewController.h"
+#import "FindToursViewController.h"
 
 @interface TourSelectionViewController ()
 
@@ -60,10 +61,14 @@
         if ([navController.viewControllers.firstObject isKindOfClass:[ParseLoginViewController class]]) {
             ParseLoginViewController *loginVC = (ParseLoginViewController *)navController.viewControllers.firstObject;
             loginVC.completion = ^ {
+                [self dismissViewControllerAnimated:YES completion:nil];
                 if (self.linkedTour) {
                     [[PFUser currentUser] addObject:self.linkedTour forKey:@"favorites"];
+                    [[PFUser currentUser] saveInBackground];
+                    FindToursViewController *findToursVC = [[FindToursViewController alloc] init];
+                    [self.navigationController pushViewController:findToursVC animated:NO];
+                    [findToursVC performSegueWithIdentifier:@"TabBarController" sender:self.linkedTour];
                 }
-                [self dismissViewControllerAnimated:YES completion:nil];
             };
             [self presentViewController:navController animated:YES completion:nil];
         }
@@ -72,25 +77,6 @@
             [currentUser addObject:self.linkedTour forKey:@"favorites"];
         }
     }
-}
-
-- (IBAction)shareButton:(UIBarButtonItem *)sender {
-    
-    NSString *text = @"Checkout this Tour on Walkabout Tours in the App Store";
-
-    UIActivityViewController *controller = [[UIActivityViewController alloc] initWithActivityItems:@[text] applicationActivities:nil];
-    
-    controller.excludedActivityTypes = @[UIActivityTypePostToWeibo,
-                                         UIActivityTypeCopyToPasteboard,
-                                         UIActivityTypeAssignToContact,
-                                         UIActivityTypeSaveToCameraRoll,
-                                         UIActivityTypeAddToReadingList,
-                                         UIActivityTypePostToFlickr,
-                                         UIActivityTypePostToVimeo,
-                                         UIActivityTypePostToTencentWeibo,
-                                         UIActivityTypeAirDrop,
-                                         ];
-    [self presentViewController:controller animated:YES completion:nil];
 }
 
 @end

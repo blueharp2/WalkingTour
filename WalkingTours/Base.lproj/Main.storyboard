@@ -535,13 +535,7 @@
                             <constraint firstItem="iZU-Lr-KvV" firstAttribute="trailing" secondItem="P06-Ev-jeT" secondAttribute="trailing" id="zPJ-Ax-eXM"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="eTx-13-oO4">
-                        <barButtonItem key="rightBarButtonItem" title="Share" id="xci-eY-v9E">
-                            <connections>
-                                <action selector="shareButton:" destination="GeJ-TF-SYQ" id="D64-cG-tM2"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="eTx-13-oO4"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="selectButtonTopConstraint" destination="eIe-2e-2Eb" id="UcF-h4-gt1"/>

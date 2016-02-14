@@ -25,6 +25,7 @@
 @property (strong, nonatomic) NSArray <Location*> *locationsFromParse;
 @property (weak, nonatomic) IBOutlet UITableView *tourListTableView;
 @property (strong, nonatomic) NSArray <Tour*> *toursFromParse;
+@property (strong, nonatomic) UIBarButtonItem *shareButton;
 
 
 @end
@@ -34,6 +35,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupViewController];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.tabBarController.navigationItem.rightBarButtonItem = self.shareButton;
 }
 
 - (void)setCurrentTour:(NSString*)currentTour {
@@ -55,6 +61,8 @@
     
     UINib *nib = [UINib nibWithNibName:@"LocationTableViewCell" bundle:nil];
     [[self tourListTableView] registerNib:nib forCellReuseIdentifier:@"LocationTableViewCell"];
+    
+    self.shareButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(shareButtonPressed)];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -200,6 +208,10 @@
     if (indexPath != nil) {
         [self tableView:self.tourListTableView accessoryButtonTappedForRowWithIndexPath:indexPath];
     }
+}
+
+- (void)shareButtonPressed {
+    NSLog(@"List");
 }
 
 @end

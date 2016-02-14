@@ -20,6 +20,7 @@
 @interface TourMapViewController () <MKMapViewDelegate, CLLocationManagerDelegate>
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
+@property (strong, nonatomic) UIBarButtonItem *shareButton;
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (strong, nonatomic) NSArray <Location*> *locationsFromParse;
 @property (strong, nonatomic) Location *currentLocation;
@@ -44,6 +45,13 @@
     // Gets user location and set map region
     CLLocation *location = [self.locationManager location];
     [self setMapForCoordinateWithLatitude:location.coordinate.latitude andLongitude:location.coordinate.longitude];
+    
+    self.shareButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(shareButtonPressed)];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.tabBarController.navigationItem.rightBarButtonItem = self.shareButton;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -236,6 +244,27 @@
     }
 }
 
+- (void)shareButtonPressed {
+    NSLog(@"Map");
+}
 
+//- (IBAction)shareButton:(UIBarButtonItem *)sender {
+//    
+//    NSString *text = @"Checkout this Tour on Walkabout Tours in the App Store";
+//    
+//    UIActivityViewController *controller = [[UIActivityViewController alloc] initWithActivityItems:@[text] applicationActivities:nil];
+//    
+//    controller.excludedActivityTypes = @[UIActivityTypePostToWeibo,
+//                                         UIActivityTypeCopyToPasteboard,
+//                                         UIActivityTypeAssignToContact,
+//                                         UIActivityTypeSaveToCameraRoll,
+//                                         UIActivityTypeAddToReadingList,
+//                                         UIActivityTypePostToFlickr,
+//                                         UIActivityTypePostToVimeo,
+//                                         UIActivityTypePostToTencentWeibo,
+//                                         UIActivityTypeAirDrop,
+//                                         ];
+//    [self presentViewController:controller animated:YES completion:nil];
+//}
 
 @end
