@@ -157,6 +157,15 @@ static const NSArray *categories;
 }
 
 - (void)setUpVenuesTableView {
+    
+    UILabel *headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.categoryTableView.frame.origin.x -40, self.suggestedLocationTableView.frame.origin.y, self.suggestedLocationTableView.frame.size.width, 40)];
+    [headerLabel setText:NSLocalizedString(@"Select from suggested venues", comment:nil)];
+    headerLabel.font = [UIFont fontWithName:@"Futura" size:20];
+    headerLabel.textColor = [UIColor colorWithRed:0.278 green:0.510 blue:0.855 alpha:1.000];
+    [headerLabel setTextAlignment:NSTextAlignmentCenter];
+    [self.suggestedLocationTableView setTableHeaderView:headerLabel];
+
+
     self.suggestedLocationTableView.dataSource = self;
     self.suggestedLocationTableView.delegate = self;
 }
