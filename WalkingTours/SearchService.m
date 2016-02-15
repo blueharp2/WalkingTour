@@ -13,6 +13,7 @@
 + (NSMutableArray*)findMatchesWithTerm:(NSString *)term arrayToSearch:(NSMutableArray *)arrayToSearch {
     
     NSMutableArray *matches = [NSMutableArray new];
+    NSMutableDictionary *unableToLocateVenue = [NSMutableDictionary dictionaryWithObjectsAndKeys: @"Unable to locate venue", @"name",  @"", @"address", nil];
     
     for (int i = 0; i < [arrayToSearch count]; i++) {
         
@@ -20,14 +21,16 @@
         NSString* lowerCaseStringToSearch = [stringToSearch lowercaseStringWithLocale: [NSLocale currentLocale]];
         NSString* lowerCaseSearchTerm = [term lowercaseStringWithLocale:[NSLocale currentLocale]];
         
-        
-            NSRange searchResult = [lowerCaseStringToSearch rangeOfString: lowerCaseSearchTerm];
+        NSRange searchResult = [lowerCaseStringToSearch rangeOfString: lowerCaseSearchTerm];
         if (searchResult.location == NSNotFound) {
             NSLog(@"Search term string was not found");
         } else {
             NSLog(@"%@ starts at index %lu and is %lu characters long", lowerCaseSearchTerm, searchResult.location, searchResult.length);
             [matches addObject:[arrayToSearch objectAtIndex:i]];
         }
+    }
+    if (matches.count == 0) {
+        [matches addObject:unableToLocateVenue];
     }
     return matches;
 }

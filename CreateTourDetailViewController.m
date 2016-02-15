@@ -118,6 +118,7 @@ static const NSArray *categories;
     self.mapPinAnnotation = newPoint;
     [self dropPinAtLocationCoordinate:coordinate];
     self.locationNameTextField.text = locationToEdit.locationName;
+    self.locationAddressTextField.text = locationToEdit.locationAddress;
     self.locationDescriptionTextField.text = locationToEdit.locationDescription;
     [self.mapView setRegion:MKCoordinateRegionMakeWithDistance(coordinate, 300, 300) animated:YES];
 }
@@ -162,8 +163,11 @@ static const NSArray *categories;
     [headerLabel setText:NSLocalizedString(@"Select from suggested venues", comment:nil)];
     headerLabel.font = [UIFont fontWithName:@"Futura" size:20];
     headerLabel.textColor = [UIColor colorWithRed:0.278 green:0.510 blue:0.855 alpha:1.000];
+    headerLabel.backgroundColor = [UIColor lightGrayColor];
     [headerLabel setTextAlignment:NSTextAlignmentCenter];
     [self.suggestedLocationTableView setTableHeaderView:headerLabel];
+    [headerLabel sizeToFit];
+    
 
 
     self.suggestedLocationTableView.dataSource = self;
@@ -485,6 +489,19 @@ static const NSArray *categories;
     if ([tableView isEqual: self.categoryTableView]) {
         return categories.count;
     } else { // tableView == suggestedLocationTableView
+//        if (self.suggestedVenuesWithAddress.count == 0) {
+//     
+//        UILabel *noDataMessageLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0,
+//                                                                        self.suggestedLocationTableView.bounds.size.width,
+//                                                                        self.suggestedLocationTableView.bounds.size.height)];
+//        noDataMessageLabel.text = @"No data available";
+//        noDataMessageLabel.textAlignment = NSTextAlignmentCenter;
+//        [noDataMessageLabel sizeToFit];
+//        
+//        self.suggestedLocationTableView.backgroundView = noDataMessageLabel;
+//        self.suggestedLocationTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+//        }
+        
         return self.suggestedVenuesWithAddress.count;
     }
 }
