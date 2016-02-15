@@ -62,7 +62,7 @@
             ParseLoginViewController *loginVC = (ParseLoginViewController *)navController.viewControllers.firstObject;
             loginVC.completion = ^ {
                 [self dismissViewControllerAnimated:YES completion:nil];
-                if (self.linkedTour) {
+                if (self.linkedTour != nil) {
                     [[PFUser currentUser] addObject:self.linkedTour forKey:@"favorites"];
                     [[PFUser currentUser] saveInBackground];
                     FindToursViewController *findToursVC = [[FindToursViewController alloc] init];
@@ -73,9 +73,9 @@
             [self presentViewController:navController animated:YES completion:nil];
         }
     } else {
-        if (self.linkedTour) {
+        if (self.linkedTour != nil) {
             [currentUser addObject:self.linkedTour forKey:@"favorites"];
-            [self performSegueWithIdentifier:@"FindToursViewController" sender:self.linkedTour];
+            [self performSegueWithIdentifier:@"FindToursViewController" sender:self];
 //            FindToursViewController *findToursVC = [[FindToursViewController alloc] init];
 //            [self.navigationController pushViewController:findToursVC animated:NO];
 //            [findToursVC performSegueWithIdentifier:@"TabBarController" sender:self.linkedTour];
@@ -84,14 +84,16 @@
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([sender isKindOfClass:[NSString class]]) {
+//    if ([sender isKindOfClass:[NSString class]]) {
         if ([segue.identifier  isEqual: @"FindToursViewController"]) {
             if ([segue.destinationViewController isKindOfClass:[FindToursViewController class]]) {
                 FindToursViewController *findToursVC = (FindToursViewController *)segue.destinationViewController;
-                
+                findToursVC.linkedTour = self.linkedTour;
+                self.linkedTour = nil;
+                NSLog(@"%@", self.linkedTour);
             }
         }
-    }
+//    }
 }
 
 @end

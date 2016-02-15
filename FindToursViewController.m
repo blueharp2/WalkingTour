@@ -88,6 +88,15 @@
     [super didReceiveMemoryWarning];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    if (self.linkedTour) {
+        NSString *tourTemp = self.linkedTour;
+        self.linkedTour = nil;
+        [self performSegueWithIdentifier:@"TabBarController" sender:tourTemp];
+    }
+}
+
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
     
@@ -119,10 +128,6 @@
     //Setup up MapView
     [self.mapView setDelegate:self];
     [self.mapView setShowsUserLocation: YES];
-    
-    if (self.linkedTour) {
-        [self performSegueWithIdentifier:@"TabBarController" sender:self.linkedTour];
-    }
     
 }
 
