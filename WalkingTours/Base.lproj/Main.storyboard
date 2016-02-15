@@ -497,7 +497,7 @@
                                     <color key="titleColor" red="0.27840076974743694" green="0.51002020468252163" blue="0.85375236742424243" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <segue destination="tqM-E3-5K0" kind="show" id="1Gy-tP-J2d"/>
+                                    <segue destination="tqM-E3-5K0" kind="show" identifier="FindToursViewController" id="1Gy-tP-J2d"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R1I-8O-bYr">

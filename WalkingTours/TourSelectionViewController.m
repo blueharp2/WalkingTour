@@ -75,6 +75,21 @@
     } else {
         if (self.linkedTour) {
             [currentUser addObject:self.linkedTour forKey:@"favorites"];
+            [self performSegueWithIdentifier:@"FindToursViewController" sender:self.linkedTour];
+//            FindToursViewController *findToursVC = [[FindToursViewController alloc] init];
+//            [self.navigationController pushViewController:findToursVC animated:NO];
+//            [findToursVC performSegueWithIdentifier:@"TabBarController" sender:self.linkedTour];
+        }
+    }
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([sender isKindOfClass:[NSString class]]) {
+        if ([segue.identifier  isEqual: @"FindToursViewController"]) {
+            if ([segue.destinationViewController isKindOfClass:[FindToursViewController class]]) {
+                FindToursViewController *findToursVC = (FindToursViewController *)segue.destinationViewController;
+                
+            }
         }
     }
 }

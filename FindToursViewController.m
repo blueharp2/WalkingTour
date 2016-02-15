@@ -120,6 +120,10 @@
     [self.mapView setDelegate:self];
     [self.mapView setShowsUserLocation: YES];
     
+    if (self.linkedTour) {
+        [self performSegueWithIdentifier:@"TabBarController" sender:self.linkedTour];
+    }
+    
 }
 
 - (void)searchButtonPressed:(UIBarButtonItem *)sender {
