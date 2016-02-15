@@ -38,7 +38,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     self.navigationController.navigationBar.translucent = YES;
@@ -46,7 +45,6 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
     if (self.view.frame.size.height < 500.0) {
         self.selectButtonTopConstraint.constant -= 40;
     }
@@ -61,14 +59,15 @@
         if ([navController.viewControllers.firstObject isKindOfClass:[ParseLoginViewController class]]) {
             ParseLoginViewController *loginVC = (ParseLoginViewController *)navController.viewControllers.firstObject;
             loginVC.completion = ^ {
-                [self dismissViewControllerAnimated:YES completion:nil];
-                if (self.linkedTour != nil) {
-                    [[PFUser currentUser] addObject:self.linkedTour forKey:@"favorites"];
-                    [[PFUser currentUser] saveInBackground];
-                    FindToursViewController *findToursVC = [[FindToursViewController alloc] init];
-                    [self.navigationController pushViewController:findToursVC animated:NO];
-                    [findToursVC performSegueWithIdentifier:@"TabBarController" sender:self.linkedTour];
-                }
+                [self dismissViewControllerAnimated:YES completion:^ {
+                    if (self.linkedTour != nil) {
+                        [[PFUser currentUser] addObject:self.linkedTour forKey:@"favorites"];
+                        [[PFUser currentUser] saveInBackground];
+                        FindToursViewController *findToursVC = [[FindToursViewController alloc] init];
+                        [self.navigationController pushViewController:findToursVC animated:NO];
+                        [findToursVC performSegueWithIdentifier:@"TabBarController" sender:self.linkedTour];
+                    }
+                }];
             };
             [self presentViewController:navController animated:YES completion:nil];
         }
@@ -76,24 +75,19 @@
         if (self.linkedTour != nil) {
             [currentUser addObject:self.linkedTour forKey:@"favorites"];
             [self performSegueWithIdentifier:@"FindToursViewController" sender:self];
-//            FindToursViewController *findToursVC = [[FindToursViewController alloc] init];
-//            [self.navigationController pushViewController:findToursVC animated:NO];
-//            [findToursVC performSegueWithIdentifier:@"TabBarController" sender:self.linkedTour];
         }
     }
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-//    if ([sender isKindOfClass:[NSString class]]) {
-        if ([segue.identifier  isEqual: @"FindToursViewController"]) {
-            if ([segue.destinationViewController isKindOfClass:[FindToursViewController class]]) {
-                FindToursViewController *findToursVC = (FindToursViewController *)segue.destinationViewController;
-                findToursVC.linkedTour = self.linkedTour;
-                self.linkedTour = nil;
-                NSLog(@"%@", self.linkedTour);
-            }
+    if ([segue.identifier  isEqual: @"FindToursViewController"]) {
+        if ([segue.destinationViewController isKindOfClass:[FindToursViewController class]]) {
+            FindToursViewController *findToursVC = (FindToursViewController *)segue.destinationViewController;
+            findToursVC.linkedTour = self.linkedTour;
+            self.linkedTour = nil;
+            NSLog(@"%@", self.linkedTour);
         }
-//    }
+    }
 }
 
 @end
