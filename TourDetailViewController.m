@@ -21,6 +21,7 @@ static const NSString *ItemStatusContext;
 @property (nonatomic, weak) IBOutlet VideoPlayerView *playerView;
 @property (nonatomic, weak) IBOutlet UIButton *playButton;
 @property (weak, nonatomic) IBOutlet UILabel *locationNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *locationAddressLabel;
 @property (weak, nonatomic) IBOutlet UILabel *locationDescriptionLabel;
 @property (nonatomic, strong) NSString *locationData;
 @property (strong, nonatomic) UIColor *navBarTintColor;
@@ -40,6 +41,9 @@ static const NSString *ItemStatusContext;
     if (self.location) {
         self.locationNameLabel.text = self.location.locationName;
         self.locationDescriptionLabel.text = self.location.locationDescription;
+        if (self.location.locationAddress) {
+            self.locationAddressLabel.text = self.location.locationAddress;
+        }
         if (!self.location.video) {
             self.playButton.hidden = YES;
         }

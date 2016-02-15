@@ -11,6 +11,7 @@
 @implementation Location
 
 @dynamic locationName;
+@dynamic locationAddress;
 @dynamic locationDescription;
 @dynamic photo;
 @dynamic video;
@@ -28,6 +29,7 @@
 }
 
 -(id)initWithLocationName:(NSString *)locationName
+          locationAddress:(NSString *)locationAddress
       locationDescription:(NSString *)locationDescription
                     photo:(PFFile *)photo
                     video:(PFFile *)video
@@ -38,6 +40,7 @@
     
     if ((self = [super init])){
         self.locationName = locationName;
+        self.locationAddress = locationAddress;
         self.locationDescription = locationDescription;
         self.photo = photo;
         self.video = video;

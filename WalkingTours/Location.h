@@ -12,6 +12,7 @@
 @interface Location : PFObject <PFSubclassing>
 
 @property (copy, nonatomic) NSString *locationName;
+@property (copy, nonatomic) NSString *locationAddress;
 @property (copy, nonatomic) NSString *locationDescription;
 @property (strong, nonatomic) PFFile *photo;
 @property (strong, nonatomic) PFFile *video;
@@ -22,6 +23,7 @@
 
 
 -(id)initWithLocationName:(NSString *)locationName
+          locationAddress:(NSString *)locationAddress
    locationDescription:(NSString *)locationDescription
                  photo:(PFFile *)photo
                  video:(PFFile *)video
