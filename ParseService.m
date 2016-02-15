@@ -200,11 +200,7 @@
 
 + (void)setFavoritedTourIds:(NSArray<NSString *> *)tourIds forUser:(PFUser *)user {
     [user setObject:tourIds forKey:@"favorites"];
-    [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-        if (succeeded) {
-            NSLog(@"Updated favorites for user: %@", user.username);
-        }
-    }];
+    [user saveInBackground];
 }
 
 @end

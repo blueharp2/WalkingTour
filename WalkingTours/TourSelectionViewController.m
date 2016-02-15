@@ -96,7 +96,6 @@
             FindToursViewController *findToursVC = (FindToursViewController *)segue.destinationViewController;
             findToursVC.linkedTour = self.linkedTour;
             self.linkedTour = nil;
-            NSLog(@"%@", self.linkedTour);
         }
     }
 }
