@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3D33EFEC1C4433F3003BA45A /* share.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D33EFEB1C4433F3003BA45A /* share.png */; };
 		3D43CEF31C1F413A00118998 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D43CEF21C1F413A00118998 /* AudioToolbox.framework */; };
 		3D43CEF51C1F414100118998 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D43CEF41C1F414100118998 /* CFNetwork.framework */; };
 		3D43CEF71C1F414800118998 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D43CEF61C1F414800118998 /* CoreGraphics.framework */; };
@@ -24,10 +25,6 @@
 		3D43CF111C1F41AB00118998 /* ParseFacebookUtilsV4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D43CF0B1C1F41AB00118998 /* ParseFacebookUtilsV4.framework */; };
 		3D43CF121C1F41AB00118998 /* ParseTwitterUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D43CF0C1C1F41AB00118998 /* ParseTwitterUtils.framework */; };
 		3D43CF131C1F41AB00118998 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D43CF0D1C1F41AB00118998 /* ParseUI.framework */; };
-		3D43CF231C1F478D00118998 /* WalkingTours58.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D43CF1F1C1F478D00118998 /* WalkingTours58.png */; };
-		3D43CF241C1F478D00118998 /* WalkingTours60.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D43CF201C1F478D00118998 /* WalkingTours60.png */; };
-		3D43CF251C1F478D00118998 /* WalkingTours80.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D43CF211C1F478D00118998 /* WalkingTours80.png */; };
-		3D43CF261C1F478D00118998 /* WalkingTours120.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D43CF221C1F478D00118998 /* WalkingTours120.png */; };
 		3D43CF2D1C1F4E4D00118998 /* ParseSignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D43CF2C1C1F4E4D00118998 /* ParseSignUpViewController.m */; };
 		3D43CF301C1F4E5B00118998 /* ParseResetPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D43CF2F1C1F4E5B00118998 /* ParseResetPasswordViewController.m */; };
 		3D7264051C1F6BCC00ABEEFD /* TourSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D7264041C1F6BCC00ABEEFD /* TourSelectionViewController.m */; };
@@ -68,6 +65,7 @@
 		90F4E22B1C1FA7B3002A75B2 /* CreateTourViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90F4E22A1C1FA7B3002A75B2 /* CreateTourViewController.m */; };
 		90FD33551C210AAA002FFD1A /* LocationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 90FD33531C210AAA002FFD1A /* LocationTableViewCell.m */; };
 		90FD33561C210AAA002FFD1A /* LocationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 90FD33541C210AAA002FFD1A /* LocationTableViewCell.xib */; };
+		BF5E37661C443C6100CD4B50 /* FourSquareService.m in Sources */ = {isa = PBXBuildFile; fileRef = BF5E37651C443C6100CD4B50 /* FourSquareService.m */; };
 		BF7EAC391C207FC40076E432 /* POIDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF7EAC381C207FC40076E432 /* POIDetailTableViewCell.xib */; };
 		BF7EAC3C1C2080160076E432 /* POIDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BF7EAC3B1C2080160076E432 /* POIDetailTableViewCell.m */; };
 		BF844F141C238F650025E651 /* MyExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = BF844F131C238F640025E651 /* MyExtension.m */; };
@@ -99,6 +97,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3D33EFEB1C4433F3003BA45A /* share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = share.png; sourceTree = "<group>"; };
 		3D43CEF21C1F413A00118998 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		3D43CEF41C1F414100118998 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		3D43CEF61C1F414800118998 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -116,10 +115,6 @@
 		3D43CF0B1C1F41AB00118998 /* ParseFacebookUtilsV4.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtilsV4.framework; sourceTree = "<group>"; };
 		3D43CF0C1C1F41AB00118998 /* ParseTwitterUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseTwitterUtils.framework; sourceTree = "<group>"; };
 		3D43CF0D1C1F41AB00118998 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
-		3D43CF1F1C1F478D00118998 /* WalkingTours58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WalkingTours58.png; sourceTree = SOURCE_ROOT; };
-		3D43CF201C1F478D00118998 /* WalkingTours60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WalkingTours60.png; sourceTree = SOURCE_ROOT; };
-		3D43CF211C1F478D00118998 /* WalkingTours80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WalkingTours80.png; sourceTree = SOURCE_ROOT; };
-		3D43CF221C1F478D00118998 /* WalkingTours120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WalkingTours120.png; sourceTree = SOURCE_ROOT; };
 		3D43CF281C1F47F400118998 /* ParseLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParseLoginViewController.h; sourceTree = "<group>"; };
 		3D43CF2B1C1F4E4D00118998 /* ParseSignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParseSignUpViewController.h; sourceTree = "<group>"; };
 		3D43CF2C1C1F4E4D00118998 /* ParseSignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParseSignUpViewController.m; sourceTree = "<group>"; };
@@ -173,6 +168,7 @@
 		9050ECDB1C1F7B920092CF86 /* TourDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TourDetailViewController.m; sourceTree = "<group>"; };
 		9050ECDD1C1F82F20092CF86 /* CreateTourDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateTourDetailViewController.h; sourceTree = "<group>"; };
 		9050ECDE1C1F82F20092CF86 /* CreateTourDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateTourDetailViewController.m; sourceTree = "<group>"; };
+		9060186B1C3339A300B2E7A8 /* Polygon.geojson */ = {isa = PBXFileReference; lastKnownFileType = text; path = Polygon.geojson; sourceTree = "<group>"; };
 		9067345F1C28AAF700DF76B1 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		906734601C28AAF700DF76B1 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		908AA8BF1C20972B00A7DF57 /* ParseService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParseService.h; sourceTree = "<group>"; };
@@ -185,6 +181,8 @@
 		90FD33521C210AAA002FFD1A /* LocationTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationTableViewCell.h; sourceTree = "<group>"; };
 		90FD33531C210AAA002FFD1A /* LocationTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationTableViewCell.m; sourceTree = "<group>"; };
 		90FD33541C210AAA002FFD1A /* LocationTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LocationTableViewCell.xib; sourceTree = "<group>"; };
+		BF5E37641C443C6100CD4B50 /* FourSquareService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FourSquareService.h; sourceTree = "<group>"; };
+		BF5E37651C443C6100CD4B50 /* FourSquareService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FourSquareService.m; sourceTree = "<group>"; };
 		BF7EAC381C207FC40076E432 /* POIDetailTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = POIDetailTableViewCell.xib; sourceTree = "<group>"; };
 		BF7EAC3A1C2080160076E432 /* POIDetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = POIDetailTableViewCell.h; sourceTree = "<group>"; };
 		BF7EAC3B1C2080160076E432 /* POIDetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = POIDetailTableViewCell.m; sourceTree = "<group>"; };
@@ -337,6 +335,7 @@
 				903177CC1C1F3A9E001C8DF9 /* AppDelegate.h */,
 				903177CD1C1F3A9E001C8DF9 /* AppDelegate.m */,
 				903177D51C1F3A9E001C8DF9 /* Assets.xcassets */,
+				3D33EFEB1C4433F3003BA45A /* share.png */,
 				90090C901C2339630040EE94 /* Rectangle 1.png */,
 				90090C911C2339630040EE94 /* Rectangle 1@2x.png */,
 				90090C921C2339630040EE94 /* Rectangle 1@3x.png */,
@@ -347,6 +346,7 @@
 				90090C971C2339630040EE94 /* Rectangle 3 Copy@2x.png */,
 				90090C981C2339630040EE94 /* Rectangle 3 Copy@3x.png */,
 				903177DA1C1F3A9E001C8DF9 /* Info.plist */,
+				9060186B1C3339A300B2E7A8 /* Polygon.geojson */,
 				903177C91C1F3A9E001C8DF9 /* Supporting Files */,
 				3D9A58731C234BEB0056A624 /* seattlesunset copy700.jpg */,
 				3DC42F631C330D9A00037970 /* Walkabout-Tours29.png */,
@@ -395,6 +395,8 @@
 		90380EF21C1F48730085DD66 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				BF5E37641C443C6100CD4B50 /* FourSquareService.h */,
+				BF5E37651C443C6100CD4B50 /* FourSquareService.m */,
 				90380EF31C1F49160085DD66 /* Tour.h */,
 				90380EF41C1F49160085DD66 /* Tour.m */,
 				90380EF61C1F4C590085DD66 /* Location.h */,
@@ -536,7 +538,11 @@
 				TargetAttributes = {
 					903177C51C1F3A9E001C8DF9 = {
 						CreatedOnToolsVersion = 7.1.1;
-						DevelopmentTeam = C49MT2F2AS;
+<<<<<<< HEAD
+						DevelopmentTeam = H53W5ARJ67;
+=======
+						DevelopmentTeam = LK662Y5U4K;
+>>>>>>> master
 					};
 					903177DE1C1F3A9E001C8DF9 = {
 						CreatedOnToolsVersion = 7.1.1;
@@ -592,6 +598,7 @@
 				903177D61C1F3A9E001C8DF9 /* Assets.xcassets in Resources */,
 				903177D41C1F3A9E001C8DF9 /* Main.storyboard in Resources */,
 				3DC42F6E1C330D9A00037970 /* Walkabout-Tours58.png in Resources */,
+				3D33EFEC1C4433F3003BA45A /* share.png in Resources */,
 				3DC42F701C330D9A00037970 /* Walkabout-Tours76.png in Resources */,
 				90090C9A1C2339630040EE94 /* Rectangle 1@2x.png in Resources */,
 				3D9A58721C232C180056A624 /* newyorkpin copy700h.jpg in Resources */,
@@ -653,6 +660,7 @@
 				9050ECD91C1F78E80092CF86 /* VideoPlayerView.m in Sources */,
 				903177CE1C1F3A9E001C8DF9 /* AppDelegate.m in Sources */,
 				90AE88D11C209290005536B4 /* CategoryTableViewCell.m in Sources */,
+				BF5E37661C443C6100CD4B50 /* FourSquareService.m in Sources */,
 				908AA8C11C20972B00A7DF57 /* ParseService.m in Sources */,
 				9050ECDC1C1F7B920092CF86 /* TourDetailViewController.m in Sources */,
 				BFAD24D11C20ECED009557DF /* TourListViewController.m in Sources */,
@@ -843,6 +851,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -851,8 +860,9 @@
 				INFOPLIST_FILE = WalkingTours/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = C49MT2F2AS.com.creeperspeak.WalkingTours;
+				PRODUCT_BUNDLE_IDENTIFIER = com.creeperspeak.WalkingTours;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -861,6 +871,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -868,8 +879,9 @@
 				INFOPLIST_FILE = WalkingTours/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = C49MT2F2AS.com.creeperspeak.WalkingTours;
+				PRODUCT_BUNDLE_IDENTIFIER = com.creeperspeak.WalkingTours;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

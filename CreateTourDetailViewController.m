@@ -9,6 +9,8 @@
 #import "CreateTourDetailViewController.h"
 #import "CategoryTableViewCell.h"
 #import "CreateTourViewController.h"
+#import "FourSquareService.h"
+#import "SearchService.h"
 @import MobileCoreServices;
 @import CoreLocation;
 @import CoreMedia;
@@ -30,13 +32,19 @@ static const NSArray *categories;
 @property (strong, nonatomic) Location *createdLocation;
 @property (strong, nonatomic) MKPointAnnotation *mapPinAnnotation;
 @property (strong, nonatomic) UIColor *navBarTintColor;
+@property (strong, nonatomic) NSMutableArray *suggestedAddresses;
+@property (strong, nonatomic) NSMutableArray *suggestedVenuesWithAddress;
+@property (nonatomic) int *textLabelBeginEditingCounter;
 @property BOOL categoriesEdited;
 @property BOOL locationSet;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet UITextField *locationNameTextField;
+@property (weak, nonatomic) IBOutlet UITextField *locationAddressTextField;
 @property (weak, nonatomic) IBOutlet UITextField *locationDescriptionTextField;
+@property (weak, nonatomic) IBOutlet UITableView *suggestedLocationTableView;
 @property (weak, nonatomic) IBOutlet UILabel *pinDropReminderLabel;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *mapHeightConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewTopConstraint;
 @property (weak, nonatomic) IBOutlet UIButton *cameraButton;
 @property (weak, nonatomic) IBOutlet UIButton *saveButton;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *saveButtonBottomConstraint;
@@ -49,15 +57,25 @@ static const NSArray *categories;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self setUpVenuesTableView];
+    
+    //        [self.suggestedVenuesWithAddress addObject:result];
+    
+    
+    NSLog(@"%lu", (unsigned long)self.suggestedAddresses.count);
+    
     
     self.image = (self.image == nil ? [UIImage imageNamed:@"placeholder"] : self.image);
     
     self.saveButton.layer.cornerRadius = self.saveButton.frame.size.width / 2;
     
     self.locationNameTextField.hidden = YES;
+    self.locationAddressTextField.hidden = YES;
     self.locationDescriptionTextField.hidden = YES;
+    self.suggestedLocationTableView.hidden = YES;
     self.cameraButton.hidden = YES;
     self.locationNameTextField.alpha = 0.0;
+    self.locationAddressTextField.alpha = 0.0;
     self.locationDescriptionTextField.alpha = 0.0;
     self.cameraButton.alpha = 0.0;
     
@@ -69,11 +87,12 @@ static const NSArray *categories;
     [self.locationManager setDelegate:self];
     
     self.locationNameTextField.delegate = self;
+    self.locationAddressTextField.delegate = self;
     self.locationDescriptionTextField.delegate = self;
     
     UIColor *tintColor = self.navigationController.navigationBar.tintColor;
     self.navBarTintColor = tintColor;
-//    self.navigationController.navigationBar.tintColor = [UIColor colorWithWhite:0.951 alpha:1.000];
+    //    self.navigationController.navigationBar.tintColor = [UIColor colorWithWhite:0.951 alpha:1.000];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -99,6 +118,7 @@ static const NSArray *categories;
     self.mapPinAnnotation = newPoint;
     [self dropPinAtLocationCoordinate:coordinate];
     self.locationNameTextField.text = locationToEdit.locationName;
+    self.locationAddressTextField.text = locationToEdit.locationAddress;
     self.locationDescriptionTextField.text = locationToEdit.locationDescription;
     [self.mapView setRegion:MKCoordinateRegionMakeWithDistance(coordinate, 300, 300) animated:YES];
 }
@@ -106,7 +126,7 @@ static const NSArray *categories;
 #pragma mark - Setup Functions
 
 - (void)setCategoryOptions {
-        categories = @[NSLocalizedString(@"Restaurant", comment:@"This is a tour category"), NSLocalizedString(@"Cafe", comment:@"This is a tour category"), NSLocalizedString(@"Art", comment:@"This is a tour category"), NSLocalizedString(@"Museum", comment:@"This is a tour category"), NSLocalizedString(@"History", comment:@"This is a tour category"), NSLocalizedString(@"Shopping", comment:@"This is a tour category"), NSLocalizedString(@"Nightlife", comment:@"This is a tour category"), NSLocalizedString(@"Film", comment:@"This is a tour category"), NSLocalizedString(@"Education", comment:@"This is a tour category"), NSLocalizedString(@"Nature", comment:@"This is a tour category")];
+    categories = @[NSLocalizedString(@"Restaurant", comment:@"This is a tour category"), NSLocalizedString(@"Cafe", comment:@"This is a tour category"), NSLocalizedString(@"Art", comment:@"This is a tour category"), NSLocalizedString(@"Museum", comment:@"This is a tour category"), NSLocalizedString(@"History", comment:@"This is a tour category"), NSLocalizedString(@"Shopping", comment:@"This is a tour category"), NSLocalizedString(@"Nightlife", comment:@"This is a tour category"), NSLocalizedString(@"Film", comment:@"This is a tour category"), NSLocalizedString(@"Education", comment:@"This is a tour category"), NSLocalizedString(@"Nature", comment:@"This is a tour category")];
 }
 
 - (void)setUpGreyOutView {
@@ -137,10 +157,28 @@ static const NSArray *categories;
     [self.view addSubview:self.categoryTableView];
 }
 
+- (void)setUpVenuesTableView {
+    
+    UILabel *headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.categoryTableView.frame.origin.x -40, self.suggestedLocationTableView.frame.origin.y, self.suggestedLocationTableView.frame.size.width, 40)];
+    [headerLabel setText:NSLocalizedString(@"Select from suggested venues", comment:nil)];
+    headerLabel.font = [UIFont fontWithName:@"Futura" size:20];
+    headerLabel.textColor = [UIColor colorWithRed:0.278 green:0.510 blue:0.855 alpha:1.000];
+    headerLabel.backgroundColor = [UIColor lightGrayColor];
+    [headerLabel setTextAlignment:NSTextAlignmentCenter];
+    [self.suggestedLocationTableView setTableHeaderView:headerLabel];
+    [headerLabel sizeToFit];
+    
+
+
+    self.suggestedLocationTableView.dataSource = self;
+    self.suggestedLocationTableView.delegate = self;
+}
+
 #pragma mark - User Interaction Functions
 
 - (void)loadImagePicker {
     [self.locationNameTextField resignFirstResponder];
+    [self.locationAddressTextField resignFirstResponder];
     [self.locationDescriptionTextField resignFirstResponder];
     if (!self.imagePicker) {
         self.imagePicker = [[UIImagePickerController alloc] init];
@@ -161,6 +199,7 @@ static const NSArray *categories;
 
 - (void)displayCategories {
     [self.locationNameTextField resignFirstResponder];
+    [self.locationAddressTextField resignFirstResponder];
     [self.locationDescriptionTextField resignFirstResponder];
     [self.view bringSubviewToFront:self.saveButton];
     [self.view layoutIfNeeded];
@@ -209,16 +248,22 @@ static const NSArray *categories;
 }
 
 - (IBAction)cameraButtonPressed:(UIButton *)sender {
-        [self loadImagePicker];
+    [self loadImagePicker];
 }
 
 - (IBAction)saveButtonPressed:(UIButton *)sender {
     if (self.selectedCategories.count == 0) {
         [self.locationNameTextField resignFirstResponder];
+        [self.locationAddressTextField resignFirstResponder];
         [self.locationDescriptionTextField resignFirstResponder];
         NSString *alertMessage = NSLocalizedString(@"Please fill all fields out.", comment:nil);
         if (self.locationNameTextField.text.length == 0) {
             alertMessage = NSLocalizedString(@"Please enter a location name.", comment: nil);
+            [self presentAlertWithMessage:alertMessage];
+            return;
+        }
+        if (self.locationAddressTextField.text.length == 0) {
+            alertMessage = NSLocalizedString(@"Please enter a location address.", nil);
             [self presentAlertWithMessage:alertMessage];
             return;
         }
@@ -251,19 +296,20 @@ static const NSArray *categories;
                         currentState.location = self.geoPoint;
                         currentState.categories = self.selectedCategories;
                     }
-                    Location *locationToEdit = (self.locationToEdit == nil ? [[Location alloc] initWithLocationName:self.locationNameTextField.text locationDescription:self.locationDescriptionTextField.text photo:self.photoFile video:self.videoFile categories:self.selectedCategories location:self.geoPoint orderNumber:0 tour:nil] : currentState);
+                    Location *locationToEdit = (self.locationToEdit == nil ? [[Location alloc] initWithLocationName:self.locationNameTextField.text locationAddress: self.locationAddressTextField.text locationDescription:self.locationDescriptionTextField.text photo:self.photoFile video:self.videoFile categories:self.selectedCategories location:self.geoPoint orderNumber:0 tour:nil] : currentState);
                     self.createdLocation = locationToEdit;
                 }
             } else {
                 [self displayCategories];
             }
         } else {
-            Location *locationToSave = [[Location alloc] initWithLocationName:self.locationNameTextField.text locationDescription:self.locationDescriptionTextField.text photo:self.photoFile video:self.videoFile categories:nil location:self.geoPoint orderNumber:0 tour:nil];
+            Location *locationToSave = [[Location alloc] initWithLocationName:self.locationNameTextField.text locationAddress: self.locationAddressTextField.text locationDescription:self.locationDescriptionTextField.text photo:self.photoFile video:self.videoFile categories:nil location:self.geoPoint orderNumber:0 tour:nil];
             self.createdLocation = locationToSave;
             [self displayCategories];
         }
         if (self.locationToEdit && !self.categoriesEdited) {
             self.selectedCategories = [NSMutableArray arrayWithArray:self.locationToEdit.categories];
+            
             [self presentEditCategoriesAlert];
         } else {
             [self saveLocationWithCategories:sender];
@@ -287,7 +333,7 @@ static const NSArray *categories;
     }];
     UIAlertAction *noAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"No",comment:nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
         if (!self.locationToEdit) {
-            Location *locationToSave = [[Location alloc] initWithLocationName:self.locationNameTextField.text locationDescription:self.locationDescriptionTextField.text photo:self.photoFile video:self.videoFile categories:nil location:self.geoPoint orderNumber:0 tour:nil];
+            Location *locationToSave = [[Location alloc] initWithLocationName:self.locationNameTextField.text locationAddress: self.locationAddressTextField.text locationDescription:self.locationDescriptionTextField.text photo:self.photoFile video:self.videoFile categories:nil location:self.geoPoint orderNumber:0 tour:nil];
             self.createdLocation = locationToSave;
             [self displayCategories];
         } else {
@@ -326,9 +372,9 @@ static const NSArray *categories;
         self.createdLocation.categories = self.selectedCategories;
         self.navigationController.navigationBarHidden = NO;
         if (self.createTourDetailDelegate) {
-//            NSLog(@"LocationToEdit = nil? Answer: %d", self.locationToEdit == nil);
-//            NSLog(@"Does created = toEdit? %d", self.createdLocation == self.locationToEdit);
-//            NSLog(@"created == %@", self.createdLocation);
+            //            NSLog(@"LocationToEdit = nil? Answer: %d", self.locationToEdit == nil);
+            //            NSLog(@"Does created = toEdit? %d", self.createdLocation == self.locationToEdit);
+            //            NSLog(@"created == %@", self.createdLocation);
             [self.createTourDetailDelegate didFinishSavingLocationWithLocation:self.createdLocation image:self.image newLocation:(self.locationToEdit == nil ? YES : NO)];
         }
         [self.navigationController popViewControllerAnimated:YES];
@@ -352,11 +398,14 @@ static const NSArray *categories;
     [self.view layoutIfNeeded];
     if (self.locationNameTextField.alpha == 0.0) {
         self.locationNameTextField.hidden = NO;
+        self.locationAddressTextField.hidden = NO;
         self.locationDescriptionTextField.hidden = NO;
+        self.suggestedLocationTableView.hidden = NO;
         self.cameraButton.hidden = NO;
         self.saveButton.layer.cornerRadius = self.saveButton.frame.size.width / 2;
         [UIView animateWithDuration:0.4 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^{
             self.locationNameTextField.alpha = 1.0;
+            self.locationAddressTextField.alpha = 1.0;
             self.locationDescriptionTextField.alpha = 1.0;
             self.cameraButton.alpha = 1.0;
             self.mapHeightConstraint.constant = -(self.mapView.frame.size.height / 2);
@@ -437,34 +486,86 @@ static const NSArray *categories;
 #pragma mark - UITableViewControllerDelegate & UITableViewControllerDatasource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return categories.count;
+    if ([tableView isEqual: self.categoryTableView]) {
+        return categories.count;
+    } else { // tableView == suggestedLocationTableView
+//        if (self.suggestedVenuesWithAddress.count == 0) {
+//     
+//        UILabel *noDataMessageLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0,
+//                                                                        self.suggestedLocationTableView.bounds.size.width,
+//                                                                        self.suggestedLocationTableView.bounds.size.height)];
+//        noDataMessageLabel.text = @"No data available";
+//        noDataMessageLabel.textAlignment = NSTextAlignmentCenter;
+//        [noDataMessageLabel sizeToFit];
+//        
+//        self.suggestedLocationTableView.backgroundView = noDataMessageLabel;
+//        self.suggestedLocationTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+//        }
+        
+        return self.suggestedVenuesWithAddress.count;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    CategoryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-    [cell setCategory:categories[indexPath.row]];
-    cell.accessoryType = UITableViewCellAccessoryNone;
-    if ([self.selectedCategories containsObject:categories[indexPath.row]]) {
-        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    if ([tableView isEqual: self.categoryTableView]) {
+        
+        CategoryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+        [cell setCategory:categories[indexPath.row]];
+        cell.accessoryType = UITableViewCellAccessoryNone;
+        if ([self.selectedCategories containsObject:categories[indexPath.row]]) {
+            cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        }
+        return cell;
+        
+    } else {  // tableView == suggestedLocationTableView
+        
+        UITableViewCell *cell = [self.suggestedLocationTableView dequeueReusableCellWithIdentifier:@"suggestedAddressesCell" forIndexPath:indexPath];
+        cell.textLabel.font = [UIFont fontWithName:@"Futura" size:17.0];
+        cell.textLabel.textColor = [UIColor colorWithRed:0.278 green:0.510 blue:0.855 alpha:1.000];
+        cell.textLabel.text = [[self.suggestedVenuesWithAddress objectAtIndex:indexPath.row] objectForKey:@"name"];
+        
+        return cell;
     }
-    return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ([tableView cellForRowAtIndexPath:indexPath].accessoryType == UITableViewCellAccessoryCheckmark) {
-        [tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryNone;
-    } else {
-        [tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryCheckmark;
-    }
-    if (self.selectedCategories.count > 0) {
-        if ([self.selectedCategories containsObject:categories[indexPath.row]]) {
-            [self.selectedCategories removeObjectAtIndex:[self.selectedCategories indexOfObject:[categories objectAtIndex:indexPath.row]]];
+    // Checking which tableView is sending the message.
+    
+    if ([tableView isEqual: self.categoryTableView]) {
+        
+        if ([tableView cellForRowAtIndexPath:indexPath].accessoryType == UITableViewCellAccessoryCheckmark) {
+            [tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryNone;
         } else {
-            [self.selectedCategories addObject:categories[indexPath.row]];
+            [tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryCheckmark;
         }
-    } else {
-        self.selectedCategories = [NSMutableArray arrayWithObject:categories[indexPath.row]];
+        if (self.selectedCategories.count > 0) {
+            if ([self.selectedCategories containsObject:categories[indexPath.row]]) {
+                [self.selectedCategories removeObjectAtIndex:[self.selectedCategories indexOfObject:[categories objectAtIndex:indexPath.row]]];
+            } else {
+                [self.selectedCategories addObject:categories[indexPath.row]];
+            }
+        } else {
+            self.selectedCategories = [NSMutableArray arrayWithObject:categories[indexPath.row]];
+        }
+    } else { // tableView == suggestedLocationTableView
+        self.locationNameTextField.text = [[self.suggestedVenuesWithAddress objectAtIndex:indexPath.row] objectForKey:@"name"];
+        self.locationAddressTextField.text = [[self.suggestedVenuesWithAddress objectAtIndex:indexPath.row] objectForKey:@"address"];
+        
+        [self.locationNameTextField resignFirstResponder];
+        [self.locationAddressTextField resignFirstResponder];
+        [self.locationDescriptionTextField becomeFirstResponder];
+        [self.suggestedVenuesWithAddress removeAllObjects];
+        [self.suggestedLocationTableView reloadData];
+        
     }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return UITableViewAutomaticDimension;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 100;
 }
 
 #pragma mark LocationController
@@ -475,7 +576,7 @@ static const NSArray *categories;
 }
 
 -(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(nonnull NSArray<CLLocation *> *)location {
-   [self.delegate locationControllerDidUpdateLocation:location.lastObject];
+    [self.delegate locationControllerDidUpdateLocation:location.lastObject];
     [self setLocation:location.lastObject];
 }
 
@@ -502,7 +603,7 @@ static const NSArray *categories;
     _locationManager.delegate = self;
     _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     _locationManager.distanceFilter = 100;
-
+    
 }
 
 #pragma mark MKMapViewDelegate
@@ -530,7 +631,8 @@ static const NSArray *categories;
     annotationView.rightCalloutAccessoryView = rightCallout;
     [self dissolvePinDropReminderLabel];
     [self toggleViewAfterPinDrop];
-
+    [self toggleSuggestedVenuesTableView];
+    
     return annotationView;
 }
 
@@ -539,13 +641,13 @@ static const NSArray *categories;
         CGPoint touchPoint = [sender locationInView:self.mapView];
         CLLocationCoordinate2D coordinate = [self.mapView convertPoint:touchPoint toCoordinateFromView:self.mapView];
         
-//        MKPointAnnotation *newPoint = [[MKPointAnnotation alloc]init];
-//        newPoint.coordinate = coordinate;
-//        
-//        self.geoPoint = [PFGeoPoint geoPointWithLatitude:newPoint.coordinate.latitude longitude:newPoint.coordinate.longitude];
-//        [self.mapView removeAnnotation:self.mapPinAnnotation];
-//        self.mapPinAnnotation = newPoint;
-//        [self.mapView addAnnotation:newPoint];
+        [FourSquareService searchVenueWithLatitude: coordinate.latitude longitude:coordinate.longitude completion:^(BOOL success, NSData * _Nullable data) {
+            [FourSquareService parseVenueResponse: data completion:^(BOOL success, NSMutableArray * _Nullable addressesFromFoursquare) {
+                
+                self.suggestedAddresses = [NSMutableArray arrayWithArray:addressesFromFoursquare];
+            }];
+        }];
+        
         [self dropPinAtLocationCoordinate:coordinate];
     }
 }
@@ -565,12 +667,68 @@ static const NSArray *categories;
     [self.mapView removeAnnotations:annotations];
 }
 
+- (void)toggleMapViewForTextLabels {
+    [UIView animateWithDuration:0.4 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^{
+        
+        self.mapHeightConstraint.constant = -((self.mapView.frame.size.height / 0.60));
+        self.cameraButton.hidden = YES;
+        
+        [self.mapView updateConstraintsIfNeeded];
+        [self.view layoutIfNeeded];
+        
+    } completion:^(BOOL finished) {
+        MKCoordinateRegion pinRegion = MKCoordinateRegionMakeWithDistance(CLLocationCoordinate2DMake(self.geoPoint.latitude, self.geoPoint.longitude), 300, 300);
+        [self.mapView setRegion:pinRegion animated:YES];
+    }];
+}
+
+- (void)toggleSuggestedVenuesTableView {
+    [UIView animateWithDuration:0.4 animations:^{
+        self.tableViewTopConstraint.constant = 8;
+    }];
+    [self.view layoutIfNeeded];
+}
+
 #pragma mark - UITextFieldDelegate
 
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    //    [self toggleMapViewForTextLabels];
+    if (textField.tag == 0 && self.textLabelBeginEditingCounter == 0) {
+        [self toggleMapViewForTextLabels];
+        self.textLabelBeginEditingCounter ++;
+    }
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    if (textField.tag == 0) {
+        
+        NSString *latestString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+        
+        NSMutableArray *foundVenues = [SearchService findMatchesWithTerm:latestString arrayToSearch: self.suggestedAddresses];
+        self.suggestedVenuesWithAddress = [NSMutableArray arrayWithArray:foundVenues];
+        NSLog(@"%@", self.suggestedVenuesWithAddress);
+        [self.suggestedLocationTableView reloadData];
+    }
+    
+    return YES;
+}
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    [textField resignFirstResponder];
-    if (textField.tag == 0 && self.locationDescriptionTextField.text.length == 0) {
+    
+    if (textField.tag == 0 && self.locationAddressTextField.text.length == 0) {
+        [textField resignFirstResponder];
+        [self.suggestedVenuesWithAddress removeAllObjects];
+        [self.suggestedLocationTableView reloadData];
+        self.suggestedLocationTableView.hidden = YES;
+        [self.locationAddressTextField becomeFirstResponder];
+    }
+    
+    if (textField.tag == 1 && self.locationDescriptionTextField.text.length == 0) {
         [self.locationDescriptionTextField becomeFirstResponder];
+    }
+    
+    if (textField.tag == 2) {
+        [self.locationDescriptionTextField resignFirstResponder];
     }
     return YES;
 }

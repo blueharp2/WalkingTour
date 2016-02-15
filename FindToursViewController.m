@@ -17,6 +17,7 @@
 #import "ParseService.h"
 #import "MyExtension.h"
 #import "CustomAnnotation.h"
+#import "FourSquareService.h"
 @import Parse;
 @import ParseUI;
 #import <Crashlytics/Answers.h>
@@ -72,6 +73,7 @@
     [self.locationManager setDelegate:self];
     [self setUpSearchButton];
     [self setupViewController];
+
 }
 
 - (void)fetchToursNearUser {
