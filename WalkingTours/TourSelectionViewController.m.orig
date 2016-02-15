@@ -47,8 +47,12 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+<<<<<<< .merge_file_OUExki
     
     if (self.view.frame.size.height < 500.0 && self.constraintAdjusted == NO) {
+=======
+    if (self.view.frame.size.height < 500.0) {
+>>>>>>> .merge_file_KYm5IC
         self.selectButtonTopConstraint.constant -= 40;
         self.constraintAdjusted = YES;
     }
