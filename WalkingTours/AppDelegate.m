@@ -34,9 +34,12 @@
     if ([stringUrl containsString:@"walkabouttours://id="]) {
         NSString *tourId = [stringUrl stringByReplacingOccurrencesOfString:@"walkabouttours://id=" withString:@""];
         //Set id to be the loadedId on the homeVC
-        if ([self.window.rootViewController isKindOfClass:[TourSelectionViewController class]]) {
-            TourSelectionViewController *selectionVC = (TourSelectionViewController *)self.window.rootViewController;
-            selectionVC.linkedTour = tourId;
+        if ([self.window.rootViewController isKindOfClass:[UINavigationController class]]) {
+            UINavigationController *navController = (UINavigationController *)self.window.rootViewController;
+            if ([navController.viewControllers.firstObject isKindOfClass:[TourSelectionViewController class]]) {
+                TourSelectionViewController *selectionVC = (TourSelectionViewController *)navController.viewControllers.firstObject;
+                selectionVC.linkedTour = tourId;
+            }
         }
         
     }
