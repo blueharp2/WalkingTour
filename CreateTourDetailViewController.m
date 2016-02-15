@@ -640,7 +640,13 @@ static const NSArray *categories;
             [self dissolvePinDropReminderLabel];
         }
         [self toggleSuggestedVenuesTableView];
-        
+//        MKUserLocation *userLocation = [mapView userLocation];
+//        NSMutableArray *annotations = [NSMutableArray arrayWithArray:[mapView annotations]];
+//        [annotations removeObject:self.mapPinAnnotation];
+//        if (userLocation) {
+//            [annotations removeObject:userLocation];
+//        }
+//        [mapView removeAnnotations:annotations];
         return annotationView;
     }
     return nil;
@@ -650,7 +656,7 @@ static const NSArray *categories;
     if (sender.state == UIGestureRecognizerStateBegan && !self.pinDropInProgress) {
 //        self.pinDropInProgress = YES;
 //        if (self.mapView.visibleMapRect.size.width < 300 || self.mapView.visibleMapRect.size.height < 300) {
-            [self.mapView setVisibleMapRect:MKMapRectMake(self.mapView.visibleMapRect.origin.x, self.mapView.visibleMapRect.origin.y, 4000, 4000) animated:YES];
+//            [self.mapView setVisibleMapRect:MKMapRectMake(self.mapView.visibleMapRect.origin.x, self.mapView.visibleMapRect.origin.y, 4000, 4000) animated:YES];
 //        }
         CGPoint touchPoint = [sender locationInView:self.mapView];
         CLLocationCoordinate2D coordinate = [self.mapView convertPoint:touchPoint toCoordinateFromView:self.mapView];
@@ -678,6 +684,7 @@ static const NSArray *categories;
     }
     self.mapPinAnnotation = newPoint;
     [self.mapView addAnnotation:newPoint];
+//    [annotations removeObject:newPoint];
     [self.mapView removeAnnotations:annotations];
 }
 
