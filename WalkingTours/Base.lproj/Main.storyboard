@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="K2L-KG-DHg">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -497,7 +496,7 @@
                                     <color key="titleColor" red="0.27840076974743694" green="0.51002020468252163" blue="0.85375236742424243" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <segue destination="tqM-E3-5K0" kind="show" id="1Gy-tP-J2d"/>
+                                    <segue destination="tqM-E3-5K0" kind="show" identifier="FindToursViewController" id="1Gy-tP-J2d"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R1I-8O-bYr">
@@ -535,13 +534,7 @@
                             <constraint firstItem="iZU-Lr-KvV" firstAttribute="trailing" secondItem="P06-Ev-jeT" secondAttribute="trailing" id="zPJ-Ax-eXM"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="eTx-13-oO4">
-                        <barButtonItem key="rightBarButtonItem" title="Share" id="xci-eY-v9E">
-                            <connections>
-                                <action selector="shareButton:" destination="GeJ-TF-SYQ" id="D64-cG-tM2"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="eTx-13-oO4"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="selectButtonTopConstraint" destination="eIe-2e-2Eb" id="UcF-h4-gt1"/>
@@ -1061,6 +1054,6 @@
         <image name="seattle" width="3264" height="2448"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="PjD-pi-kko"/>
+        <segue reference="K2f-a9-X1C"/>
     </inferredMetricsTieBreakers>
 </document>

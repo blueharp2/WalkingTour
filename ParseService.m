@@ -198,4 +198,9 @@
      }];
 }
 
++ (void)setFavoritedTourIds:(NSArray<NSString *> *)tourIds forUser:(PFUser *)user {
+    [user setObject:tourIds forKey:@"favorites"];
+    [user saveInBackground];
+}
+
 @end
