@@ -19,4 +19,6 @@
 
 @interface FindToursViewController : UIViewController
 
+@property (strong, nonatomic) NSString *linkedTour;
+
 @end

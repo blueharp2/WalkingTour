@@ -25,6 +25,7 @@
 @property (strong, nonatomic) NSArray <Location*> *locationsFromParse;
 @property (weak, nonatomic) IBOutlet UITableView *tourListTableView;
 @property (strong, nonatomic) NSArray <Tour*> *toursFromParse;
+@property (strong, nonatomic) UIBarButtonItem *shareButton;
 
 
 @end
@@ -34,6 +35,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupViewController];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.tabBarController.navigationItem.rightBarButtonItem = self.shareButton;
 }
 
 - (void)setCurrentTour:(NSString*)currentTour {
@@ -55,6 +61,8 @@
     
     UINib *nib = [UINib nibWithNibName:@"LocationTableViewCell" bundle:nil];
     [[self tourListTableView] registerNib:nib forCellReuseIdentifier:@"LocationTableViewCell"];
+    
+    self.shareButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(shareButtonPressed)];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -100,6 +108,11 @@
         float cellHeight = cell.frame.size.height;
         UIButton *editButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, cellHeight, cellHeight)];
         [editButton setImage:[UIImage imageNamed:@"edit.png"] forState:UIControlStateNormal];
+//        NSLog(@"%f %f %f %f", editButton.imageView.frame.origin.x, editButton.imageView.frame.origin.y, editButton.imageView.frame.size.width, editButton.imageView.frame.size.height);
+//        if (indexPath.section == 0) {
+//            editButton.imageView.frame = CGRectMake(editButton.imageView.frame.origin.x + cellHeight - [UIImage imageNamed:@"edit.png"].size.width, editButton.imageView.frame.origin.y, editButton.imageView.frame.size.width, editButton.imageView.frame.size.width);
+//        }
+//        NSLog(@"%f %f %f %f", editButton.imageView.frame.origin.x, editButton.imageView.frame.origin.y, editButton.imageView.frame.size.width, editButton.imageView.frame.size.height);
         [editButton addTarget:self action:@selector(editButtonTapped:event:) forControlEvents:UIControlEventTouchUpInside];
         cell.accessoryView = editButton;
     }
@@ -194,6 +207,14 @@
     NSIndexPath *indexPath = [self.tourListTableView indexPathForRowAtPoint:currentTouchPosition];
     if (indexPath != nil) {
         [self tableView:self.tourListTableView accessoryButtonTappedForRowWithIndexPath:indexPath];
+    }
+}
+
+- (void)shareButtonPressed {
+    if (self.currentTour) {
+        NSString *shareText = [NSString stringWithFormat:@"Check out this tour on Walkabout Tours: walkabouttours://id=%@. Download Walkabout Tours from the App Store: %@", self.currentTour, @"https://appsto.re/i6YJ4GS"];
+        UIActivityViewController *shareController = [[UIActivityViewController alloc] initWithActivityItems:@[shareText] applicationActivities:nil];
+        [self presentViewController:shareController animated:YES completion:nil];
     }
 }
 

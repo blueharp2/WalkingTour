@@ -30,4 +30,6 @@ typedef void(^tourSaveCompletion)(BOOL success, NSError *error);
 
 + (void)searchToursNearLocation:(CLLocationCoordinate2D)location withinMiles:(float)miles withSearchTerm:(NSString *)searchTerm categories:(NSArray *)categories completion:(toursFetchCompletion)completion;
 
++ (void)setFavoritedTourIds:(NSArray<NSString *> *)tourIds forUser:(PFUser *)user;
+
 @end
