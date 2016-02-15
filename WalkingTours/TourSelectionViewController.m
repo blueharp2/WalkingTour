@@ -9,6 +9,7 @@
 #import "ParseLoginViewController.h"
 #import "ParseSignUpViewController.h"
 #import "TourSelectionViewController.h"
+#import "FindToursViewController.h"
 
 @interface TourSelectionViewController ()
 
@@ -37,7 +38,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     self.navigationController.navigationBar.translucent = YES;
@@ -45,7 +45,6 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
     if (self.view.frame.size.height < 500.0) {
         self.selectButtonTopConstraint.constant -= 40;
     }
@@ -60,31 +59,45 @@
         if ([navController.viewControllers.firstObject isKindOfClass:[ParseLoginViewController class]]) {
             ParseLoginViewController *loginVC = (ParseLoginViewController *)navController.viewControllers.firstObject;
             loginVC.completion = ^ {
-                [self dismissViewControllerAnimated:YES completion:nil];
+                [self dismissViewControllerAnimated:YES completion:^ {
+                    if (self.linkedTour != nil) {
+                        if ([[[PFUser currentUser] objectForKey:@"favorites"] isKindOfClass:[NSArray class]]) {
+                            NSArray *favorites = (NSArray *)[[PFUser currentUser] objectForKey:@"favorites"];
+                            if (![favorites containsObject:self.linkedTour]) {
+                                [[PFUser currentUser] addObject:self.linkedTour forKey:@"favorites"];
+                                [[PFUser currentUser] saveInBackground];
+                            }
+                        }
+                        FindToursViewController *findToursVC = [[FindToursViewController alloc] init];
+                        [self.navigationController pushViewController:findToursVC animated:NO];
+                        [findToursVC performSegueWithIdentifier:@"TabBarController" sender:self.linkedTour];
+                    }
+                }];
             };
             [self presentViewController:navController animated:YES completion:nil];
+        }
+    } else {
+        if (self.linkedTour != nil) {
+            if ([[[PFUser currentUser] objectForKey:@"favorites"] isKindOfClass:[NSArray class]]) {
+                NSArray *favorites = (NSArray *)[[PFUser currentUser] objectForKey:@"favorites"];
+                if (![favorites containsObject:self.linkedTour]) {
+                    [[PFUser currentUser] addObject:self.linkedTour forKey:@"favorites"];
+                    [[PFUser currentUser] saveInBackground];
+                }
+            }
+            [self performSegueWithIdentifier:@"FindToursViewController" sender:self];
         }
     }
 }
 
-- (IBAction)shareButton:(UIBarButtonItem *)sender {
-    
-    NSString *text = @"Checkout this Tour on Walkabout Tours in the App Store";
-
-    UIActivityViewController *controller = [[UIActivityViewController alloc] initWithActivityItems:@[text]
-                                                                             applicationActivities:nil];
-    
-    controller.excludedActivityTypes = @[UIActivityTypePostToWeibo,
-                                         UIActivityTypeCopyToPasteboard,
-                                         UIActivityTypeAssignToContact,
-                                         UIActivityTypeSaveToCameraRoll,
-                                         UIActivityTypeAddToReadingList,
-                                         UIActivityTypePostToFlickr,
-                                         UIActivityTypePostToVimeo,
-                                         UIActivityTypePostToTencentWeibo,
-                                         UIActivityTypeAirDrop,
-                                         ];
-    [self presentViewController:controller animated:YES completion:nil];
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier  isEqual: @"FindToursViewController"]) {
+        if ([segue.destinationViewController isKindOfClass:[FindToursViewController class]]) {
+            FindToursViewController *findToursVC = (FindToursViewController *)segue.destinationViewController;
+            findToursVC.linkedTour = self.linkedTour;
+            self.linkedTour = nil;
+        }
+    }
 }
 
 @end

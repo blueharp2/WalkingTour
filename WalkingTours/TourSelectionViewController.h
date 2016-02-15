@@ -14,4 +14,6 @@
 
 @interface TourSelectionViewController : UIViewController
 
+@property (strong, nonatomic) NSString *linkedTour;
+
 @end
