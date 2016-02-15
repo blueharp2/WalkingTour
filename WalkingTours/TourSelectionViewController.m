@@ -61,8 +61,13 @@
             loginVC.completion = ^ {
                 [self dismissViewControllerAnimated:YES completion:^ {
                     if (self.linkedTour != nil) {
-                        [[PFUser currentUser] addObject:self.linkedTour forKey:@"favorites"];
-                        [[PFUser currentUser] saveInBackground];
+                        if ([[[PFUser currentUser] objectForKey:@"favorites"] isKindOfClass:[NSArray class]]) {
+                            NSArray *favorites = (NSArray *)[[PFUser currentUser] objectForKey:@"favorites"];
+                            if (![favorites containsObject:self.linkedTour]) {
+                                [[PFUser currentUser] addObject:self.linkedTour forKey:@"favorites"];
+                                [[PFUser currentUser] saveInBackground];
+                            }
+                        }
                         FindToursViewController *findToursVC = [[FindToursViewController alloc] init];
                         [self.navigationController pushViewController:findToursVC animated:NO];
                         [findToursVC performSegueWithIdentifier:@"TabBarController" sender:self.linkedTour];
@@ -73,7 +78,13 @@
         }
     } else {
         if (self.linkedTour != nil) {
-            [currentUser addObject:self.linkedTour forKey:@"favorites"];
+            if ([[[PFUser currentUser] objectForKey:@"favorites"] isKindOfClass:[NSArray class]]) {
+                NSArray *favorites = (NSArray *)[[PFUser currentUser] objectForKey:@"favorites"];
+                if (![favorites containsObject:self.linkedTour]) {
+                    [[PFUser currentUser] addObject:self.linkedTour forKey:@"favorites"];
+                    [[PFUser currentUser] saveInBackground];
+                }
+            }
             [self performSegueWithIdentifier:@"FindToursViewController" sender:self];
         }
     }
