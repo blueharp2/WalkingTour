@@ -31,7 +31,7 @@ static const NSArray *categories;
 @property (strong, nonatomic) PFGeoPoint *geoPoint;
 @property (strong, nonatomic) Location *createdLocation;
 @property (strong, nonatomic) MKPointAnnotation *mapPinAnnotation;
-@property (strong, nonatomic) MKAnnotationView *currentAnnotationView;
+//@property (strong, nonatomic) MKAnnotationView *currentAnnotationView;
 @property (strong, nonatomic) UIColor *navBarTintColor;
 @property (strong, nonatomic) NSMutableArray *suggestedAddresses;
 @property (strong, nonatomic) NSMutableArray *suggestedVenuesWithAddress;
@@ -648,7 +648,7 @@ static const NSArray *categories;
 //            [annotations removeObject:userLocation];
 //        }
 //        [mapView removeAnnotations:annotations];
-        self.currentAnnotationView = annotationView;
+//        self.currentAnnotationView = annotationView;
         return annotationView;
     }
     return nil;
