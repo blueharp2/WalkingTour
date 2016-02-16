@@ -32,7 +32,7 @@ static const NSString *ItemStatusContext;
 @implementation TourDetailViewController
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
+    [super viewDidLoad];    
     [self setButtonStatus];
     self.navigationController.delegate = self;
     UIColor *tintColor = self.navigationController.navigationBar.tintColor;
@@ -43,6 +43,8 @@ static const NSString *ItemStatusContext;
         self.locationDescriptionLabel.text = self.location.locationDescription;
         if (self.location.locationAddress) {
             self.locationAddressLabel.text = self.location.locationAddress;
+        } else {
+            self.locationAddressLabel.hidden = YES;
         }
         if (!self.location.video) {
             self.playButton.hidden = YES;

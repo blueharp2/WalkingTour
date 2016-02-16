@@ -71,10 +71,7 @@ int const radius = 250;
     
     NSString *urlString = [NSString stringWithFormat:@"%@?client_id=%@&client_secret=%@&ll=%@,%@&v=%@&m=%@&query=%@&intent=search&radius=%@", foursquareVenueSearchURL,foursquareAPIClientID, foursquareAPIClientSecret, [NSString stringWithFormat:@"%f",latitude], [NSString stringWithFormat:@"%f", longitude], apiVersion, mode, queryString, [NSString stringWithFormat:@"%i", radius]];
     
-    NSLog(@"%@", urlString);
-    
-    if (urlString != nil) {
-        NSLog(urlString, nil);
+    if (urlString) {
         
         NSURL *URL =[NSURL URLWithString:urlString];
         
@@ -84,14 +81,11 @@ int const radius = 250;
         NSURLSession *session = [NSURLSession sharedSession];
         NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
             
-            //            NSLog(data, nil);
-     // according to Stanford course is cleaner to check for nil like if (data) { ... }
-            if (data != nil) {
+            if (data) {
                 completionHandler(true, data);
-                //                NSLog(data, nil);
             }
             
-            if (error != nil) {
+            if (error) {
                 if (response != nil) {
                     NSLog(@"My error with code: %@", (NSHTTPURLResponse *)response);
                 }
@@ -162,8 +156,8 @@ int const radius = 250;
                 NSArray *address = location[@"formattedAddress"];
                 NSString *completeAddress = [address componentsJoinedByString:@", "];
                 
-                NSLog(@"The name : %@", name);
-                NSLog(@"The address : %@", completeAddress);
+//                NSLog(@"The name : %@", name);
+//                NSLog(@"The address : %@", completeAddress);
                 if (name && location && address) {
                     NSMutableDictionary *result = [NSMutableDictionary dictionaryWithObjectsAndKeys: name, @"name",  completeAddress, @"address", nil];
                     if (result) {
