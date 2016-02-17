@@ -98,14 +98,25 @@
     [super viewWillAppear:animated];
     if (self.linkedTour) {
         NSString *tourTemp = self.linkedTour;
+        if (self.favoriteToursFromParse) {
+            [self.favoriteToursFromParse addObject:tourTemp];
+        } else {
+            self.favoriteToursFromParse = [NSMutableArray arrayWithObject:tourTemp];
+        }
         self.linkedTour = nil;
         [self performSegueWithIdentifier:@"TabBarController" sender:tourTemp];
     }
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    if (self.favoriteToursFromParse && [PFUser currentUser]) {
+        [ParseService setFavoritedTourIds:self.favoriteToursFromParse forUser:[PFUser currentUser]];
+    }
+}
+
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
-    
     [self.locationManager stopMonitoringSignificantLocationChanges];
 }
 
