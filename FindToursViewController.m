@@ -639,15 +639,17 @@
         
         if (isAlreadyAFavoriteTour ==YES) {
             [self.favoriteToursFromParse removeObject:tourId];
+            NSLog(@"add %@", self.favoriteToursFromParse);
         } else if (isAlreadyAFavoriteTour ==NO){
             if (self.favoriteToursFromParse) {
                 [self.favoriteToursFromParse addObject:tourId];
+               NSLog(@"remove %@", self.favoriteToursFromParse);
             }else{
                 self.favoriteToursFromParse = [NSMutableArray arrayWithObject:tourId];
             }
         }
     }
-    NSLog(@"Favorite Tours from Parse Array: %@", self.favoriteToursFromParse);
+//    NSLog(@"Favorite Tours from Parse Array: %@", self.favoriteToursFromParse);
 }
 
 @end
