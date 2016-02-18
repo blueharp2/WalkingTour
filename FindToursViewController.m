@@ -341,6 +341,7 @@
     if (tableView.tag == 0) {
         POIDetailTableViewCell *cell = (POIDetailTableViewCell*) [self.toursTableView dequeueReusableCellWithIdentifier:@"POIDetailTableViewCell"];
         cell.accessoryView = nil;
+        cell.delegate = self;
         
 //Start of favorite button
        // UIButton *favoriteStarButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
@@ -633,6 +634,20 @@
 #pragma mark - POIDetailTableViewCellDelegate
 -(void)favoriteButtonPressedForTourID:(NSString *)tourId{
     
+    if (tourId !=nil) {
+        BOOL isAlreadyAFavoriteTour = [self.favoriteToursFromParse containsObject:tourId];
+        
+        if (isAlreadyAFavoriteTour ==YES) {
+            [self.favoriteToursFromParse removeObject:tourId];
+        } else if (isAlreadyAFavoriteTour ==NO){
+            if (self.favoriteToursFromParse) {
+                [self.favoriteToursFromParse addObject:tourId];
+            }else{
+                self.favoriteToursFromParse = [NSMutableArray arrayWithObject:tourId];
+            }
+        }
+    }
+    NSLog(@"Favorite Tours from Parse Array: %@", self.favoriteToursFromParse);
 }
 
 @end
