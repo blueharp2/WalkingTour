@@ -31,12 +31,14 @@ static const NSArray *categories;
 @property (strong, nonatomic) PFGeoPoint *geoPoint;
 @property (strong, nonatomic) Location *createdLocation;
 @property (strong, nonatomic) MKPointAnnotation *mapPinAnnotation;
+//@property (strong, nonatomic) MKAnnotationView *currentAnnotationView;
 @property (strong, nonatomic) UIColor *navBarTintColor;
 @property (strong, nonatomic) NSMutableArray *suggestedAddresses;
 @property (strong, nonatomic) NSMutableArray *suggestedVenuesWithAddress;
 @property (nonatomic) int *textLabelBeginEditingCounter;
 @property BOOL categoriesEdited;
 @property BOOL locationSet;
+@property BOOL pinDropInProgress;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet UITextField *locationNameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *locationAddressTextField;
@@ -101,6 +103,7 @@ static const NSArray *categories;
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    self.pinDropInProgress = NO;
     
 }
 -(void)viewDidDisappear:(BOOL)animated{
@@ -396,7 +399,7 @@ static const NSArray *categories;
 
 - (void)toggleViewAfterPinDrop {
     [self.view layoutIfNeeded];
-    if (self.locationNameTextField.alpha == 0.0) {
+    if (self.locationNameTextField.alpha == 0.0 && self.pinDropReminderLabel.alpha == 1.0) {
         self.locationNameTextField.hidden = NO;
         self.locationAddressTextField.hidden = NO;
         self.locationDescriptionTextField.hidden = NO;
@@ -408,16 +411,18 @@ static const NSArray *categories;
             self.locationAddressTextField.alpha = 1.0;
             self.locationDescriptionTextField.alpha = 1.0;
             self.cameraButton.alpha = 1.0;
-            self.mapHeightConstraint.constant = -(self.mapView.frame.size.height / 2);
+//            self.mapHeightConstraint.constant = -(self.mapView.frame.size.height / 2);
             self.saveButtonBottomConstraint.constant = 10;
             [self.view layoutIfNeeded];
         } completion:^(BOOL finished) {
             MKCoordinateRegion pinRegion = MKCoordinateRegionMakeWithDistance(CLLocationCoordinate2DMake(self.geoPoint.latitude, self.geoPoint.longitude), 300, 300);
             [self.mapView setRegion:pinRegion animated:YES];
+            self.pinDropInProgress = NO;
         }];
     } else {
         MKCoordinateRegion pinRegion = MKCoordinateRegionMakeWithDistance(CLLocationCoordinate2DMake(self.geoPoint.latitude, self.geoPoint.longitude), 300, 300);
         [self.mapView setRegion:pinRegion animated:YES];
+        self.pinDropInProgress = NO;
     }
 }
 
@@ -607,37 +612,60 @@ static const NSArray *categories;
 }
 
 #pragma mark MKMapViewDelegate
+
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation{
-    
-    if ([annotation isKindOfClass:[MKUserLocation class]]) {
-        if (self.locationToEdit && !self.locationSet) {
-            self.locationSet = YES;
-            [self setLocationToEdit:self.locationToEdit];
+    if (!self.pinDropInProgress) {
+        if ([annotation isKindOfClass:[MKUserLocation class]]) {
+            if (self.locationToEdit && !self.locationSet) {
+                self.locationSet = YES;
+                [self setLocationToEdit:self.locationToEdit];
+            }
+            return nil;
         }
-        return nil;
+        
+        self.pinDropInProgress = YES;
+        MKPinAnnotationView *annotationView = (MKPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:@"AnnotationView"];
+        
+        annotationView.annotation = annotation;
+        
+        annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"AnnotationView"];
+        
+        annotationView.canShowCallout = YES;
+        annotationView.animatesDrop = YES;
+        annotationView.pinTintColor = [UIColor colorWithRed:0.278 green:0.510 blue:0.855 alpha:1.000];
+        UIButton *rightCallout = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+        
+        annotationView.rightCalloutAccessoryView = rightCallout;
+        [self toggleViewAfterPinDrop];
+        if (self.pinDropReminderLabel.alpha == 1.0) {
+            [self dissolvePinDropReminderLabel];
+        }
+        [self toggleSuggestedVenuesTableView];
+//        MKUserLocation *userLocation = [mapView userLocation];
+//        NSMutableArray *annotations = [NSMutableArray arrayWithArray:[mapView annotations]];
+//        [annotations removeObject:self.mapPinAnnotation];
+//        if (userLocation) {
+//            [annotations removeObject:userLocation];
+//        }
+//        [mapView removeAnnotations:annotations];
+//        self.currentAnnotationView = annotationView;
+        return annotationView;
     }
-    
-    MKPinAnnotationView *annotationView = (MKPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:@"AnnotationView"];
-    
-    annotationView.annotation = annotation;
-    
-    annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"AnnotationView"];
-    
-    annotationView.canShowCallout = YES;
-    annotationView.animatesDrop = YES;
-    annotationView.pinTintColor = [UIColor colorWithRed:0.278 green:0.510 blue:0.855 alpha:1.000];
-    UIButton *rightCallout = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
-    
-    annotationView.rightCalloutAccessoryView = rightCallout;
-    [self dissolvePinDropReminderLabel];
-    [self toggleViewAfterPinDrop];
-    [self toggleSuggestedVenuesTableView];
-    
-    return annotationView;
+    return nil;
 }
 
 -(IBAction)handleLongPressGestured:(UILongPressGestureRecognizer *)sender{
-    if (sender.state ==UIGestureRecognizerStateBegan) {
+    if (sender.state == UIGestureRecognizerStateBegan && !self.pinDropInProgress) {
+        if (self.locationNameTextField.alpha == 0.0 && self.pinDropReminderLabel.alpha == 1.0) {
+            self.mapHeightConstraint.constant = -(self.mapView.frame.size.height / 2);
+            [UIView animateWithDuration:0.4 animations:^{
+                [self.view layoutIfNeeded];
+            }];
+        }
+//        self.pinDropInProgress = YES;
+//        if (self.mapView.visibleMapRect.size.width < 300 || self.mapView.visibleMapRect.size.height < 300) {
+//            [self.mapView setVisibleMapRect:MKMapRectMake(self.mapView.visibleMapRect.origin.x, self.mapView.visibleMapRect.origin.y, 4000, 4000) animated:YES];
+//        }
         CGPoint touchPoint = [sender locationInView:self.mapView];
         CLLocationCoordinate2D coordinate = [self.mapView convertPoint:touchPoint toCoordinateFromView:self.mapView];
         
@@ -664,6 +692,7 @@ static const NSArray *categories;
     }
     self.mapPinAnnotation = newPoint;
     [self.mapView addAnnotation:newPoint];
+//    [annotations removeObject:newPoint];
     [self.mapView removeAnnotations:annotations];
 }
 
@@ -688,6 +717,28 @@ static const NSArray *categories;
     }];
     [self.view layoutIfNeeded];
 }
+
+//- (void)mapView:(MKMapView *)mapView didAddAnnotationViews:(NSArray<MKAnnotationView *> *)views {
+//    MKUserLocation *userLocation = [mapView userLocation];
+////    MKAnnotationView *last = self.currentAnnotationView;
+//    MKPointAnnotation *lastPoint = self.mapPinAnnotation;
+//    NSMutableArray *annotations = [NSMutableArray arrayWithObjects:userLocation, lastPoint, nil];
+//    NSArray *addedAnnotations = [NSArray arrayWithArray:views];
+//    [mapView removeAnnotations:addedAnnotations];
+//    [mapView addAnnotations:annotations];
+////    if (annotations) {
+////        if (userLocation) {
+////            [annotations removeObject:userLocation];
+////        }
+////        if (last) {
+////            [annotations removeObject:last];
+////        }
+////        if (lastPoint) {
+////            [annotations removeObject:lastPoint];
+////        }
+////        [mapView removeAnnotations:annotations];
+////    }
+//}
 
 #pragma mark - UITextFieldDelegate
 
