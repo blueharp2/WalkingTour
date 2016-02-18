@@ -14,6 +14,8 @@
 //create a property to hold a POI
 @property (strong, nonatomic) PFObject *object;
 @property (strong, nonatomic) Tour *tour;
+//@property (weak, nonatomic) IBOutlet UIButton *favoriteStarButton;
+
 
 
 

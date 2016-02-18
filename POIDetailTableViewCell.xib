@@ -48,7 +48,9 @@
                             <constraint firstAttribute="height" constant="33" id="tQe-Jd-WFp"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                        <state key="normal" title="☆"/>
+                        <connections>
+                            <action selector="favoriteStarButtonPressed:" destination="o5G-XJ-2k7" eventType="touchUpInside" id="hAN-bw-bBb"/>
+                        </connections>
                     </button>
                 </subviews>
                 <constraints>
@@ -82,6 +84,7 @@
                 </variation>
             </tableViewCellContentView>
             <connections>
+                <outlet property="favoriteStarButton" destination="wb6-fe-Wjf" id="QWo-v0-OfY"/>
                 <outlet property="tourImageView" destination="LUE-Nl-1Ik" id="gCp-fE-Zm8"/>
                 <outlet property="tourNameLabel" destination="FAF-Sl-sO5" id="3MI-ws-Qb5"/>
             </connections>
