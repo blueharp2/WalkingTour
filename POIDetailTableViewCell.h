@@ -22,6 +22,7 @@
 @property (strong, nonatomic) Tour *tour;
 @property (weak) id <POIDetailTableViewCellDelegate> delegate;
 
+- (IBAction)favoriteStarButtonPressed:(id)sender;
 
 
 

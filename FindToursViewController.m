@@ -343,6 +343,12 @@
         cell.accessoryView = nil;
         cell.delegate = self;
         
+        [POIDetailTableViewCell.favoriteStarButton setTitle: @"★" forState:UIControlStateNormal];
+        if ([]) {
+            <#statements#>
+        }
+        
+        
 //Start of favorite button
        // UIButton *favoriteStarButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         //favoriteStarButton.frame = CGRectMake(10, 8, 35.0, 35.0);
