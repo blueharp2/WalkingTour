@@ -9,12 +9,19 @@
 #import <UIKit/UIKit.h>
 #import "Location.h"
 
+@protocol POIDetailTableViewCellDelegate <NSObject>
+-(void)favoriteButtonPressedForTourID:(NSString *)tourId;
+
+@end
+
+
 @interface POIDetailTableViewCell : UITableViewCell
 
 //create a property to hold a POI
 @property (strong, nonatomic) PFObject *object;
 @property (strong, nonatomic) Tour *tour;
-//@property (weak, nonatomic) IBOutlet UIButton *favoriteStarButton;
+@property (weak) id <POIDetailTableViewCellDelegate> delegate;
+
 
 
 

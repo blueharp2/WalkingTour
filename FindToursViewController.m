@@ -22,7 +22,7 @@
 @import ParseUI;
 #import <Crashlytics/Answers.h>
 
-@interface FindToursViewController () <MKMapViewDelegate, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, TourListViewControllerDelegate>
+@interface FindToursViewController () <MKMapViewDelegate, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, TourListViewControllerDelegate, POIDetailTableViewCellDelegate>
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (strong, nonatomic) NSMutableArray<CustomAnnotation *> *mapAnnotations;
@@ -503,39 +503,39 @@
     }
 }
 
--(void)favoriteStarButtonTapped:(UIButton *)favoriteStarButton event:(UIEvent *)event{
-   // [favoriteStarButton setTintColor:[UIColor colorWithRed:0.278 green:0.510 blue:0.855 alpha:1.000]];
-    NSString *currentTitle = [favoriteStarButton titleForState:UIControlStateNormal];
-    NSString *newTitle = [currentTitle isEqual:@"☆"]? @"★" : @"☆";
-    [favoriteStarButton setTitle:newTitle forState:UIControlStateNormal];
-    
-    
-    NSSet *touches = event.allTouches;
-    UITouch *touch = touches.anyObject;
-    CGPoint currentTouchPosition = [touch locationInView:self.toursTableView];
-    NSIndexPath *indexPath = [self.toursTableView indexPathForRowAtPoint:currentTouchPosition];
-    
-    Tour *tour = self.toursFromParse[indexPath.section];
-    NSString *tourObjectId = tour.objectId;
-    
-    if (indexPath != nil) {
-        
-        BOOL isAlreadyAFavoriteTour = [self.favoriteToursFromParse containsObject:tourObjectId];
-       
-        if (isAlreadyAFavoriteTour == YES){
-            [self.favoriteToursFromParse removeObject:tourObjectId];
-        
-        }else if (isAlreadyAFavoriteTour == NO){
-            if (self.favoriteToursFromParse){
-            [self.favoriteToursFromParse addObject:tourObjectId];
-            
-            }else{
-                self.favoriteToursFromParse = [NSMutableArray arrayWithObject:tourObjectId];
-            }
-        }
- }
-     NSLog(@"Favorite Tours From Parse Array: %@", self.favoriteToursFromParse);
-}
+//-(void)favoriteStarButtonTapped:(UIButton *)favoriteStarButton event:(UIEvent *)event{
+//   // [favoriteStarButton setTintColor:[UIColor colorWithRed:0.278 green:0.510 blue:0.855 alpha:1.000]];
+//    NSString *currentTitle = [favoriteStarButton titleForState:UIControlStateNormal];
+//    NSString *newTitle = [currentTitle isEqual:@"☆"]? @"★" : @"☆";
+//    [favoriteStarButton setTitle:newTitle forState:UIControlStateNormal];
+//    
+//    
+//    NSSet *touches = event.allTouches;
+//    UITouch *touch = touches.anyObject;
+//    CGPoint currentTouchPosition = [touch locationInView:self.toursTableView];
+//    NSIndexPath *indexPath = [self.toursTableView indexPathForRowAtPoint:currentTouchPosition];
+//    
+//    Tour *tour = self.toursFromParse[indexPath.section];
+//    NSString *tourObjectId = tour.objectId;
+//    
+//    if (indexPath != nil) {
+//        
+//        BOOL isAlreadyAFavoriteTour = [self.favoriteToursFromParse containsObject:tourObjectId];
+//       
+//        if (isAlreadyAFavoriteTour == YES){
+//            [self.favoriteToursFromParse removeObject:tourObjectId];
+//        
+//        }else if (isAlreadyAFavoriteTour == NO){
+//            if (self.favoriteToursFromParse){
+//            [self.favoriteToursFromParse addObject:tourObjectId];
+//            
+//            }else{
+//                self.favoriteToursFromParse = [NSMutableArray arrayWithObject:tourObjectId];
+//            }
+//        }
+// }
+//     NSLog(@"Favorite Tours From Parse Array: %@", self.favoriteToursFromParse);
+//}
 
 #pragma mark - Navigation
 
@@ -628,6 +628,11 @@
     NSUInteger index = [self.toursFromParse indexOfObject:tour];
     [self.toursFromParse removeObjectAtIndex:index];
     [self.toursTableView deleteSections:[NSIndexSet indexSetWithIndex:index] withRowAnimation:UITableViewRowAnimationFade];
+}
+
+#pragma mark - POIDetailTableViewCellDelegate
+-(void)favoriteButtonPressedForTourID:(NSString *)tourId{
+    
 }
 
 @end

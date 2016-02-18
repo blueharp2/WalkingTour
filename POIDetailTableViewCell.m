@@ -39,7 +39,12 @@
 
 
 - (IBAction)favoriteStarButtonPressed:(id)sender {
+    NSString *currentTitle = [_favoriteStarButton titleForState:UIControlStateNormal];
+    NSString *newTitle = [currentTitle isEqual:@"☆"]? @"★" : @"☆";
+    [_favoriteStarButton setTitle:newTitle forState:UIControlStateNormal];
     
-  
+    if (self.delegate) {
+        [self.delegate favoriteButtonPressedForTourID:self.tour.objectId];
+    }
 }
 @end
