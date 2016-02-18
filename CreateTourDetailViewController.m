@@ -46,6 +46,7 @@ static const NSArray *categories;
 @property (weak, nonatomic) IBOutlet UILabel *pinDropReminderLabel;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *mapHeightConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewTopConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *suggestedLocationTableViewHeight;
 @property (weak, nonatomic) IBOutlet UIButton *cameraButton;
 @property (weak, nonatomic) IBOutlet UIButton *saveButton;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *saveButtonBottomConstraint;

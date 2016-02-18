@@ -350,7 +350,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ohv-bB-KWz">
-                                        <rect key="frame" x="0.0" y="20" width="320" height="821"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="821"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Rectangle 2 Copy 2" translatesAutoresizingMaskIntoConstraints="NO" id="ox0-Hi-KYB">
                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="600"/>
@@ -492,7 +492,7 @@
                                     <constraint firstAttribute="bottom" secondItem="Ohv-bB-KWz" secondAttribute="bottom" id="T3f-SD-Fg6"/>
                                     <constraint firstItem="Ohv-bB-KWz" firstAttribute="leading" secondItem="PaX-OB-SRL" secondAttribute="leading" id="bds-H7-wd3"/>
                                     <constraint firstItem="Ohv-bB-KWz" firstAttribute="top" secondItem="PaX-OB-SRL" secondAttribute="top" id="bvv-ms-y8D"/>
-                                    <constraint firstItem="Ohv-bB-KWz" firstAttribute="top" secondItem="PaX-OB-SRL" secondAttribute="top" constant="20" id="oXy-U8-hoN"/>
+                                    <constraint firstItem="Ohv-bB-KWz" firstAttribute="top" secondItem="PaX-OB-SRL" secondAttribute="top" id="oXy-U8-hoN"/>
                                     <constraint firstItem="Ohv-bB-KWz" firstAttribute="width" secondItem="PaX-OB-SRL" secondAttribute="width" id="qwW-qD-G9g"/>
                                 </constraints>
                                 <variation key="default">
@@ -525,6 +525,7 @@
                         <outlet property="pinDropReminderLabel" destination="yoq-0w-59d" id="3zn-uI-z0R"/>
                         <outlet property="saveButton" destination="PoL-8t-wAB" id="3J4-6W-7Vq"/>
                         <outlet property="suggestedLocationTableView" destination="obo-sP-jxX" id="wxt-Cf-BvC"/>
+                        <outlet property="suggestedLocationTableViewHeight" destination="DRc-Ib-AIw" id="0Q1-9k-gy6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jT6-HC-cRd" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -534,7 +535,7 @@
                     </connections>
                 </pongPressGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="2273" y="784"/>
+            <point key="canvasLocation" x="2352" y="830"/>
         </scene>
         <!--Tour Selection View Controller-->
         <scene sceneID="xBy-Ht-Pie">
