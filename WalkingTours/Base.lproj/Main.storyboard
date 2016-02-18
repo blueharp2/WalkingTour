@@ -524,6 +524,7 @@
                         <outlet property="mapView" destination="eTz-S3-rke" id="UwY-Qn-ERC"/>
                         <outlet property="pinDropReminderLabel" destination="yoq-0w-59d" id="3zn-uI-z0R"/>
                         <outlet property="saveButton" destination="PoL-8t-wAB" id="3J4-6W-7Vq"/>
+                        <outlet property="scrollView" destination="PaX-OB-SRL" id="BBS-yT-aT4"/>
                         <outlet property="suggestedLocationTableView" destination="obo-sP-jxX" id="wxt-Cf-BvC"/>
                         <outlet property="suggestedLocationTableViewHeight" destination="DRc-Ib-AIw" id="0Q1-9k-gy6"/>
                     </connections>

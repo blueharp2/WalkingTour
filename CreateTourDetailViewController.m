@@ -37,6 +37,7 @@ static const NSArray *categories;
 @property (nonatomic) int *textLabelBeginEditingCounter;
 @property BOOL categoriesEdited;
 @property BOOL locationSet;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet UITextField *locationNameTextField;
@@ -75,6 +76,7 @@ static const NSArray *categories;
     self.locationAddressTextField.hidden = YES;
     self.locationDescriptionTextField.hidden = YES;
     self.suggestedLocationTableView.hidden = YES;
+    self.suggestedLocationTableViewHeight.constant = 0;
     self.cameraButton.hidden = YES;
     self.locationNameTextField.alpha = 0.0;
     self.locationAddressTextField.alpha = 0.0;
@@ -705,6 +707,7 @@ static const NSArray *categories;
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
     //    [self toggleMapViewForTextLabels];
          self.suggestedLocationTableView.hidden = NO;
+    self.suggestedLocationTableViewHeight.constant = 195;
         [self toggleSuggestedVenuesTableView];
 
     if (textField.tag == 0 && self.textLabelBeginEditingCounter == 0) {
@@ -757,12 +760,23 @@ static const NSArray *categories;
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     if (textField.tag == 0) {
-    self.suggestedLocationTableView.hidden = YES;
+//    self.suggestedLocationTableView.hidden = YES;
         [UIView animateWithDuration:0.5
                          animations:^{
                              self.suggestedLocationTableView.alpha = 0;
                          }];
+        self.suggestedLocationTableViewHeight.constant = 0;
+
     }
+}
+
+- (void)keyboardWasShown:(NSNotification*)aNotification {
+    NSDictionary* info = [aNotification userInfo];
+    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+//    CGRect bkgndRect = activeField.superview.frame;
+//    bkgndRect.size.height += kbSize.height;
+//    [activeField.superview setFrame:bkgndRect];
+//    [scrollView setContentOffset:CGPointMake(0.0, activeField.frame.origin.y-kbSize.height) animated:YES];
 }
 
 #pragma mark - UINavigationControllerDelegate
