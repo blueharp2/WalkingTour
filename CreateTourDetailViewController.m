@@ -37,6 +37,7 @@ static const NSArray *categories;
 @property (nonatomic) int *textLabelBeginEditingCounter;
 @property BOOL categoriesEdited;
 @property BOOL locationSet;
+@property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet UITextField *locationNameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *locationAddressTextField;
