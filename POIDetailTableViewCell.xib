@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -41,6 +41,15 @@
                         <color key="textColor" red="0.2784313725" green="0.50980392159999999" blue="0.85490196080000003" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wb6-fe-Wjf">
+                        <rect key="frame" x="8" y="6" width="33" height="33"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="33" id="Ymf-Nm-euE"/>
+                            <constraint firstAttribute="height" constant="33" id="tQe-Jd-WFp"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                        <state key="normal" title="☆"/>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="QyA-xr-zuE" firstAttribute="top" secondItem="ZhC-BL-S3Y" secondAttribute="top" constant="6" id="2FZ-pn-Svi"/>
@@ -55,9 +64,11 @@
                     <constraint firstItem="LUE-Nl-1Ik" firstAttribute="bottom" secondItem="ZhC-BL-S3Y" secondAttribute="bottomMargin" id="UuO-Rb-2c4"/>
                     <constraint firstItem="FAF-Sl-sO5" firstAttribute="trailing" secondItem="ZhC-BL-S3Y" secondAttribute="trailingMargin" id="WAu-Xv-Wjv"/>
                     <constraint firstAttribute="trailing" secondItem="FAF-Sl-sO5" secondAttribute="trailing" constant="36" id="axI-6e-BSb"/>
+                    <constraint firstItem="wb6-fe-Wjf" firstAttribute="centerY" secondItem="ZhC-BL-S3Y" secondAttribute="centerY" id="dX0-US-Cch"/>
                     <constraint firstItem="FAF-Sl-sO5" firstAttribute="centerY" secondItem="LUE-Nl-1Ik" secondAttribute="centerY" constant="-1.5" id="gGw-EP-VT9"/>
                     <constraint firstItem="FAF-Sl-sO5" firstAttribute="leading" secondItem="LUE-Nl-1Ik" secondAttribute="trailing" constant="8" id="hsq-bE-bK5"/>
                     <constraint firstItem="FAF-Sl-sO5" firstAttribute="top" secondItem="ZhC-BL-S3Y" secondAttribute="top" constant="8" id="r1s-Vh-hyY"/>
+                    <constraint firstItem="wb6-fe-Wjf" firstAttribute="leading" secondItem="ZhC-BL-S3Y" secondAttribute="leading" constant="8" id="sWw-dI-4j9"/>
                     <constraint firstItem="FAF-Sl-sO5" firstAttribute="top" secondItem="ZhC-BL-S3Y" secondAttribute="top" constant="10" id="umc-Rc-VPv"/>
                 </constraints>
                 <variation key="default">
