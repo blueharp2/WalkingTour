@@ -343,9 +343,9 @@
         cell.accessoryView = nil;
         cell.delegate = self;
         
-        [POIDetailTableViewCell.favoriteStarButton setTitle: @"★" forState:UIControlStateNormal];
-        if ([]) {
-            <#statements#>
+        [cell.favoriteStarButton setTitle: @"☆" forState:UIControlStateNormal];
+        if ([self.favoriteToursFromParse containsObject:self.toursFromParse[indexPath.section].objectId]) {
+            [cell.favoriteStarButton setTitle:@"★" forState:UIControlStateNormal];
         }
         
         

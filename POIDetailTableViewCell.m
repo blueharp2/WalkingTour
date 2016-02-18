@@ -13,7 +13,7 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *tourImageView;
 @property (weak, nonatomic) IBOutlet UILabel *tourNameLabel;
-@property (weak, nonatomic) IBOutlet UIButton *favoriteStarButton;
+
 - (IBAction)favoriteStarButtonPressed:(id)sender;
 
 @end
@@ -26,11 +26,11 @@
 }
 
 - (void)awakeFromNib {
-    [_favoriteStarButton setTitle:@"☆" forState:UIControlStateNormal];
-    _favoriteStarButton.titleLabel.font = [UIFont fontWithName:@"Futura" size:30];
-    _favoriteStarButton.titleLabel.font = [UIFont boldSystemFontOfSize:30];
-    [_favoriteStarButton setTintColor:[UIColor colorWithRed:0.278 green:0.510 blue:0.855 alpha:1.000]];
-    [_favoriteStarButton setShowsTouchWhenHighlighted:YES];
+    [self.favoriteStarButton setTitle:@"☆" forState:UIControlStateNormal];
+    self.favoriteStarButton.titleLabel.font = [UIFont fontWithName:@"Futura" size:30];
+    self.favoriteStarButton.titleLabel.font = [UIFont boldSystemFontOfSize:30];
+    [self.favoriteStarButton setTintColor:[UIColor colorWithRed:0.278 green:0.510 blue:0.855 alpha:1.000]];
+    [self.favoriteStarButton setShowsTouchWhenHighlighted:YES];
 }
 
 

@@ -21,8 +21,9 @@
 @property (strong, nonatomic) PFObject *object;
 @property (strong, nonatomic) Tour *tour;
 @property (weak) id <POIDetailTableViewCellDelegate> delegate;
+@property (weak, nonatomic) IBOutlet UIButton *favoriteStarButton;
 
-- (IBAction)favoriteStarButtonPressed:(id)sender;
+
 
 
 
