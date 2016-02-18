@@ -117,6 +117,13 @@ static const NSArray *categories;
     self.geoPoint = [PFGeoPoint geoPointWithLatitude:newPoint.coordinate.latitude longitude:newPoint.coordinate.longitude];
     self.mapPinAnnotation = newPoint;
     [self dropPinAtLocationCoordinate:coordinate];
+    
+    [FourSquareService searchVenueWithLatitude: newPoint.coordinate.latitude longitude:newPoint.coordinate.longitude completion:^(BOOL success, NSData * _Nullable data) {
+        [FourSquareService parseVenueResponse: data completion:^(BOOL success, NSMutableArray * _Nullable addressesFromFoursquare) {
+            
+            self.suggestedAddresses = [NSMutableArray arrayWithArray:addressesFromFoursquare];
+        }];
+    }];
     self.locationNameTextField.text = locationToEdit.locationName;
     self.locationAddressTextField.text = locationToEdit.locationAddress;
     self.locationDescriptionTextField.text = locationToEdit.locationDescription;
@@ -313,10 +320,13 @@ static const NSArray *categories;
             [self presentEditCategoriesAlert];
         } else {
             [self saveLocationWithCategories:sender];
+            
         }
     } else {
         [self saveLocationWithCategories:sender];
     }
+    // Delete the venues from Foursquare from tableview datasource array.
+    [self.suggestedVenuesWithAddress removeAllObjects];
 }
 
 - (void)presentAlertWithMessage:(NSString *)alertMessage {
@@ -400,7 +410,6 @@ static const NSArray *categories;
         self.locationNameTextField.hidden = NO;
         self.locationAddressTextField.hidden = NO;
         self.locationDescriptionTextField.hidden = NO;
-        self.suggestedLocationTableView.hidden = NO;
         self.cameraButton.hidden = NO;
         self.saveButton.layer.cornerRadius = self.saveButton.frame.size.width / 2;
         [UIView animateWithDuration:0.4 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^{
@@ -631,7 +640,7 @@ static const NSArray *categories;
     annotationView.rightCalloutAccessoryView = rightCallout;
     [self dissolvePinDropReminderLabel];
     [self toggleViewAfterPinDrop];
-    [self toggleSuggestedVenuesTableView];
+//    [self toggleSuggestedVenuesTableView];
     
     return annotationView;
 }
@@ -693,9 +702,19 @@ static const NSArray *categories;
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
     //    [self toggleMapViewForTextLabels];
+         self.suggestedLocationTableView.hidden = NO;
+        [self toggleSuggestedVenuesTableView];
+
     if (textField.tag == 0 && self.textLabelBeginEditingCounter == 0) {
         [self toggleMapViewForTextLabels];
         self.textLabelBeginEditingCounter ++;
+    }
+    
+    if (textField.tag == 0 && self.textLabelBeginEditingCounter > 0) {
+        [UIView animateWithDuration:0.5
+                         animations:^{
+                             self.suggestedLocationTableView.alpha = 1;
+                         }];
     }
 }
 
@@ -709,21 +728,22 @@ static const NSArray *categories;
         NSLog(@"%@", self.suggestedVenuesWithAddress);
         [self.suggestedLocationTableView reloadData];
     }
-    
     return YES;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     
-    if (textField.tag == 0 && self.locationAddressTextField.text.length == 0) {
+    if (textField.tag == 0) {
         [textField resignFirstResponder];
-        [self.suggestedVenuesWithAddress removeAllObjects];
-        [self.suggestedLocationTableView reloadData];
-        self.suggestedLocationTableView.hidden = YES;
+        
+        //Will need to removeAllObjects when saving instead
+//        [self.suggestedVenuesWithAddress removeAllObjects];
+//        [self.suggestedLocationTableView reloadData];
+//        self.suggestedLocationTableView.hidden = YES;
         [self.locationAddressTextField becomeFirstResponder];
     }
     
-    if (textField.tag == 1 && self.locationDescriptionTextField.text.length == 0) {
+    if (textField.tag == 1) {
         [self.locationDescriptionTextField becomeFirstResponder];
     }
     
@@ -731,6 +751,16 @@ static const NSArray *categories;
         [self.locationDescriptionTextField resignFirstResponder];
     }
     return YES;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    if (textField.tag == 0) {
+    self.suggestedLocationTableView.hidden = YES;
+        [UIView animateWithDuration:0.5
+                         animations:^{
+                             self.suggestedLocationTableView.alpha = 0;
+                         }];
+    }
 }
 
 #pragma mark - UINavigationControllerDelegate
