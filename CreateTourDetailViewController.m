@@ -191,8 +191,6 @@ static const NSArray *categories;
     [self.suggestedLocationTableView setTableHeaderView:headerLabel];
     [headerLabel sizeToFit];
     
-
-
     self.suggestedLocationTableView.dataSource = self;
     self.suggestedLocationTableView.delegate = self;
 }
@@ -203,11 +201,11 @@ static const NSArray *categories;
     [self.locationNameTextField resignFirstResponder];
     [self.locationAddressTextField resignFirstResponder];
     [self.locationDescriptionTextField resignFirstResponder];
+    
     if (!self.imagePicker) {
         self.imagePicker = [[UIImagePickerController alloc] init];
         self.imagePicker.delegate = self;
         self.imagePicker.allowsEditing = YES;
-        
         if ([UIImagePickerController isSourceTypeAvailable:(UIImagePickerControllerSourceTypeCamera)] && [UIImagePickerController isCameraDeviceAvailable:UIImagePickerControllerCameraDeviceRear]) {
             NSArray *availableMediaTypes = [UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypeCamera];
             if ([availableMediaTypes containsObject:(NSString *)kUTTypeMovie]) {
@@ -336,7 +334,6 @@ static const NSArray *categories;
             [self presentEditCategoriesAlert];
         } else {
             [self saveLocationWithCategories:sender];
-            
         }
     } else {
         [self saveLocationWithCategories:sender];
@@ -426,7 +423,6 @@ static const NSArray *categories;
         self.locationNameTextField.hidden = NO;
         self.locationAddressTextField.hidden = NO;
         self.locationDescriptionTextField.hidden = NO;
-//        self.saveButton.hidden = NO;
         self.cameraButton.hidden = NO;
         self.saveButton.layer.cornerRadius = self.saveButton.frame.size.width / 2;
         [UIView animateWithDuration:0.4 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^{
@@ -576,15 +572,17 @@ static const NSArray *categories;
             self.selectedCategories = [NSMutableArray arrayWithObject:categories[indexPath.row]];
         }
     } else { // tableView == suggestedLocationTableView
-        self.locationNameTextField.text = [[self.suggestedVenuesWithAddress objectAtIndex:indexPath.row] objectForKey:@"name"];
-        self.locationAddressTextField.text = [[self.suggestedVenuesWithAddress objectAtIndex:indexPath.row] objectForKey:@"address"];
-        
-        [self.locationNameTextField resignFirstResponder];
-        [self.locationAddressTextField resignFirstResponder];
-        [self.locationDescriptionTextField becomeFirstResponder];
-        [self.suggestedVenuesWithAddress removeAllObjects];
-        [self.suggestedLocationTableView reloadData];
-        
+        NSString *name = [[self.suggestedVenuesWithAddress objectAtIndex:indexPath.row] objectForKey:@"name"];
+        if (![name  isEqual: @"Unable to locate venue"]) {
+            self.locationNameTextField.text = name;
+            self.locationAddressTextField.text = [[self.suggestedVenuesWithAddress objectAtIndex:indexPath.row] objectForKey:@"address"];
+            
+            [self.locationNameTextField resignFirstResponder];
+            [self.locationAddressTextField resignFirstResponder];
+            [self.locationDescriptionTextField becomeFirstResponder];
+            [self.suggestedVenuesWithAddress removeAllObjects];
+            [self.suggestedLocationTableView reloadData];
+        }    
     }
 }
 
