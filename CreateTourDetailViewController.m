@@ -222,7 +222,10 @@ static const NSArray *categories;
     [self.locationNameTextField resignFirstResponder];
     [self.locationAddressTextField resignFirstResponder];
     [self.locationDescriptionTextField resignFirstResponder];
+    [self.view addSubview:self.saveButton];
+    [self.greyOutView setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.view bringSubviewToFront:self.saveButton];
+    [self.saveButton setNeedsDisplay];
     [self.view layoutIfNeeded];
     NSLayoutConstraint *top = [NSLayoutConstraint constraintWithItem:self.greyOutView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTop multiplier:1.0 constant:0];
     NSLayoutConstraint *trailing = [NSLayoutConstraint constraintWithItem:self.greyOutView attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:0];
@@ -243,6 +246,13 @@ static const NSArray *categories;
     tableViewHeight.active = YES;
     tableViewWidth.active = YES;
     tableViewCenterX.active = YES;
+    
+    NSLayoutConstraint *saveButtonCenterX = [NSLayoutConstraint constraintWithItem:self.saveButton attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0.0];
+    NSLayoutConstraint *saveButtonTop = [NSLayoutConstraint constraintWithItem:self.saveButton attribute:NSLayoutAttributeTop relatedBy: NSLayoutRelationEqual toItem:self.categoryTableView  attribute: NSLayoutAttributeBottom multiplier:1 constant:8];
+    
+    saveButtonCenterX.active = YES;
+    saveButtonTop.active = YES;
+
     
     self.cameraButton.enabled = NO;
     
