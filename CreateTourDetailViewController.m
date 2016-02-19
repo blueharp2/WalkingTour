@@ -799,8 +799,14 @@ static const NSArray *categories;
 //        self.locationDescriptionTextField.hidden = NO;
 //        self.locationDescriptionTextField.alpha = 1;
 //    }
+    if (textField.tag == 1 && self.textLabelBeginEditingCounter == 0) {
+        [self toggleMapViewForTextLabels];
+    }
     
     if (textField.tag == 2) {
+        if (self.textLabelBeginEditingCounter == 0) {
+            [self toggleMapViewForTextLabels];
+        }
         [UIView animateWithDuration:0.4 animations:^{
             self.saveButton.hidden = NO;
             self.saveButtonTopConstraint.constant = 8;
