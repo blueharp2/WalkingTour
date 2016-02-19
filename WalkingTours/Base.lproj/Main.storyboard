@@ -533,7 +533,8 @@
                             <constraint firstAttribute="bottom" secondItem="PaX-OB-SRL" secondAttribute="bottom" id="zi2-uT-rAe"/>
                         </constraints>
                     </view>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="568"/>
                     <connections>
                         <outlet property="cameraButton" destination="Gaj-h6-TIr" id="U86-Xp-PQa"/>
                         <outlet property="contentView" destination="Ohv-bB-KWz" id="4fJ-IN-mm2"/>

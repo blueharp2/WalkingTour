@@ -82,7 +82,7 @@ static const NSArray *categories;
     self.locationAddressTextField.hidden = YES;
     self.locationDescriptionTextField.hidden = YES;
     self.suggestedLocationTableView.hidden = YES;
-    self.saveButton.hidden = YES;
+//    self.saveButton.hidden = YES;
     self.pinDropReminderLabelTopConstraint.constant = 8;
     
 
@@ -267,7 +267,6 @@ static const NSArray *categories;
     saveButtonTop.active = YES;
     
     [self.view layoutIfNeeded];
-    
     
     NSLayoutConstraint *top = [NSLayoutConstraint constraintWithItem:self.greyOutView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTop multiplier:1.0 constant:0];
     NSLayoutConstraint *trailing = [NSLayoutConstraint constraintWithItem:self.greyOutView attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:0];
@@ -843,7 +842,7 @@ static const NSArray *categories;
             [self toggleMapViewForTextLabels];
         }
         [UIView animateWithDuration:0.4 animations:^{
-            self.saveButton.hidden = NO;
+//            self.saveButton.hidden = NO;
             self.saveButtonTopConstraint.constant = 8;
         }];
     }
@@ -888,7 +887,7 @@ static const NSArray *categories;
         
         [UIView animateWithDuration:0.5
                          animations:^{
-                             self.saveButton.hidden = NO;
+//                             self.saveButton.hidden = NO;
                              self.saveButtonTopConstraint.constant = 8;
                          }];
     }
