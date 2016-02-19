@@ -25,15 +25,10 @@ int const radius = 250;
 +(void)searchVenueWithLatitude:(double)latitude longitude:(double)longitude completion:(nonnull void (^)(BOOL success, NSData * _Nullable data))completionHandler
 {
     
-    //  This is the url I need to get
-    //    https://api.foursquare.com/v2/venues/search?ll=47.6861009,-122.3791101&query=Thai Siam Restaurant&intent=search&radius=250
-    
     NSString *urlString = [NSString stringWithFormat:@"%@?client_id=%@&client_secret=%@&ll=%@,%@&v=%@&m=%@&intent=browse&radius=%@", foursquareVenueSearchURL,foursquareAPIClientID, foursquareAPIClientSecret, [NSString stringWithFormat:@"%f",latitude], [NSString stringWithFormat:@"%f", longitude], apiVersion, mode, [NSString stringWithFormat:@"%i", radius]];
     
-    NSLog(@"%@", urlString);
-    
     if (urlString != nil) {
-        NSLog(urlString, nil);
+//        NSLog(@"%@", urlString);
         
         NSURL *URL =[NSURL URLWithString:urlString];
         
