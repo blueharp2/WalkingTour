@@ -20,7 +20,7 @@
 
 static const NSArray *categories;
 
-@interface CreateTourDetailViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITableViewDataSource, UITableViewDelegate, MKMapViewDelegate, CLLocationManagerDelegate, UITextFieldDelegate>
+@interface CreateTourDetailViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITableViewDataSource, UITableViewDelegate, MKMapViewDelegate, CLLocationManagerDelegate, UITextFieldDelegate, UIActionSheetDelegate>
 
 @property (strong, nonatomic) UIImagePickerController *imagePicker;
 @property (strong, nonatomic) UIView *greyOutView;
@@ -201,6 +201,10 @@ static const NSArray *categories;
     [self.locationAddressTextField resignFirstResponder];
     [self.locationDescriptionTextField resignFirstResponder];
     
+    if (self.imagePicker.sourceType == UIImagePickerControllerSourceTypePhotoLibrary) {
+        self.imagePicker = nil;
+    }
+    
     if (!self.imagePicker) {
         self.imagePicker = [[UIImagePickerController alloc] init];
         self.imagePicker.delegate = self;
@@ -215,6 +219,36 @@ static const NSArray *categories;
         }
     }
     [self presentViewController:self.imagePicker animated:YES completion:nil];
+}
+
+- (void)loadPhotoLibrary {
+    {
+        [self.locationNameTextField resignFirstResponder];
+        [self.locationAddressTextField resignFirstResponder];
+        [self.locationDescriptionTextField resignFirstResponder];
+        
+        if (self.imagePicker.sourceType == UIImagePickerControllerSourceTypeCamera) {
+            self.imagePicker = nil;
+        }
+        
+        if (!self.imagePicker) {
+            self.imagePicker = [[UIImagePickerController alloc] init];
+            self.imagePicker.delegate = self;
+            self.imagePicker.allowsEditing = YES;
+            
+            if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
+
+                NSArray *availableMediaTypes = [UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+                if ([availableMediaTypes containsObject:(NSString *)kUTTypeMovie]) {
+                    self.imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+//                    self.imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+                    self.imagePicker.mediaTypes = [[NSArray alloc] initWithObjects:(NSString *)kUTTypeImage, (NSString *)kUTTypeMovie, nil];
+                }
+//                self.imagePicker.showsCameraControls = YES;
+            }
+        }
+        [self presentViewController:self.imagePicker animated:YES completion:nil];
+    }
 }
 
 - (void)displayCategories {
@@ -281,7 +315,8 @@ static const NSArray *categories;
 }
 
 - (IBAction)cameraButtonPressed:(UIButton *)sender {
-    [self loadImagePicker];
+    [self showActionSheet];
+//    [self loadImagePicker];
 }
 
 - (IBAction)saveButtonPressed:(UIButton *)sender {
@@ -364,7 +399,8 @@ static const NSArray *categories;
 - (void)presentNoPhotoWarning {
     UIAlertController *photoAlert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"No Photo/Video",comment:nil) message:NSLocalizedString(@"Did you want to add a photo or video?",comment:nil) preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *yesAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Yes",comment:nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [self loadImagePicker];
+        [self showActionSheet];
+//        [self loadImagePicker];
     }];
     UIAlertAction *noAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"No",comment:nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
         if (!self.locationToEdit) {
@@ -384,6 +420,15 @@ static const NSArray *categories;
     [photoAlert addAction:noAction];
     [photoAlert addAction:cancelAction];
     [self presentViewController:photoAlert animated:YES completion:nil];
+}
+
+- (void)showActionSheet {
+    NSString *cancelButtonTitle = NSLocalizedString(@"Cancel", comment:@" action sheet for cameraButtonPressed");
+    NSString *takePhotoOrVideo = NSLocalizedString(@"Take Photo or Video", comment:@" action sheet for cameraButtonPressed");
+    NSString *photoVideoLibrary = NSLocalizedString(@"Photo/Video Library", comment:@" action sheet for cameraButtonPressed");
+    
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:cancelButtonTitle destructiveButtonTitle:nil otherButtonTitles: takePhotoOrVideo, photoVideoLibrary, nil];
+    [actionSheet showInView:self.view];
 }
 
 - (void)presentEditCategoriesAlert {
@@ -864,6 +909,23 @@ static const NSArray *categories;
     if ([viewController isKindOfClass:[CreateTourViewController class]]) {
         self.navigationController.navigationBar.tintColor = self.navBarTintColor;
     }
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 0) {
+        NSLog(@"%@", @"Button index is iqual to 0");
+        [self loadImagePicker];
+    }
+    
+    if (buttonIndex == 1) {
+        NSLog(@"%@", @"Button index is iqual to 1");
+        [self loadPhotoLibrary];
+    }
+    
+    if (buttonIndex == 2) {
+        NSLog(@"%@", @"Cancel button pressed");
+    }
+    
 }
 
 @end
