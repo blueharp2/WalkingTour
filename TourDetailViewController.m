@@ -45,6 +45,9 @@ static const NSString *ItemStatusContext;
             self.locationAddressLabel.text = self.location.locationAddress;
         } else {
             self.locationAddressLabel.hidden = YES;
+            CGRect labelFrame = self.locationAddressLabel.frame;
+            labelFrame.size.height = 0;
+            self.locationAddressLabel.frame = labelFrame;            
         }
         if (!self.location.video) {
             self.playButton.hidden = YES;

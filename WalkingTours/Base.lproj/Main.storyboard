@@ -450,6 +450,7 @@
                                             <constraint firstItem="Gaj-h6-TIr" firstAttribute="trailing" secondItem="eTz-S3-rke" secondAttribute="trailing" constant="-10" id="7hz-mH-ULs"/>
                                             <constraint firstItem="yoq-0w-59d" firstAttribute="leading" secondItem="Ohv-bB-KWz" secondAttribute="leading" constant="20" symbolic="YES" id="7js-9k-aSv"/>
                                             <constraint firstItem="pqI-ST-Oq7" firstAttribute="top" secondItem="SU1-GD-Ons" secondAttribute="bottom" constant="8" symbolic="YES" id="8ZS-06-aMj"/>
+                                            <constraint firstAttribute="bottom" secondItem="PoL-8t-wAB" secondAttribute="bottom" constant="20" id="9l8-VX-C5z"/>
                                             <constraint firstItem="Gaj-h6-TIr" firstAttribute="bottom" secondItem="eTz-S3-rke" secondAttribute="bottom" constant="-10" id="CdZ-fZ-TL7"/>
                                             <constraint firstItem="ox0-Hi-KYB" firstAttribute="top" secondItem="Ohv-bB-KWz" secondAttribute="top" id="Cmi-vW-VU4"/>
                                             <constraint firstItem="SU1-GD-Ons" firstAttribute="top" secondItem="eTz-S3-rke" secondAttribute="bottom" constant="8" symbolic="YES" id="DG9-eZ-vFd"/>
@@ -533,7 +534,8 @@
                             <constraint firstAttribute="bottom" secondItem="PaX-OB-SRL" secondAttribute="bottom" id="zi2-uT-rAe"/>
                         </constraints>
                     </view>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="568"/>
                     <connections>
                         <outlet property="cameraButton" destination="Gaj-h6-TIr" id="U86-Xp-PQa"/>
                         <outlet property="contentView" destination="Ohv-bB-KWz" id="4fJ-IN-mm2"/>
@@ -1038,10 +1040,10 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MeQ-Wd-lRo">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="600"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="560"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Rectangle 2 Copy 2.png" translatesAutoresizingMaskIntoConstraints="NO" id="ygk-ha-HeB">
-                                                <rect key="frame" x="0.0" y="0.0" width="320" height="600"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="320" height="560"/>
                                             </imageView>
                                             <view contentMode="scaleToFill" verticalCompressionResistancePriority="200" translatesAutoresizingMaskIntoConstraints="NO" id="MeJ-Tg-42J" customClass="VideoPlayerView">
                                                 <rect key="frame" x="20" y="80" width="280" height="280"/>
@@ -1067,7 +1069,9 @@
                                                 <variation key="default">
                                                     <mask key="constraints">
                                                         <exclude reference="Gco-gN-sWY"/>
+                                                        <exclude reference="I77-8w-53L"/>
                                                         <exclude reference="UYq-QU-04e"/>
+                                                        <exclude reference="mY5-8O-UTT"/>
                                                     </mask>
                                                 </variation>
                                             </view>
@@ -1078,7 +1082,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X4c-dm-N9G">
-                                                <rect key="frame" x="20" y="426" width="280" height="154"/>
+                                                <rect key="frame" x="20" y="426" width="280" height="114"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" relation="lessThanOrEqual" constant="25" id="0VS-Lv-jqm"/>
                                                 </constraints>
@@ -1108,6 +1112,7 @@
                                             <constraint firstAttribute="bottom" secondItem="X4c-dm-N9G" secondAttribute="bottom" constant="20" symbolic="YES" id="OYN-Pz-nw1"/>
                                             <constraint firstAttribute="trailing" secondItem="ygk-ha-HeB" secondAttribute="trailing" id="Q1C-9u-qKO"/>
                                             <constraint firstAttribute="trailing" secondItem="rfv-oW-XnO" secondAttribute="trailing" constant="20" symbolic="YES" id="Qcr-Lp-auc"/>
+                                            <constraint firstItem="MeJ-Tg-42J" firstAttribute="height" secondItem="ygk-ha-HeB" secondAttribute="height" multiplier="0.5" id="Uyl-er-MHt"/>
                                             <constraint firstItem="ab4-nZ-Lpj" firstAttribute="top" secondItem="MeJ-Tg-42J" secondAttribute="bottom" constant="8" symbolic="YES" id="VGD-Es-9b7"/>
                                             <constraint firstAttribute="trailing" secondItem="X4c-dm-N9G" secondAttribute="trailing" constant="20" symbolic="YES" id="eBN-nE-QNN"/>
                                             <constraint firstItem="MeJ-Tg-42J" firstAttribute="top" secondItem="MeQ-Wd-lRo" secondAttribute="top" constant="80" id="g4q-Pf-mvs"/>
