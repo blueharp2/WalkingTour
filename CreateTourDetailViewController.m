@@ -582,7 +582,7 @@ static const NSArray *categories;
             [self.locationDescriptionTextField becomeFirstResponder];
             [self.suggestedVenuesWithAddress removeAllObjects];
             [self.suggestedLocationTableView reloadData];
-        }    
+        }
     }
 }
 
@@ -733,16 +733,24 @@ static const NSArray *categories;
     }];
 }
 
-- (void)toggleSuggestedVenuesTableView {
-    [UIView animateWithDuration:0.6 animations:^{
-        self.suggestedLocationTableView.hidden = NO;
-        self.suggestedLocationTableViewHeight.constant = 195;
-        self.tableViewTopConstraint.constant = 8;
-        self.locationDescriptionTextField.hidden = YES;
-        self.locationDescriptionTextField.alpha = 0;
-
-
-    }];
+- (void)showSuggestedVenuesTableView:(BOOL)visible {
+    if (visible) {
+        [UIView animateWithDuration:0.6 animations:^{
+            self.suggestedLocationTableView.hidden = NO;
+            self.suggestedLocationTableViewHeight.constant = 195;
+            self.tableViewTopConstraint.constant = 8;
+            self.locationDescriptionTextField.hidden = YES;
+            self.locationDescriptionTextField.alpha = 0;
+        }];
+    } else {
+        [UIView animateWithDuration:0.6 animations:^{
+            self.suggestedLocationTableView.hidden = YES;
+            self.suggestedLocationTableViewHeight.constant = 0;
+            self.tableViewTopConstraint.constant = 100;
+            self.locationDescriptionTextField.hidden = NO;
+            self.locationDescriptionTextField.alpha = 1;
+        }];
+    }
     [self.view layoutIfNeeded];
 }
 
@@ -777,21 +785,20 @@ static const NSArray *categories;
 
     if (textField.tag == 0 && self.textLabelBeginEditingCounter == 0) {
         [self toggleMapViewForTextLabels];
-        [self toggleSuggestedVenuesTableView];
+        [self showSuggestedVenuesTableView:YES];
 
     }
     
     if (textField.tag == 0 && self.textLabelBeginEditingCounter > 0) {
-        [UIView animateWithDuration:0.5
-                         animations:^{
-                             self.suggestedLocationTableView.alpha = 1;
-                         }];
+        [self showSuggestedVenuesTableView:YES];
     }
     
-    if (textField.tag == 1) {
-        self.locationDescriptionTextField.hidden = NO;
-        self.locationDescriptionTextField.alpha = 1;
-    }
+    // I need to check for the editing mode so I can toggle the map after tapping on the 2 and 3rd label
+    
+//    if (textField.tag == 1) {
+//        self.locationDescriptionTextField.hidden = NO;
+//        self.locationDescriptionTextField.alpha = 1;
+//    }
     
     if (textField.tag == 2) {
         [UIView animateWithDuration:0.4 animations:^{
@@ -858,14 +865,14 @@ static const NSArray *categories;
 //    self.suggestedLocationTableView.hidden = YES;
 
 //        self.suggestedLocationTableViewHeight.constant = 0;
-        
+        [self showSuggestedVenuesTableView:NO];
         
         [UIView animateWithDuration:0.5
                          animations:^{
-                             self.locationDescriptionTextField.hidden = NO;
-                             self.locationDescriptionTextField.alpha = 1;
-                             self.suggestedLocationTableView.alpha = 0;
-                             self.suggestedLocationTableViewHeight.constant = 0;
+//                             self.locationDescriptionTextField.hidden = NO;
+//                             self.locationDescriptionTextField.alpha = 1;
+//                             self.suggestedLocationTableView.alpha = 0;
+//                             self.suggestedLocationTableViewHeight.constant = 0;
                              self.saveButton.hidden = NO;
                              self.saveButtonTopConstraint.constant = 8;
                              
