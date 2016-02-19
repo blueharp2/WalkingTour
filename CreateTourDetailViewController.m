@@ -36,7 +36,6 @@ static const NSArray *categories;
 @property (strong, nonatomic) NSMutableArray *suggestedAddresses;
 @property (strong, nonatomic) NSMutableArray *suggestedVenuesWithAddress;
 @property (nonatomic) int *textLabelBeginEditingCounter;
-@property (nonatomic) UITextField *activeField;
 @property BOOL categoriesEdited;
 @property BOOL locationSet;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
@@ -222,11 +221,20 @@ static const NSArray *categories;
     [self.locationNameTextField resignFirstResponder];
     [self.locationAddressTextField resignFirstResponder];
     [self.locationDescriptionTextField resignFirstResponder];
-    [self.view addSubview:self.saveButton];
-    [self.greyOutView setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [self.view bringSubviewToFront:self.saveButton];
+    
+    [self.view insertSubview:self.saveButton aboveSubview:self.greyOutView];
+    [self.saveButton setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.saveButton setNeedsDisplay];
+    
+    NSLayoutConstraint *saveButtonCenterX = [NSLayoutConstraint constraintWithItem:self.saveButton attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0.0];
+    NSLayoutConstraint *saveButtonTop = [NSLayoutConstraint constraintWithItem:self.saveButton attribute:NSLayoutAttributeTop relatedBy: NSLayoutRelationEqual toItem:self.categoryTableView  attribute: NSLayoutAttributeBottom multiplier:1 constant:8];
+    
+    saveButtonCenterX.active = YES;
+    saveButtonTop.active = YES;
+    
     [self.view layoutIfNeeded];
+    
+    
     NSLayoutConstraint *top = [NSLayoutConstraint constraintWithItem:self.greyOutView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTop multiplier:1.0 constant:0];
     NSLayoutConstraint *trailing = [NSLayoutConstraint constraintWithItem:self.greyOutView attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:0];
     NSLayoutConstraint *bottom = [NSLayoutConstraint constraintWithItem:self.greyOutView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0];
@@ -246,12 +254,7 @@ static const NSArray *categories;
     tableViewHeight.active = YES;
     tableViewWidth.active = YES;
     tableViewCenterX.active = YES;
-    
-    NSLayoutConstraint *saveButtonCenterX = [NSLayoutConstraint constraintWithItem:self.saveButton attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0.0];
-    NSLayoutConstraint *saveButtonTop = [NSLayoutConstraint constraintWithItem:self.saveButton attribute:NSLayoutAttributeTop relatedBy: NSLayoutRelationEqual toItem:self.categoryTableView  attribute: NSLayoutAttributeBottom multiplier:1 constant:8];
-    
-    saveButtonCenterX.active = YES;
-    saveButtonTop.active = YES;
+
 
     
     self.cameraButton.enabled = NO;
@@ -261,7 +264,6 @@ static const NSArray *categories;
             self.navigationController.navigationBarHidden = YES;
             self.cameraButton.alpha = 0.0;
             [self.view layoutIfNeeded];
-            
         }];
         
         tableViewBottom.constant = -60.0;
@@ -523,18 +525,6 @@ static const NSArray *categories;
     if ([tableView isEqual: self.categoryTableView]) {
         return categories.count;
     } else { // tableView == suggestedLocationTableView
-//        if (self.suggestedVenuesWithAddress.count == 0) {
-//     
-//        UILabel *noDataMessageLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0,
-//                                                                        self.suggestedLocationTableView.bounds.size.width,
-//                                                                        self.suggestedLocationTableView.bounds.size.height)];
-//        noDataMessageLabel.text = @"No data available";
-//        noDataMessageLabel.textAlignment = NSTextAlignmentCenter;
-//        [noDataMessageLabel sizeToFit];
-//        
-//        self.suggestedLocationTableView.backgroundView = noDataMessageLabel;
-//        self.suggestedLocationTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-//        }
         
         return self.suggestedVenuesWithAddress.count;
     }
@@ -789,26 +779,16 @@ static const NSArray *categories;
 #pragma mark - UITextFieldDelegate
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
-    self.activeField = textField;
-    //    [self toggleMapViewForTextLabels];
-
 
     if (textField.tag == 0 && self.textLabelBeginEditingCounter == 0) {
         [self toggleMapViewForTextLabels];
         [self showSuggestedVenuesTableView:YES];
-
     }
     
     if (textField.tag == 0 && self.textLabelBeginEditingCounter > 0) {
         [self showSuggestedVenuesTableView:YES];
     }
-    
-    // I need to check for the editing mode so I can toggle the map after tapping on the 2 and 3rd label
-    
-//    if (textField.tag == 1) {
-//        self.locationDescriptionTextField.hidden = NO;
-//        self.locationDescriptionTextField.alpha = 1;
-//    }
+
     if (textField.tag == 1 && self.textLabelBeginEditingCounter == 0) {
         [self toggleMapViewForTextLabels];
     }
@@ -822,7 +802,6 @@ static const NSArray *categories;
             self.saveButtonTopConstraint.constant = 8;
         }];
     }
-    
     self.textLabelBeginEditingCounter ++;
 }
 
@@ -830,7 +809,6 @@ static const NSArray *categories;
     if (textField.tag == 0) {
         
         NSString *latestString = [textField.text stringByReplacingCharactersInRange:range withString:string];
-        
         NSMutableArray *foundVenues = [SearchService findMatchesWithTerm:latestString arrayToSearch: self.suggestedAddresses];
         self.suggestedVenuesWithAddress = [NSMutableArray arrayWithArray:foundVenues];
 //        NSLog(@"%@", self.suggestedVenuesWithAddress);
@@ -843,80 +821,41 @@ static const NSArray *categories;
     
     if (textField.tag == 0) {
         [textField resignFirstResponder];
-        
-        //Will need to removeAllObjects when saving instead
-//        [self.suggestedVenuesWithAddress removeAllObjects];
-//        [self.suggestedLocationTableView reloadData];
-//        self.suggestedLocationTableView.hidden = YES;
         self.locationDescriptionTextField.hidden = NO;
         self.locationDescriptionTextField.alpha = 1;
         [self.locationAddressTextField becomeFirstResponder];
-
-
     }
     
     if (textField.tag == 1) {
         [self.locationDescriptionTextField becomeFirstResponder];
-        [UIView animateWithDuration:0.5
-                         animations:^{
-
-//        self.locationDescriptionTextField.hidden = NO;
-//        self.locationDescriptionTextField.alpha = 1;
-
-                         }];
-
     }
     
     if (textField.tag == 2) {
         [self.locationDescriptionTextField resignFirstResponder];
-        
     }
     return YES;
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
-    self.activeField = nil;
     
     if (textField.tag == 0) {
-//    self.suggestedLocationTableView.hidden = YES;
-
-//        self.suggestedLocationTableViewHeight.constant = 0;
         [self showSuggestedVenuesTableView:NO];
         
         [UIView animateWithDuration:0.5
                          animations:^{
-//                             self.locationDescriptionTextField.hidden = NO;
-//                             self.locationDescriptionTextField.alpha = 1;
-//                             self.suggestedLocationTableView.alpha = 0;
-//                             self.suggestedLocationTableViewHeight.constant = 0;
                              self.saveButton.hidden = NO;
                              self.saveButtonTopConstraint.constant = 8;
-                             
                          }];
     }
     
     if (textField.tag == 1) {
         self.locationDescriptionTextField.hidden = NO;
         self.locationDescriptionTextField.alpha = 1;
-
     }
     
     if (textField.tag == 2) {
-        
-//        self.saveButton.hidden = NO;
-//        self.saveBu
-
 
     }
-}
-
-- (void)keyboardWasShown:(NSNotification*)aNotification {
-    NSDictionary* info = [aNotification userInfo];
-    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
-    CGRect bkgndRect = self.activeField.superview.frame;
-    bkgndRect.size.height += kbSize.height;
-    [self.activeField.superview setFrame:bkgndRect];
-    [self.scrollView setContentOffset:CGPointMake(0.0, self.activeField.frame.origin.y-kbSize.height) animated:YES];
 }
 
 #pragma mark - UINavigationControllerDelegate
