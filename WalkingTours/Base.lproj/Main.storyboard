@@ -45,12 +45,12 @@
                                 <rect key="frame" x="16" y="195" width="288" height="30"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="next"/>
                                 <connections>
                                     <outlet property="delegate" destination="wsN-44-hsF" id="E8c-aX-KzJ"/>
                                 </connections>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="kes-x4-yde">
+                            <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="kes-x4-yde">
                                 <rect key="frame" x="16" y="233" width="288" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="gH7-fq-q8y"/>
@@ -266,20 +266,20 @@
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="1i5-x6-BXp">
                                 <rect key="frame" x="16" y="203" width="288" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="next"/>
                                 <connections>
                                     <outlet property="delegate" destination="jae-n2-KAo" id="G9U-uV-b4F"/>
                                 </connections>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="JQd-1t-nHf">
+                            <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="JQd-1t-nHf">
                                 <rect key="frame" x="16" y="241" width="288" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="next" secureTextEntry="YES"/>
                                 <connections>
                                     <outlet property="delegate" destination="jae-n2-KAo" id="W5y-CI-DhV"/>
                                 </connections>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="KIn-UW-axy">
+                            <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="KIn-UW-axy">
                                 <rect key="frame" x="16" y="296" width="288" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -350,7 +350,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ohv-bB-KWz">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="817"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="853"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Rectangle 2 Copy 2" translatesAutoresizingMaskIntoConstraints="NO" id="ox0-Hi-KYB">
                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="600"/>
@@ -388,7 +388,7 @@
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="next"/>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PoL-8t-wAB">
-                                                <rect key="frame" x="138" y="752" width="45" height="45"/>
+                                                <rect key="frame" x="138" y="788" width="45" height="45"/>
                                                 <color key="backgroundColor" red="0.82842303299999998" green="0.91177850999999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="45" id="EEw-Sa-UNW"/>
@@ -404,7 +404,7 @@
                                                 </connections>
                                             </button>
                                             <tableView clipsSubviews="YES" tag="1" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="obo-sP-jxX">
-                                                <rect key="frame" x="20" y="549" width="280" height="195"/>
+                                                <rect key="frame" x="20" y="585" width="280" height="195"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="195" id="DRc-Ib-AIw"/>
@@ -433,7 +433,7 @@
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Drop a pin to create a location for your tour." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yoq-0w-59d">
-                                                <rect key="frame" x="20" y="496" width="280" height="45"/>
+                                                <rect key="frame" x="20" y="496" width="280" height="44.5"/>
                                                 <fontDescription key="fontDescription" name="Futura-MediumItalic" family="Futura" pointSize="17"/>
                                                 <color key="textColor" red="0.2784313725" green="0.50980392159999999" blue="0.85490196080000003" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -467,7 +467,7 @@
                                             <constraint firstItem="obo-sP-jxX" firstAttribute="top" secondItem="pqI-ST-Oq7" secondAttribute="bottom" constant="99" id="UHh-VO-Tfj"/>
                                             <constraint firstItem="pqI-ST-Oq7" firstAttribute="leading" secondItem="Ohv-bB-KWz" secondAttribute="leading" constant="20" symbolic="YES" id="ajb-b7-kUG"/>
                                             <constraint firstItem="Gaj-h6-TIr" firstAttribute="trailing" secondItem="eTz-S3-rke" secondAttribute="trailing" constant="-9" id="asz-b7-f5C"/>
-                                            <constraint firstItem="PoL-8t-wAB" firstAttribute="top" secondItem="JOQ-pC-1Ce" secondAttribute="bottom" constant="264" id="au2-sE-cCg"/>
+                                            <constraint firstItem="PoL-8t-wAB" firstAttribute="top" secondItem="JOQ-pC-1Ce" secondAttribute="bottom" constant="300" id="au2-sE-cCg"/>
                                             <constraint firstItem="eTz-S3-rke" firstAttribute="height" secondItem="ox0-Hi-KYB" secondAttribute="height" multiplier="0.5" id="dCS-Me-anW"/>
                                             <constraint firstAttribute="trailing" secondItem="obo-sP-jxX" secondAttribute="trailing" constant="20" symbolic="YES" id="dCi-It-jI9"/>
                                             <constraint firstItem="JOQ-pC-1Ce" firstAttribute="top" secondItem="pqI-ST-Oq7" secondAttribute="bottom" constant="8" symbolic="YES" id="dje-gH-5xj"/>
@@ -497,6 +497,7 @@
                                                 <exclude reference="ktk-ds-L4n"/>
                                                 <exclude reference="n6X-nC-cVs"/>
                                                 <exclude reference="KfW-p2-r9A"/>
+                                                <exclude reference="UHh-VO-Tfj"/>
                                                 <exclude reference="xuF-4w-te1"/>
                                                 <exclude reference="2w7-8e-png"/>
                                                 <exclude reference="ETD-p9-9bF"/>

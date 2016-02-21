@@ -57,7 +57,10 @@
 }
 
 - (IBAction)saveSignUp:(id)sender {
-    
+    [self signUpUser];
+}
+
+- (void)signUpUser {
     if ([self validateEmail:self.emailSignUp]) {
         
         PFUser *user = [PFUser user];
@@ -102,31 +105,18 @@
 #pragma TextField Delegate
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    [textField resignFirstResponder];
+    if (textField.tag == 0) {
+        [self.passwordSignUp becomeFirstResponder];
+    } else if (textField.tag == 1) {
+        [self.emailSignUp becomeFirstResponder];
+    } else {
+        [self signUpUser];
+    }
     return YES;
-    
 }
 
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    [textField resignFirstResponder];
+}
 
 @end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

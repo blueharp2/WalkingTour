@@ -77,6 +77,10 @@ static const NSArray *categories;
     self.image = (self.image == nil ? [UIImage imageNamed:@"placeholder"] : self.image);
     
     self.saveButton.layer.cornerRadius = self.saveButton.frame.size.width / 2;
+    self.saveButton.layer.shadowColor = [[UIColor colorWithWhite:0.690 alpha:1.000] CGColor];
+    self.saveButton.layer.shadowOpacity = 0.4;
+    self.saveButton.layer.shadowRadius = 4.0;
+    self.saveButton.layer.shadowOffset = CGSizeMake(0, 2);
     
     self.locationNameTextField.hidden = YES;
     self.locationAddressTextField.hidden = YES;
