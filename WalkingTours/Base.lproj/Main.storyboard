@@ -414,7 +414,7 @@
                                                         <rect key="frame" x="0.0" y="28" width="280" height="44"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bhN-aB-zlw" id="4qf-VZ-Org">
-                                                            <rect key="frame" x="0.0" y="0.0" width="280" height="43"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="280" height="43.5"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                         </tableViewCellContentView>
                                                     </tableViewCell>
@@ -699,7 +699,7 @@
                                         <color key="textColor" red="0.2784313725" green="0.50980392159999999" blue="0.85490196080000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <tableView clipsSubviews="YES" tag="1" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="u25-ew-tet">
+                                    <tableView clipsSubviews="YES" tag="1" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="u25-ew-tet">
                                         <rect key="frame" x="16" y="88" width="288" height="145"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <prototypes>
@@ -707,7 +707,7 @@
                                                 <rect key="frame" x="0.0" y="28" width="288" height="44"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="c1G-Pg-WB5" id="2AI-z2-yf4">
-                                                    <rect key="frame" x="0.0" y="0.0" width="288" height="43"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="288" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </tableViewCellContentView>
                                             </tableViewCell>
@@ -749,7 +749,7 @@
                                             <action selector="finalSearchButtonPressed:" destination="tqM-E3-5K0" eventType="touchUpInside" id="boA-u8-BKW"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Categories" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="64P-i7-kj1">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Categories" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="64P-i7-kj1">
                                         <rect key="frame" x="126" y="67" width="69" height="19"/>
                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="14"/>
                                         <color key="textColor" red="0.2784313725" green="0.50980392159999999" blue="0.85490196080000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -1082,7 +1082,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X4c-dm-N9G">
-                                                <rect key="frame" x="20" y="426" width="280" height="114"/>
+                                                <rect key="frame" x="20" y="426" width="280" height="18.5"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" relation="lessThanOrEqual" constant="25" id="0VS-Lv-jqm"/>
                                                 </constraints>
@@ -1109,7 +1109,7 @@
                                             <constraint firstItem="ygk-ha-HeB" firstAttribute="width" secondItem="MeQ-Wd-lRo" secondAttribute="width" id="6Bk-uL-jyJ"/>
                                             <constraint firstItem="rfv-oW-XnO" firstAttribute="leading" secondItem="MeQ-Wd-lRo" secondAttribute="leading" constant="20" symbolic="YES" id="9Hn-2d-6ip"/>
                                             <constraint firstAttribute="trailing" secondItem="ab4-nZ-Lpj" secondAttribute="trailing" constant="20" symbolic="YES" id="M53-s1-AeB"/>
-                                            <constraint firstAttribute="bottom" secondItem="X4c-dm-N9G" secondAttribute="bottom" constant="20" symbolic="YES" id="OYN-Pz-nw1"/>
+                                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="X4c-dm-N9G" secondAttribute="bottom" constant="20" symbolic="YES" id="OYN-Pz-nw1"/>
                                             <constraint firstAttribute="trailing" secondItem="ygk-ha-HeB" secondAttribute="trailing" id="Q1C-9u-qKO"/>
                                             <constraint firstAttribute="trailing" secondItem="rfv-oW-XnO" secondAttribute="trailing" constant="20" symbolic="YES" id="Qcr-Lp-auc"/>
                                             <constraint firstItem="MeJ-Tg-42J" firstAttribute="height" secondItem="ygk-ha-HeB" secondAttribute="height" multiplier="0.5" id="Uyl-er-MHt"/>
