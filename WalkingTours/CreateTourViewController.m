@@ -32,6 +32,10 @@
     [super viewDidLoad];
     [self setupMainViewController];
     self.addLocationButton.layer.cornerRadius = self.addLocationButton.frame.size.width / 2;
+    self.addLocationButton.layer.shadowColor = [[UIColor colorWithWhite:0.690 alpha:1.000] CGColor];
+    self.addLocationButton.layer.shadowOpacity = 0.4;
+    self.addLocationButton.layer.shadowRadius = 4.0;
+    self.addLocationButton.layer.shadowOffset = CGSizeMake(0, 2);
 }
 
 - (void)viewWillAppear:(BOOL)animated {

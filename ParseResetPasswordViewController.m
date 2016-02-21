@@ -56,7 +56,10 @@
 }
 
 - (IBAction)sendResetPassword:(id)sender {
-    
+    [self resetPassword];
+}
+
+- (void)resetPassword {
     if ([self validateEmail:self.passwordReset]) {
         [PFUser requestPasswordResetForEmailInBackground:self.passwordReset.text];
     }
@@ -70,8 +73,12 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
+    [self resetPassword];
     return YES;
-    
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    [textField resignFirstResponder];
 }
 
 @end
