@@ -357,6 +357,7 @@ static const NSArray *categories;
                     if (currentState) {
                         self.selectedCategories = [NSMutableArray arrayWithArray:self.locationToEdit.categories];
                         currentState.locationName = self.locationNameTextField.text;
+                        currentState.locationAddress = self.locationAddressTextField.text;
                         currentState.locationDescription = self.locationDescriptionTextField.text;
                         currentState.photo = self.photoFile;
                         currentState.video = self.videoFile;
