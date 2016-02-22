@@ -66,13 +66,17 @@
     self.finalSearchButton.layer.borderWidth = 1.0;
     self.finalSearchButton.layer.borderColor = [UIColor colorWithRed:0.278 green:0.510 blue:0.855 alpha:1.000].CGColor;
     self.keywordSearchBar.delegate = self;
+    [self setFavoritesForUser];
     //Location Manager setup
     self.locationManager = [[CLLocationManager alloc]init];
     [self.locationManager requestWhenInUseAuthorization];
     [self.locationManager setDelegate:self];
     [self setUpSearchButton];
     [self setupViewController];
+}
 
+- (void)setFavoritesForUser {
+    self.favoriteToursFromParse = [[PFUser currentUser] objectForKey:@"favorites"];
 }
 
 - (void)fetchToursNearUser {
