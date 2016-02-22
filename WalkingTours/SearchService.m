@@ -25,7 +25,6 @@
         if (searchResult.location == NSNotFound) {
             NSLog(@"Search term string was not found");
         } else {
-            NSLog(@"%@ starts at index %lu and is %lu characters long", lowerCaseSearchTerm, (unsigned long)searchResult.location, (unsigned long)searchResult.length);
             [matches addObject:[arrayToSearch objectAtIndex:i]];
         }
     }
