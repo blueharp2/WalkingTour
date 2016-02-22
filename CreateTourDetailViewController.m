@@ -68,12 +68,6 @@ static const NSArray *categories;
     [super viewDidLoad];
     [self setUpVenuesTableView];
     
-    //        [self.suggestedVenuesWithAddress addObject:result];
-    
-    
-    NSLog(@"%lu", (unsigned long)self.suggestedAddresses.count);
-    
-    
     self.image = (self.image == nil ? [UIImage imageNamed:@"placeholder"] : self.image);
     
     self.saveButton.layer.cornerRadius = self.saveButton.frame.size.width / 2;
@@ -456,9 +450,6 @@ static const NSArray *categories;
         self.createdLocation.categories = self.selectedCategories;
         self.navigationController.navigationBarHidden = NO;
         if (self.createTourDetailDelegate) {
-            //            NSLog(@"LocationToEdit = nil? Answer: %d", self.locationToEdit == nil);
-            //            NSLog(@"Does created = toEdit? %d", self.createdLocation == self.locationToEdit);
-            //            NSLog(@"created == %@", self.createdLocation);
             [self.createTourDetailDelegate didFinishSavingLocationWithLocation:self.createdLocation image:self.image newLocation:(self.locationToEdit == nil ? YES : NO)];
         }
         [self.navigationController popViewControllerAnimated:YES];
@@ -860,7 +851,6 @@ static const NSArray *categories;
         NSString *latestString = [textField.text stringByReplacingCharactersInRange:range withString:string];
         NSMutableArray *foundVenues = [SearchService findMatchesWithTerm:latestString arrayToSearch: self.suggestedAddresses];
         self.suggestedVenuesWithAddress = [NSMutableArray arrayWithArray:foundVenues];
-//        NSLog(@"%@", self.suggestedVenuesWithAddress);
         [self.suggestedLocationTableView reloadData];
     }
     return YES;
@@ -917,17 +907,14 @@ static const NSArray *categories;
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex == 0) {
-        NSLog(@"%@", @"Button index is iqual to 0");
         [self loadImagePicker];
     }
     
     if (buttonIndex == 1) {
-        NSLog(@"%@", @"Button index is iqual to 1");
         [self loadPhotoLibrary];
     }
     
     if (buttonIndex == 2) {
-        NSLog(@"%@", @"Cancel button pressed");
     }
     
 }

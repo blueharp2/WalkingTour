@@ -28,7 +28,6 @@ int const radius = 250;
     NSString *urlString = [NSString stringWithFormat:@"%@?client_id=%@&client_secret=%@&ll=%@,%@&v=%@&m=%@&intent=browse&radius=%@", foursquareVenueSearchURL,foursquareAPIClientID, foursquareAPIClientSecret, [NSString stringWithFormat:@"%f",latitude], [NSString stringWithFormat:@"%f", longitude], apiVersion, mode, [NSString stringWithFormat:@"%i", radius]];
     
     if (urlString != nil) {
-//        NSLog(@"%@", urlString);
         
         NSURL *URL =[NSURL URLWithString:urlString];
         
@@ -37,12 +36,8 @@ int const radius = 250;
         
         NSURLSession *session = [NSURLSession sharedSession];
         NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-            
-            //            NSLog(data, nil);
-            // according to Stanford course is cleaner to check for nil like if (data) { ... }
             if (data != nil) {
                 completionHandler(true, data);
-                //                NSLog(data, nil);
             }
             
             if (error != nil) {
@@ -99,7 +94,6 @@ int const radius = 250;
     NSString *urlString = [NSString stringWithFormat:@"%@?client_id=%@&client_secret=%@&ll=%@&v=%@m=%@&query=%@", foursquareVenueSearchURL, foursquareAPIClientID, foursquareAPIClientSecret, cfLatLong, apiVersion,mode, queryString];
 
     if (urlString != nil) {
-        NSLog(urlString, nil);
         
         NSURL *URL =[NSURL URLWithString:urlString];
         
@@ -108,12 +102,9 @@ int const radius = 250;
         
         NSURLSession *session = [NSURLSession sharedSession];
         NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-  
-//            NSLog(data, nil);
 
             if (data != nil) {
                 completionHandler(true, data);
-//                NSLog(data, nil);
                  }
             
             if (error != nil) {
@@ -134,7 +125,6 @@ int const radius = 250;
     if (data)
     {
     NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:(NSJSONReadingMutableContainers) error:&error];
-//        NSLog(@"%@",json);
     
     if (json != nil && [json isKindOfClass:[NSDictionary class]])
     {
@@ -151,8 +141,6 @@ int const radius = 250;
                 NSArray *address = location[@"formattedAddress"];
                 NSString *completeAddress = [address componentsJoinedByString:@", "];
                 
-//                NSLog(@"The name : %@", name);
-//                NSLog(@"The address : %@", completeAddress);
                 if (name && location && address) {
                     NSMutableDictionary *result = [NSMutableDictionary dictionaryWithObjectsAndKeys: name, @"name",  completeAddress, @"address", nil];
                     if (result) {

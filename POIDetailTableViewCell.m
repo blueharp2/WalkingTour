@@ -46,7 +46,6 @@
     
     if (self.delegate) {
         [self.delegate favoriteButtonPressedForTourID:self.tour.objectId];
-       // NSLog(@"%@", self.tour.objectId);
     }
 }
 @end

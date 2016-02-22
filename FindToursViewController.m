@@ -495,10 +495,6 @@
     }];
 }
 
-//- (void)undoButtonPressed:(UIBarButtonItem *)sender {
-//    //
-//}
-
 - (void)editButtonTapped:(UIButton *)sender event:(UIEvent *)event {
     NSSet *touches = event.allTouches;
     UITouch *touch = touches.anyObject;
@@ -609,19 +605,16 @@
     if (tourId !=nil) {
         BOOL isAlreadyAFavoriteTour = [self.favoriteToursFromParse containsObject:tourId];
         
-        if (isAlreadyAFavoriteTour ==YES) {
+        if (isAlreadyAFavoriteTour) {
             [self.favoriteToursFromParse removeObject:tourId];
-            NSLog(@"add %@", self.favoriteToursFromParse);
-        } else if (isAlreadyAFavoriteTour ==NO){
+        } else {
             if (self.favoriteToursFromParse) {
                 [self.favoriteToursFromParse addObject:tourId];
-               NSLog(@"remove %@", self.favoriteToursFromParse);
-            }else{
+            } else {
                 self.favoriteToursFromParse = [NSMutableArray arrayWithObject:tourId];
             }
         }
     }
-//    NSLog(@"Favorite Tours from Parse Array: %@", self.favoriteToursFromParse);
 }
 
 @end
