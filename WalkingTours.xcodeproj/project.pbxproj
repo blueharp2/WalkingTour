@@ -862,9 +862,10 @@
 				INFOPLIST_FILE = WalkingTours/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.creeperspeak.WalkingTours;
+				PRODUCT_BUNDLE_IDENTIFIER = C49MT2F2AS.com.creeperspeak.WalkingTours;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -881,9 +882,10 @@
 				INFOPLIST_FILE = WalkingTours/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.creeperspeak.WalkingTours;
+				PRODUCT_BUNDLE_IDENTIFIER = C49MT2F2AS.com.creeperspeak.WalkingTours;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
