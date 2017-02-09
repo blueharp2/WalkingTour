@@ -1,9 +1,9 @@
 //
-//  VideoPlayerView.m
+//  ParseLoginViewController.h
 //  WalkingTours
 //
-//  Created by Miles Ranisavljevic on 12/14/15.
-//  Copyright © 2015 Lindsey Boggio. All rights reserved.
+//  Created by Cynthia Strickland on 12/14/15.
+//  Copyright © 2015 Cynthia Strickland All rights reserved.
 //
 
 #import "VideoPlayerView.h"

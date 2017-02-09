@@ -2,8 +2,8 @@
 //  SearchService.h
 //  WalkingTours
 //
-//  Created by Alberto Vega Gonzalez on 2/11/16.
-//  Copyright © 2016 Lindsey Boggio. All rights reserved.
+//  Created by Cynthia Strickland on 12/14/15.
+//  Copyright © 2015 Cynthia Strickland All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

@@ -1,9 +1,9 @@
 //
-//  FourSquareService.m
-//  GoTime
+//  FourSquareService.h
+//  WalkingTours
 //
-//  Created by Alberto Vega Gonzalez on 12/31/15.
-//  Copyright © 2015 creeperspeak. All rights reserved.
+//  Created by Cynthia Strickland on 12/14/15.
+//  Copyright © 2015 Cynthia Strickland All rights reserved.
 //
 
 #import "FourSquareService.h"
